@@ -6,7 +6,7 @@ module.exports = {
     permissions: ['SEND_MESSAGES'],
     ownerOnly: false,
     usage: 'poll [question]',
-    examples: ['poll', 'Le "bouh" fait-il diablement peur ?'],
+    examples: ['poll', 'poll Le "bouh" fait-il diablement peur ?'],
     description: 'postez votre propre sondage!',
     async run(client, message, args)  {
         if (!args[0])

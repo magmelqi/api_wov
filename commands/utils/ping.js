@@ -34,7 +34,7 @@ module.exports = {
        )
        .setTimestamp()
        .setAuthor({ name: `Lusky34` })
-       .setFooter({ text: message.author.username, iconeURL: message.author.displayAvatarURL() })
+       .setFooter({ text: interaction.user.tag, iconeURL: message.author.displayAvatarURL() })
        
 
 
