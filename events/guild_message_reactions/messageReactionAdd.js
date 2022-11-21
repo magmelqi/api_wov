@@ -69,17 +69,17 @@ module.exports = {
 
         const logChannel = client.channels.cache.get('1044258472121860126');
 
-        if (emojiName === '👍🏻') {logChannel.send({ embeds: [embedP]}), member.send('Vous voulez participer  la quête gemme !')}
-        if (emojiName === '👎🏻') {logChannel.send({ embeds: [embedN]}), member.send('Vous ne voulez pas participer  la quête gemme !')}
+        if (emojiName === '') {logChannel.send({ embeds: [embedP]}), member.send('Vous voulez participer  la quête gemme !')}
+        if (emojiName === '') {logChannel.send({ embeds: [embedN]}), member.send('Vous ne voulez pas participer  la quête gemme !')}
 
-        if (emojiName === '👍') {logChannel.send({ embeds: [embedPOr1]}), member.send('Vous voulez participer  la quête OR 1 !')}
-        if (emojiName === '👎') {logChannel.send({ embeds: [embedNOr1]}), member.send('Vous ne voulez pas participer  la quête OR 1 !')}
+        if (emojiName === '') {logChannel.send({ embeds: [embedPOr1]}), member.send('Vous voulez participer  la quête OR 1 !')}
+        if (emojiName === '') {logChannel.send({ embeds: [embedNOr1]}), member.send('Vous ne voulez pas participer  la quête OR 1 !')}
 
-        if (emojiName === '👍🏼') {logChannel.send({ embeds: [embedPOr2]}), member.send('Vous voulez participer  la quête OR 2 !')}
-        if (emojiName === '👎🏼') {logChannel.send({ embeds: [embedNOr2]}), member.send('Vous ne voulez pas participer  la quête OR 2 !')}
+        if (emojiName === '') {logChannel.send({ embeds: [embedPOr2]}), member.send('Vous voulez participer  la quête OR 2 !')}
+        if (emojiName === '') {logChannel.send({ embeds: [embedNOr2]}), member.send('Vous ne voulez pas participer  la quête OR 2 !')}
 
-        if (emojiName === '👍🏽') {logChannel.send({ embeds: [embedPOr3]}), member.send('Vous voulez participer  la quête OR 3 !')}
-        if (emojiName === '👎🏽') {logChannel.send({ embeds: [embedNOr3]}), member.send('Vous ne voulez pas participer  la quête OR 3 !')}
+        if (emojiName === '') {logChannel.send({ embeds: [embedPOr3]}), member.send('Vous voulez participer  la quête OR 3 !')}
+        if (emojiName === '') {logChannel.send({ embeds: [embedNOr3]}), member.send('Vous ne voulez pas participer  la quête OR 3 !')}
 
     
   }}
