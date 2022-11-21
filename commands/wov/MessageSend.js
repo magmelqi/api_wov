@@ -35,13 +35,13 @@ module.exports = {
   runSlash: async(client, interaction) => {
     const MessageContent = interaction.options.getString('message');
     const Messagesend = await superagent.post(`https://api.wolvesville.com/clans/${process.env.CLAN_ID}/chat`)
-  .send({message: `${interaction.user.tag} :${MessageContent}`})
+  .send({message: `${interaction.user.username} :${MessageContent}`})
   .set( 'Authorization', process.env.WOV_TOKEN)
   .set('Content-Type', 'application/json')
   .set('Accept', 'application/json')
   .catch((err) => {return interaction.reply(err)}); 
   console.log ('Commande message clan fait');
-  console.log(`${interaction.user.tag} :${MessageContent}`)
+  console.log(`${interaction.user.username} :${MessageContent}`)
   message.channel.send(`'${MessageContent} ' a bien été envoyé.`)
 }
 }
