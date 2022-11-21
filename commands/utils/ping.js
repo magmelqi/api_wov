@@ -25,6 +25,19 @@ module.exports = {
     message.channel.send({ embeds: [embed] });
     },
     runSlash: (client, interaction) => {
-      interaction.reply('Pong!');
+      const embed = new MessageEmbed()
+       .setTitle('🏓 Pong')
+       .setThumbnail(client.user.displayAvatarURL())
+       .addFields(
+        { name: 'Latence', value: `\`${client.ws.ping}ms\``, inline: true},
+        { name: 'Uptime', value: `<t:${parseInt(client.readyTimestamp / 1000)}:R>`, inline: true},
+       )
+       .setTimestamp()
+       .setAuthor({ name: `Lusky34` })
+       .setFooter({ text: message.author.username, iconeURL: message.author.displayAvatarURL() })
+       
+
+
+       interaction.reply({ embeds: [embed] });
     }
   };
