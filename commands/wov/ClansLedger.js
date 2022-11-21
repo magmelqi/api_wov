@@ -10,7 +10,7 @@ module.exports = {
     ownerOnly: false,
     usage: 'dons',
     examples: ['dons'],
-    description: 'Les donations du clan (pas fonctionel)',
+    description: 'Les donations du clan',
       run: async(client, message, args) => {
         const obj = await superagent.get(`https://api.wolvesville.com/clans/${process.env.CLAN_ID}/ledger`)
         .set( 'Authorization', process.env.WOV_TOKEN)

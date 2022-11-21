@@ -11,7 +11,7 @@ module.exports = {
     ownerOnly: false,
     usage: 'mclan [nombre]',
     examples: ['meclan 5', 'mclan 9'],
-    description: 'Voir les [nombre] derniers messages du chat de clan',
+    description: 'Voir les derniers messages du chat de clan',
       run: async(client, message, args) => {
         if (!args[0] || !args[0].match(/^(1|2|3|4|5|6|7|8|9)$/)) return message.reply('merci d\'entrer un nombre entre 1 et 9');
         var nombre = message.content.substring(7).trim()
