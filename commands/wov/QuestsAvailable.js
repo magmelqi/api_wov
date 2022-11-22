@@ -79,7 +79,7 @@ module.exports = {
         poll4.react('👎🏽');
 
         const embed5 = new MessageEmbed()
-          .setTitle("Aves-vous déjà payé les 500 or pour la quête ? (Si quête or)")
+          .setTitle("Avez-vous déjà payé les 500 or pour la quête ? (Si quête or)")
           .setColor('WHITE')
           .setDescription("Oui 👍🏾 Non 👎🏾")
           .setTimestamp()
@@ -174,7 +174,7 @@ module.exports = {
 
 
         const embed6 = new MessageEmbed()
-          .setTitle("Aves-vous déjà payé les 500 or pour la quête ? (Si quête or)")
+          .setTitle("Avez-vous déjà payé les 500 or pour la quête ? (Si quête or)")
           .setColor('WHITE')
           .setDescription("Oui 👍🏿 Non 👎🏿")
           .setTimestamp()

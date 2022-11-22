@@ -13,13 +13,13 @@ module.exports = {
     description: 'Envoie un message dans le chat du clan',
       run: async(client, message, args) => {
         const Messageclan = await superagent.post(`https://api.wolvesville.com/clans/${process.env.CLAN_ID}/chat`)
-        .send({message: `${message.author.tag} :${message.content.substring(6)}`})
+        .send({message: `${message.author.username} :${message.content.substring(6)}`})
         .set( 'Authorization', process.env.WOV_TOKEN)
         .set('Content-Type', 'application/json')
         .set('Accept', 'application/json')
         .catch((err) => {return message.channel.send(err)}); 
         console.log ('Commande MessageSend fait');
-        console.log(`${message.author.tag} :${message.content.substring(6)}`)
+        console.log(`${message.author.username} :${message.content.substring(6)}`)
         message.channel.send(`'${message.content.substring(6)} ' a bien été envoyé.`)
         
   },
