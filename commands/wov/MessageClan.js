@@ -36,6 +36,7 @@ module.exports = {
         const PlayerIdd1 = obj.search(PlayerIdd); const PlayerIdf1 = obj.search(PlayerIdf); var PlayerId = obj.slice(PlayerIdd1+13, PlayerIdf1); var obj = obj.slice(msgf1+7); console.log(PlayerId); 
 
         if ( PlayerId == 'nerUsername":"BOT(lusky34)') {var PlayerId= "BOT"; console.log('if')
+        try {
         const embed= new MessageEmbed()
     .setAuthor({name: 'Chat WOV'})
     .setColor('WHITE')
@@ -43,7 +44,7 @@ module.exports = {
     .setThumbnail()
     .setTimestamp();
 
-      try { await message.channel.send({embeds: [embed]})} catch (err) {message.channel.send("Erreur dans l'envoie du message")}}
+       await message.channel.send({embeds: [embed]})} catch (err) {message.channel.send("Erreur dans l'envoie du message")}}
         
       
        else { console.log('else')
@@ -56,15 +57,15 @@ module.exports = {
           var usernamed= /","username":"/g; var usernamef= /","personalMessage":"/g
         const usernamed1 = pseudo.search(usernamed); const usernamef1 = pseudo.search(usernamef); var username = pseudo.slice(usernamed1+14, usernamef1); console.log (username)
 
-
-        const embed= new MessageEmbed()
+        try{
+        const embed2= new MessageEmbed()
     .setAuthor({name: 'Chat WOV'})
     .setColor('#77b5fe')
     .setFields({name: username, value: `-${msg}`}, {name: "fais le", value: `-${date} à ${date2}`})
     .setThumbnail()
     .setTimestamp();
 
-       try{ await message.channel.send({embeds: [embed]})}catch (err) {message.channel.send("Erreur dans l'envoie du message")}}}
+        await message.channel.send({embeds: [embed2]})}catch (err) {message.channel.send("Erreur dans l'envoie du message")}}}
         
   },
   options:[
@@ -98,6 +99,7 @@ module.exports = {
     const PlayerIdd1 = obj.search(PlayerIdd); const PlayerIdf1 = obj.search(PlayerIdf); var PlayerId = obj.slice(PlayerIdd1+13, PlayerIdf1); var obj = obj.slice(msgf1+7); console.log(PlayerId); 
 
     if ( PlayerId == 'nerUsername":"BOT(lusky34)') {var PlayerId= "BOT"; console.log('if')
+    try {
     const embed= new MessageEmbed()
     .setAuthor({name: 'Chat WOV'})
     .setColor('WHITE')
@@ -105,7 +107,7 @@ module.exports = {
     .setThumbnail()
     .setTimestamp();
 
-    try { await interaction.channel.send({ embeds: [embed], ephemeral: true })} catch (err) {message.channel.send("Erreur dans l'envoie du message")}}
+     await interaction.channel.send({ embeds: [embed], ephemeral: true })} catch (err) {message.channel.send("Erreur dans l'envoie du message")}}
     
   
    else { console.log('else')
@@ -118,7 +120,7 @@ module.exports = {
       var usernamed= /","username":"/g; var usernamef= /","personalMessage":"/g
     const usernamed1 = pseudo.search(usernamed); const usernamef1 = pseudo.search(usernamef); var username = pseudo.slice(usernamed1+14, usernamef1); console.log (username)
 
-
+    try{
     const embed= new MessageEmbed()
     .setAuthor({name: 'Chat WOV'})
     .setColor('#77b5fe')
@@ -126,5 +128,5 @@ module.exports = {
     .setThumbnail()
     .setTimestamp();
 
-    try{ await interaction.channel.send({ embeds: [embed], ephemeral: true})} catch (err) {message.channel.send("Erreur dans l'envoie du message")}}}
+     await interaction.channel.send({ embeds: [embed], ephemeral: true})} catch (err) {message.channel.send("Erreur dans l'envoie du message")}}}
   }}
