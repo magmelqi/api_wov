@@ -8,6 +8,9 @@ client.commands = new Collection ();
 
 ['EventUtil','CommandUtil'].forEach(handler => { require(`./utils/handlers/${handler}`)(client) });
 
+client.on("message", message => {
+    if (message.content.startsWith('salut')) message.channel.send('Bouh !');
+});
 
 process.on ('exit', code => { Logger.client(`Le processus s'est arrèté avec le code: ${code} !`)});
 process.on('uncaughtException', (err, origin) => { Logger.error(`UNCAUGHT_EXCEPTION: ${err}`) ;console.error(`Origine: ${origin}`)});
