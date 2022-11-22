@@ -3,24 +3,58 @@ const { MessageEmbed } = require('discord.js')
 module.exports = {
   name: "add",
   category: 'none',
-  permissions: ['SEND_MESSAGES'],
+  permissions: ['BAN_MEMBERS'],
   ownerOnly: false,
   usage: 'add [member]',
   examples: ['add @Evie'],
   description: "La commande ajoute les rôles louveteau et membre WL à la personne",
     run: (client, message, args) =>  {
-        let role = message.guild.roles.cache.find(r => r.name === 'BOUH');console.log(message.author.username)
+        let role = message.guild.roles.cache.find(r => r.id === '724210352346366014');
+        let role2 = message.guild.roles.cache.find(r => r.id === '724210352346366014');
+        let member = message.mentions.members.first();
         //'<@&806912965496143882>','<@&72421035%%2346366014>'
-        if (role) {
-            if (message.member.roles.cache.has(role.id)) return message.channel.send("Vous avez déjà ce rôle !")
-            if (role.permissions.has('KICK_MEMBERS')) return message.channel.send('Vous ne pouvez pas avoir ce rôle !'); 
-            message.member.roles.add(role)
-            .then (m => message.channel.send(`vous possédez maintement le role ${role}.`))
-            .catch((err) => {message.channel.send(err)});
-        } else {
-            message.channel.send('Le rôle n\'existe pas')
-        }
+ 
+            if (member.roles.cache.has(role.id)) message.channel.send(`${message.author.username} posséde déjà le role ${role}.`)
+            if (role.permissions.has('KICK_MEMBERS')) message.channel.send(`${message.author.username} ne peut pas avoir le role ${role}.`)
+
+            if (member.roles.cache.has(role2.id)) return message.channel.send(`${message.author.username} posséde déjà le role ${role2}.`)
+            if (role2.permissions.has('KICK_MEMBERS')) return message.channel.send(`${message.author.username} ne peut pas avoir le role ${role2}.`)
+
+            member.roles.add(role)
+            .then (m => message.channel.send(`${message.author.username} posséde maintement le roles 🐅 Membre de la WL 🐅.`))
+            .catch((err) => {return message.channel.send(err)});
+
+            member.roles.add(role2)
+            .then (m => message.channel.send(`${message.author.username} posséde maintement le role ${role2}.`))
+            .catch((err) => {return message.channel.send(err)}); 
+
     },
-    async runSlash (client, interaction) {
+    options:[
+        {
+            name: "utilisateur",
+            description: "taper l'utilisateur qui va recevoir les rôles",
+            type: "STRING",
+            required: true,
+        },
+    ],
+        async runSlash (client, interaction) {
+        let role = message.guild.roles.cache.find(r => r.name === 'BOUH');
+        let role2 = message.guild.roles.cache.find(r => r.name === 'test');
+        let member = interaction.options.getString('message');
+        //'<@&806912965496143882>','<@&72421035%%2346366014>'
+ 
+            if (member.roles.cache.has(role.id)) interaction.channel.send(`${message.author.username} posséde déjà le role ${role}.`)
+            if (role.permissions.has('KICK_MEMBERS')) interaction.channel.send(`${message.author.username} ne peut pas avoir le role ${role}.`)
+
+            if (member.roles.cache.has(role2.id)) return interaction.channel.send(`${message.author.username} posséde déjà le role ${role2}.`)
+            if (role2.permissions.has('KICK_MEMBERS')) return interaction.channel.send(`${message.author.username} ne peut pas avoir le role ${role2}.`)
+            
+            member.roles.add(role)
+            .then (m => interaction.channel.send(`${message.author.username} posséde maintement le roles ${role}.`))
+            .catch((err) => {return interaction.channel.send(err)});
+
+            member.roles.add(role2)
+            .then (m => interaction.channel.send(`${message.author.username} posséde maintement le role ${role2}.`))
+            .catch((err) => {return interaction.channel.send(err)});
 }
 }
