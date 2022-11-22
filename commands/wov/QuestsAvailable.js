@@ -115,7 +115,7 @@ module.exports = {
         const imageD4 = imageB4.search(debut); const imageF4 = imageB4.search(fin); const image4 = imageB4.slice(imageD4, imageF4+4);
         console.log (image4);
 
-        const imageB5= imageB4.slice(imageF3+4)
+        const imageB5= imageB4.slice(imageF4+4)
         const imageD5 = imageB5.search(debut); const imageF5 = imageB5.search(fin); const image5 = imageB5.slice(imageD5, imageF5+4);
         console.log (image5);
 
@@ -166,7 +166,7 @@ module.exports = {
           .setDescription("Oui 👍🏾 Non 👎🏾")
           .setImage(image4)
           .setTimestamp()
-       const poll6 = await message.channel.send({ embeds : [embed4], fetchReply: true});
+       const poll6 = await message.channel.send({ embeds : [embed5], fetchReply: true});
         poll6.react('👍🏾');
         poll6.react('👎🏾');
 
@@ -180,6 +180,6 @@ module.exports = {
         poll5.react('👍🏿');
         poll5.react('👎🏿');
 
-        message.channel.send('Coucou 1036923350808805436 voilà pour vous !')
+        message.channel.send('Coucou <@&806912965496143882> voilà pour vous !')
 
        }}
