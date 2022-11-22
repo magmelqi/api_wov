@@ -160,25 +160,25 @@ module.exports = {
         poll4.react('👍🏽');
         poll4.react('👎🏽');
 
-        const embed6 = new MessageEmbed()
+        const embed5 = new MessageEmbed()
           .setTitle("Skin or 3")
           .setColor('#FFA500')
           .setDescription("Oui 👍🏾 Non 👎🏾")
           .setImage(image4)
           .setTimestamp()
-       const poll6 = await message.channel.send({ embeds : [embed5], fetchReply: true});
-        poll6.react('👍🏾');
-        poll6.react('👎🏾');
+       const poll5 = await message.channel.send({ embeds : [embed5], fetchReply: true});
+        poll5.react('👍🏾');
+        poll5.react('👎🏾');
 
 
-        const embed5 = new MessageEmbed()
+        const embed6 = new MessageEmbed()
           .setTitle("Aves-vous déjà payé les 500 or pour la quête ? (Si quête or)")
           .setColor('WHITE')
           .setDescription("Oui 👍🏿 Non 👎🏿")
           .setTimestamp()
-       const poll5 = await message.channel.send({ embeds : [embed5], fetchReply: true});
-        poll5.react('👍🏿');
-        poll5.react('👎🏿');
+       const poll6 = await message.channel.send({ embeds : [embed6], fetchReply: true});
+        poll6.react('👍🏿');
+        poll6.react('👎🏿');
 
         message.channel.send('Coucou <@&806912965496143882> voilà pour vous !')
 
