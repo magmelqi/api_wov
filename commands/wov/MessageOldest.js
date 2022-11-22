@@ -5,12 +5,12 @@ const Messageclan = new MessageChannel;
 const axios = require('axios')
 
 module.exports = {
-    name: "mvar",
+    name: "mclanvar",
     category: 'wov',
     permissions: ['SEND_MESSAGES'],
     ownerOnly: false,
-    usage: 'mvar [année-mois-jourTheure:minute:seconde]',
-    examples: ['mvar 2022-11-22T20:20:01', 'mvar 2002-09-07T06:27:48'],
+    usage: 'mclanvar [année-mois-jourTheure:minute:seconde]',
+    examples: ['mclanvar 2022-11-22T20:20:01', 'mclanvar 2002-09-07T06:27:48'],
     description: 'Voir le messages du chat de clan a la date demandée',
       run: async(client, message, args) => {
         var dateVar = message.content.substring(10).trim()
@@ -73,7 +73,7 @@ module.exports = {
         required: true,
     }
 ],
-  runSlash: async(client, interaction) => {
+  runSlash: async(message, interaction) => {
     const dateVar = interaction.options.getString('date'); console.log(nomber)
     const Messageclan = await superagent.get(`https://api.wolvesville.com/clans/${process.env.CLAN_ID}/chat?oldest=${dateVar}`)
   .set( 'Authorization', process.env.WOV_TOKEN)
