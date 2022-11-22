@@ -39,9 +39,9 @@ module.exports = {
         const embed= new MessageEmbed()
     .setAuthor({name: 'Chat WOV'})
     .setColor('WHITE')
-    .setFields({name: `Pseudo: ${PlayerId}`, value: `-${msg}`}, {name: "fais le", value: `-${date} à ${date2}`})
+    .setFields({name: PlayerId, value: `-${msg}`}, {name: "fais le", value: `-${date} à ${date2}`})
     .setThumbnail()
-    .setTimestamp()
+    .setTimestamp();
 
       try { await message.channel.send({embeds: [embed]})} catch (err) {message.channel.send("Erreur dans l'envoie du message")}}
         
@@ -60,9 +60,9 @@ module.exports = {
         const embed= new MessageEmbed()
     .setAuthor({name: 'Chat WOV'})
     .setColor('#77b5fe')
-    .setFields({name: `Pseudo: ${username}`, value: `-${msg}`}, {name: "fais le", value: `-${date} à ${date2}`})
+    .setFields({name: username, value: `-${msg}`}, {name: "fais le", value: `-${date} à ${date2}`})
     .setThumbnail()
-    .setTimestamp()
+    .setTimestamp();
 
        try{ await message.channel.send({embeds: [embed]})}catch (err) {message.channel.send("Erreur dans l'envoie du message")}}}
         
@@ -101,9 +101,9 @@ module.exports = {
     const embed= new MessageEmbed()
     .setAuthor({name: 'Chat WOV'})
     .setColor('WHITE')
-    .setFields({name: `Pseudo: ${PlayerId}`, value: `-${msg}`}, {name: "fais le", value: `-${date} à ${date2}`})
+    .setFields({name: PlayerId, value: `-${msg}`}, {name: "fais le", value: `-${date} à ${date2}`})
     .setThumbnail()
-    .setTimestamp()
+    .setTimestamp();
 
     try { await interaction.channel.send({ embeds: [embed], ephemeral: true })} catch (err) {message.channel.send("Erreur dans l'envoie du message")}}
     
@@ -122,9 +122,9 @@ module.exports = {
     const embed= new MessageEmbed()
     .setAuthor({name: 'Chat WOV'})
     .setColor('#77b5fe')
-    .setFields({name: `Pseudo: ${username}`, value: `-${msg}`}, {name: "fais le", value: `-${date} à ${date2}`})
+    .setFields({name: username, value: `-${msg}`}, {name: "fais le", value: `-${date} à ${date2}`})
     .setThumbnail()
-    .setTimestamp()
+    .setTimestamp();
 
     try{ await interaction.channel.send({ embeds: [embed], ephemeral: true})} catch (err) {message.channel.send("Erreur dans l'envoie du message")}}}
   }}
