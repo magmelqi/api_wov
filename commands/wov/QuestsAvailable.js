@@ -86,6 +86,8 @@ module.exports = {
        const poll5 = await message.channel.send({ embeds : [embed5], fetchReply: true});
         poll5.react('👍🏾');
         poll5.react('👎🏾');
+
+        message.channel.send('Coucou <@&806912965496143882> voilà pour vous !')
     },
 
     runSlash: async(client, message) => {
