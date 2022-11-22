@@ -43,7 +43,7 @@ module.exports = {
     .setThumbnail()
     .setTimestamp()
 
-        message.channel.send({embeds: [embed]})}
+      try {message.channel.send({embeds: [embed]})} catch (err) {message.channel.send("Erreur dans l'envoie du message")}}
         
       
        else { console.log('else')
@@ -64,7 +64,7 @@ module.exports = {
     .setThumbnail()
     .setTimestamp()
 
-        message.channel.send({embeds: [embed]})}}
+       try{ message.channel.send({embeds: [embed]})}catch (err) {message.channel.send("Erreur dans l'envoie du message")}}}
         
   },
   options:[
@@ -105,7 +105,7 @@ module.exports = {
     .setThumbnail()
     .setTimestamp()
 
-    interaction.channel.send({ embeds: [embed], ephemeral: true })}
+    try {interaction.channel.send({ embeds: [embed], ephemeral: true })} catch (err) {message.channel.send("Erreur dans l'envoie du message")}}
     
   
    else { console.log('else')
@@ -126,6 +126,5 @@ module.exports = {
     .setThumbnail()
     .setTimestamp()
 
-    interaction.channel.send({ embeds: [embed], ephemeral: true})}}
-
-}}
+    try{interaction.channel.send({ embeds: [embed], ephemeral: true})} catch (err) {message.channel.send("Erreur dans l'envoie du message")}}}
+  }}
