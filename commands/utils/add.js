@@ -9,8 +9,8 @@ module.exports = {
   examples: ['add @Evie'],
   description: "La commande ajoute les rôles louveteau et membre WL à la personne",
     run: (client, message, args) =>  {
-        let role = message.guild.roles.cache.find(r => r.id === '724210352346366014');
-        let role2 = message.guild.roles.cache.find(r => r.id === '724210352346366014');
+        let role = message.guild.roles.cache.find(r => r.name === '🐅Membre de la WL🐅');
+        let role2 = message.guild.roles.cache.find(r => r.name === 'Louveteau');
         let member = message.mentions.members.first();
         //'<@&806912965496143882>','<@&72421035%%2346366014>'
  
