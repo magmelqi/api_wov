@@ -17,14 +17,13 @@ module.exports = {
         .set('Content-Type', 'application/json')
         .set('Accept', 'application/json')
         .catch((err) => {return message.channel.send(err)}); 
-        console.log ('Commande clan fait');
+        console.log ('Commande bot fait');
         const Clan = await Clanauthorized.body
         const obj=JSON.stringify(Clan); 
-        var id = obj.slice(3, 5); var idn = obj.slice(8, 44)
+        var idn = obj.slice(8, 44)
         var creationTimend = obj.slice(62, 72); var creationTimenf = obj.slice(73, 78)
         var namen = obj.slice(96, 112)
 
-        console.log(`${id}:"${idn}"`)
         const emebed = new MessageEmbed()
         .setTitle('Clan connecté au bot:')
         .setColor('WHITE')
@@ -36,15 +35,13 @@ module.exports = {
   .set('Content-Type', 'application/json')
   .set('Accept', 'application/json')
   .catch((err) => {return message.channel.send(err)}); 
-  console.log ('Commande clan fait');
+  console.log ('Commande bot fait');
   const Clan = await Clanauthorized.body
-  console.log (Clan)
   const obj=JSON.stringify(Clan); 
-  var id = obj.slice(3, 5); var idn = obj.slice(8, 44)
+  var idn = obj.slice(8, 44)
   var creationTimend = obj.slice(62, 72); var creationTimenf = obj.slice(73, 78)
   var namen = obj.slice(96, 112)
 
-  console.log(`${id}:"${idn}"`)
   const emebed = new MessageEmbed()
         .setTitle('Clan connecté au bot:')
         .setColor('WHITE')

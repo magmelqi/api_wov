@@ -21,7 +21,7 @@ module.exports = {
         .catch((err) => {return message.channel.send(`Le pseudo: "${nom}" n'existe pas.\nou ${err}`)}); 
         const User = await Username.body
         const UserId=JSON.stringify(User); 
-        var idn = UserId.slice(7, 43); var idn1 = idn.trim(); console.log(idn)
+        var idn = UserId.slice(7, 43); var idn1 = idn.trim();
 
         const Quests = await superagent.put(`https://api.wolvesville.com/clans/${process.env.CLAN_ID}/members/${idn1}/participateInQuests`)
         .send({participateInQuests: false})
@@ -67,7 +67,7 @@ module.exports = {
         .set( 'Authorization', process.env.WOV_TOKEN)
         .set('Content-Type', 'application/json')
         .set('Accept', 'application/json')
-        .catch((err) => {return message.channel.send(`Le pseudo: "${nom}" n'existe pas.\nou ${err}`)}); 
+        .catch((err) => {return interaction.reply(`Le pseudo: "${nom}" n'existe pas.\nou ${err}`)}); 
         const User = await Username.body
         const UserId=JSON.stringify(User); 
         var idn = UserId.slice(7, 43); var idn1 = idn.trim(); console.log(idn)

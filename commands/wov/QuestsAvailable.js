@@ -78,7 +78,14 @@ module.exports = {
         poll4.react('👍🏽');
         poll4.react('👎🏽');
 
-
+        const embed5 = new MessageEmbed()
+          .setTitle("Aves-vous déjà payé les 500 or pour la quête ? (Si quête or)")
+          .setColor('WHITE')
+          .setDescription("Oui 👍🏾 Non 👎🏾")
+          .setTimestamp()
+       const poll5 = await message.channel.send({ embeds : [embed5], fetchReply: true});
+        poll5.react('👍🏾');
+        poll5.react('👎🏾');
     },
 
     runSlash: async(client, message) => {
@@ -108,9 +115,13 @@ module.exports = {
         const imageD4 = imageB4.search(debut); const imageF4 = imageB4.search(fin); const image4 = imageB4.slice(imageD4, imageF4+4);
         console.log (image4);
 
+        const imageB5= imageB4.slice(imageF3+4)
+        const imageD5 = imageB5.search(debut); const imageF5 = imageB5.search(fin); const image5 = imageB5.slice(imageD5, imageF5+4);
+        console.log (image5);
+
 
       const embed1 = new MessageEmbed()
-        .setTitle("Skin gemme")
+        .setTitle("Skin gemme 1")
         .setColor('#FF69B4')
         .setDescription("Oui 👍🏻 Non 👎🏻")
         .setImage(image1)
@@ -120,7 +131,7 @@ module.exports = {
       poll1.react('👎🏻');
 
       const embed2 = new MessageEmbed()
-          .setTitle("Skin or 1")
+          .setTitle("Skin gemme 2")
           .setColor('#FFA500')
           .setDescription("Oui 👍 Non 👎")
           .setImage(image2)
@@ -130,7 +141,7 @@ module.exports = {
         poll2.react('👎');
 
         const embed3 = new MessageEmbed()
-          .setTitle("Skin or 2")
+          .setTitle("Skin or 1")
           .setColor('#FFA500')
           .setDescription("Oui 👍🏼 Non 👎🏼")
           .setImage(image3)
@@ -140,7 +151,7 @@ module.exports = {
         poll3.react('👎🏼');
 
         const embed4 = new MessageEmbed()
-          .setTitle("Skin or 3")
+          .setTitle("Skin or 2")
           .setColor('#FFA500')
           .setDescription("Oui 👍🏽 Non 👎🏽")
           .setImage(image4)
@@ -148,5 +159,27 @@ module.exports = {
        const poll4 = await message.channel.send({ embeds : [embed4], fetchReply: true});
         poll4.react('👍🏽');
         poll4.react('👎🏽');
+
+        const embed6 = new MessageEmbed()
+          .setTitle("Skin or 3")
+          .setColor('#FFA500')
+          .setDescription("Oui 👍🏾 Non 👎🏾")
+          .setImage(image4)
+          .setTimestamp()
+       const poll6 = await message.channel.send({ embeds : [embed4], fetchReply: true});
+        poll6.react('👍🏾');
+        poll6.react('👎🏾');
+
+
+        const embed5 = new MessageEmbed()
+          .setTitle("Aves-vous déjà payé les 500 or pour la quête ? (Si quête or)")
+          .setColor('WHITE')
+          .setDescription("Oui 👍🏿 Non 👎🏿")
+          .setTimestamp()
+       const poll5 = await message.channel.send({ embeds : [embed5], fetchReply: true});
+        poll5.react('👍🏿');
+        poll5.react('👎🏿');
+
+        message.channel.send('Coucou 1036923350808805436 voilà pour vous !')
 
        }}

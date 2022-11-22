@@ -23,7 +23,7 @@ module.exports = {
         .set( 'Authorization', process.env.WOV_TOKEN)
         .set('Content-Type', 'application/json')
         .set('Accept', 'application/json')
-        .catch((err) => {console.log('Clan introuvable')});   
+        .catch((err) => {message.channel.send(`Clan introuvable\nou ${err}`)});   
         const ClanId = await ClanIdb.text;
         var CNb= /name/g
         var CNf= /","description/g
@@ -40,7 +40,7 @@ module.exports = {
           .setImage(`${data.equippedAvatar.url}`)
           .setTimestamp()
       
-            message.channel.send({ embeds: [embed]}),console.log(`Pseudo: ${nom} Clan: ${CN1 ?? "Pas de clan"}`), console.log ('Commande username faite');
+            message.channel.send({ embeds: [embed]}),console.log(`Pseudo: ${nom} Clan: ${CN1 ?? "Pas de clan"}`), console.log ('Commande profil faite');
       
       } catch (err) {console.log(err)} return
         
@@ -64,7 +64,7 @@ module.exports = {
         .set( 'Authorization', process.env.WOV_TOKEN)
         .set('Content-Type', 'application/json')
         .set('Accept', 'application/json')
-        .catch((err) => {console.log('Trop de requet')});   
+        .catch((err) => {message.channel.send(`Clan introuvable\nou ${err}`)});   
         const ClanId = await (`${ClanIdb.text}`);
         var CNb= /name/g
         var CNf= /","description/g
@@ -81,7 +81,7 @@ module.exports = {
           .setImage(`${data.equippedAvatar.url}`)
           .setTimestamp()
       
-            await interaction.reply({ embeds: [embed]}),console.log(`Pseudo: ${nom} Clan: ${CN1 ?? "Pas de clan"}`), console.log ('Commande username faite');
+            await interaction.reply({ embeds: [embed]}),console.log(`Pseudo: ${nom} Clan: ${CN1 ?? "Pas de clan"}`), console.log ('Commande profil faite');
       
       } catch (err) {console.log(err)} return
 }}    

@@ -18,7 +18,7 @@ module.exports = {
         .set('Content-Type', 'application/json')
         .set('Accept', 'application/json')
         .catch((err) => {return message.channel.send(err)}); 
-        console.log ('Commande message clan fait');
+        console.log ('Commande MessageSend fait');
         console.log(`${message.author.tag} :${message.content.substring(6)}`)
         message.channel.send(`'${message.content.substring(6)} ' a bien été envoyé.`)
         
@@ -40,7 +40,7 @@ module.exports = {
   .set('Content-Type', 'application/json')
   .set('Accept', 'application/json')
   .catch((err) => {return interaction.reply(err)}); 
-  console.log ('Commande message clan fait');
+  console.log ('Commande MessageSend fait');
   console.log(`${interaction.user.username} :${MessageContent}`)
   message.channel.send(`'${MessageContent} ' a bien été envoyé.`)
 }

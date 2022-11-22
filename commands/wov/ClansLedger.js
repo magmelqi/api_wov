@@ -17,7 +17,7 @@ module.exports = {
         .set('Content-Type', 'application/json')
         .set('Accept', 'application/json')
         .catch((err) => {console.log(err)});
-        console.log ('Commande message clan fait');
+        console.log ('Commande dons fait');
         const Clan = await obj.body
         var dons=obj.text 
 
@@ -82,29 +82,16 @@ module.exports = {
           .setDescription(`${Pseudo1}`)
           .addFields({name: 'Type d\'action:', value: `${Type1}`},{name: 'Or:', value: `${OR1}`},{name:'gemme:', value: `${Gemme1}`},{name: 'fais le:', value:`${Crée1} à ${Crée2}`}); console.log(Type1)
         
-            message.channel.send({ embeds: [embed2]})}
-
-       } 
-       
-
-
-
-
-
-
-
-
-      
-      },
+            message.channel.send({ embeds: [embed2]})}}
+          },
       runSlash: async (client, interaction) => {
         const Messageclan = await superagent.get(`https://api.wolvesville.com/clans/${process.env.CLAN_ID}/ledger`)
         .set( 'Authorization', process.env.WOV_TOKEN)
         .set('Content-Type', 'application/json')
         .set('Accept', 'application/json')
         .catch((err) => {return interaction.reply(err)}); 
-        console.log ('Commande message clan fait');
+        console.log ('Commande dons fait');
         const Clan = await Messageclan.body
         const obj=JSON.stringify(Clan); 
-        console.log(Clan)
       }
     }
