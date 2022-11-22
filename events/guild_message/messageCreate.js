@@ -5,7 +5,10 @@ module.exports = {
     name: "messageCreate",
     once: false,
     execute(client, message) {
+        if (message.content.startsWith('Bouh !')) {message.react('👻')}
         if (message.author.bot) return;
+        if (message.content.startsWith('Salut')) {message.react('👻')}
+        if (message.content.startsWith('Salut !')) {message.channel.send('Bouh !')}
         if (!message.content.startsWith(prefix)) return;
         
         const args = message.content.slice(prefix.length).trim().split(/ +/g);
