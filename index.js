@@ -1,5 +1,6 @@
 const {Client, Collection} = require('discord.js');
-const dotenv = require('dotenv'); dotenv.config();
+const dotenv = require('dotenv');const poll = require('./commands/utils/poll');
+ dotenv.config();
 const client = new Client({intents: 1539, partials: ['MESSAGE', 'CHANNEL', 'REACTION', 'USER']});
 const superagent = require('superagent').agent();
 const Logger = require ('./utils/Logger');
@@ -9,7 +10,7 @@ client.commands = new Collection ();
 ['EventUtil','CommandUtil'].forEach(handler => { require(`./utils/handlers/${handler}`)(client) });
 
 client.on("message", message => {
-    if (message.content.startsWith('salut')) message.channel.send('Bouh !');
+    if (message.content.startsWith('salut'));{message.channel.send('Bouh !'); message.react('👻')}
 });
 
 process.on ('exit', code => { Logger.client(`Le processus s'est arrèté avec le code: ${code} !`)});
