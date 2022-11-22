@@ -164,7 +164,7 @@ module.exports = {
           .setTitle("Skin or 3")
           .setColor('#FFA500')
           .setDescription("Oui 👍🏾 Non 👎🏾")
-          .setImage(image4)
+          .setImage(image5)
           .setTimestamp()
        const poll5 = await message.channel.send({ embeds : [embed5], fetchReply: true});
         poll5.react('👍🏾');
