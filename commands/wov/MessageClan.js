@@ -39,7 +39,7 @@ module.exports = {
         const embed= new MessageEmbed()
     .setAuthor({name: 'Chat WOV'})
     .setColor('WHITE')
-    .setFields({name: PlayerId, value: `${msg}`}, {name: "fais le", value: `${date} à ${date2}`})
+    .setFields({name: `Pseudo: ${PlayerId}`, value: `-${msg}`}, {name: "fais le", value: `-${date} à ${date2}`})
     .setThumbnail()
     .setTimestamp()
 
@@ -60,7 +60,7 @@ module.exports = {
         const embed= new MessageEmbed()
     .setAuthor({name: 'Chat WOV'})
     .setColor('#77b5fe')
-    .setFields({name: username, value: `${msg}`}, {name: "fais le", value: `${date} à ${date2}`})
+    .setFields({name: `Pseudo: ${username}`, value: `-${msg}`}, {name: "fais le", value: `-${date} à ${date2}`})
     .setThumbnail()
     .setTimestamp()
 
@@ -101,7 +101,7 @@ module.exports = {
     const embed= new MessageEmbed()
     .setAuthor({name: 'Chat WOV'})
     .setColor('WHITE')
-    .setFields({name: PlayerId, value: `${msg}`}, {name: "fais le", value: `${date} à ${date2}`})
+    .setFields({name: `Pseudo: ${PlayerId}`, value: `-${msg}`}, {name: "fais le", value: `-${date} à ${date2}`})
     .setThumbnail()
     .setTimestamp()
 
@@ -122,7 +122,7 @@ module.exports = {
     const embed= new MessageEmbed()
     .setAuthor({name: 'Chat WOV'})
     .setColor('#77b5fe')
-    .setFields({name: username, value: `${msg}`}, {name: "fais le", value: `${date} à ${date2}`})
+    .setFields({name: `Pseudo: ${username}`, value: `-${msg}`}, {name: "fais le", value: `-${date} à ${date2}`})
     .setThumbnail()
     .setTimestamp()
 

@@ -33,11 +33,12 @@ module.exports = {
         var PlayerIdd= /{"player/g; var PlayerIdf= /","date":"/g
         const PlayerIdd1 = obj.search(PlayerIdd); const PlayerIdf1 = obj.search(PlayerIdf); var PlayerId = obj.slice(PlayerIdd1+13, PlayerIdf1); var obj = obj.slice(msgf1+7); console.log(PlayerId); 
 
+        try {
         if ( PlayerId == 'nerUsername":"BOT(lusky34)') {var PlayerId= "BOT"; console.log('if')
         const embed= new MessageEmbed()
     .setAuthor({name: 'Chat WOV'})
     .setColor('WHITE')
-    .setFields({name: PlayerId, value: `${msg}`}, {name: "fais le", value: `${date} à ${date2}`})
+    .setFields({name: `Pseudo: ${PlayerId}`, value: `-${msg}`}, {name: "fais le", value: `-${date} à ${date2}`})
     .setThumbnail()
     .setTimestamp()
 
@@ -58,11 +59,11 @@ module.exports = {
         const embed= new MessageEmbed()
     .setAuthor({name: 'Chat WOV'})
     .setColor('#77b5fe')
-    .setFields({name: username, value: `${msg}`}, {name: "fais le", value: `${date} à ${date2}`})
+    .setFields({name: `Pseudo: ${username}`, value: `-${msg}`}, {name: "fais le", value: `-${date} à ${date2}`})
     .setThumbnail()
     .setTimestamp()
 
-        message.channel.send({embeds: [embed]})}
+        message.channel.send({embeds: [embed]})}} catch (err) { message;channel.send("Erreur dans l'envoie du message")}
         
   },
   options:[
@@ -93,11 +94,13 @@ module.exports = {
     var PlayerIdd= /{"player/g; var PlayerIdf= /","date":"/g
     const PlayerIdd1 = obj.search(PlayerIdd); const PlayerIdf1 = obj.search(PlayerIdf); var PlayerId = obj.slice(PlayerIdd1+13, PlayerIdf1); var obj = obj.slice(msgf1+7); console.log(PlayerId); 
 
+
+    try {
     if ( PlayerId == 'nerUsername":"BOT(lusky34)') {var PlayerId= "BOT"; console.log('if')
     const embed= new MessageEmbed()
     .setAuthor({name: 'Chat WOV'})
     .setColor('WHITE')
-    .setFields({name: PlayerId, value: `${msg}`}, {name: "fais le", value: `${date} à ${date2}`})
+    .setFields({name: `Pseudo: ${PlayerId}`, value: `-${msg}`}, {name: "fais le", value: `-${date} à ${date2}`})
     .setThumbnail()
     .setTimestamp()
 
@@ -118,10 +121,10 @@ module.exports = {
     const embed= new MessageEmbed()
     .setAuthor({name: 'Chat WOV'})
     .setColor('#77b5fe')
-    .setFields({name: username, value: `${msg}`}, {name: "fais le", value: `${date} à ${date2}`})
+    .setFields({name: `Pseudo: ${username}`, value: `-${msg}`}, {name: "fais le", value: `-${date} à ${date2}`})
     .setThumbnail()
     .setTimestamp()
 
-    interaction.channel.send({ embeds: [embed], ephemeral: true})}
+    interaction.channel.send({ embeds: [embed], ephemeral: true})}} catch (err) { message;channel.send("Erreur dans l'envoie du message")}
 
 }}
