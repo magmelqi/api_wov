@@ -132,7 +132,7 @@ module.exports = {
 
       const embed2 = new MessageEmbed()
           .setTitle("Skin gemme 2")
-          .setColor('#FFA500')
+          .setColor('#FF69B4')
           .setDescription("Oui 👍 Non 👎")
           .setImage(image2)
           .setTimestamp()
