@@ -52,7 +52,7 @@ module.exports = {
           .set( 'Authorization', process.env.WOV_TOKEN)
           .set('Content-Type', 'application/json')
           .set('Accept', 'application/json')
-          .catch((err) => {return message.channel.send(err)}); const pseudo = usernameb.text
+          .catch((err) => {usernameb(); message.channel.send("Erreur dans la requête du player")}); const pseudo = usernameb.text
 
           var usernamed= /","username":"/g; var usernamef= /","personalMessage":"/g
         const usernamed1 = pseudo.search(usernamed); const usernamef1 = pseudo.search(usernamef); var username = pseudo.slice(usernamed1+14, usernamef1); console.log (username)
@@ -115,7 +115,7 @@ module.exports = {
       .set( 'Authorization', process.env.WOV_TOKEN)
       .set('Content-Type', 'application/json')
       .set('Accept', 'application/json')
-      .catch((err) => {return interaction.reply(err)}); const pseudo = usernameb.text
+      .catch((err) => {usernameb(); interaction.reply("Erreur dans la requête du player")}); const pseudo = usernameb.text
 
       var usernamed= /","username":"/g; var usernamef= /","personalMessage":"/g
     const usernamed1 = pseudo.search(usernamed); const usernamef1 = pseudo.search(usernamef); var username = pseudo.slice(usernamed1+14, usernamef1); console.log (username)
