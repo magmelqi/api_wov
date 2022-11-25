@@ -52,7 +52,7 @@ module.exports = {
           .set( 'Authorization', process.env.WOV_TOKEN)
           .set('Content-Type', 'application/json')
           .set('Accept', 'application/json')
-          .catch((err) => { message.channel.send(`Erreur dans la requête du pseudo le message ${i} n'a pas pu être envoyé.\n\`Nouvelle tentative en cours...\``); console.log (i)});          
+          .catch((err) => { message.channel.send(`Erreur dans la requête du pseudo le message ${i+1} n'a pas pu être envoyé.\n\`Nouvelle tentative en cours...\``); console.log (i)});          
           
          try{ var pseudo = usernameb.text} catch (err) {usernameb}
 
@@ -118,7 +118,7 @@ module.exports = {
       .set( 'Authorization', process.env.WOV_TOKEN)
       .set('Content-Type', 'application/json')
       .set('Accept', 'application/json')
-      .catch((err) => {interaction.channel.send(`Erreur dans la requête du pseudo le message ${i} n'a pas pu être envoyé.\n\`Nouvelle tentative en cours...\``); console.log (i)});          
+      .catch((err) => {interaction.channel.send(`Erreur dans la requête du pseudo le message ${i+1} n'a pas pu être envoyé.\n\`Nouvelle tentative en cours...\``); console.log (i)});          
           
       try{ var pseudo = usernameb.text} catch (err) {usernameb}
       var usernamed= /","username":"/g; var usernamef= /","personalMessage":"/g
