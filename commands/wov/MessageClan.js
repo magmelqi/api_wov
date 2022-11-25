@@ -38,7 +38,7 @@ module.exports = {
         if ( PlayerId == 'nerUsername":"BOT(lusky34)') {var PlayerId= "BOT"; console.log('if')
         try {
         const embed= new MessageEmbed()
-    .setAuthor({name: 'Chat WOV'})
+    .setAuthor({name: `Chat WOV-${i+1}`})
     .setColor('WHITE')
     .setFields({name: PlayerId, value: `-${msg}`}, {name: "fais le", value: `-${date} à ${date2}`})
     .setThumbnail()
@@ -61,7 +61,7 @@ module.exports = {
 
         try{
         const embed2= new MessageEmbed()
-    .setAuthor({name: 'Chat WOV'})
+    .setAuthor({name: `Chat WOV-${i+1}`})
     .setColor('#77b5fe')
     .setFields({name: username, value: `-${msg}`}, {name: "fais le", value: `-${date} à ${date2}`})
     .setThumbnail()
@@ -104,7 +104,7 @@ module.exports = {
     if ( PlayerId == 'nerUsername":"BOT(lusky34)') {var PlayerId= "BOT"; console.log('if')
     try {
     const embed= new MessageEmbed()
-    .setAuthor({name: 'Chat WOV'})
+    .setAuthor({name: `Chat WOV-${i+1}`})
     .setColor('WHITE')
     .setFields({name: PlayerId, value: `-${msg}`}, {name: "fais le", value: `-${date} à ${date2}`})
     .setThumbnail()
@@ -126,7 +126,7 @@ module.exports = {
 
     try{
     const embed= new MessageEmbed()
-    .setAuthor({name: 'Chat WOV'})
+    .setAuthor({name: `Chat WOV-${i+1}`})
     .setColor('#77b5fe')
     .setFields({name: username, value: `-${msg}`}, {name: "fais le", value: `-${date} à ${date2}`})
     .setThumbnail()
