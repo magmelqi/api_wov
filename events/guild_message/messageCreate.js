@@ -5,9 +5,11 @@ module.exports = {
     name: "messageCreate",
     once: false,
     execute(client, message) {
-        if (message.content.startsWith('Bouh !')) {message.react('👻')}
         if (message.author.bot) return;
+        if (message.content.startsWith('Bouh')) {message.react('👻')}
+        if (message.content.startsWith('bouh')) {message.react('👻')}
         if (message.content.startsWith('Salut')) {message.react('👻')}
+        if (message.content.startsWith('salut')) {message.react('👻')}
         if (message.content.startsWith('Salut !')) {message.channel.send('Bouh !')}
         if (!message.content.startsWith(prefix)) return;
         
@@ -16,7 +18,7 @@ module.exports = {
         if (cmdName.length == 0) return;
         
         let cmd = client.commands.get(cmdName);
-        if (!cmd) return message.reply('cette commande n\'existe pas ! Ou elle n\'a pu être chargée.');
+        if (!cmd) return console.log('cette commande n\'existe pas ! Ou elle n\'a pu être chargée.');
 
         if (cmd.ownerOnly) {
             if (message.author.id != ownerId) return message.reply('La seule personne pouvant taper cette commande est l\'owner du bot!')

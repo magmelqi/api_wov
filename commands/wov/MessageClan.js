@@ -47,13 +47,12 @@ module.exports = {
        await message.channel.send({embeds: [embed]})} catch (err) {message.channel.send("Erreur dans l'envoie du message")}}
         
       
-       else { console.log('else')
-          var  usernameb  = await superagent.get(`https://api.wolvesville.com/players/${PlayerId}`)
+       else { console.log('else'); throttle: 100
+          const  usernameb  = await superagent.get(`https://api.wolvesville.com/players/${PlayerId}`)
           .set( 'Authorization', process.env.WOV_TOKEN)
           .set('Content-Type', 'application/json')
           .set('Accept', 'application/json')
-          .catch((err) => {message.channel.send(`Erreur dans la requête du player \nou ${err}`)}); 
-          
+          .catch((err) => {return message.channel.send(`Erreur dans la requête du pseudo le message ${i} n'a pas pu être envoyé`)});          
           
           const pseudo = usernameb.text
 
@@ -113,12 +112,13 @@ module.exports = {
      await interaction.channel.send({ embeds: [embed], ephemeral: true })} catch (err) {message.channel.send("Erreur dans l'envoie du message")}}
     
   
-   else { console.log('else')
+   else { console.log('else'); throttle: 100
       const  usernameb  = await superagent.get(`https://api.wolvesville.com/players/${PlayerId}`)
       .set( 'Authorization', process.env.WOV_TOKEN)
       .set('Content-Type', 'application/json')
       .set('Accept', 'application/json')
-      .catch((err) => {usernameb(); interaction.reply(`Erreur dans la requête du player \nou ${err}`)}); const pseudo = usernameb.text
+      .catch((err) => {return interaction.reply(`Erreur dans la requête du pseudo le message ${i} n'a pas pu être envoyé`)}); 
+      const pseudo = usernameb.text
 
       var usernamed= /","username":"/g; var usernamef= /","personalMessage":"/g
     const usernamed1 = pseudo.search(usernamed); const usernamef1 = pseudo.search(usernamef); var username = pseudo.slice(usernamed1+14, usernamef1); console.log (username)

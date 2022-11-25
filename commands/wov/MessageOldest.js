@@ -5,15 +5,15 @@ const Messageclan = new MessageChannel;
 const axios = require('axios')
 
 module.exports = {
-    name: "mclanvar",
+    name: "mvar",
     category: 'wov',
     permissions: ['SEND_MESSAGES'],
     ownerOnly: false,
-    usage: 'mclanvar [année-mois-jourTheure:minute:seconde]',
-    examples: ['mclanvar 2022-11-22T20:20:01', 'mclanvar 2002-09-07T06:27:48'],
+    usage: 'mvar [année-mois-jourTheure:minute:seconde]',
+    examples: ['mvar 2022-11-22T20:20:01', 'mvar 2002-09-07T06:27:48'],
     description: 'Voir le messages du chat de clan a la date demandée',
       run: async(client, message, args) => {
-        var dateVar = message.content.substring(10).trim()
+        var dateVar = message.content.substring(6).trim()
         const Messageclan = await superagent.get(`https://api.wolvesville.com/clans/${process.env.CLAN_ID}/chat?oldest=${dateVar}`)
         .set( 'Authorization', process.env.WOV_TOKEN)
         .set('Content-Type', 'application/json')
@@ -38,14 +38,14 @@ module.exports = {
         const embed= new MessageEmbed()
     .setAuthor({name: 'Chat WOV'})
     .setColor('WHITE')
-    .setFields({name: `Pseudo: ${PlayerId}`, value: `-${msg}`}, {name: "fais le", value: `-${date} à ${date2}`})
+    .setFields({name: `Pseudo: \`${PlayerId}\``, value: `-${msg}`}, {name: "fais le", value: `-${date} à ${date2}`})
     .setThumbnail()
     .setTimestamp()
 
-        message.channel.send({embeds: [embed]})}
+        message.send({embeds: [embed]})}
         
       
-       else { console.log('else')
+       else { console.log('else'); throttle: 100
           const  usernameb  = await superagent.get(`https://api.wolvesville.com/players/${PlayerId}`)
           .set( 'Authorization', process.env.WOV_TOKEN)
           .set('Content-Type', 'application/json')
@@ -59,7 +59,7 @@ module.exports = {
         const embed= new MessageEmbed()
     .setAuthor({name: 'Chat WOV'})
     .setColor('#77b5fe')
-    .setFields({name: `Pseudo: ${username}`, value: `-${msg}`}, {name: "fais le", value: `-${date} à ${date2}`})
+    .setFields({name: `Pseudo: \`${username}\``, value: `-${msg}`}, {name: "fais le", value: `-${date} à ${date2}`})
     .setThumbnail()
     .setTimestamp()
 
@@ -68,15 +68,50 @@ module.exports = {
   },
   options:[
     {
-        name: "date",
-        description: "Tapez la date du message que vous souhaitez voir",
+        name: "année",
+        description: "Tapez l'année du message que vous souhaitez voir",
         type: "STRING",
         required: true,
+    },
+    {
+      name: "mois",
+      description: "Tapez le mois du message que vous souhaitez voir",
+      type: "STRING",
+      required: true,
+    },
+    {
+      name: "jour",
+      description: "Tapez le jour du message que vous souhaitez voir",
+      type: "STRING",
+      required: true,
+    },
+    {
+      name: "heure",
+      description: "Tapez l'heure du message que vous souhaitez voir",
+      type: "STRING",
+      required: false,
+    },
+    {
+      name: "minute",
+      description: "Tapez les minutes du message que vous souhaitez voir",
+      type: "STRING",
+      required: false,
+    },
+    {
+      name: "seconde",
+      description: "Tapez les secondes du message que vous souhaitez voir",
+      type: "STRING",
+      required: false,
     }
 ],
-  runSlash: async(message, interaction) => {
-    const dateVar = interaction.options.getString('date'); console.log(nomber)
-    const Messageclan = await superagent.get(`https://api.wolvesville.com/clans/${process.env.CLAN_ID}/chat?oldest=${dateVar}`)
+  runSlash: async(message, interaction) => {  //2002-09-07T06:27:48
+    const annéeVar = interaction.options.getString('année');
+    const moisVar = interaction.options.getString('mois');
+    const jourVar = interaction.options.getString('jour');
+    const heureVar = interaction.options.getString('heure') ?? 0;
+    const minuteVar = interaction.options.getString('minute') ?? 0;
+    const secondeVar = interaction.options.getString('seconde') ?? 0;
+    const Messageclan = await superagent.get(`https://api.wolvesville.com/clans/${process.env.CLAN_ID}/chat?oldest=${annéeVar}-${moisVar}-${jourVar}T${heureVar}:${minuteVar}:${secondeVar}`)
   .set( 'Authorization', process.env.WOV_TOKEN)
   .set('Content-Type', 'application/json')
   .set('Accept', 'application/json')
@@ -100,11 +135,11 @@ module.exports = {
     const embed= new MessageEmbed()
     .setAuthor({name: 'Chat WOV'})
     .setColor('WHITE')
-    .setFields({name: `Pseudo: ${PlayerId}`, value: `-${msg}`}, {name: "fais le", value: `-${date} à ${date2}`})
+    .setFields({name: `Pseudo: \`${PlayerId}\``, value: `-${msg}`}, {name: "fais le", value: `-${date} à ${date2}`})
     .setThumbnail()
     .setTimestamp()
 
-    interaction.channel.send({ embeds: [embed], ephemeral: true })}
+    interaction.send({ embeds: [embed], ephemeral: true })}
     
   
    else { console.log('else')
@@ -121,7 +156,7 @@ module.exports = {
     const embed= new MessageEmbed()
     .setAuthor({name: 'Chat WOV'})
     .setColor('#77b5fe')
-    .setFields({name: `Pseudo: ${username}`, value: `-${msg}`}, {name: "fais le", value: `-${date} à ${date2}`})
+    .setFields({name: `Pseudo: \`${username}\``, value: `-${msg}`}, {name: "fais le", value: `-${date} à ${date2}`})
     .setThumbnail()
     .setTimestamp()
 
