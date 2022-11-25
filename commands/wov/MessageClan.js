@@ -22,7 +22,7 @@ module.exports = {
         .catch((err) => {return message.channel.send(err)}); 
         console.log ('Commande message clan fait');
         const Clan = await Messageclan.body
-        var obj=JSON.stringify(Clan); 
+        var obj=await JSON.stringify(Clan);
 
         for(let i=0; i < nombre; i++ ) {
 
@@ -47,14 +47,14 @@ module.exports = {
        await message.channel.send({embeds: [embed]})} catch (err) {message.channel.send("Erreur dans l'envoie du message")}}
         
       
-       else { console.log('else'); throttle: 100
+       else { console.log('else'); throttle: 500
           const  usernameb  = await superagent.get(`https://api.wolvesville.com/players/${PlayerId}`)
           .set( 'Authorization', process.env.WOV_TOKEN)
           .set('Content-Type', 'application/json')
           .set('Accept', 'application/json')
-          .catch((err) => {return message.channel.send(`Erreur dans la requête du pseudo le message ${i} n'a pas pu être envoyé`)});          
+          .catch((err) => { message.channel.send(`Erreur dans la requête du pseudo le message ${i} n'a pas pu être envoyé \n nouvelle tentative en cours...`); console.log (i)});          
           
-          const pseudo = usernameb.text
+         try{ var pseudo = usernameb.text} catch (err) {usernameb}
 
           var usernamed= /","username":"/g; var usernamef= /","personalMessage":"/g
         const usernamed1 = pseudo.search(usernamed); const usernamef1 = pseudo.search(usernamef); var username = pseudo.slice(usernamed1+14, usernamef1); console.log (username)
@@ -87,7 +87,7 @@ module.exports = {
   .catch((err) => {return interaction.reply(err)}); 
   console.log ('Commande message clan fait');
   const Clan = await Messageclan.body
-  var obj=JSON.stringify(Clan); 
+  var obj=await JSON.stringify(Clan); 
 
   for(let i=0; i < nomber; i++ ) {
 
@@ -117,9 +117,9 @@ module.exports = {
       .set( 'Authorization', process.env.WOV_TOKEN)
       .set('Content-Type', 'application/json')
       .set('Accept', 'application/json')
-      .catch((err) => {return interaction.reply(`Erreur dans la requête du pseudo le message ${i} n'a pas pu être envoyé`)}); 
-      const pseudo = usernameb.text
-
+      .catch((err) => {interaction.reply(`Erreur dans la requête du pseudo le message ${i} n'a pas pu être envoyé \n nouvelle tentative en cours...`); console.log (i)});          
+          
+      try{ var pseudo = usernameb.text} catch (err) {usernameb}
       var usernamed= /","username":"/g; var usernamef= /","personalMessage":"/g
     const usernamed1 = pseudo.search(usernamed); const usernamef1 = pseudo.search(usernamef); var username = pseudo.slice(usernamed1+14, usernamef1); console.log (username)
 
