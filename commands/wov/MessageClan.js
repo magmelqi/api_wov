@@ -84,7 +84,8 @@ module.exports = {
   .set( 'Authorization', process.env.WOV_TOKEN)
   .set('Content-Type', 'application/json')
   .set('Accept', 'application/json')
-  .catch((err) => {return interaction.reply(err)}); 
+  .catch((err) => {return interaction.reply(err)});
+  interaction.reply({content: `Exécution de la commande pour voir ${nomber} message(s)`, ephemeral: true})
   console.log ('Commande message clan fait');
   const Clan = await Messageclan.body
   var obj=await JSON.stringify(Clan); 
@@ -117,7 +118,7 @@ module.exports = {
       .set( 'Authorization', process.env.WOV_TOKEN)
       .set('Content-Type', 'application/json')
       .set('Accept', 'application/json')
-      .catch((err) => {interaction.reply(`Erreur dans la requête du pseudo le message ${i} n'a pas pu être envoyé.\n\`Nouvelle tentative en cours...\``); console.log (i)});          
+      .catch((err) => {interaction.channel.send(`Erreur dans la requête du pseudo le message ${i} n'a pas pu être envoyé.\n\`Nouvelle tentative en cours...\``); console.log (i)});          
           
       try{ var pseudo = usernameb.text} catch (err) {usernameb}
       var usernamed= /","username":"/g; var usernamef= /","personalMessage":"/g
