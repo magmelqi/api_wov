@@ -4,6 +4,7 @@ const dotenv = require('dotenv');const poll = require('./commands/utils/poll');
 const client = new Client({intents: 1539, partials: ['MESSAGE', 'CHANNEL', 'REACTION', 'USER']});
 const superagent = require('superagent').agent();
 const Logger = require ('./utils/Logger');
+const dayjs = require ('dayjs'); const timestamp = `[${dayjs().format("YYYY-MM-DDTHH:mm:ss")}]`; console.log (timestamp)
 
 client.commands = new Collection ();
 

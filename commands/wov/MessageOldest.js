@@ -28,7 +28,7 @@ module.exports = {
         const msgd1 = obj.search(msgd); const msgf1 = obj.search(msgf); var msg = obj.slice(msgd1+9, msgf1); console.log (msg)
 
         var dated= /","date":"/g; var datef= /","msg":"/g
-        const dated1 = obj.search(dated); const datef1 = obj.search(datef); var date = obj.slice(dated1+10, datef1-14); var date2 = obj.slice(datef1-13, datef1-8); console.log (date)
+        const dated1 = obj.search(dated); const datef1 = obj.search(datef); var date = obj.slice(dated1+10, datef1-14); var date2 = obj.slice(datef1-13, datef1-11); var date3 = obj.slice(datef1-10, datef1-8);var date2 = date2-1+2; console.log (`-${date} à ${date2}h${date3}`);
 
         var PlayerIdd= /{"player/g; var PlayerIdf= /","date":"/g
         const PlayerIdd1 = obj.search(PlayerIdd); const PlayerIdf1 = obj.search(PlayerIdf); var PlayerId = obj.slice(PlayerIdd1+13, PlayerIdf1); var obj = obj.slice(msgf1+7); console.log(PlayerId); 
@@ -38,14 +38,14 @@ module.exports = {
         const embed= new MessageEmbed()
     .setAuthor({name: 'Chat WOV'})
     .setColor('WHITE')
-    .setFields({name: `Pseudo: \`${PlayerId}\``, value: `-${msg}`}, {name: "fais le", value: `-${date} à ${date2}`})
+    .setFields({name: `Pseudo: \`${PlayerId}\``, value: `-${msg}`}, {name: "fais le", value: `-${date} à ${date2}h${date3}`})
     .setThumbnail()
     .setTimestamp()
 
         message.send({embeds: [embed]})}
         
       
-       else { console.log('else'); throttle: 100
+       else { console.log('else');
           const  usernameb  = await superagent.get(`https://api.wolvesville.com/players/${PlayerId}`)
           .set( 'Authorization', process.env.WOV_TOKEN)
           .set('Content-Type', 'application/json')
@@ -59,7 +59,7 @@ module.exports = {
         const embed= new MessageEmbed()
     .setAuthor({name: 'Chat WOV'})
     .setColor('#77b5fe')
-    .setFields({name: `Pseudo: \`${username}\``, value: `-${msg}`}, {name: "fais le", value: `-${date} à ${date2}`})
+    .setFields({name: `Pseudo: \`${username}\``, value: `-${msg}`}, {name: "fais le", value: `-${date} à ${date2}h${date3}`})
     .setThumbnail()
     .setTimestamp()
 
@@ -124,7 +124,7 @@ module.exports = {
     const msgd1 = obj.search(msgd); const msgf1 = obj.search(msgf); var msg = obj.slice(msgd1+9, msgf1); console.log (msg)
 
     var dated= /","date":"/g; var datef= /","msg":"/g
-    const dated1 = obj.search(dated); const datef1 = obj.search(datef); var date = obj.slice(dated1+10, datef1-14); var date2 = obj.slice(datef1-13, datef1-8); console.log (date)
+    const dated1 = obj.search(dated); const datef1 = obj.search(datef); var date = obj.slice(dated1+10, datef1-14); var date2 = obj.slice(datef1-13, datef1-11); var date3 = obj.slice(datef1-10, datef1-8); var date2 = date2-1+2; console.log (`-${date} à ${date2}h${date3}`);
 
     var PlayerIdd= /{"player/g; var PlayerIdf= /","date":"/g
     const PlayerIdd1 = obj.search(PlayerIdd); const PlayerIdf1 = obj.search(PlayerIdf); var PlayerId = obj.slice(PlayerIdd1+13, PlayerIdf1); var obj = obj.slice(msgf1+7); console.log(PlayerId); 
@@ -135,7 +135,7 @@ module.exports = {
     const embed= new MessageEmbed()
     .setAuthor({name: 'Chat WOV'})
     .setColor('WHITE')
-    .setFields({name: `Pseudo: \`${PlayerId}\``, value: `-${msg}`}, {name: "fais le", value: `-${date} à ${date2}`})
+    .setFields({name: `Pseudo: \`${PlayerId}\``, value: `-${msg}`}, {name: "fais le", value: `-${date} à ${date2}h${date3}`})
     .setThumbnail()
     .setTimestamp()
 
@@ -156,7 +156,7 @@ module.exports = {
     const embed= new MessageEmbed()
     .setAuthor({name: 'Chat WOV'})
     .setColor('#77b5fe')
-    .setFields({name: `Pseudo: \`${username}\``, value: `-${msg}`}, {name: "fais le", value: `-${date} à ${date2}`})
+    .setFields({name: `Pseudo: \`${username}\``, value: `-${msg}`}, {name: "fais le", value: `-${date} à ${date2}h${date3}`})
     .setThumbnail()
     .setTimestamp()
 

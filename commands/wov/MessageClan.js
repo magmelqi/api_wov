@@ -2,7 +2,7 @@ const superagent = require('superagent').agent();
 const { MessageEmbed } = require('discord.js');
 const dotenv = require('dotenv'); dotenv.config();
 const Messageclan = new MessageChannel;
-const axios = require('axios')
+const axios = require('axios'); 
 
 module.exports = {
     name: "mclan",
@@ -47,7 +47,7 @@ module.exports = {
        await message.channel.send({embeds: [embed]})} catch (err) {message.channel.send("Erreur dans l'envoie du message")}}
         
       
-       else { console.log('else'); throttle: 500
+       else { console.log('else');
           var usernameb = await superagent.get(`https://api.wolvesville.com/players/${PlayerId}`)
           .set( 'Authorization', process.env.WOV_TOKEN)
           .set('Content-Type', 'application/json')
@@ -89,6 +89,7 @@ module.exports = {
   console.log ('Commande message clan fait');
   const Clan = await Messageclan.body
   var obj=await JSON.stringify(Clan); 
+  
 
   for(let i=0; i < nomber; i++ ) {
 
@@ -113,7 +114,8 @@ module.exports = {
      await interaction.channel.send({ embeds: [embed], ephemeral: true })} catch (err) {message.channel.send("Erreur dans l'envoie du message")}}
     
   
-   else { console.log('else'); throttle: 100
+   else { console.log('else')
+
       const  usernameb  = await superagent.get(`https://api.wolvesville.com/players/${PlayerId}`)
       .set( 'Authorization', process.env.WOV_TOKEN)
       .set('Content-Type', 'application/json')

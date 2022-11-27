@@ -11,7 +11,9 @@ module.exports = {
 
         client.user.setPresence({ activities: [{ name: 'BOUH', type: 'PLAYING'}], status: 'idle'})
 
-        const devGuild = await client.guilds.cache.get('559352487430193180','724207157419180062',);
+        const devGuild = await client.guilds.cache.get('559352487430193180');
         devGuild.commands.set(client.commands.map(cmd => cmd));
+        const devGuild2 = await client.guilds.cache.get('724207157419180062',);
+        devGuild2.commands.set(client.commands.map(cmd => cmd));
     },
   };
