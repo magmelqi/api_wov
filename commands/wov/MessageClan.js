@@ -48,13 +48,13 @@ module.exports = {
         
       
        else { console.log('else'); throttle: 500
-          const  usernameb  = await superagent.get(`https://api.wolvesville.com/players/${PlayerId}`)
+          var usernameb = await superagent.get(`https://api.wolvesville.com/players/${PlayerId}`)
           .set( 'Authorization', process.env.WOV_TOKEN)
           .set('Content-Type', 'application/json')
           .set('Accept', 'application/json')
-          .catch((err) => { message.channel.send(`Erreur dans la requête du pseudo le message ${i+1} n'a pas pu être envoyé.\n\`Nouvelle tentative en cours...\``); console.log (i)});          
+          .catch((err) => { message.channel.send(`Erreur dans la requête du pseudo le message ${i+1} n'a pas pu être envoyé.\n\`Nouvelle tentative en cours...\``); console.log (i+1)});          
           
-         try{ var pseudo = usernameb.text} catch (err) {usernameb}
+         try{ var pseudo = usernameb.text} catch (err) {usernameb; var pseudo = usernameb.text}
 
           var usernamed= /","username":"/g; var usernamef= /","personalMessage":"/g
         const usernamed1 = pseudo.search(usernamed); const usernamef1 = pseudo.search(usernamef); var username = pseudo.slice(usernamed1+14, usernamef1); console.log (username)
@@ -118,7 +118,7 @@ module.exports = {
       .set( 'Authorization', process.env.WOV_TOKEN)
       .set('Content-Type', 'application/json')
       .set('Accept', 'application/json')
-      .catch((err) => {interaction.channel.send(`Erreur dans la requête du pseudo le message ${i+1} n'a pas pu être envoyé.\n\`Nouvelle tentative en cours...\``); console.log (i)});          
+      .catch((err) => {interaction.channel.send(`Erreur dans la requête du pseudo le message ${i+1} n'a pas pu être envoyé.\n\`Nouvelle tentative en cours...\``); console.log (i+1)});          
           
       try{ var pseudo = usernameb.text} catch (err) {usernameb}
       var usernamed= /","username":"/g; var usernamef= /","personalMessage":"/g
