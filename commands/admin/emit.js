@@ -7,7 +7,7 @@ module.exports = {
   ownerOnly: true,
   usage: 'emit',
   examples: ['pemit'],
-  description: "Emettre un eévénement au choix!",
+  description: "Emettre un événement au choix!",
     run: (client, message, args) =>  {
         if (!args[0] || !args[0].match(/^(guildMemberAdd|guildMemberRemove)$/)) return message.reply('merci d\'entrer un évenement valide (`\guildMemberAdd`/`\guildMemberRemove\`)');
 
