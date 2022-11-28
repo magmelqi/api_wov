@@ -15,5 +15,6 @@ module.exports = {
         devGuild.commands.set(client.commands.map(cmd => cmd));
         const devGuild2 = await client.guilds.cache.get('724207157419180062',);
         devGuild2.commands.set(client.commands.map(cmd => cmd));
+        
     },
   };

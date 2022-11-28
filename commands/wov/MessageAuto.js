@@ -11,7 +11,7 @@ module.exports = {
     ownerOnly: false,
     usage: 'mauto', 
     examples: ['mauto'],
-    description: 'Lance la liaison avec le chat de wov, envoie les messages envoyé sur wov en temps réel (pas config l\'id channel)',
+    description: 'Envoie les messages envoyé sur wov en temps réel (pas config l\'id channel)',
       run: (client, message, args) => {const logChannel = client.channels.cache.get('1046792811065913366');logChannel.send("On");console.log('on')
         setInterval(async() =>{ 
         const timestamp = `${dayjs().format("YYYY-MM-DDTHH:mm:ss")}`; console.log (timestamp)
