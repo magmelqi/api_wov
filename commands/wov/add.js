@@ -24,5 +24,7 @@ module.exports = {
                   .then (m => message.channel.send(`${member} posséde maintement le role ${role2}.`))
                   .catch((err) => {return message.channel.send(`Erreur: ${err}`)}); }
   
-      }}
+      },
+      runSlash:  (client, message, args) => {}
+    }
   
