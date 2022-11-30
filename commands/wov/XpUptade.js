@@ -29,7 +29,8 @@ module.exports = {
     
         const timestamp = `${dayjs().add(-1, 'hour').format("DD-MM-YYYY")}`; console.log(timestamp)
         const timestampH = `${dayjs().add(-1, 'day').add(-1, 'hour').format("DD-MM-YYYY")}`
-        console.log(timestampH)
+        console.log(timestampH);
+        const heure = `${dayjs().format("HH:mm")}-fr`;
     
         const memberCount = (clan2.memberCount);
        
@@ -47,7 +48,8 @@ module.exports = {
           Avatar: data.profileIconId,
           Xp: data.xp,
           Participation: data.participateInClanQuests,
-          Création: data.creationTime
+          Création: data.creationTime,
+          Heure: heure
         }
         
         const objectToJson = JSON.stringify(info)
