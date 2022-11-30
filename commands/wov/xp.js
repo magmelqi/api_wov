@@ -17,7 +17,7 @@ module.exports = {
         .set('Content-Type', 'application/json')
         .set('Accept', 'application/json')
         .catch((err) => {message.channel.send(`Erreur a la 1ére requête: ${err}`); console.log(err)}); 
-        console.log ('Commande message clan fait'); var  clan = (Messageclan.body);
+        console.log ('Commande xp fait'); var  clan = (Messageclan.body);
     
         const member = await superagent.get(`https://api.wolvesville.com/clans/${process.env.CLAN_ID}/info`)
         .set( 'Authorization', process.env.WOV_TOKEN)
@@ -40,13 +40,13 @@ module.exports = {
         var data = JSON.parse(Mm1);
 
         try {
-        var Xp = JSON.parse(readFileSync(`./Member/${timestamp}/${data.username}.json`, 'utf-8'))} catch (err) {message.channel.send(`Erreur ${data.username} n'a pas d'xp enregistré pour aujourd'hui: ${timestamp}`); var Xp = 0}
+        var XpU = JSON.parse(readFileSync(`./Member/Member-Id/${timestamp}/${data.playerId}.json`, 'utf-8'))} catch (err) {message.channel.send(`Erreur ${data.username} n'a pas d'xp enregistré pour aujourd'hui: ${timestamp}`); var XpU = 0}
 
         try {
-        var XpH = JSON.parse(readFileSync(`./Member/${timestampH}/${data.username}.json`, 'utf-8'))} catch (err) {message.channel.send(`Erreur ${data.username} n'a pas d'xp enregistré pour hier: ${timestampH}`); var XpH = 0}
+        var XpH = JSON.parse(readFileSync(`./Member/Member-Id/${timestampH}/${data.username}.json`, 'utf-8'))} catch (err) {message.channel.send(`Erreur ${data.username} n'a pas d'xp enregistré pour hier: ${timestampH}`); var XpH = 0}
         
-        var XpA = Xp.xp-XpH.xp;
-        if (XpA < 2001) { message.channel.send(`+ ${Xp.pseudo}: ${XpA}`)} else {console.log(Xp.pseudo,  XpA)}
+        var XpA = XpU.Xp-XpH.xp;
+        if (XpA < 2001) { message.channel.send(`+ ${data.username}: ${XpA}`)} else {console.log(XpU.Pseudo,  XpA)}
 
       }}
 

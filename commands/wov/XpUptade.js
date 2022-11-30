@@ -17,7 +17,7 @@ module.exports = {
         .set('Content-Type', 'application/json')
         .set('Accept', 'application/json')
         .catch((err) => {message.channel.send(`Erreur a la 1ére requête: ${err}`); console.log(err)}); 
-        console.log ('Commande message clan fait'); 
+        console.log ('Commande xpadd fait'); 
     
         const member = await superagent.get(`https://api.wolvesville.com/clans/${process.env.CLAN_ID}/info`)
         .set( 'Authorization', process.env.WOV_TOKEN)
@@ -41,18 +41,24 @@ module.exports = {
         var data = JSON.parse(Mm1);
     
         const info = {
-          pseudo: data.username,
-          id: data.playerId,
-          niveau: data.level,
+          Pseudo: data.username,
+          Id: data.playerId,
+          Niveau: data.level,
           Avatar: data.profileIconId,
-          xp: data.xp
+          Xp: data.xp,
+          Participation: data.participateInClanQuests,
+          Création: data.creationTime
         }
         
         const objectToJson = JSON.stringify(info)
-        if (!existsSync(`./Member/${timestamp}`)){
-          mkdirSync(`./Member/${timestamp}`, { recursive: true });
+        if (!existsSync(`./Member/Member-Id/${timestamp}`)){
+          mkdirSync(`./Member/Member-Id/${timestamp}`, { recursive: true });
       }
-        writeFileSync(`./Member/${timestamp}/${data.username}.json`, objectToJson)
-        const Xp = JSON.parse(readFileSync(`./Member/${timestamp}/${data.username}.json`, 'utf-8')); console.log(Xp.pseudo, Xp.xp)
+      if (!existsSync(`./Member/Member-Pseudo/${timestamp}`)){
+        mkdirSync(`./Member/Member-Pseudo/${timestamp}`, { recursive: true });
+    }
+        writeFileSync(`./Member/Member-Id/${timestamp}/${data.playerId}.json`, objectToJson)
+        writeFileSync(`./Member/Member-Pseudo/${timestamp}/${data.username}.json`, objectToJson)
+        const Xp = JSON.parse(readFileSync(`./Member/Member-Id/${timestamp}/${data.playerId}.json`, 'utf-8')); console.log(Xp.Pseudo, Xp.Xp)
      var nb = i+1}message.channel.send(`Uptade des xp de ${nb} membres sur ${memberCount} membres`)
     }}
