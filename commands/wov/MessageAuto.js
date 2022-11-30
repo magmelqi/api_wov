@@ -19,18 +19,16 @@ module.exports = {
       .set( 'Authorization', process.env.WOV_TOKEN)
       .set('Content-Type', 'application/json')
       .set('Accept', 'application/json')
-      .catch((err) => {message.channel.send(`Erreur a la 1ére requête: ${err} \n\`2éme tentaive en cours...\``); console.log(err)}); 
-      var obj= Messageclan.text; 
+      .catch((err) => {message.channel.send(`Erreur a la 1ére requête: ${err} \n\`2éme tentaive en cours...\``); console.log(err)});
+      var objErr= JSON.stringify(Messageclan); 
 
-      if (obj == undefined) {
+      if (objErr == undefined) {
         const Messageclan = await superagent.get(`https://api.wolvesville.com/clans/${process.env.CLAN_ID}/chat?oldest=${timestamp}`)
       .set( 'Authorization', process.env.WOV_TOKEN)
       .set('Content-Type', 'application/json')
       .set('Accept', 'application/json')
       .catch((err) => {message.channel.send(`Erreur a la 1ére requête: ${err} \n\`3éme tentaive en cours...\` Ah bah il y en a pas flemme de mettre une 3éme requête`); console.log(err)}); 
-      var obj= Messageclan.text; 
-
-        }
+      var obj= Messageclan.text} else {var obj= Messageclan.text}
       
       
       for(let i=0; i < 10; i++ ){
@@ -64,15 +62,15 @@ module.exports = {
         .set('Content-Type', 'application/json')
         .set('Accept', 'application/json')
         .catch((err) => {return message.channel.send(`Erreur a la 2éme requête: ${err}\n\`2éme tentaive en cours...\``)}); 
-        var pseudo = usernameb.text;
+        var pseudoErr = JSON.stringify(usernameb);
 
-        if (pseudo == undefined) {
+        if (pseudoErr == undefined) {
             const  usernameb  = await superagent.get(`https://api.wolvesville.com/players/${PlayerId}`)
         .set( 'Authorization', process.env.WOV_TOKEN)
         .set('Content-Type', 'application/json')
         .set('Accept', 'application/json')
         .catch((err) => {return message.channel.send(`Erreur a la 2éme requête: ${err}`)}); 
-        var pseudo = usernameb.text}
+        var pseudo = usernameb.text} else {var pseudo = usernameb.text}
 
           var usernamed= /","username":"/g; var usernamef= /","personalMessage":"/g
       const usernamed1 = pseudo.search(usernamed); const usernamef1 = pseudo.search(usernamef); var username = pseudo.slice(usernamed1+14, usernamef1); console.log (username)
