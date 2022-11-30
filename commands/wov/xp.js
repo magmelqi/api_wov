@@ -46,8 +46,7 @@ module.exports = {
         var XpH = JSON.parse(readFileSync(`./Member/Member-Id/${timestampH}/${data.username}.json`, 'utf-8'))} catch (err) {message.channel.send(`Erreur ${data.username} n'a pas d'xp enregistré pour hier: ${timestampH}`); var XpH = 0}
         
         var XpA = XpU.Xp-XpH.xp;
-        if (XpA < 2001) { message.channel.send(`+ ${data.username}: ${XpA}`)} else {console.log(XpU.Pseudo,  XpA)}
-
-      }}
+        if (XpA < 2001) { message.channel.send(`+ ${data.username}: ${XpA}`)} else {console.log(XpU.Pseudo,  XpA)};
+      }message.channel.send(`-Dernier uptade pour les xp du \`${timestampH}\` effectué à \`${XpH.Heure}\`\n-Dernier uptade pour les xp du \`${timestamp}\` effectué à \`${XpU.Heure}\``)}
 
 }

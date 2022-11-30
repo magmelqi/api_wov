@@ -30,7 +30,7 @@ module.exports = {
         const timestamp = `${dayjs().add(-1, 'hour').format("DD-MM-YYYY")}`; console.log(timestamp)
         const timestampH = `${dayjs().add(-1, 'day').add(-1, 'hour').format("DD-MM-YYYY")}`
         console.log(timestampH);
-        const heure = `${dayjs().format("HH:mm")}-fr`;
+        const heure = `${dayjs().format("HH:mm")}-heure fr`;
     
         const memberCount = (clan2.memberCount);
        
