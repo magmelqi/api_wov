@@ -66,6 +66,6 @@ module.exports = {
           console.log(Gems.Pseudo, Gems.gems); message.channel.send(`${Gems.Pseudo}: ${Gems.gems}`)}
 
      var nb = i}}
-     if (nb > 1) {console.log(`Uptade des dons de ${nb} membres`)} else {
-     console.log(`Uptade des dons de ${nb} membre`)}
+     if (nb > 1) {message.channel.send(`Uptade des dons de ${nb} membres`)} else {
+     message.channel.send(`Uptade des dons de ${nb} membre`)}
     }}
