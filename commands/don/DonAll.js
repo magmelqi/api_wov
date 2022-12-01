@@ -4,7 +4,7 @@ const prefix = '?';
 
 module.exports = {
     name: "donall",
-    category: 'donall',
+    category: 'don',
     permissions: ['BAN_MEMBERS'],
     ownerOnly: false,
     usage: 'donall', 
