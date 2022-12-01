@@ -27,8 +27,8 @@ module.exports = {
     
         var text = Messageclan.text
     
-        const timestamp = `${dayjs().format("DD-MM-YYYY")}`; console.log(timestamp)
-        const timestampH = `${dayjs().add(-1, 'day').format("DD-MM-YYYY")}`
+        const timestamp = `${dayjs().add(-1, 'hour').format("DD-MM-YYYY")}`; console.log(timestamp)
+        const timestampH = `${dayjs().add(-1, 'day').add(-1, 'hour').format("DD-MM-YYYY")}`
         console.log(timestampH);
         const heure = `${dayjs().format("HH:mm")}-heure anglaise`;
     
@@ -53,14 +53,14 @@ module.exports = {
         }
         
         const objectToJson = JSON.stringify(info)
-        if (!existsSync(`./Member/Member-Id/${timestamp}`)){
-          mkdirSync(`./Member/Member-Id/${timestamp}`, { recursive: true });
+        if (!existsSync(`./xp/Member-Id/${timestamp}`)){
+          mkdirSync(`./xp/Member-Id/${timestamp}`, { recursive: true });
       }
-      if (!existsSync(`./Member/Member-Pseudo/${timestamp}`)){
-        mkdirSync(`./Member/Member-Pseudo/${timestamp}`, { recursive: true });
+      if (!existsSync(`./xp/Member-Pseudo/${timestamp}`)){
+        mkdirSync(`./xp/Member-Pseudo/${timestamp}`, { recursive: true });
     }
-        writeFileSync(`./Member/Member-Id/${timestamp}/${data.playerId}.json`, objectToJson)
-        writeFileSync(`./Member/Member-Pseudo/${timestamp}/${data.username}.json`, objectToJson)
-        const Xp = JSON.parse(readFileSync(`./Member/Member-Id/${timestamp}/${data.playerId}.json`, 'utf-8')); console.log(Xp.Pseudo, Xp.Xp)
+        writeFileSync(`./xp/Member-Id/${timestamp}/${data.playerId}.json`, objectToJson)
+        writeFileSync(`./xp/Member-Pseudo/${timestamp}/${data.username}.json`, objectToJson)
+        const Xp = JSON.parse(readFileSync(`./xp/Member-Id/${timestamp}/${data.playerId}.json`, 'utf-8')); console.log(Xp.Pseudo, Xp.Xp)
      var nb = i+1}message.channel.send(`Uptade des xp de ${nb} membres sur ${memberCount} membres`)
     }}

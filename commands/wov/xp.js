@@ -40,12 +40,12 @@ module.exports = {
         var data = JSON.parse(Mm1);
 
         try {
-        var XpU = JSON.parse(readFileSync(`./Member/Member-Id/${timestamp}/${data.playerId}.json`, 'utf-8'))} catch (err) {message.channel.send(`Erreur ${data.username} n'a pas d'xp enregistré pour aujourd'hui: ${timestamp}`); var XpU = 0}
-
+        var XpU = JSON.parse(readFileSync(`./xp/Member-Id/${timestamp}/${data.playerId}.json`, 'utf-8'))} catch (err) {message.channel.send(`Erreur ${data.username} n'a pas d'xp enregistré pour aujourd'hui: ${timestamp}`); var XpU = 0}
+         var Xp1 = XpU.Xp-1+1
         try {
-        var XpH = JSON.parse(readFileSync(`./Member/Member-Id/${timestampH}/${data.username}.json`, 'utf-8'))} catch (err) {message.channel.send(`Erreur ${data.username} n'a pas d'xp enregistré pour hier: ${timestampH}`); var XpH = 0}
-        
-        var XpA = XpU.Xp-XpH.xp;
+        var XpH = JSON.parse(readFileSync(`./xp/Member-Id/${timestampH}/${data.playerId}.json`, 'utf-8'))} catch (err) {message.channel.send(`Erreur ${data.username} n'a pas d'xp enregistré pour hier: ${timestampH}`); var XpH = 0}
+         var Xp2 = XpH.Xp
+        var XpA = Xp1-Xp2;
         if (XpA < 2001) { message.channel.send(`+ ${data.username}: ${XpA}`)} else {console.log(XpU.Pseudo,  XpA)};
       }message.channel.send(`-Dernier uptade pour les xp du \`${timestampH}\` effectué à \`${XpH.Heure}\`\n-Dernier uptade pour les xp du \`${timestamp}\` effectué à \`${XpU.Heure}\``)}
 
