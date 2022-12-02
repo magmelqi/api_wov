@@ -1,9 +1,12 @@
 const {Client, Collection} = require('discord.js');
 const dotenv = require('dotenv');dotenv.config();const poll = require('./commands/utils/poll');
 const client = new Client({intents: 1539, partials: ['MESSAGE', 'CHANNEL', 'REACTION', 'USER']});
-//const CronJob = require('cron').CronJob
 const Logger = require ('./utils/Logger');
-//const XpUptade = require ('./commands/wov/XpUptade');
+const http = require('http');
+const express = require('express');
+const app = express();
+//const CronJob = require('cron').CronJob
+
 
 client.commands = new Collection ();
 
@@ -15,6 +18,12 @@ client.commands = new Collection ();
 //});
 //console.log('After job instantiation');
 //job.start();
+
+app.get("/", (request, response) => response.sendStatus(200));
+app.listen(process.env.PORT);
+setInterval(() => {
+  http.get(`https://glitch.com/~${process.env.PROJECT_DOMAIN}`);
+}, 280000);
 
 
 process.on ('exit', code => { Logger.client(`Le processus s'est arrèté avec le code: ${code} !`)});

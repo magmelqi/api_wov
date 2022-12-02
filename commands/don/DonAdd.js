@@ -7,7 +7,7 @@ module.exports = {
     name: "donadd",
     category: 'don',
     permissions: ['BAN_MEMBERS'],
-    ownerOnly: false,
+    ownerOnly: true,
     usage: 'donadd', 
     examples: ['donadd'],
     description: 'Actualise l\'or et les gems des membres',
@@ -32,9 +32,11 @@ module.exports = {
         if (type !== "DONATE") {console.log ("return")} else {
         var data = JSON.parse(Mm1);
 
-        try {
+        try {var InfoOr={"Or":0,"Création":"bouh"}
           var InfoOr = JSON.parse(readFileSync(`././Information/Or/Member-Id/${data.playerId}.json`, 'utf-8'))} catch (err) {}
-          if (InfoOr.Or > 0) {
+
+          if (InfoOr.Création == data.creationTime) {message.channel.send(`Le don d'or de ${InfoOr.Pseudo} a déjà été comptabilisé`)}
+          else if (InfoOr.Or > 0) {
             const info = {
               Pseudo: data.playerUsername,
               PlayerId: data.playerId,
@@ -67,11 +69,12 @@ module.exports = {
         writeFileSync(`././Information/Or/Member-Pseudo/${data.playerUsername}.json`, objectToJson)
         const Or = JSON.parse(readFileSync(`././Information/Or/Member-Id/${data.playerId}.json`, 'utf-8')); 
         console.log(Or.Pseudo, Or.Or); message.channel.send(`${Or.Pseudo}: ${Or.Or}`)}
-
-        try {
+        
+        try {var InfoGemme={"Gemme":0,"Création":"bouh"}
           var InfoGemme = JSON.parse(readFileSync(`././Information/Gemme/Member-Id/${data.playerId}.json`, 'utf-8'))} catch (err) {}
 
-          if (InfoGemme.Gemme > 0) {
+          if (InfoGemme.Création == data.creationTime) {message.channel.send(`Le don de gemme de ${InfoGemme.Pseudo} a déjà été comptabilisé`)}
+          else if (InfoGemme.Gemme > 0) {
             const info = {
               Pseudo: data.playerUsername,
               PlayerId: data.playerId,
