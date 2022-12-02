@@ -27,9 +27,9 @@ module.exports = {
     
         var text = Messageclan.text
     
-        const timestamp = `${dayjs().add(-1, 'hour').format("DD-MM-YYYY")}`;
-        const timestampH = `${dayjs().add(-7, 'day').add(-1, 'hour').format("DD-MM-YYYY")}`; 
-        const timestampA = `${dayjs().add(-2, 'day').add(-1, 'hour').format("DD-MM-YYYY")}`; 
+        const timestamp = `${dayjs().format("DD-MM-YYYY")}`;
+        const timestampH = `${dayjs().add(-7, 'day').format("DD-MM-YYYY")}`; 
+        const timestampA = `${dayjs().add(-2, 'day').format("DD-MM-YYYY")}`; 
     
         const memberCount = (clan2.memberCount);
       for (let i =0; i < memberCount; i++){ 
@@ -54,7 +54,7 @@ module.exports = {
             var InfoB = JSON.parse(readFileSync(`././Information/xp/Member-Id/${timestampH}/${data.playerId}.json`, 'utf-8'))} catch (err) {message.channel.send(`Erreur ${data.username} n'a pas d'xp enregistré il y a 1 semaine: ${timestampH}`); var InfoB = 0}
              var Xp2 = InfoB.Xp; var XpA = Xp1-Xp2;
     
-            if (XpA < 2000) { message.channel.send(`+ ${data.username} a rejoins le \`${joinTf}\`, xp: \`${XpA}\``)} else {console.log(InfoA.Pseudo,  XpA)};}
+            if (XpA < 2000) { message.channel.send(`+ \`${data.username}\` a rejoins le \`${joinTf}\`, xp: \`${XpA}\``)} else {console.log(InfoA.Pseudo,  XpA)};}
 
 
 
@@ -63,7 +63,7 @@ module.exports = {
           try {
           var InfoC = JSON.parse(readFileSync(`././Information/xp/Member-Id/${timestampA}/${data.playerId}.json`, 'utf-8'))} catch (err) {message.channel.send(`Erreur ${data.username} n'a pas d'xp enregistré pour avant-hier: ${timestampA}`); var InfoC = 0}
           var Xp3 = InfoC.Xp; var XpB = Xp3
-          if (XpB < 1000) { message.channel.send(`+ ${data.username} a rejoins le \`${joinTf}\`, xp: \`${XpB}\``)} else {console.log(InfoC.Pseudo,  XpB)};
+          if (XpB < 1000) { message.channel.send(`+ \`${data.username}\` a rejoins le \`${joinTf}\`, xp: \`${XpB}\``)} else {console.log(InfoC.Pseudo,  XpB)};
         } 
 
         
