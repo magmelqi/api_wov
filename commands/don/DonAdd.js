@@ -7,7 +7,7 @@ module.exports = {
     name: "donadd",
     category: 'don',
     permissions: ['BAN_MEMBERS'],
-    ownerOnly: true,
+    ownerOnly: false,
     usage: 'donadd', 
     examples: ['donadd'],
     description: 'Actualise l\'or et les gems des membres',
