@@ -28,7 +28,7 @@ module.exports = {
         var text = Messageclan.text
     
         const timestamp = `${dayjs().add(-1, 'hour').format("DD-MM-YYYY")}`; console.log(timestamp)
-        const heure = `${dayjs().format("HH:mm")}`;
+        const heure = `${dayjs().add(-1, 'hour').format("HH:mm")}-heure anglaise`;
     
         const memberCount = (clan2.memberCount);
        
