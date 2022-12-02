@@ -69,9 +69,16 @@ module.exports = {
         
 
       }
+
       try {
-      message.channel.send(`-Dernier uptade pour les xp du \`${timestampH}\` effectué à \`${InfoB.Heure}\`\n-Dernier uptade pour les xp du \`${timestamp}\` effectué à \`${InfoA.Heure}\``)}catch (err) {}
-       
+        message.channel.send(`-Dernier uptade pour les xp du \`${timestamp}\` effectué à \`${InfoA.Heure}\``)
+      }catch(err) {}
+
+      try {
+      message.channel.send(`-Dernier uptade pour les xp du \`${timestampH}\` effectué à \`${InfoB.Heure}\``)
+    }catch (err) {}
+
        try {
-        message.channel.send(`-Dernier uptade pour les xp du \`${timestampA}\` effectué à \`${InfoC.Heure}\`\n-Dernier uptade pour les xp du \`${timestamp}\` effectué à \`${InfoA.Heure}\``)}catch (err) {}
+        message.channel.send(`-Dernier uptade pour les xp du \`${timestampA}\` effectué à \`${InfoC.Heure}\``)
+      }catch (err) {}
 }}
