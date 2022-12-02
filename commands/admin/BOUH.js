@@ -1,7 +1,7 @@
 
 
 module.exports = {
-    name: "alive",
+    name: "bouh",
     category: 'admin',
     permissions: ['ADMINISTRATOR'],
     ownerOnly: true,
