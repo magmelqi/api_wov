@@ -31,7 +31,27 @@ module.exports = {
         var type = text.slice(MmDF+-8,MmDF-2); var text= text.slice(MmDF+42);
         if (type !== "DONATE") {console.log ("return")} else {
         var data = JSON.parse(Mm1);
-          if (data.gold > 0) {
+
+        try {
+          var InfoOr = JSON.parse(readFileSync(`././Information/Or/Member-Id/${data.playerId}.json`, 'utf-8'))} catch (err) {}
+          if (InfoOr.Or > 0) {
+            const info = {
+              Pseudo: data.playerUsername,
+              PlayerId: data.playerId,
+              DonId: data.id,
+              Or: data.gold+InfoOr.Or,
+              Type: data.type,
+              Création: data.creationTime,
+              Heure: heure
+            }
+            const objectToJson = JSON.stringify(info)
+    
+            writeFileSync(`././Information/Or/Member-Id/${data.playerId}.json`, objectToJson)
+            writeFileSync(`././Information/Or/Member-Pseudo/${data.playerUsername}.json`, objectToJson)
+            const Or = JSON.parse(readFileSync(`././Information/Or/Member-Id/${data.playerId}.json`, 'utf-8')); 
+            console.log(Or.Pseudo, Or.Or); message.channel.send(`${Or.Pseudo}: ${Or.Or}`)}
+          
+         else if (data.gold > 0) {
         const info = {
           Pseudo: data.playerUsername,
           PlayerId: data.playerId,
@@ -48,7 +68,27 @@ module.exports = {
         const Or = JSON.parse(readFileSync(`././Information/Or/Member-Id/${data.playerId}.json`, 'utf-8')); 
         console.log(Or.Pseudo, Or.Or); message.channel.send(`${Or.Pseudo}: ${Or.Or}`)}
 
-        if (data.gems > 0) {
+        try {
+          var InfoGemme = JSON.parse(readFileSync(`././Information/Gemme/Member-Id/${data.playerId}.json`, 'utf-8'))} catch (err) {}
+
+          if (InfoGemme.Gemme > 0) {
+            const info = {
+              Pseudo: data.playerUsername,
+              PlayerId: data.playerId,
+              DonId: data.id,
+              Gemme: data.gems+InfoGemme.Gemme,
+              Type: data.type,
+              Création: data.creationTime,
+              Heure: heure
+            }
+            const objectToJson = JSON.stringify(info)
+    
+            writeFileSync(`././Information/Gemme/Member-Id/${data.playerId}.json`, objectToJson)
+            writeFileSync(`././Information/Gemme/Member-Pseudo/${data.playerUsername}.json`, objectToJson)
+            const Gems = JSON.parse(readFileSync(`././Information/Gemme/Member-Id/${data.playerId}.json`, 'utf-8')); 
+            console.log(Gems.Pseudo, Gems.gems); message.channel.send(`${Gems.Pseudo}: ${Gems.gems}`)}
+
+        else if (data.gems > 0) {
           const info = {
             Pseudo: data.playerUsername,
             PlayerId: data.playerId,
