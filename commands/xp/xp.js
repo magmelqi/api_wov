@@ -27,9 +27,9 @@ module.exports = {
     
         var text = Messageclan.text
     
-        const timestamp = `${dayjs().format("DD-MM-YYYY")}`;
-        const timestampH = `${dayjs().add(-7, 'day').format("DD-MM-YYYY")}`; 
-        const timestampA = `${dayjs().add(-2, 'day').format("DD-MM-YYYY")}`; 
+        const timestamp = `${dayjs().add(-1, 'hour').format("DD-MM-YYYY")}`;
+        const timestampH = `${dayjs().add(-7, 'day').add(-1, 'hour').format("DD-MM-YYYY")}`; 
+        const timestampA = `${dayjs().add(-2, 'day').add(-1, 'hour').format("DD-MM-YYYY")}`; 
     
         const memberCount = (clan2.memberCount);
       for (let i =0; i < memberCount; i++){ 
