@@ -1,4 +1,4 @@
-
+const superagent = require('superagent').agent();
 
 module.exports = {
     name: "bouh",
@@ -8,9 +8,18 @@ module.exports = {
     usage: 'bouh',
     examples: ['bouh'],
     description: "bouh",
-      run: (client, message, args) =>  {message.channel.send('Salut !')
-        setInterval(() => {const logChannel = client.channels.cache.get('1044258472121860126');
-            logChannel.send('Salut !')
-        },280000)
-      },
-    };
+    async run (client, message, args) {message.channel.send('go !'); const logChannel = client.channels.cache.get('1044258472121860126');
+        const bouh = await superagent.get('https://glitch.com/~mewing-ember-linen')
+        .set('content-type', 'text/html')
+        .catch((err) => console.log(err))
+         console.log(bouh.statusCode); const status = bouh.statusCode; var TestS= JSON.stringify(status)
+         logChannel.send(TestS)
+      setInterval(async() => {
+        const bouh = await superagent.get('https://glitch.com/~mewing-ember-linen')
+        .set('content-type', 'text/html')
+        .catch((err) => console.log(err))
+        console.log(bouh.statusCode); const status = bouh.statusCode; var TestS= JSON.stringify(status)
+        logChannel.send(TestS)
+      },240000)
+    },
+  };

@@ -28,8 +28,8 @@ module.exports = {
         var text = Messageclan.text
     
         const timestamp = `${dayjs().add(-1, 'hour').format("DD-MM-YYYY")}`;
-        const timestampH = `${dayjs().add(-7, 'day').add(-1, 'hour').format("DD-MM-YYYY")}`; 
-        const timestampA = `${dayjs().add(-2, 'day').add(-1, 'hour').format("DD-MM-YYYY")}`; 
+        const timestampH = `${dayjs().add(-8, 'day').add(-1, 'hour').format("DD-MM-YYYY")}`; 
+        const timestampA = `${dayjs().add(-3, 'day').add(-1, 'hour').format("DD-MM-YYYY")}`; 
     
         const memberCount = (clan2.memberCount);
       for (let i =0; i < memberCount; i++){ 
@@ -46,8 +46,8 @@ module.exports = {
 
 
           var join = InfoA.Création; var joinT= JSON.stringify(join); var joinTf= joinT.slice(1,11);
-          const timestampB= dayjs().add(-2, 'day').add(-1, 'hour').format("YYYY-MM-DD")
-          const timestampC= dayjs().add(-7, 'day').add(-1, 'hour').format("YYYY-MM-DD")
+          const timestampB= dayjs().add(-3, 'day').add(-1, 'hour').format("YYYY-MM-DD")
+          const timestampC= dayjs().add(-8, 'day').add(-1, 'hour').format("YYYY-MM-DD")
 
           if (joinTf==timestampC) {
           try {
