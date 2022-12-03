@@ -2,8 +2,6 @@ const { MessageEmbed } = require("discord.js");
 const superagent = require('superagent').agent();
 const dotenv = require('dotenv'); dotenv.config();
 
-const prefix = '?';
-const ownerId = '385172057433964556';
 
 module.exports = {
     name: "messageReactionAdd",

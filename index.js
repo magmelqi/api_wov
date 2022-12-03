@@ -1,6 +1,6 @@
 const {Client, Collection} = require('discord.js');
 const dotenv = require('dotenv');dotenv.config();const poll = require('./commands/utils/poll');
-const client = new Client({intents: 1539, partials: ['MESSAGE', 'CHANNEL', 'REACTION', 'USER']});
+const client = new Client({intents: 1539, partials: ['MESSAGE', 'CHANNEL', 'REACTION', 'USER', 'GUILD_MEMBER', 'GUILD_SCHEDULED_EVENT']});
 const Logger = require ('./utils/Logger');
 //const CronJob = require('cron').CronJob
 
