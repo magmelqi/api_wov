@@ -19,6 +19,24 @@ module.exports = {
         const poll = await message.reply({ embeds : [embed]});
         poll.react('✅');
     },
+    options:[
+      {
+          name: "titre",
+          description: "taper le nom du sondage",
+          type: "STRING",
+          required: true,
+      }],
+
     async runSlash (client, interaction) {
+      const nom = interaction.options.getString('titre');
+
+      const embed = new MessageEmbed()
+      .setTitle(`Participation pour la quête${nom}`)
+      .setColor('#00a3b5')
+      .setDescription(`Si vous n'avez pas réagis à la rection 👍🏼 sur la quête ${nom} et que vous voulez quand même participer à la quête${nom}, veuillez réagir sur cette réaction ✅`)
+      .setTimestamp()
+
+    const poll = await interaction.reply({ embeds : [embed]});
+    poll.react('✅');
   },
 };

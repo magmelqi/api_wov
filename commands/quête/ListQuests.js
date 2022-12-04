@@ -10,7 +10,7 @@ module.exports = {
     ownerOnly: false,
     usage: 'liste',
     examples: ['liste'],
-    description: 'Voir les quêtes achetable + sondage',
+    description: 'Liste des participants de la quête',
       run: async(client, message, args) => {
         const Questsactive = await superagent.get(`https://api.wolvesville.com/clans/${process.env.CLAN_ID}/quests/active`)
         .set( 'Authorization', process.env.WOV_TOKEN)
@@ -63,5 +63,57 @@ module.exports = {
           message.channel.send(`\`${data.username}\` est présent dans la quête`)
         
     },
+    async runSlash(client, interaction) { 
+      interaction.reply({content: 'La liste arrive...', ephemeral: true})
+      const Questsactive = await superagent.get(`https://api.wolvesville.com/clans/${process.env.CLAN_ID}/quests/active`)
+      .set( 'Authorization', process.env.WOV_TOKEN)
+      .set('Content-Type', 'application/json')
+      .set('Accept', 'application/json')
+      .catch((err) => {interaction.channel.send(err)}); 
+      const Clan = (Questsactive.body)
+      const Partciipants= (Clan.participants);
+
+      const heure = `${dayjs().format("HH:mm")}-heure anglaise`;
+      
+      var text = JSON.stringify(Partciipants)
+      try {
+      for (var i = 0; i < 50;i++){ 
+          var Mmf = /},{"/g
+          const MmDF = text.search(Mmf); var Mm1 = text.slice(1, MmDF+1);
+          var text = text.slice(MmDF+1);
+          
+          var data = JSON.parse(Mm1);
+
+          const info = {
+              Pseudo: data.username,
+              Id: data.playerId,
+              Xp: data.xp,
+              Heure: heure
+            }
+
+            const objectToJson = JSON.stringify(info)
+        writeFileSync(`././Information/Quête/Member-Id/${data.playerId}.json`, objectToJson)
+        writeFileSync(`././Information/Quête/Member-Pseudo/${data.username}.json`, objectToJson)
+        interaction.channel.send(`\`${data.username}\` est présent dans la quête`)
+      }} catch(err) {}
+      var Mmf = /},{"/g
+      const MmDF = text.search(Mmf);
+      var Mm1 = text.slice(MmDF+2, -1); 
+     
+      
+      var data = JSON.parse(Mm1);
+      const info = {
+          Pseudo: data.username,
+          Id: data.playerId,
+          Xp: data.xp,
+          Heure: heure
+        }
+
+        const objectToJson = JSON.stringify(info)
+
+        writeFileSync(`././Information/Quête/Member-Id/${data.playerId}.json`, objectToJson)
+        writeFileSync(`././Information/Quête/Member-Pseudo/${data.username}.json`, objectToJson)
+        interaction.channel.send(`\`${data.username}\` est présent dans la quête`)
+       }
 
  }
