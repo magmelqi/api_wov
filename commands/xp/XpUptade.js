@@ -60,7 +60,7 @@ module.exports = {
         writeFileSync(`././Information/xp/Member-Id/${timestamp}/${data.playerId}.json`, objectToJson)
         writeFileSync(`././Information/xp/Member-Pseudo/${timestamp}/${data.username}.json`, objectToJson)
         const Xp = JSON.parse(readFileSync(`././Information/xp/Member-Id/${timestamp}/${data.playerId}.json`, 'utf-8')); console.log(Xp.Pseudo, Xp.Xp)
-     var nb = i+1}message.channel.send(`Uptade des xp de ${nb} membres sur ${memberCount} membres`)
+     var nb = i+1}message.channel.send(`Update des xp de ${nb} membres sur ${memberCount} membres`)
     },
 
     async runSlash(client, interaction) { 
@@ -114,6 +114,6 @@ module.exports = {
       writeFileSync(`././Information/xp/Member-Id/${timestamp}/${data.playerId}.json`, objectToJson)
       writeFileSync(`././Information/xp/Member-Pseudo/${timestamp}/${data.username}.json`, objectToJson)
       const Xp = JSON.parse(readFileSync(`././Information/xp/Member-Id/${timestamp}/${data.playerId}.json`, 'utf-8')); console.log(Xp.Pseudo, Xp.Xp)
-   var nb = i+1}interaction.channel.send(`Uptade des xp de ${nb} membres sur ${memberCount} membres`) 
+   var nb = i+1}interaction.channel.send(`Update des xp de ${nb} membres sur ${memberCount} membres`) 
   }
   }
