@@ -11,24 +11,27 @@ module.exports = {
     usage: 'xpauto', 
     examples: ['xpauto'],
     description: 'Actualise les xp des membres',
-       async run (client, message, args) {
-        const vérificationH = `${dayjs().add(-1, 'hour').format("HH")}`; const vérificationm = `${dayjs().add(-1, 'hour').format("mm")}`
+       async run (client, message, args) { message.channel.send('XpAuto: on')
+        var vérificationH = `${dayjs().add(-1, 'hour').format("HH")}`; var vérificationm = `${dayjs().add(-1, 'hour').format("mm")}`
         console.log(vérificationH, vérificationm);
         setInterval(async()=> {
-        if (vérificationH = "23" && vérificationm > "45") {const logChannel = client.channels.cache.get('1044258472121860126');
+            var vérificationH = `${dayjs().add(-1, 'hour').format("HH")}`; var vérificationm = `${dayjs().add(-1, 'hour').format("mm")}`
+            console.log(vérificationH, vérificationm);
+
+        if (vérificationH == "23" && vérificationm > "00") {const logChannel = client.channels.cache.get('1044258472121860126');
         logChannel.send(`Xp actualisé`);
         const Messageclan = await superagent.get(`https://api.wolvesville.com/clans/${process.env.CLAN_ID}/members`)
         .set( 'Authorization', process.env.WOV_TOKEN)
         .set('Content-Type', 'application/json')
         .set('Accept', 'application/json')
-        .catch((err) => {message.channel.send(`Erreur a la 1ére requête: ${err}`); console.log(err)}); 
+        .catch((err) => {message.channel.send(`Erreur a la 1ère requête: ${err}`); console.log(err)}); 
         console.log ('Commande xpadd fait'); 
     
         const member = await superagent.get(`https://api.wolvesville.com/clans/${process.env.CLAN_ID}/info`)
         .set( 'Authorization', process.env.WOV_TOKEN)
         .set('Content-Type', 'application/json')
         .set('Accept', 'application/json')
-        .catch((err) => {message.channel.send(`Erreur a la 2éme requête: ${err}`); console.log(err)}); const  clan2 = (member.body); 
+        .catch((err) => {message.channel.send(`Erreur a la 2ème requête: ${err}`); console.log(err)}); const  clan2 = (member.body); 
     
         var text = Messageclan.text
     
@@ -65,6 +68,8 @@ module.exports = {
         writeFileSync(`././Information/xp/Member-Id/${timestamp}/${data.playerId}.json`, objectToJson)
         writeFileSync(`././Information/xp/Member-Pseudo/${timestamp}/${data.username}.json`, objectToJson)
         const Xp = JSON.parse(readFileSync(`././Information/xp/Member-Id/${timestamp}/${data.playerId}.json`, 'utf-8')); console.log(Xp.Pseudo, Xp.Xp)
-     var nb = i+1}message.channel.send(`Update des xp de ${nb} membres sur ${memberCount} membres`)}},300000)
+     var nb = i+1}message.channel.send(`Update des xp de ${nb} membres sur ${memberCount} membres`)}
+     var vérificationH = `${dayjs().add(-1, 'hour').format("HH")}`;
+     if (vérificationH == "00") {return message.channel.send(`Fin de l'actualisation`)}},300000)
     },
 }

@@ -11,7 +11,7 @@ module.exports = {
         }catch (err) {console.log ('impossible de récupérer les messages')
         return}}
 
-        if (newMessage.author.bot) return;  
+        if (oldMessage.author= oldMessage.author.bot) return;  
 
         let Embed = new MessageEmbed() 
         .setColor(bot.color)

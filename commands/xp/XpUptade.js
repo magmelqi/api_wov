@@ -16,14 +16,14 @@ module.exports = {
         .set( 'Authorization', process.env.WOV_TOKEN)
         .set('Content-Type', 'application/json')
         .set('Accept', 'application/json')
-        .catch((err) => {message.channel.send(`Erreur a la 1ére requête: ${err}`); console.log(err)}); 
+        .catch((err) => {message.channel.send(`Erreur a la 1ère requête: ${err}`); console.log(err)}); 
         console.log ('Commande xpadd fait'); 
     
         const member = await superagent.get(`https://api.wolvesville.com/clans/${process.env.CLAN_ID}/info`)
         .set( 'Authorization', process.env.WOV_TOKEN)
         .set('Content-Type', 'application/json')
         .set('Accept', 'application/json')
-        .catch((err) => {message.channel.send(`Erreur a la 2éme requête: ${err}`); console.log(err)}); const  clan2 = (member.body); 
+        .catch((err) => {message.channel.send(`Erreur a la 2ème requête: ${err}`); console.log(err)}); const  clan2 = (member.body); 
     
         var text = Messageclan.text
     
@@ -70,14 +70,14 @@ module.exports = {
       .set( 'Authorization', process.env.WOV_TOKEN)
       .set('Content-Type', 'application/json')
       .set('Accept', 'application/json')
-      .catch((err) => {interaction.channel.send(`Erreur a la 1ére requête: ${err}`); console.log(err)}); 
+      .catch((err) => {interaction.channel.send(`Erreur a la 1ère requête: ${err}`); console.log(err)}); 
       console.log ('Commande xpadd fait'); 
   
       const member = await superagent.get(`https://api.wolvesville.com/clans/${process.env.CLAN_ID}/info`)
       .set( 'Authorization', process.env.WOV_TOKEN)
       .set('Content-Type', 'application/json')
       .set('Accept', 'application/json')
-      .catch((err) => {interaction.channel.send(`Erreur a la 2éme requête: ${err}`); console.log(err)}); const  clan2 = (member.body); 
+      .catch((err) => {interaction.channel.send(`Erreur a la 2ème requête: ${err}`); console.log(err)}); const  clan2 = (member.body); 
   
       var text = Messageclan.text
   

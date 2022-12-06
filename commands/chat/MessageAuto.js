@@ -1,7 +1,6 @@
 const superagent = require('superagent').agent();
-const { MessageEmbed, Interaction } = require('discord.js');
+const { MessageEmbed } = require('discord.js');
 const dotenv = require('dotenv'); dotenv.config();
-const Questsavailable= new MessageChannel;
 const dayjs = require ('dayjs');
 
 module.exports = {
@@ -19,15 +18,16 @@ module.exports = {
       .set( 'Authorization', process.env.WOV_TOKEN)
       .set('Content-Type', 'application/json')
       .set('Accept', 'application/json')
-      .catch((err) => {message.channel.send(`Erreur a la 1ére requête: ${err} \n\`2éme tentaive en cours...\``); console.log(err)});
-      var objErr= JSON.stringify(Messageclan); 
+      .catch((err) => {message.channel.send(`Erreur a la 1ère requête: ${err} \n\`2ème tentaive en cours...\``); console.log(err)});
+      var objErr= JSON.stringify(Messageclan);
+
 
       if (objErr == undefined) {
         const Messageclan = await superagent.get(`https://api.wolvesville.com/clans/${process.env.CLAN_ID}/chat?oldest=${timestamp}`)
       .set( 'Authorization', process.env.WOV_TOKEN)
       .set('Content-Type', 'application/json')
       .set('Accept', 'application/json')
-      .catch((err) => {message.channel.send(`Erreur a la 1ére requête: ${err} \n\`3éme tentaive en cours...\` Ah bah il y en a pas flemme de mettre une 3éme requête`); console.log(err)}); 
+      .catch((err) => {message.channel.send(`Erreur a la 1ère requête: ${err} \n\`3ème tentaive en cours...\` Ah bah il y en a pas flemme de mettre une 3ème requête`); console.log(err)}); 
       var obj= Messageclan.text} else {var obj= Messageclan.text}
       
       
@@ -61,7 +61,7 @@ module.exports = {
         .set( 'Authorization', process.env.WOV_TOKEN)
         .set('Content-Type', 'application/json')
         .set('Accept', 'application/json')
-        .catch((err) => {return message.channel.send(`Erreur a la 2éme requête: ${err}\n\`2éme tentaive en cours...\``)}); 
+        .catch((err) => {return message.channel.send(`Erreur a la 2ème requête: ${err}\n\`2ème tentaive en cours...\``)}); 
         var pseudoErr = JSON.stringify(usernameb);
 
         if (pseudoErr == undefined) {
@@ -69,7 +69,7 @@ module.exports = {
         .set( 'Authorization', process.env.WOV_TOKEN)
         .set('Content-Type', 'application/json')
         .set('Accept', 'application/json')
-        .catch((err) => {return message.channel.send(`Erreur a la 2éme requête: ${err}`)}); 
+        .catch((err) => {return message.channel.send(`Erreur a la 2ème requête: ${err}`)}); 
         var pseudo = usernameb.text} else {var pseudo = usernameb.text}
 
           var usernamed= /","username":"/g; var usernamef= /","personalMessage":"/g

@@ -12,6 +12,8 @@ module.exports = {
 
         const LatestMessageDeleted = AuditsLogs.entries.first();
 
+        if (message.author= message.author.bot) return; 
+
         let Embed = new MessageEmbed() 
         .setColor(bot.color)
         .setTitle("Message supprimé")

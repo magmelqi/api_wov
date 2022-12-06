@@ -62,22 +62,18 @@ module.exports = {
 
           try {
           var InfoC = JSON.parse(readFileSync(`././Information/xp/Member-Id/${timestampA}/${data.playerId}.json`, 'utf-8'))} catch (err) {message.channel.send(`Erreur ${data.username} n'a pas d'xp enregistré pour avant-hier: ${timestampA}`); var InfoC = 0}
-          var Xp3 = InfoC.Xp; var XpB = Xp3
-          if (XpB < 1000) { message.channel.send(`+ \`${data.username}\` a rejoins le \`${joinTf}\`, xp: \`${XpB}\``)} else {console.log(InfoC.Pseudo,  XpB)};
+          var Xp3 = InfoC.Xp;
+          if (Xp1 < 1000) { message.channel.send(`+ \`${data.username}\` a rejoins le \`${joinTf}\`, xp: \`${Xp1}\``)} else {console.log(InfoC.Pseudo,  Xp1)};
         } 
       }
 
       try {
-        message.channel.send(`-Dernier uptade pour les xp du \`${timestamp}\` effectué à \`${InfoA.Heure}\``)
+        message.channel.send(`-Dernier update pour les xp du \`${timestamp}\` effectué à \`${InfoA.Heure}\``)
       }catch(err) {}
 
       try {
-      message.channel.send(`-Dernier uptade pour les xp du \`${timestampH}\` effectué à \`${InfoB.Heure}\``)
+      message.channel.send(`-Dernier update pour les xp du \`${timestampH}\` effectué à \`${InfoB.Heure}\``)
     }catch (err) {}
-
-       try {
-        message.channel.send(`-Dernier uptade pour les xp du \`${timestampA}\` effectué à \`${InfoC.Heure}\``)
-      }catch (err) {}
 
        },
        async runSlash(client, interaction) { 
@@ -133,22 +129,18 @@ module.exports = {
 
           try {
           var InfoC = JSON.parse(readFileSync(`././Information/xp/Member-Id/${timestampA}/${data.playerId}.json`, 'utf-8'))} catch (err) {interaction.channel.send(`Erreur ${data.username} n'a pas d'xp enregistré pour avant-hier: ${timestampA}`); var InfoC = 0}
-          var Xp3 = InfoC.Xp; var XpB = Xp3
-          if (XpB < 1000) { interaction.channel.send(`+ \`${data.username}\` a rejoins le \`${joinTf}\`, xp: \`${XpB}\``)} else {console.log(InfoC.Pseudo,  XpB)};
+          var Xp3 = InfoC.Xp; 
+          if (Xp1 < 1000) { interaction.channel.send(`+ \`${data.username}\` a rejoins le \`${joinTf}\`, xp: \`${Xp1}\``)} else {console.log(InfoC.Pseudo,  Xp1)};
         } 
       }
 
       try {
-        interaction.channel.send(`-Dernier uptade pour les xp du \`${timestamp}\` effectué à \`${InfoA.Heure}\``)
+        interaction.channel.send(`-Dernier update pour les xp du \`${timestamp}\` effectué à \`${InfoA.Heure}\``)
       }catch(err) {}
 
       try {
-      interaction.channel.send(`-Dernier uptade pour les xp du \`${timestampH}\` effectué à \`${InfoB.Heure}\``)
+      interaction.channel.send(`-Dernier update pour les xp du \`${timestampH}\` effectué à \`${InfoB.Heure}\``)
     }catch (err) {}
-
-       try {
-        interaction.channel.send(`-Dernier uptade pour les xp du \`${timestampA}\` effectué à \`${InfoC.Heure}\``)
-      }catch (err) {}
       
 
        }

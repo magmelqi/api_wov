@@ -16,7 +16,7 @@ module.exports = {
         .set( 'Authorization', process.env.WOV_TOKEN)
         .set('Content-Type', 'application/json')
         .set('Accept', 'application/json')
-        .catch((err) => {console.log(`Erreur a la 1ére requête: ${err}`); console.log(err)}); 
+        .catch((err) => {message.channel.send(`Erreur a la 1ère requête: ${err}`); console.log(err)}); 
         console.log ('Commande banque fait'); 
     
         var text = Messageclan.text
@@ -33,7 +33,7 @@ module.exports = {
         var data = JSON.parse(Mm1);
         var Atime = data.creationTime; var AtimeT = JSON.stringify(Atime); var annéeA= AtimeT.slice(1,5)
           var moisA= AtimeT.slice(6,8); var jourA= AtimeT.slice(9,11); var heureA= AtimeT.slice(12,14); var minuteA= AtimeT.slice(15,17)
-          var secondeA= AtimeT.slice(18,20); console.log(`Dernier don: Année: ${annéeA}, mois: ${moisA}, jour: ${jourA}, heure: ${heureA}, minute: ${minuteA}, seconde: ${secondeA}`)
+          var secondeA= AtimeT.slice(18,20);
 
         try {var InfoOr={"Or":0,"Création":"0000-00-00T00:00:00.000Z"}; 
           var InfoOr = JSON.parse(readFileSync(`././Information/Or/Member-Id/${data.playerId}.json`, 'utf-8'))} catch (err) {}
@@ -131,7 +131,7 @@ module.exports = {
       .set( 'Authorization', process.env.WOV_TOKEN)
       .set('Content-Type', 'application/json')
       .set('Accept', 'application/json')
-      .catch((err) => {console.log(`Erreur a la 1ére requête: ${err}`); console.log(err)}); 
+      .catch((err) => {interaction.channel.send(`Erreur a la 1ère requête: ${err}`); console.log(err)}); 
       console.log ('Commande banque fait'); 
   
       var text = Messageclan.text
