@@ -35,6 +35,8 @@ module.exports = {
           var moisA= AtimeT.slice(6,8); var jourA= AtimeT.slice(9,11); var heureA= AtimeT.slice(12,14); var minuteA= AtimeT.slice(15,17)
           var secondeA= AtimeT.slice(18,20);
 
+          if (data.gold > 0) {
+
         try {var InfoOr={"Or":0,"Création":"0000-00-00T00:00:00.000Z"}; 
           var InfoOr = JSON.parse(readFileSync(`././Information/Or/Member-Id/${data.playerId}.json`, 'utf-8'))} catch (err) {}
           var time = InfoOr.Création; var timeT = JSON.stringify(time); var annéeOr= timeT.slice(1,5) 
@@ -75,7 +77,9 @@ module.exports = {
         writeFileSync(`././Information/Or/Member-Id/${data.playerId}.json`, objectToJson)
         writeFileSync(`././Information/Or/Member-Pseudo/${data.playerUsername}.json`, objectToJson)
         const Or = JSON.parse(readFileSync(`././Information/Or/Member-Id/${data.playerId}.json`, 'utf-8')); 
-        console.log(Or.Pseudo, Or.Or); message.channel.send(`${Or.Pseudo}: ${Or.Or}`)}}else {message.channel.send(`Le don d'or de ${InfoOr.Pseudo} a déjà été comptabilisé`)}
+        console.log(Or.Pseudo, Or.Or); message.channel.send(`${Or.Pseudo}: ${Or.Or}`)}}else {message.channel.send(`Le don d'or de \`${InfoOr.Pseudo}\` a déjà été comptabilisé`)}}
+
+        if (data.gems > 0) {
         
         try {var InfoGemme={"Gemme":0,"Création":"0000-00-00T00:00:00.000Z"}
           var InfoGemme = JSON.parse(readFileSync(`././Information/Gemme/Member-Id/${data.playerId}.json`, 'utf-8'))} catch (err) {}
@@ -117,11 +121,11 @@ module.exports = {
           writeFileSync(`././Information/Gemme/Member-Id/${data.playerId}.json`, objectToJson)
           writeFileSync(`././Information/Gemme/Member-Pseudo/${data.playerUsername}.json`, objectToJson)
           const Gems = JSON.parse(readFileSync(`././Information/Gemme/Member-Id/${data.playerId}.json`, 'utf-8')); 
-          console.log(Gems.Pseudo, Gems.gems); message.channel.send(`${Gems.Pseudo}: ${Gems.gems}`)}}else {message.channel.send(`Le don de gemme de ${InfoGemme.Pseudo} a déjà été comptabilisé`)}
+          console.log(Gems.Pseudo, Gems.gems); message.channel.send(`${Gems.Pseudo}: ${Gems.gems}`)}}else {message.channel.send(`Le don de gemme de \`${InfoGemme.Pseudo}\` a déjà été comptabilisé`)}}
 
      var nb = i}}
-     if (nb > 1) {message.channel.send(`Uptade des dons de ${nb} membres`)} else {
-     message.channel.send(`Uptade des dons de ${nb} membre`)}
+     if (nb > 1) {message.channel.send(`Update des dons de ${nb} membres`)} else {
+     message.channel.send(`Update des dons de ${nb} membre`)}
     },
 
     async runSlash(client, interaction) { 
@@ -150,6 +154,8 @@ module.exports = {
         var moisA= AtimeT.slice(6,8); var jourA= AtimeT.slice(9,11); var heureA= AtimeT.slice(12,14); var minuteA= AtimeT.slice(15,17)
         var secondeA= AtimeT.slice(18,20); console.log(`Dernier don: Année: ${annéeA}, mois: ${moisA}, jour: ${jourA}, heure: ${heureA}, minute: ${minuteA}, seconde: ${secondeA}`)
 
+        if (data.gold > 0) {
+
       try {var InfoOr={"Or":0,"Création":"0000-00-00T00:00:00.000Z"}; 
         var InfoOr = JSON.parse(readFileSync(`././Information/Or/Member-Id/${data.playerId}.json`, 'utf-8'))} catch (err) {}
         var time = InfoOr.Création; var timeT = JSON.stringify(time); var annéeOr= timeT.slice(1,5) 
@@ -157,7 +163,7 @@ module.exports = {
         var secondeOr= timeT.slice(18,20); console.log(`Donnée-or: Année: ${annéeOr}, mois: ${moisOr}, jour: ${jourOr}, heure: ${heureOr}, minute: ${minuteOr}, seconde: ${secondeOr}`)
 
         if (annéeA > annéeOr || moisA > moisOr || moisA == moisOr && jourA > jourOr || moisA == moisOr && jourA == jourOr && heureA > heureOr || moisA == moisOr && jourA == jourOr && heureA == heureOr && minuteA > minuteOr || moisA == moisOr && jourA == jourOr && heureA == heureOr && minuteA == minuteOr && secondeA > secondeOr ) {
-        if (InfoOr.Création == data.creationTime) {interaction.channel.send(`Le don d'or de ${InfoOr.Pseudo} a déjà été comptabilisé`)}
+        if (InfoOr.Création == data.creationTime) {interaction.channel.send(`Le don d'or de \`${InfoOr.Pseudo}\` a déjà été comptabilisé`)}
         else if (InfoOr.Or > 0) {
           const info = {
             Pseudo: data.playerUsername,
@@ -190,7 +196,9 @@ module.exports = {
       writeFileSync(`././Information/Or/Member-Id/${data.playerId}.json`, objectToJson)
       writeFileSync(`././Information/Or/Member-Pseudo/${data.playerUsername}.json`, objectToJson)
       const Or = JSON.parse(readFileSync(`././Information/Or/Member-Id/${data.playerId}.json`, 'utf-8')); 
-      console.log(Or.Pseudo, Or.Or); interaction.channel.send(`${Or.Pseudo}: ${Or.Or}`)}}else {interaction.channel.send(`Le don d'or de ${InfoOr.Pseudo} a déjà été comptabilisé`)}
+      console.log(Or.Pseudo, Or.Or); interaction.channel.send(`${Or.Pseudo}: ${Or.Or}`)}}else {interaction.channel.send(`Le don d'or de ${InfoOr.Pseudo} a déjà été comptabilisé`)}}
+
+      if (data.gems > 0) {
       
       try {var InfoGemme={"Gemme":0,"Création":"0000-00-00T00:00:00.000Z"}
         var InfoGemme = JSON.parse(readFileSync(`././Information/Gemme/Member-Id/${data.playerId}.json`, 'utf-8'))} catch (err) {}
@@ -199,7 +207,7 @@ module.exports = {
         var secondeGemme= timeT.slice(18,20); console.log(`Donnée-gemme: Année: ${annéeGemme}, mois: ${moisGemme}, jour: ${jourGemme}, heure: ${heureGemme}, minute: ${minuteGemme}, seconde: ${secondeGemme}`)
 
         if (annéeA > annéeGemme || moisA > moisGemme || moisA == moisGemme && jourA > jourGemme || moisA == moisGemme && jourA == jourGemme && heureA > heureGemme || moisA == moisGemme && jourA == jourGemme && heureA == heureGemme && minuteA > minuteGemme || moisA == moisGemme && jourA == jourGemme && heureA == heureGemme && minuteA == minuteGemme && secondeA > secondeGemme ) {
-        if (InfoGemme.Création == data.creationTime) {interaction.channel.send(`Le don de gemme de ${InfoGemme.Pseudo} a déjà été comptabilisé`)}
+        if (InfoGemme.Création == data.creationTime) {interaction.channel.send(`Le don de gemme de \`${InfoGemme.Pseudo}\` a déjà été comptabilisé`)}
         else if (InfoGemme.Gemme > 0) {
           const info = {
             Pseudo: data.playerUsername,
@@ -232,10 +240,10 @@ module.exports = {
         writeFileSync(`././Information/Gemme/Member-Id/${data.playerId}.json`, objectToJson)
         writeFileSync(`././Information/Gemme/Member-Pseudo/${data.playerUsername}.json`, objectToJson)
         const Gems = JSON.parse(readFileSync(`././Information/Gemme/Member-Id/${data.playerId}.json`, 'utf-8')); 
-        console.log(Gems.Pseudo, Gems.gems); interaction.channel.send(`${Gems.Pseudo}: ${Gems.gems}`)}}else {interaction.channel.send(`Le don de gemme de ${InfoGemme.Pseudo} a déjà été comptabilisé`)}
+        console.log(Gems.Pseudo, Gems.gems); interaction.channel.send(`${Gems.Pseudo}: ${Gems.gems}`)}}else {interaction.channel.send(`Le don de gemme de ${InfoGemme.Pseudo} a déjà été comptabilisé`)}}
 
    var nb = i}}
-   if (nb > 1) {interaction.channel.send(`Uptade des dons de ${nb} membres`)} else {
-   interaction.channel.send(`Uptade des dons de ${nb} membre`)}
+   if (nb > 1) {interaction.channel.send(`Update des dons de ${nb} membres`)} else {
+   interaction.channel.send(`Update des dons de ${nb} membre`)}
    }
   }

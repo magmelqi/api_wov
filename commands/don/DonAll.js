@@ -29,9 +29,9 @@ module.exports = {
               var Gemme = JSON.parse(readFileSync(`././Information/Gemme/Member-Id/${OrO}`, 'utf-8'))} catch (err) {}
       
                   try {
-              if (Or.Or > 1 && Gemme.Gemme > 1) {message.channel.send(`\`${Or.Pseudo}\` posséde Or: \`${Or.Or}\` Gemme: \`${Gemme.Gemme}\``);}
-              else if (Gemme.Gemme > 0) {message.channel.send(`\`${Or.Pseudo}\` posséde Gemme: \`${Gemme.Gemme}\``);}
-              else if (Or.Or > 0 ) {message.channel.send(`\`${Or.Pseudo}\` posséde Or: \`${Or.Or}\``);}
+              if (Or.Or > 1 && Gemme.Gemme > 1) {message.channel.send(`\`${Or.Pseudo}\` posséde: \`${Or.Or}\` Or et \`${Gemme.Gemme}\` gemme`);}
+              else if (Gemme.Gemme > 0) {message.channel.send(`\`${Or.Pseudo}\` posséde: \`${Gemme.Gemme}\` gemme`);}
+              else if (Or.Or > 0 ) {message.channel.send(`\`${Or.Pseudo}\` posséde: \`${Gemme.Gemme}\` gemme`);}
                   }catch (err) {}
             var Or = 0; var Gemme = 0
           }},
@@ -57,9 +57,9 @@ module.exports = {
               var Gemme = JSON.parse(readFileSync(`././Information/Gemme/Member-Id/${OrO}`, 'utf-8'))} catch (err) {}
       
                   try {
-              if (Or.Or > 1 && Gemme.Gemme > 1) {interaction.channel.send(`\`${Or.Pseudo}\` posséde Or: \`${Or.Or}\` Gemme: \`${Gemme.Gemme}\``);}
-              else if (Gemme.Gemme > 0) {interaction.channel.send(`\`${Or.Pseudo}\` posséde Gemme: \`${Gemme.Gemme}\``);}
-              else if (Or.Or > 0 ) {interaction.channel.send(`\`${Or.Pseudo}\` posséde Or: \`${Or.Or}\``);}
+              if (Or.Or > 1 && Gemme.Gemme > 1) {interaction.channel.send(`\`${Or.Pseudo}\` posséde: \`${Or.Or}\` Or et \`${Gemme.Gemme}\` gemme`);}
+              else if (Gemme.Gemme > 0) {interaction.channel.send(`\`${Or.Pseudo}\` posséde: \`${Gemme.Gemme}\` gemme`);}
+              else if (Or.Or > 0 ) {interaction.channel.send(`\`${Or.Pseudo}\` posséde: \`${Gemme.Gemme}\` gemme`);}
                   }catch (err) {}
             var Or = 0; var Gemme = 0
            }

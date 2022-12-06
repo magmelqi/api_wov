@@ -4,13 +4,13 @@ const dotenv = require('dotenv'); dotenv.config();
 const axios = require('axios')
 
 module.exports = {
-    name: "dons",
+    name: "donlist",
     category: 'don',
     permissions: ['BAN_MEMBERS'],
     ownerOnly: false,
-    usage: 'dons',
-    examples: ['dons'],
-    description: 'Les donations du clan',
+    usage: 'donlist',
+    examples: ['donlist'],
+    description: 'La liste des donations récente du clan',
       run: async(client, message, args) => {
         const obj = await superagent.get(`https://api.wolvesville.com/clans/${process.env.CLAN_ID}/ledger`)
         .set( 'Authorization', process.env.WOV_TOKEN)

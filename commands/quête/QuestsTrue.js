@@ -67,7 +67,7 @@ module.exports = {
             .set( 'Authorization', process.env.WOV_TOKEN)
             .set('Content-Type', 'application/json')
             .set('Accept', 'application/json')
-            .catch((err) => {return interaction.reply(`Le pseudo: "${nom}" n'existe pas.\nou ${err}`)}); 
+            .catch((err) => {return interaction.reply({content: `Le pseudo: "${nom}" n'existe pas.\nou ${err}`, ephemeral: true})}); 
             const User = await Username.body
             const UserId=JSON.stringify(User); 
             var idn = UserId.slice(7, 43); var idn1 = idn.trim(); console.log(idn)
@@ -77,7 +77,7 @@ module.exports = {
             .set( 'Authorization', process.env.WOV_TOKEN)
             .set('Content-Type', 'application/json')
             .set('Accept', 'application/json')
-            .catch((err) => {return interaction.reply(`${nom} n'est pas présent(e) dans le clan\nou ${err}`)}); 
+            .catch((err) => {return interaction.reply({content: `${nom} n'est pas présent(e) dans le clan\nou ${err}`, ephemeral: true})}); 
             const Clan = await Quests.body
             const obj=JSON.stringify(Clan); 
            

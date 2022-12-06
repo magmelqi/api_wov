@@ -29,9 +29,9 @@ module.exports = {
               var Gemme = JSON.parse(readFileSync(`././Information/Gemme/Member-Id/${OrO}`, 'utf-8'))} catch (err) {}
       
                   try {
-              if (Or.Or > 499 && Gemme.Gemme > 0) {message.channel.send(`\`${Or.Pseudo}\` posséde Or: \`${Or.Or}\` et gemme: \`${Gemme.Gemme}\``);}
-              else if (Gemme.Gemme > 0) {message.channel.send(`\`${Or.Pseudo}\` posséde gemme: \`${Gemme.Gemme}\``);}
-              else if (Or.Or > 499 ) {message.channel.send(`\`${Or.Pseudo}\` posséde Or: \`${Or.Or}\``);}
+              if (Or.Or > 499 && Gemme.Gemme > 0) {message.channel.send(`\`${Or.Pseudo}\` posséde: \`${Or.Or}\` <:orwov:1049617166854520892> et \`${Gemme.Gemme}\` <:diamant_wov:1049618534084395039>`);}
+              else if (Gemme.Gemme > 0) {message.channel.send(`\`${Or.Pseudo}\` posséde: \`${Gemme.Gemme}\` <:diamant_wov:1049618534084395039>`);}
+              else if (Or.Or > 499 ) {message.channel.send(`\`${Or.Pseudo}\` posséde: \`${Or.Or}\` <:orwov:1049617166854520892>`);}
                   }catch (err) {}
             var Or = 0; var Gemme = 0
           }},
@@ -50,15 +50,15 @@ module.exports = {
                 var OrO = JSON.parse(Ors); 
           
                 try {
-                var Or = JSON.parse(readFileSync(`././Information/Or/Member-Id/${OrO}`, 'utf-8'))} catch (err) {return message.channel.send(`Erreur de lecture dans les fichiers`);}
+                var Or = JSON.parse(readFileSync(`././Information/Or/Member-Id/${OrO}`, 'utf-8'))} catch (err) {return interaction.channel.send(`Erreur de lecture dans les fichiers`);}
           
                 try {
                   var Gemme = JSON.parse(readFileSync(`././Information/Gemme/Member-Id/${OrO}`, 'utf-8'))} catch (err) {}
           
                       try {
-                  if (Or.Or > 499 && Gemme.Gemme > 0) {message.channel.send(`\`${Or.Pseudo}\` posséde Or: \`${Or.Or}\` et gemme: \`${Gemme.Gemme}\``);}
-                  else if (Gemme.Gemme > 0) {message.channel.send(`\`${Or.Pseudo}\` posséde gemme: \`${Gemme.Gemme}\``);}
-                  else if (Or.Or > 499 ) {message.channel.send(`\`${Or.Pseudo}\` posséde Or: \`${Or.Or}\``);}
+                  if (Or.Or > 499 && Gemme.Gemme > 0) {interaction.channel.send(`\`${Or.Pseudo}\` posséde: \`${Or.Or}\` Or et \`${Gemme.Gemme}\` gemme`);}
+                  else if (Gemme.Gemme > 0) {interaction.channel.send(`\`${Or.Pseudo}\` posséde: \`${Gemme.Gemme}\` gemme`);}
+                  else if (Or.Or > 499 ) {interaction.channel.send(`\`${Or.Pseudo}\` posséde: \`${Or.Or}\` Or`);}
                       }catch (err) {}
                 var Or = 0; var Gemme = 0 }
         }
