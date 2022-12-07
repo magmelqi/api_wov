@@ -16,14 +16,14 @@ module.exports = {
         .set( 'Authorization', process.env.WOV_TOKEN)
         .set('Content-Type', 'application/json')
         .set('Accept', 'application/json')
-        .catch((err) => {return message.channel.send(`Erreur a la 1ére requête: ${err}`)}); 
+        .catch((err) => {return message.channel.send(`Erreur a la 1ère requête: ${err}`)}); 
         console.log ('Commande xp fait'); var  clan = (Messageclan.body);
     
         const member = await superagent.get(`https://api.wolvesville.com/clans/${process.env.CLAN_ID}/info`)
         .set( 'Authorization', process.env.WOV_TOKEN)
         .set('Content-Type', 'application/json')
         .set('Accept', 'application/json')
-        .catch((err) => {return message.channel.send(`Erreur a la 1ére requête: ${err}`)}); const  clan2 = (member.body); 
+        .catch((err) => {return message.channel.send(`Erreur a la 2ème requête: ${err}`)}); const  clan2 = (member.body); 
     
         var text = Messageclan.text
     
@@ -54,7 +54,7 @@ module.exports = {
             var InfoB = JSON.parse(readFileSync(`././Information/xp/Member-Id/${timestampH}/${data.playerId}.json`, 'utf-8'))} catch (err) {message.channel.send(`Erreur ${data.username} n'a pas d'xp enregistré il y a 1 semaine: ${timestampH}`); var InfoB = 0}
              var Xp2 = InfoB.Xp; var XpA = Xp1-Xp2;
     
-            if (XpA < 2000) { message.channel.send(`+ \`${data.username}\` a rejoins le \`${joinTf}\`, xp: \`${XpA}\``)} else {console.log(InfoA.Pseudo,  Xp1)};}
+            if (XpA < 2000) { message.channel.send(`+\`❌\` \`${data.username}\` a rejoins le \`${joinTf}\`, \nxp: \`${XpA}\` sur \`2000\`xp requis`)} else {console.log(InfoA.Pseudo,  Xp1)};}
 
 
 
@@ -63,7 +63,9 @@ module.exports = {
           try {
           var InfoC = JSON.parse(readFileSync(`././Information/xp/Member-Id/${timestampA}/${data.playerId}.json`, 'utf-8'))} catch (err) {message.channel.send(`Erreur ${data.username} n'a pas d'xp enregistré pour avant-hier: ${timestampA}`); var InfoC = 0}
           var Xp3 = InfoC.Xp;
-          if (Xp1 < 1000) { message.channel.send(`+ \`${data.username}\` a rejoins le \`${joinTf}\`, xp: \`${Xp1}\``)} else {console.log(InfoC.Pseudo,  Xp1)};
+          if (Xp1 > 1000) {message.channel.send(`+\`✅\` \`${data.username}\` a rejoins le \`${joinTf}\`, \nxp: \`${Xp1}\` sur \`1000\`xp requis`);console.log(InfoC.Pseudo,  Xp1)} 
+          else {
+           message.channel.send(`+\`❌\` \`${data.username}\` a rejoins le \`${joinTf}\`, \nxp: \`${Xp1}\` sur \`1000\`xp requis`);console.log(InfoC.Pseudo,  Xp1)}
         } 
       }
 
@@ -83,14 +85,14 @@ module.exports = {
         .set( 'Authorization', process.env.WOV_TOKEN)
         .set('Content-Type', 'application/json')
         .set('Accept', 'application/json')
-        .catch((err) => {return interaction.channel.send(`Erreur a la 1ére requête: ${err}`)}); 
+        .catch((err) => {return interaction.channel.send(`Erreur a la 1ère requête: ${err}`)}); 
         console.log ('Commande xp fait'); var  clan = (Messageclan.body);
     
         const member = await superagent.get(`https://api.wolvesville.com/clans/${process.env.CLAN_ID}/info`)
         .set( 'Authorization', process.env.WOV_TOKEN)
         .set('Content-Type', 'application/json')
         .set('Accept', 'application/json')
-        .catch((err) => {return interaction.channel.send(`Erreur a la 1ére requête: ${err}`)}); const  clan2 = (member.body); 
+        .catch((err) => {return interaction.channel.send(`Erreur a la 2ème requête: ${err}`)}); const  clan2 = (member.body); 
     
         var text = Messageclan.text
     
