@@ -21,13 +21,14 @@ module.exports = {
                 var Listef = /.json"/g; var ListeS = Lisetet.search(Listef)
                 var Listes = Lisetet.slice(1, ListeS+6); var Lisetet = Lisetet.slice(ListeS+6); 
                 var ListeO = JSON.parse(Listes); 
-          
+                var pseudoF = JSON.parse(readFileSync(`././Information/Quête/Member-Id/${ListeO}`, 'utf-8'))
+                var pseudo = pseudoF.Pseudo
                 
           
                 try {
-                  var ListeMembre = JSON.parse(readFileSync(`././Information/Or/Member-Id/${ListeO}`, 'utf-8'))} catch (err) {message.channel.send(`Erreur de lecture dans le fichier ${ListeO} n'existe pas`);}
+                  var ListeMembre = JSON.parse(readFileSync(`././Information/Or/Member-Id/${ListeO}`, 'utf-8'))} catch (err) {message.channel.send(`Erreur de lecture dans le fichier ${pseudo} n'existe pas`);}
           
-                      try { var or = 0; if (ListeMembre.Or > 499) {var or = -500} else {message.channel.send(`${ListeMembre.Pseudo} a seulement ${ListeMembre.Or} en banque`)}
+                      try { var or = 0; if (ListeMembre.Or > 499) {var or = 500} else {message.channel.send(`${ListeMembre.Pseudo} a seulement ${ListeMembre.Or} en banque`)}
                         const info = {
                             Pseudo: ListeMembre.Pseudo,
                             PlayerId: ListeMembre.PlayerId,

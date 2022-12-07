@@ -1,7 +1,7 @@
 const superagent = require('superagent').agent();
 const dotenv = require('dotenv'); dotenv.config();
 const dayjs = require ('dayjs');
-const {writeFileSync} = require ("fs");
+const {writeFileSync, unlinkSync, readdirSync} = require ("fs");
 
 module.exports = {
     name: "liste",
@@ -12,6 +12,29 @@ module.exports = {
     examples: ['liste'],
     description: 'Liste des participants de la quête',
       run: async(client, message, args) => {
+
+        try {
+          var Lister = readdirSync(`././Information/Quête/Member-Id`, 'utf-8')} catch (err) {return console.log(err);}
+          var Lisetet = JSON.stringify(Lister);
+
+          try {
+            var ListerP = readdirSync(`././Information/Quête/Member-Pseudo`, 'utf-8')} catch (err) {return console.log(err);}
+            var LisetetP = JSON.stringify(ListerP);
+
+          for(let i=0; i < ListerP.length; i++)  {
+    
+              var Listef = /.json"/g; var ListeS = Lisetet.search(Listef)
+              var Listes = Lisetet.slice(1, ListeS+6); var Lisetet = Lisetet.slice(ListeS+6); 
+              try {var ListeO = JSON.parse(Listes);}catch(err) {console.log(err)}
+
+              var ListefP = /.json"/g; var ListeSP = LisetetP.search(ListefP)
+              var ListesP = LisetetP.slice(1, ListeSP+6); var LisetetP = LisetetP.slice(ListeSP+6);
+              var ListeOP = JSON.parse(ListesP); 
+            try {
+                unlinkSync(`././Information/Quête/Member-Id/${ListeO}`, 'utf-8')}catch (err) {console.log(err)}
+                unlinkSync(`././Information/Quête/Member-Pseudo/${ListeOP}`, 'utf-8')}
+
+
         const Questsactive = await superagent.get(`https://api.wolvesville.com/clans/${process.env.CLAN_ID}/quests/active`)
         .set( 'Authorization', process.env.WOV_TOKEN)
         .set('Content-Type', 'application/json')
