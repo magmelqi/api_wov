@@ -14,7 +14,8 @@ module.exports = {
       run: async(client, message, args) => {
         var nom = message.content.substring(8).trim()
         const { data } = await axios.get(`https://api.wolvesville.com/players/search?username=${nom}`, {
-          headers: { 'Authorization': process.env.WOV_TOKEN, 'Content-Type': 'application/json', 'Accept': 'application/json'}}).catch((err) => {return message.channel.send(`Pseudo introuvable\nou ${err}`)}); 
+          headers: { 'Authorization': process.env.WOV_TOKEN, 'Content-Type': 'application/json', 'Accept': 'application/json'}}).catch((err) => 
+          {return message.channel.send(`Pseudo introuvable\nou ${err}`)}); 
 
           const CI1= data.clanId
         if (CI1 === undefined) {var PP = "Pas de clan"} 
