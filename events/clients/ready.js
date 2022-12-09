@@ -8,7 +8,6 @@ module.exports = {
         let usersCount = client.guilds.cache.reduce((a, g) => a + g.memberCount, 0);
 
         Logger.client(`- prêt à être utilisé par ${usersCount} utilisateurs sur ${guildsCount.size} serveur`);
-        logChannel.send(`Prêt à être utilisé par ${usersCount} utilisateurs sur ${guildsCount.size} serveur`)
 
         client.user.setPresence({ activities: [{ name: 'BOUH', type: 'PLAYING'}], status: 'idle'})
 
