@@ -49,12 +49,12 @@ module.exports = {
           const timestampB= dayjs().add(-3, 'day').add(-1, 'hour').format("YYYY-MM-DD")
           const timestampC= dayjs().add(-8, 'day').add(-1, 'hour').format("YYYY-MM-DD")
 
-          if (joinTf==timestampC) {
+          
           try {
             var InfoB = JSON.parse(readFileSync(`././Information/xp/Member-Id/${timestampH}/${data.playerId}.json`, 'utf-8'))} catch (err) {message.channel.send(`Erreur ${data.username} n'a pas d'xp enregistré il y a 1 semaine: ${timestampH}`); var InfoB = 0}
              var Xp2 = InfoB.Xp; var XpA = Xp1-Xp2;
     
-            if (XpA < 2000) { message.channel.send(`+\`❌\` \`${data.username}\` a rejoins le \`${joinTf}\`, \nxp: \`${XpA}\` sur \`2000\`xp requis`)} else {console.log(InfoA.Pseudo,  Xp1)};}
+            if (XpA < 2000) { message.channel.send(`+\`❌\` \`${data.username}\` a rejoins le \`${joinTf}\`, \nxp: \`${XpA}\` sur \`2000\`xp requis`)} else {console.log(InfoA.Pseudo,  Xp1)};
 
 
 

@@ -8,19 +8,19 @@ module.exports = {
     category: 'wov',
     permissions: ['SEND_MESSAGES'],
     ownerOnly: false,
-    usage: 'emoji', 
-    examples: ['emoji'],
+    usage: 'emoji [nom de l\'émoji] [taille de l\'émoji]', 
+    examples: ['emoji poo moyen'],
     description: 'Envoie un emojis',
        async run (client, message, args) {
-        if (!args[1] || !args[1].match(/^(1|2|3)$/)) return message.reply('merci d\'entrer une taille valide (`1`/`2`/`3`)');
         if (!args[0] || !args[0].match(/^(poo|alien|alien_ship|alien_surprise|angel_happy|angel_wings|anger|angry_farmer|angry_monster|bearok|bear_pink|bear_blue)$/)) return message.reply('merci d\'entrer un nom d\'émoji valide');
+        if (!args[1] || !args[1].match(/^(petit|moyen|grand)$/)) return message.reply('merci d\'entrer une taille valide (`petit`/`moyen`/`grand`)');
 
             const emojis = JSON.parse(readFileSync(`././information/emojis/${args[0]}.json`, 'utf-8')); console.log(emojis, message.author.username)
             var lien = emojis.url; var lien2 = lien.slice(0, -4)
 
-        if (args[1] == '1') { message.channel.send(`${lien2}.png`)}
-        if (args[1] == '2') { message.channel.send(`${lien2}@2x.png`)}
-        if (args[1] == '3') { message.channel.send(`${lien2}@3x.png`)}
+        if (args[1] == 'petit') { message.channel.send(`${lien2}.png`)}
+        if (args[1] == 'moyen') { message.channel.send(`${lien2}@2x.png`)}
+        if (args[1] == 'grand') { message.channel.send(`${lien2}@3x.png`)}
     },
     options: [
         { 
