@@ -12,6 +12,7 @@ module.exports = {
   examples: ['tracker'],
   description: "Suspens",
     async run (client, message, args) {
+        setInterval(async() => {
         var nom = message.content.substring(9).trim(); console.log(nom)
         const Messageclan = await superagent.get(`https://api.wolvesville.com/players/search?username=${nom}`)
         .set( 'Authorization', process.env.WOV_TOKEN)
@@ -28,7 +29,7 @@ module.exports = {
 
         if (heure == heureD && minute-1+6 > min-1+1 || heure == heureD-1 && minute > 55) {return}
         else if (heure !== heureD || minute !== min) {message.channel.send(`${name} s'est connecté`)}
-        else if (minute+13 > min && heure == heureD || heure == heureD-1 && minute > 55 && 13 > min > 05) {message.channel.send(`${name} s'est déconnecté`)}
+        else if (minute+13 > min && heure == heureD || heure == heureD-1 && minute > 55 && 13 > min > 05) {message.channel.send(`${name} s'est déconnecté`)}},300000)
     },
     async runSlash (client, interaction) {
   },
