@@ -11,7 +11,9 @@ module.exports = {
           let role2 = message.guild.roles.cache.find(r => r.name === 'Louveteau'); //Louveteau
           let member = message.mentions.members.first();
   
-          if (member.roles.cache.has(role.id) && member.roles.cache.has(role2.id)) { return message.channel.send(`${member} posséde déjà le role ${role.name} et le role ${role2.name}.`)} 
+          if (member.roles.cache.has(role.id) && member.roles.cache.has(role2.id)) { return message.channel.send(`${member} posséde déjà le role ${role.name} et le role ${role2.name}.`)}
+
+          if (!member.roles.cache.has(role.id) && !member.roles.cache.has(role2.id)) {member.roles.add(role, role2); return message.channel.send(`${member} posséde maintement le role ${role.name} et le role ${role2.name}.`)}
    
               if (member.roles.cache.has(role.id)) {message.channel.send(`${member} posséde déjà le role ${role.name}.`)}
               else {member.roles.add(role)
@@ -26,7 +28,7 @@ module.exports = {
   
       },
       async runSlash(client, interaction) { 
-        interaction.reply({content: `La commande / ne marche pas veuillez utiliser le \n?add [@KamieSukehiro#3211]`, ephemeral: true})
+        interaction.reply({content: `La commande / ne marche pas veuillez utiliser le ?, par exemple: \n?add @KamieSukehiro#3211`, ephemeral: true})
       }
     }
   

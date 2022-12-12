@@ -16,23 +16,26 @@ module.exports = {
         .set( 'Authorization', process.env.WOV_TOKEN)
         .set('Content-Type', 'application/json')
         .set('Accept', 'application/json')
-        .catch((err) => {message.channel.send(`Erreur a la 1ère requête: ${err}`); console.log(err)}); 
-        console.log ('Commande xpadd fait'); 
-    
-        const member = await superagent.get(`https://api.wolvesville.com/clans/${process.env.CLAN_ID}/info`)
+        .catch((err) => {message.channel.send(`Erreur a la 1ère requête\n\`2ème tentaive en cours...\``); console.log(err)}); 
+        console.log ('Commande xpadd faite');
+        var objErr= JSON.stringify(Messageclan);
+        if (objErr !== undefined) {message.channel.send(`Calcul en cours...`)}
+
+        setTimeout(async()=> {var objErr= JSON.stringify(Messageclan);
+        if (objErr == undefined) {console.log('yo')
+          const Messageclan = await superagent.get(`https://api.wolvesville.com/clans/${process.env.CLAN_ID}/members`)
         .set( 'Authorization', process.env.WOV_TOKEN)
         .set('Content-Type', 'application/json')
         .set('Accept', 'application/json')
-        .catch((err) => {message.channel.send(`Erreur a la 2ème requête: ${err}`); console.log(err)}); const  clan2 = (member.body); 
+        .catch((err) => {message.channel.send(`Erreur a la 2ème requêtes\n\`3ème tentaives en cours...\` Ah bah il y en a pas flemme de mettre une 3ème requêtes`);return console.log(err)}); 
+        var text= Messageclan.text} else {var text= Messageclan.text}
     
-        var text = Messageclan.text
     
         const timestamp = `${dayjs().add(-1, 'hour').format("DD-MM-YYYY")}`; 
         const heure = `${dayjs().add(-1, 'hour').format("HH:mm")}-heure anglaise`;
     
-        const memberCount = (clan2.memberCount);
-       
-      for (var i = 0; i < memberCount;i++){ 
+       try {
+      for (var i = 0; i < 50;i++){ 
         var Mmf= /"participateInClanQuests":/g
         const MmDF = text.search(Mmf); var Mm1 = text.slice(0, MmDF+32);
         var quests = text.slice(MmDF+26,MmDF+30);
@@ -60,33 +63,34 @@ module.exports = {
         writeFileSync(`././Information/xp/Member-Id/${timestamp}/${data.playerId}.json`, objectToJson)
         writeFileSync(`././Information/xp/Member-Pseudo/${timestamp}/${data.username}.json`, objectToJson)
         const Xp = JSON.parse(readFileSync(`././Information/xp/Member-Id/${timestamp}/${data.playerId}.json`, 'utf-8')); console.log(Xp.Pseudo, Xp.Xp)
-     var nb = i+1}message.channel.send(`Update des xp de ${nb} membres sur ${memberCount} membres`)
+     i= i+1}} catch (err) {}message.channel.send(`Update des xp de \`${i}\` membres`)},5000)
     },
 
     async runSlash(client, interaction) { 
       
-      interaction.reply({content: 'Actualisation des xp en cours...', ephemeral: true})
       const Messageclan = await superagent.get(`https://api.wolvesville.com/clans/${process.env.CLAN_ID}/members`)
       .set( 'Authorization', process.env.WOV_TOKEN)
       .set('Content-Type', 'application/json')
       .set('Accept', 'application/json')
-      .catch((err) => {interaction.channel.send(`Erreur a la 1ère requête: ${err}`); console.log(err)}); 
+      .catch((err) => {interaction.reply({content:`Erreur a la 1ère requête\n\`2ème tentaive en cours...\``, ephemeral:true}); console.log(err)}); 
       console.log ('Commande xpadd fait'); 
-  
-      const member = await superagent.get(`https://api.wolvesville.com/clans/${process.env.CLAN_ID}/info`)
+      var objErr= JSON.stringify(Messageclan);
+      if (objErr !== undefined) {interaction.reply(`Calcul en cours...`)}
+
+      setTimeout(async()=> {var objErr= JSON.stringify(Messageclan);
+      if (objErr == undefined) {console.log('yo')
+        const Messageclan = await superagent.get(`https://api.wolvesville.com/clans/${process.env.CLAN_ID}/members`)
       .set( 'Authorization', process.env.WOV_TOKEN)
       .set('Content-Type', 'application/json')
       .set('Accept', 'application/json')
-      .catch((err) => {interaction.channel.send(`Erreur a la 2ème requête: ${err}`); console.log(err)}); const  clan2 = (member.body); 
-  
-      var text = Messageclan.text
+      .catch((err) => {interaction.followUp({content:`Erreur a la 2ème requêtes\n\`3ème tentaives en cours...\` Ah bah il y en a pas flemme de mettre une 3ème requêtes`, ephemeral:true});return console.log(err)}); 
+      var text= Messageclan.text} else {var text= Messageclan.text}
+
   
       const timestamp = `${dayjs().add(-1, 'hour').format("DD-MM-YYYY")}`; 
       const heure = `${dayjs().add(-1, 'hour').format("HH:mm")}-heure anglaise`;
-  
-      const memberCount = (clan2.memberCount);
-     
-    for (var i = 0; i < memberCount;i++){ 
+     try {
+    for (var i = 0; i < 50;i++){ 
       var Mmf= /"participateInClanQuests":/g
       const MmDF = text.search(Mmf); var Mm1 = text.slice(0, MmDF+32);
       var quests = text.slice(MmDF+26,MmDF+30);
@@ -114,6 +118,6 @@ module.exports = {
       writeFileSync(`././Information/xp/Member-Id/${timestamp}/${data.playerId}.json`, objectToJson)
       writeFileSync(`././Information/xp/Member-Pseudo/${timestamp}/${data.username}.json`, objectToJson)
       const Xp = JSON.parse(readFileSync(`././Information/xp/Member-Id/${timestamp}/${data.playerId}.json`, 'utf-8')); console.log(Xp.Pseudo, Xp.Xp)
-   var nb = i+1}interaction.channel.send(`Update des xp de ${nb} membres sur ${memberCount} membres`) 
+    var i = i+1}}catch(err){}interaction.channel.send(`Update des xp de \`${i}\` membres`)},5000)
   }
   }

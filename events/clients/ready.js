@@ -9,7 +9,7 @@ module.exports = {
 
         Logger.client(`- prêt à être utilisé par ${usersCount} utilisateurs sur ${guildsCount.size} serveur`);
 
-        client.user.setPresence({ activities: [{ name: 'BOUH', type: 'PLAYING'}], status: 'idle'})
+        client.user.setPresence({ activities: [{ name: 'BOUH', type: 'PLAYING'}], status: 'online'}) //dnd, invisible, online, idle
 
         const devGuild = await client.guilds.cache.get('559352487430193180');
         devGuild.commands.set(client.commands.map(cmd => cmd));

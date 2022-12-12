@@ -16,23 +16,27 @@ module.exports = {
         .set( 'Authorization', process.env.WOV_TOKEN)
         .set('Content-Type', 'application/json')
         .set('Accept', 'application/json')
-        .catch((err) => {return message.channel.send(`Erreur a la 1ère requête: ${err}`)}); 
-        console.log ('Commande xp fait'); var  clan = (Messageclan.body);
-    
-        const member = await superagent.get(`https://api.wolvesville.com/clans/${process.env.CLAN_ID}/info`)
+        .catch((err) => {message.channel.send(`Erreur a la 1ère requête\n\`2ème tentaive en cours...\``); console.log(err)}); 
+        console.log ('Commande xpadd faite');
+        var objErr= JSON.stringify(Messageclan);
+        if (objErr !== undefined) {message.channel.send(`Affichage en cours...`)}
+
+        setTimeout(async()=> {var objErr= JSON.stringify(Messageclan);
+        if (objErr == undefined) {console.log('yo')
+          const Messageclan = await superagent.get(`https://api.wolvesville.com/clans/${process.env.CLAN_ID}/members`)
         .set( 'Authorization', process.env.WOV_TOKEN)
         .set('Content-Type', 'application/json')
         .set('Accept', 'application/json')
-        .catch((err) => {return message.channel.send(`Erreur a la 2ème requête: ${err}`)}); const  clan2 = (member.body); 
-    
-        var text = Messageclan.text
+        .catch((err) => {message.channel.send(`Erreur a la 2ème requêtes\n\`3ème tentaives en cours...\` Ah bah il y en a pas flemme de mettre une 3ème requêtes`);return console.log(err)}); 
+        var text= Messageclan.text} else {var text= Messageclan.text}
+
     
         const timestamp = `${dayjs().add(-1, 'hour').format("DD-MM-YYYY")}`;
-        const timestampH = `${dayjs().add(-8, 'day').add(-1, 'hour').format("DD-MM-YYYY")}`; 
+        const timestampH = `${dayjs().add(-9, 'day').add(-1, 'hour').format("DD-MM-YYYY")}`; 
         const timestampA = `${dayjs().add(-3, 'day').add(-1, 'hour').format("DD-MM-YYYY")}`; 
     
-        const memberCount = (clan2.memberCount);
-      for (let i =0; i < memberCount; i++){ 
+        try {
+      for (let i =0; i < 50; i++){ 
         var Mmf= /"participateInClanQuests":/g
         const MmDF = text.search(Mmf); var Mm1 = text.slice(0, MmDF+32);
         var quests = text.slice(MmDF+26,MmDF+30);
@@ -47,11 +51,10 @@ module.exports = {
 
           var join = InfoA.Création; var joinT= JSON.stringify(join); var joinTf= joinT.slice(1,11);
           const timestampB= dayjs().add(-3, 'day').add(-1, 'hour').format("YYYY-MM-DD")
-          const timestampC= dayjs().add(-8, 'day').add(-1, 'hour').format("YYYY-MM-DD")
 
           
           try {
-            var InfoB = JSON.parse(readFileSync(`././Information/xp/Member-Id/${timestampH}/${data.playerId}.json`, 'utf-8'))} catch (err) {message.channel.send(`Erreur ${data.username} n'a pas d'xp enregistré il y a 1 semaine: ${timestampH}`); var InfoB = 0}
+            var InfoB = JSON.parse(readFileSync(`././Information/xp/Member-Id/${timestampH}/${data.playerId}.json`, 'utf-8'))} catch (err) { var InfoB = 0}
              var Xp2 = InfoB.Xp; var XpA = Xp1-Xp2;
     
             if (XpA < 2000) { message.channel.send(`+\`❌\` \`${data.username}\` a rejoins le \`${joinTf}\`, \nxp: \`${XpA}\` sur \`2000\`xp requis`)} else {console.log(InfoA.Pseudo,  Xp1)};
@@ -62,12 +65,12 @@ module.exports = {
 
           try {
           var InfoC = JSON.parse(readFileSync(`././Information/xp/Member-Id/${timestampA}/${data.playerId}.json`, 'utf-8'))} catch (err) {message.channel.send(`Erreur ${data.username} n'a pas d'xp enregistré pour avant-hier: ${timestampA}`); var InfoC = 0}
-          var Xp3 = InfoC.Xp;
+          
           if (Xp1 > 1000) {message.channel.send(`+\`✅\` \`${data.username}\` a rejoins le \`${joinTf}\`, \nxp: \`${Xp1}\` sur \`1000\`xp requis`);console.log(InfoC.Pseudo,  Xp1)} 
           else {
            message.channel.send(`+\`❌\` \`${data.username}\` a rejoins le \`${joinTf}\`, \nxp: \`${Xp1}\` sur \`1000\`xp requis`);console.log(InfoC.Pseudo,  Xp1)}
         } 
-      }
+      }}catch(err) {}
 
       try {
         message.channel.send(`-Dernier update pour les xp du \`${timestamp}\` effectué à \`${InfoA.Heure}\``)
@@ -75,33 +78,35 @@ module.exports = {
 
       try {
       message.channel.send(`-Dernier update pour les xp du \`${timestampH}\` effectué à \`${InfoB.Heure}\``)
-    }catch (err) {}
+    }catch (err) {}},5000)
 
        },
        async runSlash(client, interaction) { 
-
-        interaction.reply({content: 'La liste des xp arrive...', ephemeral: true})
+        
         const Messageclan = await superagent.get(`https://api.wolvesville.com/clans/${process.env.CLAN_ID}/members`)
         .set( 'Authorization', process.env.WOV_TOKEN)
         .set('Content-Type', 'application/json')
         .set('Accept', 'application/json')
-        .catch((err) => {return interaction.channel.send(`Erreur a la 1ère requête: ${err}`)}); 
-        console.log ('Commande xp fait'); var  clan = (Messageclan.body);
-    
-        const member = await superagent.get(`https://api.wolvesville.com/clans/${process.env.CLAN_ID}/info`)
+        .catch((err) => {interaction.reply({content:`Erreur a la 1ère requête\n\`2ème tentaive en cours...\``, ephemeral: true}); console.log(err)}); 
+        console.log ('Commande xpadd faite');
+        var objErr= JSON.stringify(Messageclan);
+        if (objErr !== undefined) {interaction.reply(`Affichage en cours...`)}
+
+        setTimeout(async()=> {var objErr= JSON.stringify(Messageclan);
+        if (objErr == undefined) {console.log('yo')
+          const Messageclan = await superagent.get(`https://api.wolvesville.com/clans/${process.env.CLAN_ID}/members`)
         .set( 'Authorization', process.env.WOV_TOKEN)
         .set('Content-Type', 'application/json')
         .set('Accept', 'application/json')
-        .catch((err) => {return interaction.channel.send(`Erreur a la 2ème requête: ${err}`)}); const  clan2 = (member.body); 
-    
-        var text = Messageclan.text
+        .catch((err) => {interaction.followUp({content:`Erreur a la 2ème requêtes\n\`3ème tentaives en cours...\` Ah bah il y en a pas flemme de mettre une 3ème requêtes`, ephemeral: true});return console.log(err)}); 
+        var text= Messageclan.text} else {var text= Messageclan.text}
     
         const timestamp = `${dayjs().add(-1, 'hour').format("DD-MM-YYYY")}`;
-        const timestampH = `${dayjs().add(-8, 'day').add(-1, 'hour').format("DD-MM-YYYY")}`; 
+        const timestampH = `${dayjs().add(-9, 'day').add(-1, 'hour').format("DD-MM-YYYY")}`; 
         const timestampA = `${dayjs().add(-3, 'day').add(-1, 'hour').format("DD-MM-YYYY")}`; 
     
-        const memberCount = (clan2.memberCount);
-      for (let i =0; i < memberCount; i++){ 
+      try {
+      for (let i =0; i < 50; i++){ 
         var Mmf= /"participateInClanQuests":/g
         const MmDF = text.search(Mmf); var Mm1 = text.slice(0, MmDF+32);
         var quests = text.slice(MmDF+26,MmDF+30);
@@ -116,14 +121,13 @@ module.exports = {
 
           var join = InfoA.Création; var joinT= JSON.stringify(join); var joinTf= joinT.slice(1,11);
           const timestampB= dayjs().add(-3, 'day').add(-1, 'hour').format("YYYY-MM-DD")
-          const timestampC= dayjs().add(-8, 'day').add(-1, 'hour').format("YYYY-MM-DD")
 
-          if (joinTf==timestampC) {
+          
           try {
-            var InfoB = JSON.parse(readFileSync(`././Information/xp/Member-Id/${timestampH}/${data.playerId}.json`, 'utf-8'))} catch (err) {interaction.channel.send(`Erreur ${data.username} n'a pas d'xp enregistré il y a 1 semaine: ${timestampH}`); var InfoB = 0}
+            var InfoB = JSON.parse(readFileSync(`././Information/xp/Member-Id/${timestampH}/${data.playerId}.json`, 'utf-8'))} catch (err) { var InfoB = 0}
              var Xp2 = InfoB.Xp; var XpA = Xp1-Xp2;
     
-            if (XpA < 2000) { interaction.channel.send(`+ \`${data.username}\` a rejoins le \`${joinTf}\`, xp: \`${XpA}\``)} else {console.log(InfoA.Pseudo,  XpA)};}
+            if (XpA < 2000) { interaction.channel.send(`+\`❌\` \`${data.username}\` a rejoins le \`${joinTf}\`, \nxp: \`${XpA}\` sur \`2000\`xp requis`)} else {console.log(InfoA.Pseudo,  Xp1)};
 
 
 
@@ -131,8 +135,10 @@ module.exports = {
 
           try {
           var InfoC = JSON.parse(readFileSync(`././Information/xp/Member-Id/${timestampA}/${data.playerId}.json`, 'utf-8'))} catch (err) {interaction.channel.send(`Erreur ${data.username} n'a pas d'xp enregistré pour avant-hier: ${timestampA}`); var InfoC = 0}
-          var Xp3 = InfoC.Xp; 
-          if (Xp1 < 1000) { interaction.channel.send(`+ \`${data.username}\` a rejoins le \`${joinTf}\`, xp: \`${Xp1}\``)} else {console.log(InfoC.Pseudo,  Xp1)};
+          
+          if (Xp1 > 1000) {interaction.channel.send(`+\`✅\` \`${data.username}\` a rejoins le \`${joinTf}\`, \nxp: \`${Xp1}\` sur \`1000\`xp requis`);console.log(InfoC.Pseudo,  Xp1)} 
+          else {
+           interaction.channel.send(`+\`❌\` \`${data.username}\` a rejoins le \`${joinTf}\`, \nxp: \`${Xp1}\` sur \`1000\`xp requis`);console.log(InfoC.Pseudo,  Xp1)}
         } 
       }
 
@@ -142,7 +148,7 @@ module.exports = {
 
       try {
       interaction.channel.send(`-Dernier update pour les xp du \`${timestampH}\` effectué à \`${InfoB.Heure}\``)
-    }catch (err) {}
+    }catch (err) {}}catch(err) {}},5000)
       
 
        }
