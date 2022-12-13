@@ -27,9 +27,8 @@ module.exports = {
           .set('Content-Type', 'application/json')
           .set('Accept', 'application/json')
           .catch((err) => {message.channel.send(`Erreur a la 2ème requêtes\n\`3ème tentaives en cours...\` Ah bah il y en a pas flemme de mettre une 3ème requêtes`);return console.log(err)});
-          const Statut = await message.channel.send(`Tracker sur ${nom}: on`)
           var text= Messageclan.text} else {var text= Messageclan.text}
-
+          const Statut = await message.channel.send(`Tracker sur ${nom}: on`)
 
 
 
@@ -46,14 +45,14 @@ module.exports = {
 
       const embed = new MessageEmbed()
       .setTitle(`Statut de connexion`)
-      .setColor('GREY')
-      .setAuthor(name)
+      .setColor('LIGHT_GREY')
+      .setAuthor({name: nom})
       .addFields(
        { name: 'Dernière connexion:', value: `\`\`\`${Co}\`\`\``, inline: true},
        { name: "Activité", value: `\`\`\`none\`\`\``, inline: true},
       )
       .setTimestamp()
-      .setFooter({iconeURL: message.author.displayAvatarURL() })
+      .setFooter({text: name,iconeURL: message.author.displayAvatarURL() })
       
       Statut.edit({ content: ' ', embeds: [embed] });
         setInterval(async()=> {
