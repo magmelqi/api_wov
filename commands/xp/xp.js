@@ -16,7 +16,7 @@ module.exports = {
         .set( 'Authorization', process.env.WOV_TOKEN)
         .set('Content-Type', 'application/json')
         .set('Accept', 'application/json')
-        .catch((err) => {message.channel.send(`Erreur a la 1ère requête\n\`2ème tentaives en cours...\``); console.log(err)}); 
+        .catch((err) => {message.channel.send(`Erreur a la 1ère requête\n\`2ème tentatives en cours...\``); console.log(err)}); 
         console.log ('Commande xpadd faite');
         var objErr= JSON.stringify(Messageclan);
         if (objErr !== undefined) {message.channel.send(`Affichage en cours...`)}
@@ -27,7 +27,7 @@ module.exports = {
         .set( 'Authorization', process.env.WOV_TOKEN)
         .set('Content-Type', 'application/json')
         .set('Accept', 'application/json')
-        .catch((err) => {message.channel.send(`Erreur a la 2ème requêtes\n\`3ème tentaives en cours...\` Ah bah il y en a pas flemme de mettre une 3ème requêtes`);return console.log(err)}); 
+        .catch((err) => {message.channel.send(`Erreur a la 2ème requêtes\n\`3ème tentatives en cours...\` Ah bah il y en a pas flemme de mettre une 3ème requêtes`);return console.log(err)}); 
         var text= Messageclan.text} else {var text= Messageclan.text}
 
     
@@ -87,7 +87,7 @@ module.exports = {
         .set( 'Authorization', process.env.WOV_TOKEN)
         .set('Content-Type', 'application/json')
         .set('Accept', 'application/json')
-        .catch((err) => {interaction.reply({content:`Erreur a la 1ère requête\n\`2ème tentaives en cours...\``, ephemeral: true}); console.log(err)}); 
+        .catch((err) => {interaction.reply({content:`Erreur a la 1ère requête\n\`2ème tentatives en cours...\``, ephemeral: true}); console.log(err)}); 
         console.log ('Commande xpadd faite');
         var objErr= JSON.stringify(Messageclan);
         if (objErr !== undefined) {interaction.reply(`Affichage en cours...`)}
@@ -98,7 +98,7 @@ module.exports = {
         .set( 'Authorization', process.env.WOV_TOKEN)
         .set('Content-Type', 'application/json')
         .set('Accept', 'application/json')
-        .catch((err) => {interaction.followUp({content:`Erreur a la 2ème requêtes\n\`3ème tentaives en cours...\` Ah bah il y en a pas flemme de mettre une 3ème requêtes`, ephemeral: true});return console.log(err)}); 
+        .catch((err) => {interaction.followUp({content:`Erreur a la 2ème requêtes\n\`3ème tentatives en cours...\` Ah bah il y en a pas flemme de mettre une 3ème requêtes`, ephemeral: true});return console.log(err)}); 
         var text= Messageclan.text} else {var text= Messageclan.text}
     
         const timestamp = `${dayjs().add(-1, 'hour').format("DD-MM-YYYY")}`;

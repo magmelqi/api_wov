@@ -16,19 +16,19 @@ module.exports = {
         .set( 'Authorization', process.env.WOV_TOKEN)
         .set('Content-Type', 'application/json')
         .set('Accept', 'application/json')
-        .catch((err) => {message.channel.send(`Erreur a la 1ère requête\n\`2ème tentaives en cours...\``); console.log(err)}); 
+        .catch((err) => {message.channel.send(`Erreur a la 1ère requête\n\`2ème tentatives en cours...\``); console.log(err)}); 
         console.log ('Commande xpadd faite');
         var objErr= JSON.stringify(Messageclan);
         if (objErr !== undefined) {message.channel.send(`Calcul en cours...`)}
 
         setTimeout(async()=> {var objErr= JSON.stringify(Messageclan);
-        if (objErr == undefined) {console.log('yo')
+        if (objErr == undefined) {
           const Messageclan = await superagent.get(`https://api.wolvesville.com/clans/${process.env.CLAN_ID}/members`)
         .set( 'Authorization', process.env.WOV_TOKEN)
         .set('Content-Type', 'application/json')
         .set('Accept', 'application/json')
-        .catch((err) => {message.channel.send(`Erreur a la 2ème requêtes\n\`3ème tentaives en cours...\` Ah bah il y en a pas flemme de mettre une 3ème requêtes`);return console.log(err)}); 
-        var text= Messageclan.text} else {var text= Messageclan.text}
+        .catch((err) => {message.channel.send(`Erreur ${err} `);return console.log(err)}); 
+        var text= Messageclan.text;} else {var text= Messageclan.text}
     
     
         const timestamp = `${dayjs().add(-1, 'hour').format("DD-MM-YYYY")}`; 
@@ -63,7 +63,7 @@ module.exports = {
         writeFileSync(`././Information/xp/Member-Id/${timestamp}/${data.playerId}.json`, objectToJson)
         writeFileSync(`././Information/xp/Member-Pseudo/${timestamp}/${data.username}.json`, objectToJson)
         const Xp = JSON.parse(readFileSync(`././Information/xp/Member-Id/${timestamp}/${data.playerId}.json`, 'utf-8')); console.log(Xp.Pseudo, Xp.Xp)
-     i= i+1}} catch (err) {}message.channel.send(`Update des xp de \`${i}\` membres`)},5000)
+     i= i}} catch (err) {}message.channel.send(`Update des xp de \`${i}\` membres`)},5000)
     },
 
     async runSlash(client, interaction) { 
@@ -118,6 +118,6 @@ module.exports = {
       writeFileSync(`././Information/xp/Member-Id/${timestamp}/${data.playerId}.json`, objectToJson)
       writeFileSync(`././Information/xp/Member-Pseudo/${timestamp}/${data.username}.json`, objectToJson)
       const Xp = JSON.parse(readFileSync(`././Information/xp/Member-Id/${timestamp}/${data.playerId}.json`, 'utf-8')); console.log(Xp.Pseudo, Xp.Xp)
-    var i = i+1}}catch(err){}interaction.channel.send(`Update des xp de \`${i}\` membres`)},5000)
+    var i = i}}catch(err){}interaction.channel.send(`Update des xp de \`${i}\` membres`)},5000)
   }
   }
