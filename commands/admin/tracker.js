@@ -45,6 +45,7 @@ module.exports = {
 
       const embed = new MessageEmbed()
       .setTitle(`Statut de connexion`)
+      .setThumbnail(body.equippedAvatar.url)
       .setColor('LIGHT_GREY')
       .setAuthor({name: nom})
       .addFields(
@@ -75,6 +76,7 @@ module.exports = {
         if (heure !== heureAncienne || minute !== minuteAncienne) {
           const embed = new MessageEmbed()
           .setTitle(`Statut de connexion`)
+          .setThumbnail(body.equippedAvatar.url)
           .setColor('GREEN')
           .setAuthor(name)
           .addFields(
@@ -94,6 +96,7 @@ module.exports = {
         else if (minute == minuteAncienne && heure == heureAncienne)         
         {const embed = new MessageEmbed()
           .setTitle(`Statut de connexion`)
+          .setThumbnail(body.equippedAvatar.url)
           .setColor('RED')
           .setAuthor(name)
           .addFields(
