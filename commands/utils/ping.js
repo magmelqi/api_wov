@@ -8,12 +8,15 @@ module.exports = {
   usage: 'ping',
   examples: ['ping'],
   description: "La commande ping envoie la latence du bot et de l'API",
-    run: (client, message, args) =>  {
+    async run (client, message, args) {
+      const tryPong = await message.channel.send("on essaye de pong... un instant");
+
       const embed = new MessageEmbed()
        .setTitle('🏓 Pong')
        .setThumbnail(client.user.displayAvatarURL())
        .addFields(
-        { name: 'Latence', value: `\`${client.ws.ping}ms\``, inline: true},
+        { name: 'Latence API', value: `\`\`\`${client.ws.ping}ms\`\`\``, inline: true},
+        { name: "Latence BOT", value: `\`\`\`${tryPong.createdTimestamp - message.createdTimestamp}ms\`\`\``, inline: true},
         { name: 'Uptime', value: `<t:${parseInt(client.readyTimestamp / 1000)}:R>`, inline: true},
        )
        .setTimestamp()
@@ -22,35 +25,20 @@ module.exports = {
        
 
 
-    message.channel.send({ embeds: [embed] });
+    tryPong.edit({ content: ' ', embeds: [embed] });
     },
-    async runSlash (client, interaction) {const tryPong = await interaction.reply({
-      content: "On essaye de pong... un instant!",
-      fetchReply: true,
-    });
+    async runSlash (client, interaction) {
+      const tryPong = await interaction.reply({content: "On essaye de pong... un instant!", fetchReply: true});
 
     const embed = new MessageEmbed()
       .setTitle("Pong! 🏓")
       .setThumbnail(client.user.displayAvatarURL())
       .addFields(
-        {
-          name: "Latence API",
-          value: `\`\`\`${client.ws.ping}ms\`\`\``,
-          inline: true,
-        },
-        {
-          name: "Latence BOT",
-          value: `\`\`\`${
-            tryPong.createdTimestamp - interaction.createdTimestamp
-          }ms\`\`\``,
-          inline: true,
-        }
+        { name: "Latence API", value: `\`\`\`${client.ws.ping}ms\`\`\``, inline: true},
+        { name: "Latence BOT", value: `\`\`\`${tryPong.createdTimestamp - interaction.createdTimestamp}ms\`\`\``, inline: true,}
       )
       .setTimestamp()
-      .setFooter({
-        text: interaction.user.username,
-        iconURL: interaction.user.displayAvatarURL(),
-      });
+      .setFooter({text: interaction.user.username, iconURL: interaction.user.displayAvatarURL()});
 
     interaction.editReply({ content: " ", embeds: [embed] });
   },

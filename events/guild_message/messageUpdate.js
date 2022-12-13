@@ -17,7 +17,7 @@ module.exports = {
         .setColor(bot.color)
         .setTitle("Message modifié")
         .setThumbnail(bot.user.displayAvatarURL({dynamic: true}))
-        .setDescription(`Auteur du message: ${newMessage.author}\nDate de la création du message: <t:${Math.floor(oldMessage.createdTimestamp / 1000)}:R>\nAncien contenu: \`\`\`${AncienMessage}\`\`\`\nNouveau contenu: \`\`\`${newMessage.content}\`\`\``)
+        .setDescription(`Auteur du message: ${newMessage.author}\nSalon: ${message.channel}\nDate de la création du message: <t:${Math.floor(oldMessage.createdTimestamp / 1000)}:R>\nAncien contenu: \`\`\`${AncienMessage}\`\`\`\nNouveau contenu: \`\`\`${newMessage.content}\`\`\``)
 
         const logChannel = bot.channels.cache.get('1044258472121860126');
         logChannel.send({ embeds: [Embed]})

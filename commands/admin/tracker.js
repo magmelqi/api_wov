@@ -1,6 +1,7 @@
 const superagent = require('superagent').agent();
 const dotenv = require('dotenv'); dotenv.config();
 const {writeFileSync, readFileSync, readdirSync} = require ("fs");
+const { MessageEmbed } = require('discord.js')
 
 module.exports = {
   name: "tracker",
@@ -25,7 +26,8 @@ module.exports = {
           .set( 'Authorization', process.env.WOV_TOKEN)
           .set('Content-Type', 'application/json')
           .set('Accept', 'application/json')
-          .catch((err) => {message.channel.send(`Erreur a la 2ème requêtes\n\`3ème tentaives en cours...\` Ah bah il y en a pas flemme de mettre une 3ème requêtes`);return console.log(err)}); 
+          .catch((err) => {message.channel.send(`Erreur a la 2ème requêtes\n\`3ème tentaives en cours...\` Ah bah il y en a pas flemme de mettre une 3ème requêtes`);return console.log(err)});
+          const Statut = await message.channel.send(`Tracker sur ${nom}: on`)
           var text= Messageclan.text} else {var text= Messageclan.text}
 
 
@@ -35,13 +37,25 @@ module.exports = {
         var name = body.username
         var connexion = body.lastOnline
         var connexionT = JSON.stringify(connexion); var heure = connexionT.slice(12, 14); var minute = connexionT.slice(15, 17)
-        console.log(heure, minute); var Co = `${heure}:${minute}`; message.channel.send(`Dernière connexion de ${name} à: ${Co}`)
+        console.log(heure, minute); var Co = `${heure}:${minute}`;
         const info = {
           Pseudo: name,
           lastOnline: Co
       }
       const objectToJson = JSON.stringify(info) ;writeFileSync(`././Information/secret/secret.json`, objectToJson)
-        message.channel.send(`Tracker sur ${nom}: on`)
+
+      const embed = new MessageEmbed()
+      .setTitle(`Statut de connexion`)
+      .setColor('GREY')
+      .setAuthor(name)
+      .addFields(
+       { name: 'Dernière connexion:', value: `\`\`\`${Co}\`\`\``, inline: true},
+       { name: "Activité", value: `\`\`\`none\`\`\``, inline: true},
+      )
+      .setTimestamp()
+      .setFooter({iconeURL: message.author.displayAvatarURL() })
+      
+      Statut.edit({ content: ' ', embeds: [embed] });
         setInterval(async()=> {
         const Messageclan = await superagent.get(`https://api.wolvesville.com/players/search?username=${nom}`)
         .set( 'Authorization', process.env.WOV_TOKEN)
@@ -59,24 +73,45 @@ module.exports = {
         var heureAncienne = connexionAncienneT.slice(1, 3); var minuteAncienne = connexionAncienneT.slice(4, 6)
         console.log(heureAncienne, minuteAncienne)
 
-        if (heure == heureAncienne && minute == minuteAncienne || heure-1 == heureAncienne && minuteAncienne > 55 && minute < 05|| heure == heureAncienne && minute-1+1 < minuteAncienne-1+7) {
-          const info = {
-            Pseudo: name,
-            lastOnline: Co
-        };const objectToJson = JSON.stringify(info) ;writeFileSync(`././Information/secret/secret.json`, objectToJson);return}
-        else if (heure !== heureAncienne || minute !== minuteAncienne) {message.channel.send(`${name} s'est connecté`)
+        if (heure !== heureAncienne || minute !== minuteAncienne) {
+          const embed = new MessageEmbed()
+          .setTitle(`Statut de connexion`)
+          .setColor('GREEN')
+          .setAuthor(name)
+          .addFields(
+           { name: 'Dernière connexion:', value: `\`\`\`${Co}\`\`\``, inline: true},
+           { name: "Activité", value: `\`\`\`connecté\`\`\``, inline: true},
+          )
+          .setTimestamp()
+          .setFooter({iconeURL: message.author.displayAvatarURL() })
+          
+          Statut.edit({ content: ' ', embeds: [embed] });
+
         const info = {
             Pseudo: name,
             lastOnline: Co
         };const objectToJson = JSON.stringify(info) ;writeFileSync(`././Information/secret/secret.json`, objectToJson)
     }
-        else if (minute < minuteAncienne+13 && heure == heureAncienne || heure == heureAncienne && minuteAncienne > 55 && 13 > minute > 05)         
-        {message.channel.send(`${name} s'est déconnecté`)
+        else if (minute == minuteAncienne && heure == heureAncienne)         
+        {const embed = new MessageEmbed()
+          .setTitle(`Statut de connexion`)
+          .setColor('RED')
+          .setAuthor(name)
+          .addFields(
+           { name: 'Dernière connexion:', value: `\`\`\`${Co}\`\`\``, inline: true},
+           { name: "Activité", value: `\`\`\`déconnecté\`\`\``, inline: true},
+          )
+          .setTimestamp()
+          .setFooter({iconeURL: message.author.displayAvatarURL() })
+          
+          Statut.edit({ content: ' ', embeds: [embed] });
+
+
         const info = {
           Pseudo: name,
           lastOnline: Co
-      };const objectToJson = JSON.stringify(info) ;writeFileSync(`././Information/secret/secret.json`, objectToJson)
-    }},500000)},5000)
+      };const objectToJson = JSON.stringify(info); writeFileSync(`././Information/secret/secret.json`, objectToJson)
+    }},300000)},5000)
     },
     options:[
       {
