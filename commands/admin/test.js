@@ -7,10 +7,10 @@ const Discord = require('discord.js')
 module.exports = {
     name: "test",
     category: 'admin',
-    permissions: ['ADMINISTRATOR'],
+    permissions: ['BAN_MEMBERS'],
     ownerOnly: false,
-    usage: 'test [taille]',
-    examples: ['test 1 | test 2 | test 3'],
+    usage: 'test ',
+    examples: ['test'],
     description: 'Commande test',
      async run (client, message, args) { 
 
@@ -18,15 +18,35 @@ module.exports = {
 
         ctx = canvas.getContext("2d");
 
-        var background = await Canvas.loadImage("./Information/LoupDuo.png");
+        function getRandomInt(max) {
+            return Math.floor(Math.random() * max);
+          }
+        var rdm =getRandomInt(3); console.log(rdm)
+        if (rdm ==0) {var background = await Canvas.loadImage("./Information/LoupBlanc2.png");}
+        if (rdm ==1) {var background = await Canvas.loadImage("./Information/LoupDuo6.png");}
+        if (rdm ==3) {var background = await Canvas.loadImage("./Information/DuoLoup2.png");}
         ctx.drawImage(background, 0, 0, 1024, 500);
 
         ctx.font = "42px Impact";
-        ctx.fillStyle = "#000000";
-        ctx.textAlign = "center";
+        if (rdm ==0) {
+            ctx.fillStyle = "#FFFFFF";
+            ctx.textAlign = "center";
+            ctx.fillText(message.author.tag.toUpperCase(), 512, 410);
+            ctx.fillText("BIENVENUE", 512, 360);}
+
+        if (rdm ==1) {
+            ctx.fillStyle = "#000000";
+            ctx.textAlign = "center";
+            ctx.fillText(message.author.tag.toUpperCase(), 512, 395);
+            ctx.fillText("BIENVENUE", 512, 350);}
+        
+        if (rdm ==0) {
+            ctx.fillStyle = "#FFFFFF";
+            ctx.textAlign = "center";
+            ctx.fillText(message.author.tag.toUpperCase(), 512, 410);
+            ctx.fillText("BIENVENUE", 512, 360);}
+
         //ctx.fillText(member.user.tag.toUpperCase(), 512, 410)
-        ctx.fillText(message.author.tag.toUpperCase(), 512, 410);
-        ctx.fillText("BIENVENUE", 512, 360);
 
         ctx.beginPath();
         ctx.arc(512, 166, 119, 0, Math.PI * 2);
