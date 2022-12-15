@@ -1,6 +1,8 @@
 const superagent = require('superagent').agent();
 const dotenv = require('dotenv'); dotenv.config();
-
+const { MessageEmbed, MessageAttachment } = require('discord.js');
+const Canvas = require("canvas");
+const Discord = require('discord.js')
 
 module.exports = {
     name: "test",
@@ -11,68 +13,44 @@ module.exports = {
     examples: ['test 1 | test 2 | test 3'],
     description: 'Commande test',
      async run (client, message, args) { 
-        if (!args[0] || !args[0].match(/^(1|2|3)$/)) return message.reply('merci d\'entrer un évenement valide (`1`/`2`/`3`)');
 
-        const Messageclan = await superagent.get(`https://api.wolvesville.com/items/emojis`)
-        .set( 'Authorization', process.env.WOV_TOKEN)
-        .set('Content-Type', 'application/json')
-        .set('Accept', 'application/json')
-        .catch((err) => {console.log(`Erreur a la 1ère requête: ${err}`); console.log(err)}); 
-        const body = Messageclan.body; const text = JSON.stringify(body)
-        var debut= /"urlAnimation":"/g; var fin = /.json"/g 
-        const debutS = text.search(debut); const finS = text.search(fin); var lien = text.slice(debutS+15, finS+6);
-        const lienO = JSON.parse(lien); console.log(lienO)
+        var canvas = Canvas.createCanvas(1024, 500);
 
-        var debut2= /"urlPreview":"/g; var fin2 = /.png"/g 
-        const debutS2 = text.search(debut2); const finS2 = text.search(fin2); var lien2 = text.slice(debutS2+14, finS2); 
+        ctx = canvas.getContext("2d");
 
-        if (args[0] == '1') { message.channel.send(`${lien2}.png`)}
-        if (args[0] == '2') { message.channel.send(`${lien2}@2x.png`)}
-        if (args[0] == '3') { message.channel.send(`${lien2}@3x.png`)}
+        var background = await Canvas.loadImage("./Information/LoupDuo.png");
+        ctx.drawImage(background, 0, 0, 1024, 500);
 
+        ctx.font = "42px Impact";
+        ctx.fillStyle = "#000000";
+        ctx.textAlign = "center";
+        //ctx.fillText(member.user.tag.toUpperCase(), 512, 410)
+        ctx.fillText(message.author.tag.toUpperCase(), 512, 410);
+        ctx.fillText("BIENVENUE", 512, 360);
+
+        ctx.beginPath();
+        ctx.arc(512, 166, 119, 0, Math.PI * 2);
+        ctx.closePath();
+        ctx.clip();
+
+        //var avatar = await Canvas.loadImage(member.user.displayAvatarURL({
+        //    format: "png",
+        //    size: 1024
+        //}));
+
+        var avatar = await Canvas.loadImage(message.author.displayAvatarURL({
+            format: "png",
+            size: 1024
+        }));
+
+        ctx.drawImage(avatar, 393, 47, 238, 238);
+
+        var attachement = new MessageAttachment(canvas.toBuffer(), "welcome.png")
+
+        message.channel.send({files: [attachement]})
     },
-    options: [
-        {
-            name: 'taille',
-            description: 'Choisir une taille pour l\'émoji',
-            type: 'STRING',
-            required: true,
-            choices: [
-                {
-                    name: '1',
-                    value: 'taille1',
-                },
-                {
-                    name: '2',
-                    value: 'taille2',
-                },
-                {
-                    name: '3',
-                    value: 'taille3',
-                }
-            ]
-        }
-    ],
 
     runSlash: async(client, interaction) => { 
-        const evtChoices = interaction.options.getString('taille');
-
-        const Messageclan = await superagent.get(`https://api.wolvesville.com/items/emojis`)
-        .set( 'Authorization', process.env.WOV_TOKEN)
-        .set('Content-Type', 'application/json')
-        .set('Accept', 'application/json')
-        .catch((err) => {interaction.reply({content: `Erreur a la 1ère requête: ${err}`, ephemeral: true}); console.log(err)});
-        interaction.reply({content: `Exécution en cours`, ephemeral: true})
-        const body = Messageclan.body; const text = JSON.stringify(body)
-        var debut= /"urlAnimation":"/g; var fin = /.json"/g 
-        const debutS = text.search(debut); const finS = text.search(fin); var lien = text.slice(debutS+15, finS+6);
-        const lienO = JSON.parse(lien); console.log(lienO)
-
-        var debut2= /"urlPreview":"/g; var fin2 = /.png"/g 
-        const debutS2 = text.search(debut2); const finS2 = text.search(fin2); var lien2 = text.slice(debutS2+14, finS2);
-
-        if (evtChoices == 'taille1') {interaction.channel.send(`${lien2}.png`);}
-        if (evtChoices == 'taille2') {interaction.channel.send(`${lien2}@2x.png`);}
-        if (evtChoices == 'taille3') {interaction.channel.send(`${lien2}@3x.png`);}
-
+      
+            interaction.reply('https://tenor.com/view/pretty-please-kitty-softpaws-puss-in-boots-the-last-wish-acting-cute-pleading-gif-25144556')
        }}
