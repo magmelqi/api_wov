@@ -13,9 +13,15 @@ module.exports = {
     description: "Voir le profil du pseudo",
       run: async(client, message, args) => {
         var nom = message.content.substring(8).trim()
-        const { data } = await axios.get(`https://api.wolvesville.com/players/search?username=${nom}`, {
-          headers: { 'Authorization': process.env.WOV_TOKEN, 'Content-Type': 'application/json', 'Accept': 'application/json'}}).catch((err) => 
-          {return message.channel.send(`Pseudo introuvable\nou ${err}`)}); 
+        const profil = await superagent.get(`https://api.wolvesville.com/players/search?username=${nom}`) 
+          .set( 'Authorization', process.env.WOV_TOKEN)
+          .set('Content-Type', 'application/json')
+          .set('Accept', 'application/json')
+          .catch((err) => {
+            if (err == "Error: Too Many Requests") {return message.channel.send("Veuillez retaper la commande")}
+            else if (err == "Error: Not Found") {return message.channel.send(`Pseudo inexistant`)}
+            else {return message.channel.send(`Erreur: ${err}`)}}); 
+          const data = await profil.body
 
           const CI1= data.clanId
         if (CI1 === undefined) {var PP = "Pas de clan"} 
@@ -24,7 +30,9 @@ module.exports = {
         .set( 'Authorization', process.env.WOV_TOKEN)
         .set('Content-Type', 'application/json')
         .set('Accept', 'application/json')
-        .catch((err) => {message.channel.send(`${err} veuillez retaper la commande`)});   
+        .catch((err) => {
+          if (err == "Error: Too Many Requests") {return message.channel.send("Veuillez retaper la commande")}
+          else {return message.channel.send(`Erreur: ${err}`)}}); 
         const ClanId = await ClanIdb.text;
         var CNb= /name/g
         var CNf= /","description/g
@@ -56,8 +64,15 @@ module.exports = {
     }],
       runSlash: async(client, interaction) => {
         const nom = interaction.options.getString('pseudo');
-        const { data } = await axios.get(`https://api.wolvesville.com/players/search?username=${nom}`, {
-          headers: { 'Authorization': process.env.WOV_TOKEN, 'Content-Type': 'application/json', 'Accept': 'application/json'}}).catch((err) => {return interaction.reply(`Pseudo introuvable\nou ${err}`)}); 
+        const profil = await superagent.get(`https://api.wolvesville.com/players/search?username=${nom}`) 
+          .set( 'Authorization', process.env.WOV_TOKEN)
+          .set('Content-Type', 'application/json')
+          .set('Accept', 'application/json')
+          .catch((err) => {
+            if (err == "Error: Too Many Requests") {return interaction.reply({content:"Veuillez retaper la commande", ephemeral:true})}
+            else if (err == "Error: Not Found") {return interaction.reply({content:`Pseudo inexistant`, ephemeral:true})}
+            else {return interaction.reply(`Erreur: ${err}`)}}); 
+          const data = await profil.body
 
           const CI1= data.clanId
         if (CI1 === undefined) {var PP = "Pas de clan"} 
@@ -66,13 +81,15 @@ module.exports = {
         .set( 'Authorization', process.env.WOV_TOKEN)
         .set('Content-Type', 'application/json')
         .set('Accept', 'application/json')
-        .catch((err) => {interaction.reply(`${err}, veuillez retaper la commande`)});   
-        const ClanId = await (`${ClanIdb.text}`);
+        .catch((err) => {
+          if (err == "Error: Too Many Requests") {return interaction.reply({content:"Veuillez retaper la commande", ephemeral:true})}
+          else {return interaction.reply({content:`Erreur ${err}`, ephemeral:true})}}); 
+        const ClanId = await ClanIdb.text;
         var CNb= /name/g
         var CNf= /","description/g
-        const CNDB = ClanId.search(CNb); const CNDF = ClanId.search(CNf); var CN1 = ClanId.slice(CNDB+7, CNDF)};
+        const CNDB = ClanId.search(CNb); const CNDF = ClanId.search(CNf); var CN1 = ClanId.slice(CNDB+7, CNDF); 
         var CN2 = CN1.slice(0, 13);
-        if (CN2 == "Wolves Legion") {var CN1= "Wolves Legion 🐺"; var tigre = "  🐅" }
+        if (CN2 == "Wolves Legion") {var CN1= "Wolves Legion 🐺"; var tigre = "  🐅" }}
 
         try{
           const embed = new MessageEmbed()
