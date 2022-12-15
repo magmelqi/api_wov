@@ -56,7 +56,7 @@ module.exports = {
       .setFooter({text: name,iconeURL: message.author.displayAvatarURL() })
       
       Statut.edit({ content: ' ', embeds: [embed] });
-        setInterval(async()=> { const member = message.guild.members.cache.get(user.id)
+        setInterval(async()=> {
         const Messageclan = await superagent.get(`https://api.wolvesville.com/players/search?username=${nom}`)
         .set( 'Authorization', process.env.WOV_TOKEN)
         .set('Content-Type', 'application/json')
@@ -75,7 +75,7 @@ module.exports = {
         var heureAncienne = connexionAncienneT.slice(1, 3); var minuteAncienne = connexionAncienneT.slice(4, 6)
         console.log(heureAncienne, minuteAncienne)
 
-        if (heure !== heureAncienne || minute !== minuteAncienne) {member.send(`${nom} s'est connecté`)
+        if (heure !== heureAncienne || minute !== minuteAncienne) {message.author.send(`${nom} s'est connecté`)
           const embed = new MessageEmbed()
           .setTitle(`Statut de connexion`)
           .setThumbnail(body.equippedAvatar.url)
@@ -95,7 +95,7 @@ module.exports = {
             lastOnline: Co
         };const objectToJson = JSON.stringify(info) ;writeFileSync(`././Information/secret/secret.json`, objectToJson)
     }
-        else if (minute == minuteAncienne && heure == heureAncienne) {member.send(`${nom} s'est déconnecté`)
+        else if (minute == minuteAncienne && heure == heureAncienne) {message.author.send(`${nom} s'est déconnecté`)
           const embed = new MessageEmbed()
           .setTitle(`Statut de connexion`)
           .setThumbnail(body.equippedAvatar.url)

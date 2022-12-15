@@ -25,7 +25,7 @@ module.exports = {
        
 
 
-    tryPong.edit({ content: ' ', embeds: [embed] });
+    tryPong.edit({ content: ' ', embeds: [embed] }); 
     },
     async runSlash (client, interaction) {
       const tryPong = await interaction.reply({content: "On essaye de pong... un instant!", fetchReply: true});
