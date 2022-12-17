@@ -83,38 +83,38 @@ module.exports = {
   },
   options:[
     {
-        name: "pseudo",
+        name: "pseudoid",
         description: "taper l'id du joueur",
         type: "STRING",
         required: true,
     }],
       runSlash: async(client, interaction) => {
-        const nom = interaction.options.getString('pseudo');
-        var Mprofil= await interaction.reply({content:`Recherche du profil de ${nom}...`, ephemeral:true,fetchReply: true})
-        const profil = await superagent.get(`https://api.wolvesville.com/players/search?username=${nom}`) 
-        .set( 'Authorization', process.env.WOV_TOKEN)
-        .set('Content-Type', 'application/json')
-        .set('Accept', 'application/json')
-        .catch((err) => {
-          if (err == "Error: Too Many Requests") {interaction.editReply({content:"Erreur a la 1ère requête\n\`2ème tentatives en cours...\`", ephemeral:true})}
-          else if (err == "Error: Not Found") {return interaction.editReply({content:`Pseudo inexistant`, ephemeral:true})}
-          else {return interaction.editReply({content:`Erreur: ${err}`, ephemeral: true})}});
-          var objErr= JSON.stringify(profil);
-
-          if (objErr == undefined) {await new Promise(resolve => setTimeout(resolve, 5000))
-            const profil = await superagent.get(`https://api.wolvesville.com/players/search?username=${nom}`)
+        const nom = interaction.options.getString('pseudoid');
+        var Mprofil= await interaction.reply({content:`Recherche du profil de ${nom}...`,  ephemeral:true,fetchReply: true})
+        const profil = await superagent.get(`https://api.wolvesville.com/players/${nom}`) 
           .set( 'Authorization', process.env.WOV_TOKEN)
           .set('Content-Type', 'application/json')
           .set('Accept', 'application/json')
           .catch((err) => {
-            if (err == "Error: Too Many Requests") {return interaction.editReply({content:"Veuillez retaper la commande, impossible de trouver le profil du joueur: \`Too Many Requests\`", ephemeral:true})}
-            else if (err == "Error: Not Found") {return interaction.editReply({content:`Pseudo inexistant`, ephemeral:true})}
-            else {return interaction.editReply({content:`Erreur: ${err}`, ephemeral:true})}});
-            var data = await profil.body} else {var data = await profil.body}
-            
-            if (data == undefined) return;
-            if (data !== undefined)
-          await interaction.editReply({content: `Recherche du profil de ${nom} réussi\nRecherche du clan de ${nom}, veuillez patienter`, ephemeral: true})
+            if (err == "Error: Too Many Requests") {interaction.editReply({content:"Erreur a la 1ère requête\n\`2ème tentatives en cours...\`"})}
+            else if (err == "Error: Not Found") {return interaction.editReply({content:`PseudoId inexistant`})}
+            else {return interaction.editReply({content:`Erreur: ${err}`})}});
+            var objErr= JSON.stringify(profil);
+
+            if (objErr == undefined) {await new Promise(resolve => setTimeout(resolve, 5000))
+              const profil = await superagent.get(`https://api.wolvesville.com/players/search?username=${nom}`)
+            .set( 'Authorization', process.env.WOV_TOKEN)
+            .set('Content-Type', 'application/json')
+            .set('Accept', 'application/json')
+            .catch((err) => {
+              if (err == "Error: Too Many Requests") {return interaction.editReply({content:"Veuillez retaper la commande, impossible de trouver le profil du joueur: \`Too Many Requests\`"})}
+              else if (err == "Error: Not Found") {return interaction.editReply({content:`PseudoId inexistant`})}
+              else {return interaction.editReply({content:`Erreur: ${err}`})}});
+              var data = await profil.body} else {var data = await profil.body}
+              if (data == undefined) return;
+              if (data !== undefined) {
+          await interaction.editReply({content: `Recherche du profil de ${nom} réussi\nRecherche du clan de ${nom}, veuillez patienter` })}
+
           const CI1= data.clanId
         if (CI1 === undefined) {var PP = "Pas de clan"} 
         else {await new Promise(resolve => setTimeout(resolve, 5000))
@@ -123,8 +123,8 @@ module.exports = {
         .set('Content-Type', 'application/json')
         .set('Accept', 'application/json')
         .catch((err) => {
-          if (err == "Error: Too Many Requests") {interaction.editReply({content:"Erreur a la 2ème requêtes\n\`2ème tentatives en cours...\`", ephemeral:true})}
-          else {return interaction.editReply({content:`Erreur ${err}`, ephemeral:true})}});
+          if (err == "Error: Too Many Requests") {interaction.editReply({content: "Erreur a la 2ème requêtes\n\`2ème tentatives en cours...\`"})}
+          else {return interaction.editReply({content: `Erreur: ${err}`})}}); 
           var objErr= JSON.stringify(ClanIdb);
 
           if (objErr == undefined) {await new Promise(resolve => setTimeout(resolve, 5000))
@@ -138,10 +138,9 @@ module.exports = {
            var ClanId = await ClanIdb.text;} else {var ClanId = await ClanIdb.text;}
 
 
-
         var CNb= /name/g
         var CNf= /","description/g
-        const CNDB = ClanId.search(CNb); const CNDF = ClanId.search(CNf); var CN1 = ClanId.slice(CNDB+7, CNDF); 
+        const CNDB = ClanId.search(CNb); const CNDF = ClanId.search(CNf); var CN1 = ClanId.slice(CNDB+7, CNDF);
         var CN2 = CN1.slice(0, 13);
         if (CN2 == "Wolves Legion") {var CN1= "Wolves Legion 🐺"; var tigre = "  🐅" }}
 
@@ -155,7 +154,6 @@ module.exports = {
           .setImage(`${data.equippedAvatar.url}`)
           .setTimestamp()
       
-            await interaction.channel.send({embeds: [embed] });console.log(`Pseudo: ${nom} Clan: ${CN1 ?? "Pas de clan"}`), console.log ('Commande profil faite');
-      
-      } catch (err) {console.log(err)} return
+            interaction.channel.send({ embeds: [embed]}),console.log(`Pseudo: ${nom} Clan: ${CN1 ?? "Pas de clan"}`), console.log ('Commande profil faite')
+          } catch (err) {console.log(err)} return
 }}    
