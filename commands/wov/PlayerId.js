@@ -1,7 +1,6 @@
 const superagent = require('superagent').agent();
 const { MessageEmbed } = require('discord.js');
 const dotenv = require('dotenv'); dotenv.config();
-const axios = require('axios')
 
 module.exports = {
     name: "profilid",
