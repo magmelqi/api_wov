@@ -68,7 +68,7 @@ module.exports = {
           .setThumbnail()
           .setTimestamp()
       
-            Mprofil.edit({ content: ' ', embeds: [embed]}),console.log(`Clan: ${data.name} Chef: ${PseudoId.username}`), console.log ('Commande profil faite');
+            Mprofil.edit({ content: ' ', embeds: [embed]});console.log(`Clan: ${data.name} Chef: ${PseudoId.username}`); console.log ('Commande clan faite');
       
       } catch (err) {console.log(err)} return
         
@@ -138,7 +138,7 @@ module.exports = {
           .setThumbnail()
           .setTimestamp()
       
-            interaction.channel.send({ embeds: [embed]}),console.log(`Clan: ${data.name} Chef: ${PseudoId.username}`), console.log ('Commande profil faite');
+            interaction.channel.send({ embeds: [embed]});console.log(`Clan: ${data.name} Chef: ${PseudoId.username}`); console.log ('Commande clan faite');
       
       } catch (err) {console.log(err)} return
 }}    
