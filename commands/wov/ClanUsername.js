@@ -82,7 +82,7 @@ module.exports = {
     }],
       runSlash: async(client, interaction) => {
         const nom = interaction.options.getString('clan');
-        var Mprofil= await interaction.channel.send({content:`Recherche du Clan intitulé: ${nom}...`, ephemeral:true, fetchReply: true})
+        var Mprofil= await interaction.reply({content:`Recherche du Clan intitulé: ${nom}...`, ephemeral:true, fetchReply: true})
         const profil = await superagent.get(`https://api.wolvesville.com/clans/search?name=${nom}`) 
           .set( 'Authorization', process.env.WOV_TOKEN)
           .set('Content-Type', 'application/json')
