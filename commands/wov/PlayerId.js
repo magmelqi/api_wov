@@ -4,23 +4,23 @@ const dotenv = require('dotenv'); dotenv.config();
 const axios = require('axios')
 
 module.exports = {
-    name: "profil",
+    name: "profilid",
     category: 'wov',
     permissions: ['SEND_MESSAGES'],
     ownerOnly: false,
-    usage: 'profil [Pseudo]',
-    examples: ['profil Hqrmonie'],
-    description: "Voir le profil du pseudo",
+    usage: 'profilid [PseudoId]',
+    examples: ['profilid 7511d3b4-0cbe-4c97-aff1-8328fac71b4e'],
+    description: "Voir le profil du pseudoId",
       run: async(client, message, args) => {
-        var nom = message.content.substring(8).trim()
+        var nom = message.content.substring(10).trim();
         var Mprofil= await message.channel.send(`Recherche du profil de ${nom}...`)
-        const profil = await superagent.get(`https://api.wolvesville.com/players/search?username=${nom}`) 
+        const profil = await superagent.get(`https://api.wolvesville.com/players/${nom}`) 
           .set( 'Authorization', process.env.WOV_TOKEN)
           .set('Content-Type', 'application/json')
           .set('Accept', 'application/json')
           .catch((err) => {
             if (err == "Error: Too Many Requests") {Mprofil.edit({content:"Erreur a la 1ère requête\n\`2ème tentatives en cours...\`"})}
-            else if (err == "Error: Not Found") {return Mprofil.edit({content:`Pseudo inexistant`})}
+            else if (err == "Error: Not Found") {return Mprofil.edit({content:`PseudoId inexistant`})}
             else {return Mprofil.edit({content:`Erreur: ${err}`})}});
             var objErr= JSON.stringify(profil);
 
@@ -31,7 +31,7 @@ module.exports = {
             .set('Accept', 'application/json')
             .catch((err) => {
               if (err == "Error: Too Many Requests") {return Mprofil.edit({content:"Veuillez retaper la commande, impossible de trouver le profil du joueur: \`Too Many Requests\`"})}
-              else if (err == "Error: Not Found") {return Mprofil.edit({content:`Pseudo inexistant`})}
+              else if (err == "Error: Not Found") {return Mprofil.edit({content:`PseudoId inexistant`})}
               else {return Mprofil.edit({content:`Erreur: ${err}`})}});
               var data = await profil.body} else {var data = await profil.body}
               if (data == undefined) return;
@@ -85,7 +85,7 @@ module.exports = {
   options:[
     {
         name: "pseudo",
-        description: "taper le pseudo pour voir son profil wov",
+        description: "taper l'id du joueur",
         type: "STRING",
         required: true,
     }],
