@@ -21,8 +21,8 @@ module.exports = {
         var objErr= JSON.stringify(Messageclan);
         if (objErr !== undefined) {message.channel.send(`Affichage en cours...`)}
 
-        setTimeout(async()=> {var objErr= JSON.stringify(Messageclan);
-        if (objErr == undefined) {console.log('yo')
+        
+        if (objErr == undefined) {await new Promise(resolve => setTimeout(resolve, 5000))
           const Messageclan = await superagent.get(`https://api.wolvesville.com/clans/${process.env.CLAN_ID}/members`)
         .set( 'Authorization', process.env.WOV_TOKEN)
         .set('Content-Type', 'application/json')
@@ -78,7 +78,7 @@ module.exports = {
 
       try {
       message.channel.send(`-Dernier update pour les xp du \`${timestampH}\` effectué à \`${InfoB.Heure}\``)
-    }catch (err) {}},5000)
+    }catch (err) {}
 
        },
        async runSlash(client, interaction) { 
@@ -92,8 +92,8 @@ module.exports = {
         var objErr= JSON.stringify(Messageclan);
         if (objErr !== undefined) {interaction.reply(`Affichage en cours...`)}
 
-        setTimeout(async()=> {var objErr= JSON.stringify(Messageclan);
-        if (objErr == undefined) {console.log('yo')
+       
+        if (objErr == undefined) {await new Promise(resolve => setTimeout(resolve, 5000))
           const Messageclan = await superagent.get(`https://api.wolvesville.com/clans/${process.env.CLAN_ID}/members`)
         .set( 'Authorization', process.env.WOV_TOKEN)
         .set('Content-Type', 'application/json')
@@ -148,7 +148,7 @@ module.exports = {
 
       try {
       interaction.channel.send(`-Dernier update pour les xp du \`${timestampH}\` effectué à \`${InfoB.Heure}\``)
-    }catch (err) {}}catch(err) {}},5000)
+    }catch (err) {}}catch(err) {}
       
 
        }

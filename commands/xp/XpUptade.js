@@ -21,8 +21,8 @@ module.exports = {
         var objErr= JSON.stringify(Messageclan);
         if (objErr !== undefined) {message.channel.send(`Calcul en cours...`)}
 
-        setTimeout(async()=> {var objErr= JSON.stringify(Messageclan);
-        if (objErr == undefined) {
+        
+        if (objErr == undefined) {await new Promise(resolve => setTimeout(resolve, 5000))
           const Messageclan = await superagent.get(`https://api.wolvesville.com/clans/${process.env.CLAN_ID}/members`)
         .set( 'Authorization', process.env.WOV_TOKEN)
         .set('Content-Type', 'application/json')
@@ -63,7 +63,7 @@ module.exports = {
         writeFileSync(`././Information/xp/Member-Id/${timestamp}/${data.playerId}.json`, objectToJson)
         writeFileSync(`././Information/xp/Member-Pseudo/${timestamp}/${data.username}.json`, objectToJson)
         const Xp = JSON.parse(readFileSync(`././Information/xp/Member-Id/${timestamp}/${data.playerId}.json`, 'utf-8')); console.log(Xp.Pseudo, Xp.Xp)
-     i= i}} catch (err) {}message.channel.send(`Update des xp de \`${i}\` membres`)},5000)
+     i= i}} catch (err) {}message.channel.send(`Update des xp de \`${i}\` membres`)
     },
 
     async runSlash(client, interaction) { 
@@ -77,8 +77,8 @@ module.exports = {
       var objErr= JSON.stringify(Messageclan);
       if (objErr !== undefined) {interaction.reply(`Calcul en cours...`)}
 
-      setTimeout(async()=> {var objErr= JSON.stringify(Messageclan);
-      if (objErr == undefined) {console.log('yo')
+      
+      if (objErr == undefined) {await new Promise(resolve => setTimeout(resolve, 5000))
         const Messageclan = await superagent.get(`https://api.wolvesville.com/clans/${process.env.CLAN_ID}/members`)
       .set( 'Authorization', process.env.WOV_TOKEN)
       .set('Content-Type', 'application/json')
@@ -118,6 +118,6 @@ module.exports = {
       writeFileSync(`././Information/xp/Member-Id/${timestamp}/${data.playerId}.json`, objectToJson)
       writeFileSync(`././Information/xp/Member-Pseudo/${timestamp}/${data.username}.json`, objectToJson)
       const Xp = JSON.parse(readFileSync(`././Information/xp/Member-Id/${timestamp}/${data.playerId}.json`, 'utf-8')); console.log(Xp.Pseudo, Xp.Xp)
-    var i = i}}catch(err){}interaction.channel.send(`Update des xp de \`${i}\` membres`)},5000)
+    var i = i}}catch(err){}interaction.channel.send(`Update des xp de \`${i}\` membres`)
   }
   }
