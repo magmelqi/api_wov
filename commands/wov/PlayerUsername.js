@@ -25,7 +25,7 @@ module.exports = {
 
           const CI1= data.clanId
         if (CI1 === undefined) {var PP = "Pas de clan"} 
-        else {
+        else {await new Promise(resolve => setTimeout(resolve, 5000))
         const ClanIdb = await superagent.get(`https://api.wolvesville.com/clans/${CI1}/info`)
         .set( 'Authorization', process.env.WOV_TOKEN)
         .set('Content-Type', 'application/json')
@@ -73,17 +73,18 @@ module.exports = {
             else if (err == "Error: Not Found") {return interaction.reply({content:`Pseudo inexistant`, ephemeral:true})}
             else {return interaction.reply(`Erreur: ${err}`)}}); 
           const data = await profil.body
-
+        
+          await interaction.reply({content:`Recherche du profil de ${nom}, veuillez patienter`, ephemeral: true})
           const CI1= data.clanId
         if (CI1 === undefined) {var PP = "Pas de clan"} 
-        else {
+        else {await new Promise(resolve => setTimeout(resolve, 5000))
         const ClanIdb = await superagent.get(`https://api.wolvesville.com/clans/${CI1}/info`)
         .set( 'Authorization', process.env.WOV_TOKEN)
         .set('Content-Type', 'application/json')
         .set('Accept', 'application/json')
         .catch((err) => {
-          if (err == "Error: Too Many Requests") {return interaction.reply({content:"Veuillez retaper la commande", ephemeral:true})}
-          else {return interaction.reply({content:`Erreur ${err}`, ephemeral:true})}}); 
+          if (err == "Error: Too Many Requests") {return interaction.followUp({content:"Veuillez retaper la commande", ephemeral:true})}
+          else {return interaction.followUp({content:`Erreur ${err}`, ephemeral:true})}});
         const ClanId = await ClanIdb.text;
         var CNb= /name/g
         var CNf= /","description/g
@@ -101,7 +102,7 @@ module.exports = {
           .setImage(`${data.equippedAvatar.url}`)
           .setTimestamp()
       
-            await interaction.reply({ embeds: [embed]}),console.log(`Pseudo: ${nom} Clan: ${CN1 ?? "Pas de clan"}`), console.log ('Commande profil faite');
+            await interaction.channel.send({embeds: [embed] });console.log(`Pseudo: ${nom} Clan: ${CN1 ?? "Pas de clan"}`), console.log ('Commande profil faite');
       
       } catch (err) {console.log(err)} return
 }}    

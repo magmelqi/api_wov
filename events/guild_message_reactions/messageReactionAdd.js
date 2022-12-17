@@ -69,6 +69,8 @@ module.exports = {
 
 
         const logChannel = client.channels.cache.get('1044258472121860126');
+        const regleChannel = client.channels.cache.get('817787093182054430');
+        const evieChannel = client.channels.cache.get('992016663698473050');
 
         if (emojiName === '') {logChannel.send({ embeds: [embedP]}), member.send('Vous voulez participer  la quête gemme !')}
         if (emojiName === '') {logChannel.send({ embeds: [embedN]}), member.send('Vous ne voulez pas participer  la quête gemme !')}
@@ -81,14 +83,23 @@ module.exports = {
 
         if (emojiName === '') {logChannel.send({ embeds: [embedPOr3]}), member.send('Vous voulez participer  la quête OR 3 !')}
         if (emojiName === '') {logChannel.send({ embeds: [embedNOr3]}), member.send('Vous ne voulez pas participer  la quête OR 3 !')}
-
-        if (emojiName === '✅') {logChannel.send(`Veut participer: ${name}`)
-        console.log(name)
+        console.log(message.channel.id)
+        if (emojiName === '✅') {
+            if (name == "🍪Evie_" && message.channel.id == '817761804041322536' || message.channel.id == '994618797363306496' || message.channel.id == '1005050826777182269') {evieChannel.send(`${name} vient de claim un perso 👀`)} 
+            if (message.channel.id == '724216612206542889'){regleChannel.send(`${name} a accepté les règles.`)}};
+            if (emojiName === '👀') {console.log('if');if (message.channel.id === '1044258472121860126') {logChannel.send(`${name} a accepté les règles.`)}}
+         
+      
+         if (emojiName === '☑️' && message.channel.id == '817290280242774036') {
+                                console.log(name)
         const Username = await superagent.get(`https://api.wolvesville.com/players/search?username=${name}`)
         .set( 'Authorization', process.env.WOV_TOKEN)
         .set('Content-Type', 'application/json')
         .set('Accept', 'application/json')
-        .catch((err) => {return message.channel.send(`Le pseudo: "${nom}" n'existe pas.\nou ${err}`)}); 
+        .catch((err) => {
+            if (err == "Error: Too Many Requests") {return message.channel.send("Veuillez réagir une nouvelle fois")}
+            else if (err == "Error: Not Found") {return message.channel.send(`Pseudo inexistant`)}
+            else {return message.channel.send(`Erreur: ${err}`)}}); 
         const User = await Username.body
         const UserId=JSON.stringify(User); 
         var idn = UserId.slice(7, 43); var idn1 = idn.trim(); console.log(idn)
@@ -98,7 +109,9 @@ module.exports = {
         .set( 'Authorization', process.env.WOV_TOKEN)
         .set('Content-Type', 'application/json')
         .set('Accept', 'application/json')
-        .catch((err) => {return message.channel.send(`${nom} n'est pas présent(e) dans le clan\nou ${err}`)}); 
+        .catch((err) => {
+          if (err == "Error: Too Many Requests") {return message.channel.send("Veuillez réagir une nouvelle fois")}
+          else {return message.channel.send(`Erreur: ${err}`)}}); 
         const Clan = await Quests.body
         const obj=JSON.stringify(Clan); 
        
