@@ -12,7 +12,7 @@ module.exports = {
     description: 'Voir les clans affiliés au bot',
       run: async(client, message, args) => {
         const Mprofil = await message.channel.send('Recherche en cours...')
-        const Clanauthorized = await superagent.get('https://api.wolvesville.com/clans/authorized/')
+        var Clanauthorized = await superagent.get('https://api.wolvesville.com/clans/authorized/')
         .set( 'Authorization', process.env.WOV_TOKEN)
         .set('Content-Type', 'application/json')
         .set('Accept', 'application/json')
@@ -24,12 +24,12 @@ module.exports = {
         
         var i = 2
         while (objErr == undefined) {await new Promise(resolve => setTimeout(resolve, 1000))
-          const Clanauthorized = await superagent.get('https://api.wolvesville.com/clans/authorized/')
+          var Clanauthorized = await superagent.get('https://api.wolvesville.com/clans/authorized/')
         .set( 'Authorization', process.env.WOV_TOKEN)
         .set('Content-Type', 'application/json')
         .set('Accept', 'application/json')
         .catch((err) =>  {
-          if (err == "Error: Too Many Requests") {return Mprofil.edit({content:`Erreur, tentatives: \`${i}\``})}
+          if (err == "Error: Too Many Requests") {Mprofil.edit({content:`Erreur, tentatives: \`${i}\``})}
         else {return Mprofil.edit({content:`Erreur: ${err}`})}});
         var objErr= JSON.stringify(Clanauthorized);
          try {var obj= await Clanauthorized.text}catch(err) {}; var i = i+1} 
@@ -37,7 +37,7 @@ module.exports = {
         const emebed = new MessageEmbed()
         .setTitle('Clan connecté au bot:')
         .setColor('WHITE')
-
+        
         for (var i=0; Clanauthorized.body[i] !== undefined;i++) {var i =i;
         var fin = /"memberCount":/g; var finR = obj.search(fin);var test = obj.slice(finR+16,finR+17);
         if (test == "}") {var finS = obj.slice(1, finR+17)} else {obj.slice(1, fin+16)};
@@ -71,7 +71,7 @@ module.exports = {
     .set('Content-Type', 'application/json')
     .set('Accept', 'application/json')
     .catch((err) =>  {
-      if (err == "Error: Too Many Requests") {return interaction.editReply({content:`Erreur, tentatives: \`${i}\``, ephemeral:true})}
+      if (err == "Error: Too Many Requests") {interaction.editReply({content:`Erreur, tentatives: \`${i}\``, ephemeral:true})}
     else {return interaction.editReply({content:`Erreur: ${err}`, ephemeral:true})}});
     var objErr= JSON.stringify(Clanauthorized);
     try { var obj= await Clanauthorized.text}catch(err) {}; var i = i+1} 
@@ -80,7 +80,8 @@ module.exports = {
     .setTitle('Clan connecté au bot:')
     .setColor('WHITE')
 
-    for (var i=0; Clanauthorized.body[i] !== undefined;i++) {var i =i;
+    
+    for (var i=0;Clanauthorized.body[i] !== undefined;i++) {var i =i;
     var fin = /"memberCount":/g; var finR = obj.search(fin);var test = obj.slice(finR+16,finR+17);
     if (test == "}") {var finS = obj.slice(1, finR+17)} else {obj.slice(1, fin+16)};
 
