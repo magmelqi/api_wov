@@ -23,23 +23,25 @@ module.exports = {
             else {return Mprofil.edit({content:`Erreur: ${err}`})}});
             var objErr= JSON.stringify(profil);
 
-            if (objErr == undefined) {await new Promise(resolve => setTimeout(resolve, 5000))
+            var i = 2
+            while (objErr == undefined) {await new Promise(resolve => setTimeout(resolve, 1000))
               const profil = await superagent.get(`https://api.wolvesville.com/players/search?username=${nom}`)
             .set( 'Authorization', process.env.WOV_TOKEN)
             .set('Content-Type', 'application/json')
             .set('Accept', 'application/json')
             .catch((err) => {
-              if (err == "Error: Too Many Requests") {return Mprofil.edit({content:"Veuillez retaper la commande, impossible de trouver le profil du joueur: \`Too Many Requests\`"})}
+              if (err == "Error: Too Many Requests") {Mprofil.edit({content: `Erreur sur la recherche du \`profil\`, tentatives: \`${i}\``})}
               else if (err == "Error: Not Found") {return Mprofil.edit({content:`Pseudo inexistant`})}
               else {return Mprofil.edit({content:`Erreur: ${err}`})}});
-              var data = await profil.body} else {var data = await profil.body}
-              if (data == undefined) return;
+              var objErr= JSON.stringify(profil);
+              try {var data = await profil.body}catch(err) {}; var i = i+1}
+
               if (data !== undefined) {
           await Mprofil.edit({content: `Recherche du profil de ${nom} réussi\nRecherche du clan de ${nom}, veuillez patienter` })}
 
-          const CI1= data.clanId
+          try {var CI1= data.clanId}catch(err) {}
         if (CI1 === undefined) {var PP = "Pas de clan"} 
-        else {await new Promise(resolve => setTimeout(resolve, 5000))
+        else {await new Promise(resolve => setTimeout(resolve, 2000))
         const ClanIdb = await superagent.get(`https://api.wolvesville.com/clans/${CI1}/info`)
         .set( 'Authorization', process.env.WOV_TOKEN)
         .set('Content-Type', 'application/json')
@@ -49,15 +51,17 @@ module.exports = {
           else {return Mprofil.edit({content: `Erreur: ${err}`})}}); 
           var objErr= JSON.stringify(ClanIdb);
 
-          if (objErr == undefined) {await new Promise(resolve => setTimeout(resolve, 5000))
+          var i = 2
+          while (objErr == undefined) {await new Promise(resolve => setTimeout(resolve, 1000))
             const ClanIdb = await superagent.get(`https://api.wolvesville.com/clans/${CI1}/info`)
           .set( 'Authorization', process.env.WOV_TOKEN)
           .set('Content-Type', 'application/json')
           .set('Accept', 'application/json')
           .catch((err) => {
-            if (err == "Error: Too Many Requests") {return Mprofil.edit({content: "Veuillez retaper la commande, impossible de trouver le clan du joueur: \`Too Many Requests\`"})}
+            if (err == "Error: Too Many Requests") {Mprofil.edit({content: `Erreur sur la recherche du \`clan\`, tentatives: \`${i}\``})}
             else {return Mprofil.edit({content: `Erreur: ${err}`})}}); 
-           var ClanId = await ClanIdb.text;} else {var ClanId = await ClanIdb.text;}
+            var objErr= JSON.stringify(ClanIdb);
+            try {var ClanId = await ClanIdb.text}catch(err) {}; var i = i+1} 
 
 
         var CNb= /name/g
@@ -90,7 +94,7 @@ module.exports = {
     }],
       runSlash: async(client, interaction) => {
         const nom = interaction.options.getString('pseudo');
-        var Mprofil= await interaction.reply({content:`Recherche du profil de ${nom}...`, ephemeral:true,fetchReply: true})
+        await interaction.reply({content:`Recherche du profil de ${nom}...`, ephemeral:true,fetchReply: true})
         const profil = await superagent.get(`https://api.wolvesville.com/players/search?username=${nom}`) 
         .set( 'Authorization', process.env.WOV_TOKEN)
         .set('Content-Type', 'application/json')
@@ -101,23 +105,24 @@ module.exports = {
           else {return interaction.editReply({content:`Erreur: ${err}`, ephemeral: true})}});
           var objErr= JSON.stringify(profil);
 
-          if (objErr == undefined) {await new Promise(resolve => setTimeout(resolve, 5000))
+          var i = 2
+          while (objErr == undefined) {await new Promise(resolve => setTimeout(resolve, 1000))
             const profil = await superagent.get(`https://api.wolvesville.com/players/search?username=${nom}`)
           .set( 'Authorization', process.env.WOV_TOKEN)
           .set('Content-Type', 'application/json')
           .set('Accept', 'application/json')
           .catch((err) => {
-            if (err == "Error: Too Many Requests") {return interaction.editReply({content:"Veuillez retaper la commande, impossible de trouver le profil du joueur: \`Too Many Requests\`", ephemeral:true})}
+            if (err == "Error: Too Many Requests") {interaction.editReply({content:`Erreur sur la recherche du \`profil\`, tentatives: \`${i}\``, ephemeral:true})}
             else if (err == "Error: Not Found") {return interaction.editReply({content:`Pseudo inexistant`, ephemeral:true})}
             else {return interaction.editReply({content:`Erreur: ${err}`, ephemeral:true})}});
-            var data = await profil.body} else {var data = await profil.body}
-            
-            if (data == undefined) return;
+            var objErr= JSON.stringify(profil);
+            try {var data = await profil.body}catch(err) {}; var i = i+1} 
+
             if (data !== undefined)
-          await interaction.editReply({content: `Recherche du profil de ${nom} réussi\nRecherche du clan de ${nom}, veuillez patienter`, ephemeral: true})
-          const CI1= data.clanId
+            {await interaction.editReply({content: `Recherche du profil de ${nom} réussi\nRecherche du clan de ${nom}, veuillez patienter`, ephemeral: true})}
+         try{ var CI1= data.clanId }catch(err) {}
         if (CI1 === undefined) {var PP = "Pas de clan"} 
-        else {await new Promise(resolve => setTimeout(resolve, 5000))
+        else {await new Promise(resolve => setTimeout(resolve, 2000))
         const ClanIdb = await superagent.get(`https://api.wolvesville.com/clans/${CI1}/info`)
         .set( 'Authorization', process.env.WOV_TOKEN)
         .set('Content-Type', 'application/json')
@@ -127,15 +132,17 @@ module.exports = {
           else {return interaction.editReply({content:`Erreur ${err}`, ephemeral:true})}});
           var objErr= JSON.stringify(ClanIdb);
 
-          if (objErr == undefined) {await new Promise(resolve => setTimeout(resolve, 5000))
+          var i = 2
+          while (objErr == undefined) {await new Promise(resolve => setTimeout(resolve, 1000))
             const ClanIdb = await superagent.get(`https://api.wolvesville.com/clans/${CI1}/info`)
           .set( 'Authorization', process.env.WOV_TOKEN)
           .set('Content-Type', 'application/json')
           .set('Accept', 'application/json')
           .catch((err) => {
-            if (err == "Error: Too Many Requests") {return interaction.editReply({content: "Veuillez retaper la commande, impossible de trouver le clan du joueur: \`Too Many Requests\`"})}
-            else {return interaction.editReply({content: `Erreur: ${err}`})}}); 
-           var ClanId = await ClanIdb.text;} else {var ClanId = await ClanIdb.text;}
+            if (err == "Error: Too Many Requests") {interaction.editReply({content: `Erreur sur la recherche du \`clan\`, tentatives: \`${i}\``})}
+            else {return interaction.editReply({content: `Erreur: ${err}`})}});
+            var objErr= JSON.stringify(ClanIdb);
+            try {var ClanId = await ClanIdb.text}catch(err) {};var i = i+1} 
 
 
 

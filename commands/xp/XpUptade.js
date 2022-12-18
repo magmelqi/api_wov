@@ -12,23 +12,29 @@ module.exports = {
     examples: ['xpadd'],
     description: 'Actualise les xp des membres',
        async run (client, message, args) {
+         const tryRequests = await message.channel.send('Requête en cours')
         const Messageclan = await superagent.get(`https://api.wolvesville.com/clans/${process.env.CLAN_ID}/members`)
         .set( 'Authorization', process.env.WOV_TOKEN)
         .set('Content-Type', 'application/json')
         .set('Accept', 'application/json')
-        .catch((err) => {message.channel.send(`Erreur a la 1ère requête\n\`2ème tentatives en cours...\``); console.log(err)}); 
+        .catch((err) => {
+          if (err == "Error: Too Many Requests") {tryRequests.edit({content:`Erreur a la 1ère requête\n\`2ème tentatives en cours...\``})} 
+          else {tryRequests.edit({content:`Erreur: ${err}`});return console.log(err)}}); 
         console.log ('Commande xpadd faite');
         var objErr= JSON.stringify(Messageclan);
-        if (objErr !== undefined) {message.channel.send(`Calcul en cours...`)}
+        if (objErr !== undefined) {tryRequests.edit({content:`Calcul en cours...`})}
 
-        
-        if (objErr == undefined) {await new Promise(resolve => setTimeout(resolve, 5000))
+        var i =2
+        while (objErr == undefined) {await new Promise(resolve => setTimeout(resolve, 1000))
           const Messageclan = await superagent.get(`https://api.wolvesville.com/clans/${process.env.CLAN_ID}/members`)
         .set( 'Authorization', process.env.WOV_TOKEN)
         .set('Content-Type', 'application/json')
         .set('Accept', 'application/json')
-        .catch((err) => {message.channel.send(`Erreur ${err} `);return console.log(err)}); 
-        var text= Messageclan.text;} else {var text= Messageclan.text}
+        .catch((err) => {
+          if (err == "Error: Too Many Requests") {tryRequests.edit({content:`Erreur, tentatives: \`${i}\` `})}
+          else {tryRequests.edit({content:`Erreur: ${err}`});return console.log(err)};});
+        var objErr= JSON.stringify(Messageclan)
+        try{var text= Messageclan.text}catch(err) {};var i = i+1} 
     
     
         const timestamp = `${dayjs().add(-1, 'hour').format("DD-MM-YYYY")}`; 
@@ -63,7 +69,7 @@ module.exports = {
         writeFileSync(`././Information/xp/Member-Id/${timestamp}/${data.playerId}.json`, objectToJson)
         writeFileSync(`././Information/xp/Member-Pseudo/${timestamp}/${data.username}.json`, objectToJson)
         const Xp = JSON.parse(readFileSync(`././Information/xp/Member-Id/${timestamp}/${data.playerId}.json`, 'utf-8')); console.log(Xp.Pseudo, Xp.Xp)
-     i= i}} catch (err) {}message.channel.send(`Update des xp de \`${i}\` membres`)
+     i= i}} catch (err) {}message.channel.send({content:`Update des xp de \`${i}\` membres`})
     },
 
     async runSlash(client, interaction) { 
@@ -72,19 +78,24 @@ module.exports = {
       .set( 'Authorization', process.env.WOV_TOKEN)
       .set('Content-Type', 'application/json')
       .set('Accept', 'application/json')
-      .catch((err) => {interaction.reply({content:`Erreur a la 1ère requête\n\`2ème tentaives en cours...\``, ephemeral:true}); console.log(err)}); 
+      .catch((err) => {
+        if (err == "Error: Too Many Requests") {interaction.reply({content:`Erreur a la 1ère requête\n\`2ème tentaives en cours...\``, ephemeral:true})}
+        else{interaction.reply({content:`Erreur: ${err}`, ephemeral:true}); return console.log(err)}}); 
       console.log ('Commande xpadd fait'); 
       var objErr= JSON.stringify(Messageclan);
       if (objErr !== undefined) {interaction.reply(`Calcul en cours...`)}
 
-      
-      if (objErr == undefined) {await new Promise(resolve => setTimeout(resolve, 5000))
+      var i = 2
+      while (objErr == undefined) {await new Promise(resolve => setTimeout(resolve, 1000))
         const Messageclan = await superagent.get(`https://api.wolvesville.com/clans/${process.env.CLAN_ID}/members`)
       .set( 'Authorization', process.env.WOV_TOKEN)
       .set('Content-Type', 'application/json')
       .set('Accept', 'application/json')
-      .catch((err) => {interaction.followUp({content:`Erreur a la 2ème requêtes\n\`3ème tentaives en cours...\` Ah bah il y en a pas flemme de mettre une 3ème requêtes`, ephemeral:true});return console.log(err)}); 
-      var text= Messageclan.text} else {var text= Messageclan.text}
+      .catch((err) => {
+        if (err == "Error: Too Many Requests") {interaction.editReply({content:`Erreur, tentatives: \`${i}\` `, ephemeral:true})}
+        else {interaction.editReply({content:`Erreur: ${err}`, ephemeral:true});return console.log(err)};});
+      var objErr= JSON.stringify(Messageclan);
+      try {var text= Messageclan.text}catch(err) {}; var i = i+1} 
 
   
       const timestamp = `${dayjs().add(-1, 'hour').format("DD-MM-YYYY")}`; 

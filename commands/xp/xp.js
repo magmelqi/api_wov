@@ -23,6 +23,8 @@ module.exports = {
         .setTitle(`XP-${timestamp}`)
         .setColor('WHITE')
         .setDescription(`Xp du ${timestampH} au ${timestamp} -> 2000xp\nXp du ${timestampA} au ${timestamp} -> 1000xp`)
+        .setThumbnail()
+        .setTimestamp()
         try {
           for(let i=0; i < xpPseudoTT.length; i++)  {
             
@@ -82,6 +84,8 @@ module.exports = {
          .setTitle(`XP-${timestamp}`)
          .setColor('WHITE')
          .setDescription(`Xp du ${timestampH} au ${timestamp} -> 2000xp\nXp du ${timestampA} au ${timestamp} -> 1000xp`)
+         .setThumbnail()
+         .setTimestamp()
          try {
            for(let i=0; i < xpPseudoTT.length; i++)  {
              

@@ -9,8 +9,8 @@ module.exports = {
 
         Logger.client(`- prêt à être utilisé par ${usersCount} utilisateurs sur ${guildsCount.size} serveur`);
 
-        client.user.setPresence({ activities: [{ name: 'Wolvesville', type: 'PLAYING'}], status: 'online'}) //dnd, invisible, online, idle
-
+        client.user.setPresence({ activities: [{ name: 'les bêtises de magmelqi', type: 'WATCHING'}], status: 'online'}) //dnd, invisible, online, idle
+    // WATCHING PLAYING
         const devGuild = await client.guilds.cache.get('559352487430193180');
         devGuild.commands.set(client.commands.map(cmd => cmd));
         const devGuild2 = await client.guilds.cache.get('724207157419180062',);
