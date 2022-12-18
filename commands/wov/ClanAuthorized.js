@@ -21,16 +21,18 @@ module.exports = {
         else {return Mprofil.edit({content:`Erreur: ${err}`})}}); 
         console.log ('Commande bot fait');
         var objErr= JSON.stringify(Clanauthorized);
-
-        if (objErr == undefined) {await new Promise(resolve => setTimeout(resolve, 5000))
+        
+        var i = 2
+        while (objErr == undefined) {await new Promise(resolve => setTimeout(resolve, 1000))
           const Clanauthorized = await superagent.get('https://api.wolvesville.com/clans/authorized/')
         .set( 'Authorization', process.env.WOV_TOKEN)
         .set('Content-Type', 'application/json')
         .set('Accept', 'application/json')
         .catch((err) =>  {
-          if (err == "Error: Too Many Requests") {return Mprofil.edit({content:"Veuillez retaper la commande, impossible de trouver les clans affilés au bot \`Too Many Requests\`"})}
-        else {return Mprofil.edit({content:`Erreur: ${err}`})}}); 
-         var obj= await Clanauthorized.text;} else { var obj= await Clanauthorized.text;}
+          if (err == "Error: Too Many Requests") {return Mprofil.edit({content:`Erreur, tentatives: \`${i}\``})}
+        else {return Mprofil.edit({content:`Erreur: ${err}`})}});
+        var objErr= JSON.stringify(Clanauthorized);
+         try {var obj= await Clanauthorized.text}catch(err) {}; var i = i+1} 
 
         const emebed = new MessageEmbed()
         .setTitle('Clan connecté au bot:')
@@ -62,15 +64,17 @@ module.exports = {
     console.log ('Commande bot fait');
     var objErr= JSON.stringify(Clanauthorized);
 
-    if (objErr == undefined) {await new Promise(resolve => setTimeout(resolve, 5000))
+    var i =2
+    while (objErr == undefined) {await new Promise(resolve => setTimeout(resolve, 1000))
       const Clanauthorized = await superagent.get('https://api.wolvesville.com/clans/authorized/')
     .set( 'Authorization', process.env.WOV_TOKEN)
     .set('Content-Type', 'application/json')
     .set('Accept', 'application/json')
     .catch((err) =>  {
-      if (err == "Error: Too Many Requests") {return interaction.editReply({content:"Veuillez retaper la commande, impossible de trouver les clans affilés au bot \`Too Many Requests\`", ephemeral:true})}
-    else {return interaction.editReply({content:`Erreur: ${err}`, ephemeral:true})}}); 
-     var obj= await Clanauthorized.text;} else { var obj= await Clanauthorized.text;}
+      if (err == "Error: Too Many Requests") {return interaction.editReply({content:`Erreur, tentatives: \`${i}\``, ephemeral:true})}
+    else {return interaction.editReply({content:`Erreur: ${err}`, ephemeral:true})}});
+    var objErr= JSON.stringify(Clanauthorized);
+    try { var obj= await Clanauthorized.text}catch(err) {}; var i = i+1} 
 
     const emebed = new MessageEmbed()
     .setTitle('Clan connecté au bot:')
