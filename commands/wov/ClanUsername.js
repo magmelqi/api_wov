@@ -33,13 +33,14 @@ module.exports = {
               if (err == "Error: Too Many Requests") { Mprofil.edit({content:`Erreur sur la recherche du \`clan\`, tentatives: \`${i}\``})}
               else if (err == "Error: Not Found") {return Mprofil.edit({content:`Clan inexistant`})}
               else {return Mprofil.edit({content:`Erreur: ${err}`})}});
+              var objErr= JSON.stringify(profil);
               try {var data = await profil.body[0]}catch(err) {}; var i = i+1}
               
               if (data !== undefined) {
           await Mprofil.edit({content: `Recherche du Clan intitulé ${data.name} réussi\nRecherche du Chef de ${data.name}, veuillez patienter` })}
 
           const CI1= data.leaderId; 
-        await new Promise(resolve => setTimeout(resolve, 5000))
+        await new Promise(resolve => setTimeout(resolve, 2000))
         const PseudoIdb = await superagent.get(`https://api.wolvesville.com/players/${CI1}`)
         .set( 'Authorization', process.env.WOV_TOKEN)
         .set('Content-Type', 'application/json')
@@ -50,14 +51,15 @@ module.exports = {
           var objErr= JSON.stringify(PseudoIdb);
 
           var i =2
-          while (objErr == undefined) {await new Promise(resolve => setTimeout(resolve, 5000))
+          while (objErr == undefined) {await new Promise(resolve => setTimeout(resolve, 1000))
             const PseudoIdb = await superagent.get(`https://api.wolvesville.com/players/${CI1}`)
           .set( 'Authorization', process.env.WOV_TOKEN)
           .set('Content-Type', 'application/json')
           .set('Accept', 'application/json')
           .catch((err) => {
             if (err == "Error: Too Many Requests") {Mprofil.edit({content: `Erreur sur la recherche du \`chef\`, tentatives: \`${i}\``})}
-            else {return Mprofil.edit({content: `Erreur: ${err}`})}}); 
+            else {return Mprofil.edit({content: `Erreur: ${err}`})}});
+            var objErr= JSON.stringify(PseudoIdb);
            try {var PseudoId = await PseudoIdb.body}catch(err) {}; var i = i+1} 
 
 
@@ -105,6 +107,7 @@ module.exports = {
               if (err == "Error: Too Many Requests") {interaction.editReply({content:`Erreur sur la recherche du \`clan\`, tentatives: \`${i}\``})}
               else if (err == "Error: Not Found") {return interaction.editReply({content:`Clan inexistant`})}
               else {return interaction.editReply({content:`Erreur: ${err}`})}});
+              var objErr= JSON.stringify(profil);
               try {var data = await profil.body[0]}catch(err) {}; var i = i+1} 
 
               if (data !== undefined) {
@@ -129,7 +132,8 @@ module.exports = {
           .set('Accept', 'application/json')
           .catch((err) => {
             if (err == "Error: Too Many Requests") {interaction.editReply({content: `Erreur sur la recherche du \`chef\`, tentatives: \`${i}\``})}
-            else {return interaction.editReply({content: `Erreur: ${err}`})}}); 
+            else {return interaction.editReply({content: `Erreur: ${err}`})}});
+            var objErr= JSON.stringify(PseudoIdb); 
            try {var PseudoId = await PseudoIdb.body}catch(err) {}; var i =i+1}
 
 
