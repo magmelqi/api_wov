@@ -13,7 +13,7 @@ module.exports = {
       run: async(client, message, args) => {
         var nom = message.content.substring(5).trim(); 
         var Mprofil= await message.channel.send(`Recherche du Clan intitulé: ${nom}...`)
-        const profil = await superagent.get(`https://api.wolvesville.com/clans/search?name=${nom}`) 
+        var profil = await superagent.get(`https://api.wolvesville.com/clans/search?name=${nom}`) 
           .set( 'Authorization', process.env.WOV_TOKEN)
           .set('Content-Type', 'application/json')
           .set('Accept', 'application/json')
@@ -25,7 +25,7 @@ module.exports = {
 
             var i =2
             while (objErr == undefined) {await new Promise(resolve => setTimeout(resolve, 1000))
-              const profil = await superagent.get(`https://api.wolvesville.com/clans/search?name=${nom}`)
+              var profil = await superagent.get(`https://api.wolvesville.com/clans/search?name=${nom}`)
             .set( 'Authorization', process.env.WOV_TOKEN)
             .set('Content-Type', 'application/json')
             .set('Accept', 'application/json')
@@ -41,7 +41,7 @@ module.exports = {
 
           const CI1= data.leaderId; 
         await new Promise(resolve => setTimeout(resolve, 2000))
-        const PseudoIdb = await superagent.get(`https://api.wolvesville.com/players/${CI1}`)
+        var PseudoIdb = await superagent.get(`https://api.wolvesville.com/players/${CI1}`)
         .set( 'Authorization', process.env.WOV_TOKEN)
         .set('Content-Type', 'application/json')
         .set('Accept', 'application/json')
@@ -52,7 +52,7 @@ module.exports = {
 
           var i =2
           while (objErr == undefined) {await new Promise(resolve => setTimeout(resolve, 1000))
-            const PseudoIdb = await superagent.get(`https://api.wolvesville.com/players/${CI1}`)
+            var PseudoIdb = await superagent.get(`https://api.wolvesville.com/players/${CI1}`)
           .set( 'Authorization', process.env.WOV_TOKEN)
           .set('Content-Type', 'application/json')
           .set('Accept', 'application/json')
@@ -87,7 +87,7 @@ module.exports = {
       runSlash: async(client, interaction) => {
         const nom = interaction.options.getString('clan');
         var Mprofil= await interaction.reply({content:`Recherche du Clan intitulé: ${nom}...`, ephemeral:true, fetchReply: true})
-        const profil = await superagent.get(`https://api.wolvesville.com/clans/search?name=${nom}`) 
+        var profil = await superagent.get(`https://api.wolvesville.com/clans/search?name=${nom}`) 
           .set( 'Authorization', process.env.WOV_TOKEN)
           .set('Content-Type', 'application/json')
           .set('Accept', 'application/json')
@@ -99,7 +99,7 @@ module.exports = {
 
             var i =2
             while (objErr == undefined) {await new Promise(resolve => setTimeout(resolve, 1000))
-              const profil = await superagent.get(`https://api.wolvesville.com/clans/search?name=${nom}`)
+              var profil = await superagent.get(`https://api.wolvesville.com/clans/search?name=${nom}`)
             .set( 'Authorization', process.env.WOV_TOKEN)
             .set('Content-Type', 'application/json')
             .set('Accept', 'application/json')
@@ -115,7 +115,7 @@ module.exports = {
 
           const CI1= data.leaderId; 
         await new Promise(resolve => setTimeout(resolve, 2000))
-        const PseudoIdb = await superagent.get(`https://api.wolvesville.com/players/${CI1}`)
+        var PseudoIdb = await superagent.get(`https://api.wolvesville.com/players/${CI1}`)
         .set( 'Authorization', process.env.WOV_TOKEN)
         .set('Content-Type', 'application/json')
         .set('Accept', 'application/json')
@@ -126,7 +126,7 @@ module.exports = {
 
           var i =2
           while (objErr == undefined) {await new Promise(resolve => setTimeout(resolve, 1000))
-            const PseudoIdb = await superagent.get(`https://api.wolvesville.com/players/${CI1}`)
+            var PseudoIdb = await superagent.get(`https://api.wolvesville.com/players/${CI1}`)
           .set( 'Authorization', process.env.WOV_TOKEN)
           .set('Content-Type', 'application/json')
           .set('Accept', 'application/json')

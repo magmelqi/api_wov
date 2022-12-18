@@ -13,7 +13,7 @@ module.exports = {
       run: async(client, message, args) => {
         var nom = message.content.substring(8).trim()
         var Mprofil= await message.channel.send(`Recherche du profil de ${nom}...`)
-        const profil = await superagent.get(`https://api.wolvesville.com/players/search?username=${nom}`) 
+        var profil = await superagent.get(`https://api.wolvesville.com/players/search?username=${nom}`) 
           .set( 'Authorization', process.env.WOV_TOKEN)
           .set('Content-Type', 'application/json')
           .set('Accept', 'application/json')
@@ -25,7 +25,7 @@ module.exports = {
 
             var i = 2
             while (objErr == undefined) {await new Promise(resolve => setTimeout(resolve, 1000))
-              const profil = await superagent.get(`https://api.wolvesville.com/players/search?username=${nom}`)
+              var profil = await superagent.get(`https://api.wolvesville.com/players/search?username=${nom}`)
             .set( 'Authorization', process.env.WOV_TOKEN)
             .set('Content-Type', 'application/json')
             .set('Accept', 'application/json')
@@ -42,7 +42,7 @@ module.exports = {
           try {var CI1= data.clanId}catch(err) {}
         if (CI1 === undefined) {var PP = "Pas de clan"} 
         else {await new Promise(resolve => setTimeout(resolve, 2000))
-        const ClanIdb = await superagent.get(`https://api.wolvesville.com/clans/${CI1}/info`)
+        var ClanIdb = await superagent.get(`https://api.wolvesville.com/clans/${CI1}/info`)
         .set( 'Authorization', process.env.WOV_TOKEN)
         .set('Content-Type', 'application/json')
         .set('Accept', 'application/json')
@@ -53,7 +53,7 @@ module.exports = {
 
           var i = 2
           while (objErr == undefined) {await new Promise(resolve => setTimeout(resolve, 1000))
-            const ClanIdb = await superagent.get(`https://api.wolvesville.com/clans/${CI1}/info`)
+            var ClanIdb = await superagent.get(`https://api.wolvesville.com/clans/${CI1}/info`)
           .set( 'Authorization', process.env.WOV_TOKEN)
           .set('Content-Type', 'application/json')
           .set('Accept', 'application/json')
@@ -95,7 +95,7 @@ module.exports = {
       runSlash: async(client, interaction) => {
         const nom = interaction.options.getString('pseudo');
         await interaction.reply({content:`Recherche du profil de ${nom}...`, ephemeral:true,fetchReply: true})
-        const profil = await superagent.get(`https://api.wolvesville.com/players/search?username=${nom}`) 
+        var profil = await superagent.get(`https://api.wolvesville.com/players/search?username=${nom}`) 
         .set( 'Authorization', process.env.WOV_TOKEN)
         .set('Content-Type', 'application/json')
         .set('Accept', 'application/json')
@@ -107,7 +107,7 @@ module.exports = {
 
           var i = 2
           while (objErr == undefined) {await new Promise(resolve => setTimeout(resolve, 1000))
-            const profil = await superagent.get(`https://api.wolvesville.com/players/search?username=${nom}`)
+            var profil = await superagent.get(`https://api.wolvesville.com/players/search?username=${nom}`)
           .set( 'Authorization', process.env.WOV_TOKEN)
           .set('Content-Type', 'application/json')
           .set('Accept', 'application/json')
@@ -123,7 +123,7 @@ module.exports = {
          try{ var CI1= data.clanId }catch(err) {}
         if (CI1 === undefined) {var PP = "Pas de clan"} 
         else {await new Promise(resolve => setTimeout(resolve, 2000))
-        const ClanIdb = await superagent.get(`https://api.wolvesville.com/clans/${CI1}/info`)
+        var ClanIdb = await superagent.get(`https://api.wolvesville.com/clans/${CI1}/info`)
         .set( 'Authorization', process.env.WOV_TOKEN)
         .set('Content-Type', 'application/json')
         .set('Accept', 'application/json')
@@ -134,7 +134,7 @@ module.exports = {
 
           var i = 2
           while (objErr == undefined) {await new Promise(resolve => setTimeout(resolve, 1000))
-            const ClanIdb = await superagent.get(`https://api.wolvesville.com/clans/${CI1}/info`)
+            var ClanIdb = await superagent.get(`https://api.wolvesville.com/clans/${CI1}/info`)
           .set( 'Authorization', process.env.WOV_TOKEN)
           .set('Content-Type', 'application/json')
           .set('Accept', 'application/json')

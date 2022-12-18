@@ -47,14 +47,14 @@ module.exports = {
         var TimeObj = JSON.stringify(creationTime); 
         var jour = TimeObj.slice(1, 11);var heure = TimeObj.slice(12, 17); 
         
-        emebed.addFields({name:'- - - - - - - - - - - - - - - - - - - - - - - - - - - - -', value: `Clan numéro: ${i+1}`},{name: "nom du clan:", value: data.name, inline: true},{name: "Id:", value: data.id, inline:true},{name: "clan crée le", value: `${jour} à ${heure}`, inline: true});}
-        emebed.addFields({name:'- - - - - - - - - - - - - - - - - - - - - - - - - - - - -', value: `Nombre de clan connecté au bot: ${i}` })
+        emebed.addFields({name:'- - - - - - - - - - - - - - - - - - - - - - - - - -', value: `Clan numéro: ${i+1}`},{name: "nom du clan:", value: data.name, inline: true},{name: "Id:", value: data.id, inline:true},{name: "clan crée le", value: `${jour} à ${heure}`, inline: true});}
+        emebed.addFields({name:'- - - - - - - - - - - - - - - - - - - - - - - - - -', value: `Nombre de clan connecté au bot: ${i}` })
         Mprofil.edit({content: " ", embeds: [emebed]})
 
   },
   runSlash: async(client, interaction) => {
      await interaction.reply({content:'Recherche en cours...', ephemeral:true,fetchReply: true})
-    const Clanauthorized = await superagent.get('https://api.wolvesville.com/clans/authorized/')
+    var Clanauthorized = await superagent.get('https://api.wolvesville.com/clans/authorized/')
     .set( 'Authorization', process.env.WOV_TOKEN)
     .set('Content-Type', 'application/json')
     .set('Accept', 'application/json')
@@ -66,7 +66,7 @@ module.exports = {
 
     var i =2
     while (objErr == undefined) {await new Promise(resolve => setTimeout(resolve, 1000))
-      const Clanauthorized = await superagent.get('https://api.wolvesville.com/clans/authorized/')
+      var Clanauthorized = await superagent.get('https://api.wolvesville.com/clans/authorized/')
     .set( 'Authorization', process.env.WOV_TOKEN)
     .set('Content-Type', 'application/json')
     .set('Accept', 'application/json')
@@ -90,7 +90,7 @@ module.exports = {
     var TimeObj = JSON.stringify(creationTime); 
     var jour = TimeObj.slice(1, 11);var heure = TimeObj.slice(12, 17); 
     
-    emebed.addFields({name:'- - - - - - - - - - - - - - - - - - - - - - - - - - - - -', value: `Clan numéro: ${i+1}`},{name: "nom du clan:", value: data.name, inline: true},{name: "Id:", value: data.id, inline:true},{name: "clan crée le", value: `${jour} à ${heure}`, inline: true});}
-    emebed.addFields({name:'- - - - - - - - - - - - - - - - - - - - - - - - - - - - -', value: `Nombre de clan connecté au bot: ${i}` })
+    emebed.addFields({name:'- - - - - - - - - - - - - - - - - - - - - - - - - -', value: `Clan numéro: ${i+1}`},{name: "nom du clan:", value: data.name, inline: true},{name: "Id:", value: data.id, inline:true},{name: "clan crée le", value: `${jour} à ${heure}`, inline: true});}
+    emebed.addFields({name:'- - - - - - - - - - - - - - - - - - - - - - - - - -', value: `Nombre de clan connecté au bot: ${i}` })
     interaction.editReply({content: " ", embeds: [emebed]})
 }}

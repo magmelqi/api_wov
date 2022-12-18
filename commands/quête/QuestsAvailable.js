@@ -11,13 +11,29 @@ module.exports = {
     examples: ['quests'],
     description: 'Voir les quêtes achetable + sondage',
       run: async(client, message, args) => {
-        const Questsavailable = await superagent.get(`https://api.wolvesville.com/clans/${process.env.CLAN_ID}/quests/available`)
+         var Mquests = await message.channel.send(`Affichage des quêtes...`)
+        var Questsavailable = await superagent.get(`https://api.wolvesville.com/clans/${process.env.CLAN_ID}/quests/available`)
         .set( 'Authorization', process.env.WOV_TOKEN)
         .set('Content-Type', 'application/json')
         .set('Accept', 'application/json')
-        .catch((err) => {message.channel.send(`Erreur a la 1ère requête: ${err}`)}); 
-        const Clan = await Questsavailable.body
-        var imageB1=JSON.stringify(Clan);
+        .catch((err) => {
+         if (err == "Error: Too Many Requests") {Mquests.edit({content:"Erreur a la 1ère requête\n\`2ème tentatives en cours...\`"})}
+         else {return Mquests.edit({content:`Erreur: ${err}`})}});
+        var objErr= JSON.stringify(Questsavailable);
+        
+        var i = 2
+        while (objErr == undefined) {await new Promise(resolve => setTimeout(resolve, 1000))
+          var Questsavailable = await superagent.get('https://api.wolvesville.com/clans/${process.env.CLAN_ID}/quests/available')
+        .set( 'Authorization', process.env.WOV_TOKEN)
+        .set('Content-Type', 'application/json')
+        .set('Accept', 'application/json')
+        .catch((err) =>  {
+          if (err == "Error: Too Many Requests") {Mquests.edit({content:`Erreur, tentatives: \`${i}\``})}
+        else {return Mquests.edit({content:`Erreur: ${err}`})}});
+        var objErr= JSON.stringify(Questsavailable);
+         try {var Clan = await Questsavailable.body; var imageB1=JSON.stringify(Clan);}catch(err) {}; var i = i+1} 
+        
+        if (Clan !== undefined) {Mquests.edit({content:` `})}
         console.log ("Commande quests fait")
 
         try {var orVar = 1; var gemmeVar = 1
@@ -88,6 +104,17 @@ module.exports = {
         poll3.react('👍🏼');
         poll3.react('👎🏼');var orVar = orVar+1}
 
+   if (purchasableWithGems == "true" && i == 2) {
+        const embed3 = new MessageEmbed()
+          .setTitle(`Skin gemme ${gemmeVar}`)
+          .setColor('#FF69B4')
+          .setDescription("Oui 👍🏼 Non 👎🏼")
+          .setImage(text.promoImageUrl)
+          .setTimestamp()
+       const poll3 = await message.channel.send({ embeds : [embed3], fetchReply: true});
+        poll3.react('👍🏼');
+        poll3.react('👎🏼');var gemmeVar = gemmeVar+1}
+
 
      if (purchasableWithGems == "fals" && i == 3) {
         const embed4 = new MessageEmbed()
@@ -127,17 +154,29 @@ module.exports = {
        },
 
        async runSlash(client, interaction) {
-
-        const Questsavailable = await superagent.get(`https://api.wolvesville.com/clans/${process.env.CLAN_ID}/quests/available`)
+         interaction.reply({content: `Exécution en cours...`, ephemeral: true})
+        var Questsavailable = await superagent.get(`https://api.wolvesville.com/clans/${process.env.CLAN_ID}/quests/available`)
         .set( 'Authorization', process.env.WOV_TOKEN)
         .set('Content-Type', 'application/json')
         .set('Accept', 'application/json')
-        .catch((err) => {interaction.reply({content:`Erreur a la 1ère requête: ${err}`, ephemeral:true})}); 
-        const Clan = await Questsavailable.body
-        var imageB1=JSON.stringify(Clan);
-        console.log ("Commande quests fait")
-        interaction.reply({content: `Exécution en cours...`, ephemeral: true})
+        .catch((err) => {
+         if (err == "Error: Too Many Requests") {interaction.editReply({content:"Erreur a la 1ère requête\n\`2ème tentatives en cours...\`"})}
+         else {return interaction.editReply({content:`Erreur: ${err}`})}});
+        var objErr= JSON.stringify(Questsavailable);
+        
+        var i = 2
+        while (objErr == undefined) {await new Promise(resolve => setTimeout(resolve, 1000))
+          var Questsavailable = await superagent.get('https://api.wolvesville.com/clans/${process.env.CLAN_ID}/quests/available')
+        .set( 'Authorization', process.env.WOV_TOKEN)
+        .set('Content-Type', 'application/json')
+        .set('Accept', 'application/json')
+        .catch((err) =>  {
+          if (err == "Error: Too Many Requests") {interaction.editReply({content:`Erreur, tentatives: \`${i}\``})}
+        else {return interaction.editReply({content:`Erreur: ${err}`})}});
+        var objErr= JSON.stringify(Questsavailable);
+         try {var Clan = await Questsavailable.body; var imageB1=JSON.stringify(Clan);}catch(err) {}; var i = i+1}
 
+        console.log ("Commande quests fait")
         try {var orVar = 1; var gemmeVar = 1
          for (var i = 0; i < 6; i++) {
  
@@ -205,6 +244,17 @@ module.exports = {
         const poll3 = await interaction.channel.send({ embeds : [embed3], fetchReply: true});
          poll3.react('👍🏼');
          poll3.react('👎🏼');var orVar = orVar+1}
+
+      if (purchasableWithGems == "true" && i == 2) {
+        const embed3 = new MessageEmbed()
+          .setTitle(`Skin gemme ${gemmeVar}`)
+          .setColor('#FF69B4')
+          .setDescription("Oui 👍🏼 Non 👎🏼")
+          .setImage(text.promoImageUrl)
+          .setTimestamp()
+       const poll3 = await interaction.channel.send({ embeds : [embed3], fetchReply: true});
+        poll3.react('👍🏼');
+        poll3.react('👎🏼');var gemmeVar = gemmeVar+1}
  
  
       if (purchasableWithGems == "fals" && i == 3) {
