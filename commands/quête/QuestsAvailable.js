@@ -33,6 +33,7 @@ module.exports = {
         var objErr= JSON.stringify(Questsavailable);
          try {var Clan = await Questsavailable.body; var imageB1=JSON.stringify(Clan);}catch(err) {}; var i = i+1} 
         
+         if (Clan == undefined) {return}
         if (Clan !== undefined) {Mquests.edit({content:` `})}
         console.log ("Commande quests fait")
 
@@ -175,8 +176,10 @@ module.exports = {
         else {return interaction.editReply({content:`Erreur: ${err}`})}});
         var objErr= JSON.stringify(Questsavailable);
          try {var Clan = await Questsavailable.body; var imageB1=JSON.stringify(Clan);}catch(err) {}; var i = i+1}
-
         console.log ("Commande quests fait")
+
+        if (Clan == undefined) {return}
+        if (Clan !== undefined) {interaction.editReply({content:`Requête réussie`, ephemeral:true})}
         try {var orVar = 1; var gemmeVar = 1
          for (var i = 0; i < 6; i++) {
  
