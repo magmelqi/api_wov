@@ -24,7 +24,7 @@ module.exports = {
         if (objErr !== undefined) {var Clan = Questsavailable.body; var imageB1=JSON.stringify(Clan)}
         var i = 2
         while (objErr == undefined) {await new Promise(resolve => setTimeout(resolve, 1000))
-          var Questsavailable = await superagent.get('https://api.wolvesville.com/clans/${process.env.CLAN_ID}/quests/available')
+          var Questsavailable = await superagent.get(`https://api.wolvesville.com/clans/${process.env.CLAN_ID}/quests/available`)
         .set( 'Authorization', process.env.WOV_TOKEN)
         .set('Content-Type', 'application/json')
         .set('Accept', 'application/json')
@@ -35,7 +35,7 @@ module.exports = {
          try {var Clan = await Questsavailable.body; var imageB1=JSON.stringify(Clan);}catch(err) {}; var i = i+1} 
         
          if (Clan == undefined) {return}
-        if (Clan !== undefined) {Mquests.edit({content:` `})}
+        if (Clan !== undefined) {Mquests.delete()}
         console.log ("Commande quests fait")
 
         try {var orVar = 1; var gemmeVar = 1
