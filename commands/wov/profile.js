@@ -25,16 +25,16 @@ module.exports = {
     tryPong.edit({ content: ' ', embeds: [embed] }); 
     },
     async runSlash (client, interaction) {
-      interaction.reply({content: "On essaye de pong... un instant!", fetchReply: true});
+      interaction.reply({content: "On essaye de pong... un instant!", ephemeral: true});
 
       const embed = new MessageEmbed()
       .setTitle('Profile')
       .setThumbnail(client.user.displayAvatarURL())
-      .setDescription(`Non, ${message.author.username} c'est ?profil`)
+      .setDescription(`Non, ${interaction.user.username} c'est ?profil`)
       .setTimestamp()
       .setAuthor({ name: `Lusky34` })
-      .setFooter({ text: message.author.username, iconeURL: message.author.displayAvatarURL() })
+      .setFooter({ text: interaction.user.username, iconeURL: interaction.user.displayAvatarURL() })
 
-    interaction.editReply({ content: " ", embeds: [embed] });
+    interaction.editReply({ content: " ", embeds: [embed], ephemeral: true });
   },
 };
