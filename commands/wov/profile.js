@@ -9,7 +9,7 @@ module.exports = {
   examples: ['profile'],
   description: "La commande profil(e) de ewwen",
     async run (client, message, args) {
-      const tryPong = await message.channel.send(`Profil(e) de ${message.author.username}en cours... un instant`);
+      const tryPong = await message.channel.send(`Profil(e) de ${message.author.username} en cours... un instant`);
       await new Promise(resolve => setTimeout(resolve, 1000))
 
       const embed = new MessageEmbed()
@@ -25,7 +25,7 @@ module.exports = {
     tryPong.edit({ content: ' ', embeds: [embed] }); 
     },
     async runSlash (client, interaction) {
-      interaction.reply({content: "On essaye de pong... un instant!", ephemeral: true});
+      interaction.reply({content: `Profil(e) de ${interaction.user.username} en cours... un instant`, ephemeral: true});
 
       const embed = new MessageEmbed()
       .setTitle('Profile')
