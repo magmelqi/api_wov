@@ -22,7 +22,7 @@ module.exports = {
           else {tryRequests.edit({content:`Erreur: ${err}`});return console.log(err)}}); 
         console.log ('Commande xpadd faite');
         var objErr= JSON.stringify(Messageclan);
-        if (objErr !== undefined) {tryRequests.edit({content:`Calcul en cours...`})}
+        if (objErr !== undefined) {tryRequests.edit({content:`Calcul en cours...`}); var text= Messageclan.text}
 
         var i =2
         while (objErr == undefined) {await new Promise(resolve => setTimeout(resolve, 1000))
@@ -83,7 +83,7 @@ module.exports = {
         else{interaction.reply({content:`Erreur: ${err}`, ephemeral:true}); return console.log(err)}}); 
       console.log ('Commande xpadd fait'); 
       var objErr= JSON.stringify(Messageclan);
-      if (objErr !== undefined) {interaction.reply(`Calcul en cours...`)}
+      if (objErr !== undefined) {interaction.reply(`Calcul en cours...`); var text= Messageclan.text}
 
       var i = 2
       while (objErr == undefined) {await new Promise(resolve => setTimeout(resolve, 1000))

@@ -10,7 +10,7 @@ module.exports = {
         const message = messageReaction.message;
         const emojiName = messageReaction.emoji.name;
         const member = message.guild.members.cache.get(user.id)
-        const name = member.displayName
+        const name = member.displayName; const nameId = member.id; console.log(name, nameId)
         if(member.user.bot) return;
 
         if (messageReaction.partial) {
@@ -19,122 +19,191 @@ module.exports = {
         }catch (err) {console.log ('impossible de récupérer les messages')
         return}
     }
-    const embedP = new MessageEmbed()
+    const embedP1 = new MessageEmbed()
         .setAuthor({ name: `L'utilisateur a reéagis avec 👍🏻 !`, iconURL: member.user.displayAvatarURL()})
-        .setDescription(`${member} => quête gemme`)
+        .setDescription(`${name} => quête 1`)
         .setColor('#21ff81')
+        .setThumbnail(message.author.displayAvatarURL())
         .setTimestamp();
 
-        const embedN = new MessageEmbed()
+        const embedN1 = new MessageEmbed()
         .setAuthor({name: `L'utilisateur a reéagis avec 👎🏻 !`, iconURL: member.user.displayAvatarURL()})
-        .setDescription(`${member} => quête gemme`)
+        .setDescription(`${name} => quête 1`)
         .setColor('#dc143c')
+        .setThumbnail(message.author.displayAvatarURL())
         .setTimestamp();
 
-    const embedPOr1 = new MessageEmbed()
+    const embedP2 = new MessageEmbed()
         .setAuthor({ name: `L'utilisateur a reéagis avec 👍🏻 !`, iconURL: member.user.displayAvatarURL()})
-        .setDescription(`${member} => quête Or 1`)
+        .setDescription(`${name} => quête 2`)
         .setColor('#21ff81')
+        .setThumbnail(message.author.displayAvatarURL())
         .setTimestamp();
 
-        const embedNOr1 = new MessageEmbed()
+        const embedN2 = new MessageEmbed()
         .setAuthor({name: `L'utilisateur a reéagis avec 👎🏻 !`, iconURL: member.user.displayAvatarURL()})
-        .setDescription(`${member} => quête Or 1`)
+        .setDescription(`${name} => quête 2`)
         .setColor('#dc143c')
+        .setThumbnail(message.author.displayAvatarURL())
         .setTimestamp();
 
-    const embedPOr2 = new MessageEmbed()
+    const embedP3 = new MessageEmbed()
         .setAuthor({ name: `L'utilisateur a reéagis avec 👍🏻 !`, iconURL: member.user.displayAvatarURL()})
-        .setDescription(`${member} => quête Or 2`)
+        .setDescription(`${name} => quête 3`)
         .setColor('#21ff81')
+        .setThumbnail(message.author.displayAvatarURL())
         .setTimestamp();
 
-        const embedNOr2 = new MessageEmbed()
+        const embedN3 = new MessageEmbed()
         .setAuthor({name: `L'utilisateur a reéagis avec 👎🏻 !`, iconURL: member.user.displayAvatarURL()})
-        .setDescription(`${member} => quête Or 2`)
+        .setDescription(`${name} => quête 3`)
         .setColor('#dc143c')
+        .setThumbnail(message.author.displayAvatarURL())
         .setTimestamp();
 
-    const embedPOr3 = new MessageEmbed()
+    const embedP4 = new MessageEmbed()
         .setAuthor({ name: `L'utilisateur a reéagis avec 👍🏻 !`, iconURL: member.user.displayAvatarURL()})
-        .setDescription(`${member} => quête Or 3`)
+        .setDescription(`${name} => quête 4`)
         .setColor('#21ff81')
+        .setThumbnail(message.author.displayAvatarURL())
         .setTimestamp();
 
-        const embedNOr3 = new MessageEmbed()
+        const embedN4 = new MessageEmbed()
         .setAuthor({name: `L'utilisateur a reéagis avec 👎🏻 !`, iconURL: member.user.displayAvatarURL()})
-        .setDescription(`${member} => quête Or 3`)
+        .setDescription(`${name} => quête 4`)
         .setColor('#dc143c')
+        .setThumbnail(message.author.displayAvatarURL())
+        .setTimestamp();
+
+    const embedP5 = new MessageEmbed()
+        .setAuthor({ name: `L'utilisateur a reéagis avec 👍🏻 !`, iconURL: member.user.displayAvatarURL()})
+        .setDescription(`${name} => quête 5`)
+        .setColor('#21ff81')
+        .setThumbnail(message.author.displayAvatarURL())
+        .setTimestamp();
+
+        const embedN5 = new MessageEmbed()
+        .setAuthor({name: `L'utilisateur a reéagis avec 👎🏻 !`, iconURL: member.user.displayAvatarURL()})
+        .setDescription(`${name} => quête 5`)
+        .setColor('#dc143c')
+        .setThumbnail(message.author.displayAvatarURL())
         .setTimestamp();
 
 
         const logChannel = client.channels.cache.get('1044258472121860126');
         const regleChannel = client.channels.cache.get('817787093182054430');
         const evieChannel = client.channels.cache.get('992016663698473050');
+        const quete1Channel = client.channels.cache.get('1054396949844992060');
+        const quete2Channel = client.channels.cache.get('1054398219561484348');
+        const quete3Channel = client.channels.cache.get('1054398333831106591');
+        const quete4Channel = client.channels.cache.get('1054398377858715699');
+        const quete5Channel = client.channels.cache.get('1054399284721745950');
 
-        if (emojiName === '') {logChannel.send({ embeds: [embedP]}), member.send('Vous voulez participer  la quête gemme !')}
-        if (emojiName === '') {logChannel.send({ embeds: [embedN]}), member.send('Vous ne voulez pas participer  la quête gemme !')}
+        if (emojiName === '👍🏻' && message.channel.id == '724241714373722163') {quete1Channel.send({ embeds: [embedP1]})}
+        if (emojiName === '👎🏻' && message.channel.id == '724241714373722163') {quete1Channel.send({ embeds: [embedN1]})}
 
-        if (emojiName === '') {logChannel.send({ embeds: [embedPOr1]}), member.send('Vous voulez participer  la quête OR 1 !')}
-        if (emojiName === '') {logChannel.send({ embeds: [embedNOr1]}), member.send('Vous ne voulez pas participer  la quête OR 1 !')}
+        if (emojiName === '👍' && message.channel.id == '724241714373722163') {quete2Channel.send({ embeds: [embedP2]})}
+        if (emojiName === '👎' && message.channel.id == '724241714373722163') {quete2Channel.send({ embeds: [embedN2]})}
 
-        if (emojiName === '') {logChannel.send({ embeds: [embedPOr2]}), member.send('Vous voulez participer  la quête OR 2 !')}
-        if (emojiName === '') {logChannel.send({ embeds: [embedNOr2]}), member.send('Vous ne voulez pas participer  la quête OR 2 !')}
+        if (emojiName === '👍🏼' && message.channel.id == '724241714373722163') {quete3Channel.send({ embeds: [embedP3]})}
+        if (emojiName === '👎🏼' && message.channel.id == '724241714373722163') {quete3Channel.send({ embeds: [embedN3]})}
 
-        if (emojiName === '') {logChannel.send({ embeds: [embedPOr3]}), member.send('Vous voulez participer  la quête OR 3 !')}
-        if (emojiName === '') {logChannel.send({ embeds: [embedNOr3]}), member.send('Vous ne voulez pas participer  la quête OR 3 !')}
+        if (emojiName === '👍🏽' && message.channel.id == '724241714373722163') {quete4Channel.send({ embeds: [embedP4]})}
+        if (emojiName === '👎🏽' && message.channel.id == '724241714373722163') {quete4Channel.send({ embeds: [embedN4]})}
+
+        if (emojiName === '👍🏾' && message.channel.id == '724241714373722163') {quete5Channel.send({ embeds: [embedP5]})}
+        if (emojiName === '👎🏾' && message.channel.id == '724241714373722163') {quete5Channel.send({ embeds: [embedN5]})}
+
         console.log(message.channel.id)
         if (emojiName === '✅') {
-            if (name == "🍪Evie_" && message.channel.id == '817761804041322536' || message.channel.id == '994618797363306496' || message.channel.id == '1005050826777182269') {evieChannel.send(`${name} vient de claim un perso 👀`)} 
+            if (nameId == "567787590997114885" && message.channel.id == '817761804041322536' || nameId == "567787590997114885" && message.channel.id == '994618797363306496' || nameId == "567787590997114885" && message.channel.id == '1005050826777182269') {evieChannel.send(`${name} vient de claim un perso 👀`)} 
             if (message.channel.id == '724216612206542889'){regleChannel.send(`${name} a accepté les règles.`)}};
-            if (emojiName === '👀') {console.log('if');if (message.channel.id === '1044258472121860126') {logChannel.send(`${name} a accepté les règles.`)}}
          
       
          if (emojiName === '☑️' && message.channel.id == '817290280242774036') {
-                                console.log(name)
-        const Username = await superagent.get(`https://api.wolvesville.com/players/search?username=${name}`)
-        .set( 'Authorization', process.env.WOV_TOKEN)
-        .set('Content-Type', 'application/json')
-        .set('Accept', 'application/json')
-        .catch((err) => {
-            if (err == "Error: Too Many Requests") {return message.channel.send("Veuillez réagir une nouvelle fois")}
-            else if (err == "Error: Not Found") {return message.channel.send(`Pseudo inexistant`)}
-            else {return message.channel.send(`Erreur: ${err}`)}}); 
-        const User = await Username.body
-        const UserId=JSON.stringify(User); 
-        var idn = UserId.slice(7, 43); var idn1 = idn.trim(); console.log(idn)
-
-        const Quests = await superagent.put(`https://api.wolvesville.com/clans/${process.env.CLAN_ID}/members/${idn1}/participateInQuests`)
-        .send({participateInQuests: true})
-        .set( 'Authorization', process.env.WOV_TOKEN)
-        .set('Content-Type', 'application/json')
-        .set('Accept', 'application/json')
-        .catch((err) => {
-          if (err == "Error: Too Many Requests") {return message.channel.send("Veuillez réagir une nouvelle fois")}
-          else {return message.channel.send(`Erreur: ${err}`)}}); 
-        const Clan = await Quests.body
-        const obj=JSON.stringify(Clan); 
-       
-        var CNb= /name/g
-        var CNf= /","level"/g;
-
-        const CNDB = obj.search(CNb); const CNDF = obj.search(CNf); const CN1 = obj.slice(CNDB+7, CNDF)
-        console.log (`Pseudo: ${CN1}`);
-
-        var PIQb= /"participateInClanQuests":/g
-
-        const PIQB = obj.search(PIQb); const PIQ1 = obj.slice(PIQB+26, PIQB+30)
-        console.log (`Participation à la quête: ${PIQ1}`);
-
-        const embed = new MessageEmbed()
-              .setAuthor({name : `Statut de participation`})
-              .setColor('WHITE')
-              .addFields({ name: 'Pseudo', value: `${CN1}`, inline: false}, { name: 'Participation à la quête:', value: `${PIQ1}`, inline: false})
-              .setThumbnail()
-              .setTimestamp();
+            member.send(`Recherche d'un profil au nom de "${name}":`)
+            await new Promise(resolve => setTimeout(resolve, 1000))
+         console.log(name); const Mname = await member.send(`- - - - - -`)
+                                   
+         var Username = await superagent.get(`https://api.wolvesville.com/players/search?username=${name}`)
+         .set( 'Authorization', process.env.WOV_TOKEN)
+         .set('Content-Type', 'application/json')
+         .set('Accept', 'application/json')
+         .catch((err) => {
+             if (err == "Error: Too Many Requests") {Mname.edit({content:"Erreur a la 1ère requête\n\`2ème tentatives en cours...\`"})}
+             else if (err == "Error: Not Found") {return Mname.edit({content:`Pseudo inexistant, veuillez avoir votre pseudo wov identique à celui de discord`})}
+             else {return Mname.edit({content:`${err}, \nveuillez avertir: <@385172057433964556>`})}});
+         var objErr= JSON.stringify(Username);
+     
+         if (objErr !== undefined) {var User = Username.body; var UserId=JSON.stringify(User);}
+        var i = 2
+        while (objErr == undefined) {await new Promise(resolve => setTimeout(resolve, 1000))
+         var Username = await superagent.get(`https://api.wolvesville.com/players/search?username=${name}`)
+         .set( 'Authorization', process.env.WOV_TOKEN)
+         .set('Content-Type', 'application/json')
+         .set('Accept', 'application/json')
+         .catch((err) => {
+             if (err == "Error: Too Many Requests") {Mname.edit({content:`Erreur, tentatives: \`${i}\``})}
+             else if (err == "Error: Not Found") {return Mname.edit({content:`Pseudo inexistant, veuillez avoir votre pseudo wov identique à celui de discord`})}
+             else {return Mname.edit({content:`${err}, \nveuillez avertir: <@385172057433964556>`})}});
+        var objErr= JSON.stringify(Username);
+         try {var User = await Username.body; var UserId=JSON.stringify(User);;}catch(err) {}; var i = i+1} 
+         Mname.edit({content:`Profil de ${name} trouvé avec succés`})
+         member.send(`Activation de votre partipation:`)
+         await new Promise(resolve => setTimeout(resolve, 1000))
+         const Mactive = await member.send(`- - - - - -`)
     
-              message.channel.send({ embeds : [embed]})
-    }
+         var idn = UserId.slice(7, 43); var idn1 = idn.trim(); console.log(idn)
+         
+         
+         var Quests = await superagent.put(`https://api.wolvesville.com/clans/${process.env.CLAN_ID}/members/${idn1}/participateInQuests`)
+         .send({participateInQuests: true})
+         .set( 'Authorization', process.env.WOV_TOKEN)
+         .set('Content-Type', 'application/json')
+         .set('Accept', 'application/json')
+         .catch((err) => {
+           if (err == "Error: Too Many Requests") {Mactive.edit({content:"Erreur a la 2ème requêtes\n\`2ème tentatives en cours...\`"})}
+           else if (err == "Error: Not Found") {return Mactive.edit({content:`Pseudo: ${name} n'est pas présent dans le clan.`})}
+           else {return Mactive.edit({content:`${err}, \nveuillez avertir: <@385172057433964556>`})}});
+           var objErr= JSON.stringify(Quests);
+     
+           if (objErr !== undefined) {var Clan =  Quests.body; var obj=JSON.stringify(Clan);}
+          var i = 2
+          while (objErr == undefined) {await new Promise(resolve => setTimeout(resolve, 1000))
+             var Quests = await superagent.put(`https://api.wolvesville.com/clans/${process.env.CLAN_ID}/members/${idn1}/participateInQuests`)
+           .send({participateInQuests: true})
+           .set( 'Authorization', process.env.WOV_TOKEN)
+           .set('Content-Type', 'application/json')
+           .set('Accept', 'application/json')
+           .catch((err) => {
+               if (err == "Error: Too Many Requests") {Mactive.edit({content:`Erreur, tentatives: \`${i}\``})}
+               else if (err == "Error: Not Found") {return Mactive.edit({content:`Pseudo: ${name} n'est pas présent dans le clan.`})}
+               else {return Mactive.edit({content:`${err}, \nveuillez avertir: <@385172057433964556>`})}});
+          var objErr= JSON.stringify(Quests);
+           try {var Clan =  Quests.body; var obj=JSON.stringify(Clan);}catch(err) {}; var i = i+1}
+   
+        
+         var CNb= /name/g
+         var CNf= /","level"/g;
+ 
+         const CNDB = obj.search(CNb); const CNDF = obj.search(CNf); const CN1 = obj.slice(CNDB+7, CNDF)
+         console.log (`Pseudo: ${CN1}`);
+ 
+         var PIQb= /"participateInClanQuests":/g
+ 
+         const PIQB = obj.search(PIQb); const PIQ1 = obj.slice(PIQB+26, PIQB+30)
+         console.log (`Participation à la quête: ${PIQ1}`);
+ 
+         const embed = new MessageEmbed()
+               .setAuthor({name : `Statut de participation`})
+               .setColor('WHITE')
+               .addFields({ name: 'Pseudo', value: `${CN1}`, inline: false}, { name: 'Participation à la quête:', value: `${PIQ1}`, inline: false})
+               .setThumbnail(User.equippedAvatar.url)
+               .setTimestamp()
+               .setFooter({text: 'Quête'});
+               Mactive.edit({content: ' ', embeds : [embed]});logChannel.send({ embeds: [embed]})
 
-    
-  }}
+     }
+ 
+     
+   }}

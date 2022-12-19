@@ -23,6 +23,7 @@ module.exports = {
             else {return Mprofil.edit({content:`Erreur: ${err}`})}});
             var objErr= JSON.stringify(profil);
 
+            if (objErr !== undefined) {var data = profil.body[0]}
             var i =2
             while (objErr == undefined) {await new Promise(resolve => setTimeout(resolve, 1000))
               var profil = await superagent.get(`https://api.wolvesville.com/clans/search?name=${nom}`)
@@ -50,6 +51,7 @@ module.exports = {
           else {return Mprofil.edit({content: `Erreur: ${err}`})}}); 
           var objErr= JSON.stringify(PseudoIdb);
 
+          if (objErr !== undefined) {var PseudoId = PseudoIdb.body}
           var i =2
           while (objErr == undefined) {await new Promise(resolve => setTimeout(resolve, 1000))
             var PseudoIdb = await superagent.get(`https://api.wolvesville.com/players/${CI1}`)
@@ -97,6 +99,7 @@ module.exports = {
             else {return interaction.editReply({content:`Erreur: ${err}`})}});
             var objErr= JSON.stringify(profil);
 
+            if (objErr !== undefined) {var data = profil.body[0]}
             var i =2
             while (objErr == undefined) {await new Promise(resolve => setTimeout(resolve, 1000))
               var profil = await superagent.get(`https://api.wolvesville.com/clans/search?name=${nom}`)
@@ -124,6 +127,7 @@ module.exports = {
           else {return interaction.editReply({content: `Erreur: ${err}`})}}); 
           var objErr= JSON.stringify(PseudoIdb);
 
+          if (objErr !== undefined) {var PseudoId = PseudoIdb.body}
           var i =2
           while (objErr == undefined) {await new Promise(resolve => setTimeout(resolve, 1000))
             var PseudoIdb = await superagent.get(`https://api.wolvesville.com/players/${CI1}`)

@@ -22,6 +22,7 @@ module.exports = {
         console.log ('Commande bot fait');
         var objErr= JSON.stringify(Clanauthorized);
         
+        if (objErr !== undefined) {var obj= Clanauthorized.text}
         var i = 2
         while (objErr == undefined) {await new Promise(resolve => setTimeout(resolve, 1000))
           var Clanauthorized = await superagent.get('https://api.wolvesville.com/clans/authorized/')
@@ -64,6 +65,7 @@ module.exports = {
     console.log ('Commande bot fait');
     var objErr= JSON.stringify(Clanauthorized);
 
+    if (objErr !== undefined) {var obj= Clanauthorized.text}
     var i =2
     while (objErr == undefined) {await new Promise(resolve => setTimeout(resolve, 1000))
       var Clanauthorized = await superagent.get('https://api.wolvesville.com/clans/authorized/')

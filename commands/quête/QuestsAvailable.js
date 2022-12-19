@@ -21,6 +21,7 @@ module.exports = {
          else {return Mquests.edit({content:`Erreur: ${err}`})}});
         var objErr= JSON.stringify(Questsavailable);
         
+        if (objErr !== undefined) {var Clan = Questsavailable.body; var imageB1=JSON.stringify(Clan)}
         var i = 2
         while (objErr == undefined) {await new Promise(resolve => setTimeout(resolve, 1000))
           var Questsavailable = await superagent.get('https://api.wolvesville.com/clans/${process.env.CLAN_ID}/quests/available')
@@ -49,7 +50,7 @@ module.exports = {
         else {var image1 = imageB1.slice(1, imageD1+28); var imageB1= imageB1.slice(imageD1+28)};
         var text = JSON.parse(image1);
 
-        if (purchasableWithGems == "fals" && i == 0) { 
+        if (purchasableWithGems == "fals" && i == 0 &&text.promoImageUrl !== undefined) { 
         const embed1 = new MessageEmbed()
        .setTitle(`Skin Or ${orVar}`)
        .setColor('#FFA500')
@@ -60,7 +61,7 @@ module.exports = {
      poll1.react('👍🏻');
      poll1.react('👎🏻'); var orVar = orVar+1}
 
-     if (purchasableWithGems == "true" && i == 0) { 
+     if (purchasableWithGems == "true" && i == 0 &&text.promoImageUrl !== undefined) { 
       const embed1 = new MessageEmbed()
      .setTitle(`Skin gemme ${gemmeVar}`)
      .setColor('#FF69B4')
@@ -71,7 +72,7 @@ module.exports = {
    poll1.react('👍🏻');
    poll1.react('👎🏻'); var gemmeVar = gemmeVar+1}
             
-     if (purchasableWithGems == "true" && i == 1) {
+     if (purchasableWithGems == "true" && i == 1 &&text.promoImageUrl !== undefined) {
         const embed2 = new MessageEmbed()
           .setTitle(`Skin gemme ${gemmeVar}`)
           .setColor('#FF69B4')
@@ -82,7 +83,7 @@ module.exports = {
         poll2.react('👍');
         poll2.react('👎');var gemmeVar = gemmeVar+1}
 
-        if (purchasableWithGems == "fals" && i == 1) {
+        if (purchasableWithGems == "fals" && i == 1 &&text.promoImageUrl !== undefined) {
          const embed2 = new MessageEmbed()
            .setTitle(`Skin gemme ${orVar}`)
            .setColor('#FFA500')
@@ -94,7 +95,7 @@ module.exports = {
          poll2.react('👎');var orVar = orVar+1}
 
 
-     if (purchasableWithGems == "fals" && i == 2) {
+     if (purchasableWithGems == "fals" && i == 2 &&text.promoImageUrl !== undefined) {
         const embed3 = new MessageEmbed()
           .setTitle(`Skin or ${orVar}`)
           .setColor('#FFA500')
@@ -105,7 +106,7 @@ module.exports = {
         poll3.react('👍🏼');
         poll3.react('👎🏼');var orVar = orVar+1}
 
-   if (purchasableWithGems == "true" && i == 2) {
+   if (purchasableWithGems == "true" && i == 2 &&text.promoImageUrl !== undefined) {
         const embed3 = new MessageEmbed()
           .setTitle(`Skin gemme ${gemmeVar}`)
           .setColor('#FF69B4')
@@ -117,7 +118,7 @@ module.exports = {
         poll3.react('👎🏼');var gemmeVar = gemmeVar+1}
 
 
-     if (purchasableWithGems == "fals" && i == 3) {
+     if (purchasableWithGems == "fals" && i == 3 &&text.promoImageUrl !== undefined) {
         const embed4 = new MessageEmbed()
           .setTitle(`Skin or ${orVar}`)
           .setColor('#FFA500')
@@ -129,7 +130,7 @@ module.exports = {
         poll4.react('👎🏽');var orVar = orVar+1}
 
 
-     if (purchasableWithGems == "fals" && i == 4) {
+     if (purchasableWithGems == "fals" && i == 4 &&text.promoImageUrl !== undefined) {
         const embed5 = new MessageEmbed()
           .setTitle(`Skin or ${orVar}`)
           .setColor('#FFA500')
@@ -167,7 +168,7 @@ module.exports = {
         
         var i = 2
         while (objErr == undefined) {await new Promise(resolve => setTimeout(resolve, 1000))
-          var Questsavailable = await superagent.get('https://api.wolvesville.com/clans/${process.env.CLAN_ID}/quests/available')
+          var Questsavailable = await superagent.get(`https://api.wolvesville.com/clans/${process.env.CLAN_ID}/quests/available`)
         .set( 'Authorization', process.env.WOV_TOKEN)
         .set('Content-Type', 'application/json')
         .set('Accept', 'application/json')
@@ -192,7 +193,7 @@ module.exports = {
          else {var image1 = imageB1.slice(1, imageD1+28); var imageB1= imageB1.slice(imageD1+28)};
          var text = JSON.parse(image1);
  
-         if (purchasableWithGems == "fals" && i == 0) { 
+         if (purchasableWithGems == "fals" && i == 0 &&text.promoImageUrl !== undefined) { 
          const embed1 = new MessageEmbed()
         .setTitle(`Skin Or ${orVar}`)
         .setColor('#FFA500')
@@ -203,7 +204,7 @@ module.exports = {
       poll1.react('👍🏻');
       poll1.react('👎🏻'); var orVar = orVar+1}
  
-      if (purchasableWithGems == "true" && i == 0) { 
+      if (purchasableWithGems == "true" && i == 0 &&text.promoImageUrl !== undefined) { 
        const embed1 = new MessageEmbed()
       .setTitle(`Skin gemme ${gemmeVar}`)
       .setColor('#FF69B4')
@@ -214,7 +215,7 @@ module.exports = {
     poll1.react('👍🏻');
     poll1.react('👎🏻'); var gemmeVar = gemmeVar+1}
              
-      if (purchasableWithGems == "true" && i == 1) {
+      if (purchasableWithGems == "true" && i == 1 &&text.promoImageUrl !== undefined) {
          const embed2 = new MessageEmbed()
            .setTitle(`Skin gemme ${gemmeVar}`)
            .setColor('#FF69B4')
@@ -225,7 +226,7 @@ module.exports = {
          poll2.react('👍');
          poll2.react('👎');var gemmeVar = gemmeVar+1}
 
-         if (purchasableWithGems == "fals" && i == 1) {
+         if (purchasableWithGems == "fals" && i == 1 &&text.promoImageUrl !== undefined) {
             const embed2 = new MessageEmbed()
               .setTitle(`Skin gemme ${orVar}`)
               .setColor('#FFA500')
@@ -237,7 +238,7 @@ module.exports = {
             poll2.react('👎');var orVar = orVar+1}
  
  
-      if (purchasableWithGems == "fals" && i == 2) {
+      if (purchasableWithGems == "fals" && i == 2 &&text.promoImageUrl !== undefined) {
          const embed3 = new MessageEmbed()
            .setTitle(`Skin or ${orVar}`)
            .setColor('#FFA500')
@@ -248,7 +249,7 @@ module.exports = {
          poll3.react('👍🏼');
          poll3.react('👎🏼');var orVar = orVar+1}
 
-      if (purchasableWithGems == "true" && i == 2) {
+      if (purchasableWithGems == "true" && i == 2 &&text.promoImageUrl !== undefined) {
         const embed3 = new MessageEmbed()
           .setTitle(`Skin gemme ${gemmeVar}`)
           .setColor('#FF69B4')
@@ -260,7 +261,7 @@ module.exports = {
         poll3.react('👎🏼');var gemmeVar = gemmeVar+1}
  
  
-      if (purchasableWithGems == "fals" && i == 3) {
+      if (purchasableWithGems == "fals" && i == 3 &&text.promoImageUrl !== undefined) {
          const embed4 = new MessageEmbed()
            .setTitle(`Skin or ${orVar}`)
            .setColor('#FFA500')
@@ -272,7 +273,7 @@ module.exports = {
          poll4.react('👎🏽');var orVar = orVar+1}
  
  
-      if (purchasableWithGems == "fals" && i == 4) {
+      if (purchasableWithGems == "fals" && i == 4 &&text.promoImageUrl !== undefined) {
          const embed5 = new MessageEmbed()
            .setTitle(`Skin or ${orVar}`)
            .setColor('#FFA500')

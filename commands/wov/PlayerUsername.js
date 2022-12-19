@@ -23,6 +23,7 @@ module.exports = {
             else {return Mprofil.edit({content:`Erreur: ${err}`})}});
             var objErr= JSON.stringify(profil);
 
+            if (objErr !== undefined) {var data = profil.body}
             var i = 2
             while (objErr == undefined) {await new Promise(resolve => setTimeout(resolve, 1000))
               var profil = await superagent.get(`https://api.wolvesville.com/players/search?username=${nom}`)
@@ -51,6 +52,7 @@ module.exports = {
           else {return Mprofil.edit({content: `Erreur: ${err}`})}}); 
           var objErr= JSON.stringify(ClanIdb);
 
+          if (objErr !== undefined) {var ClanId = ClanIdb.text}
           var i = 2
           while (objErr == undefined) {await new Promise(resolve => setTimeout(resolve, 1000))
             var ClanIdb = await superagent.get(`https://api.wolvesville.com/clans/${CI1}/info`)
@@ -105,6 +107,7 @@ module.exports = {
           else {return interaction.editReply({content:`Erreur: ${err}`, ephemeral: true})}});
           var objErr= JSON.stringify(profil);
 
+          if (objErr !== undefined) {var data = profil.body}
           var i = 2
           while (objErr == undefined) {await new Promise(resolve => setTimeout(resolve, 1000))
             var profil = await superagent.get(`https://api.wolvesville.com/players/search?username=${nom}`)
@@ -132,6 +135,7 @@ module.exports = {
           else {return interaction.editReply({content:`Erreur ${err}`, ephemeral:true})}});
           var objErr= JSON.stringify(ClanIdb);
 
+          if (objErr !== undefined) {var ClanId = ClanIdb.text}
           var i = 2
           while (objErr == undefined) {await new Promise(resolve => setTimeout(resolve, 1000))
             var ClanIdb = await superagent.get(`https://api.wolvesville.com/clans/${CI1}/info`)
