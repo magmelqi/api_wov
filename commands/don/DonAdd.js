@@ -41,11 +41,11 @@ module.exports = {
         const heure = `${dayjs().format("HH:mm")}-heure anglaise`;
 
         var i = 0
-      for (var typet = "DONATE"; typet == "DONATE";){var i =i+1;
+      for (var type = "DONATE"; type == "DONATE";){var i =i+1;
         var Mmf= /"creationTime":/g
         const MmDF = text.search(Mmf); var Mm1 = text.slice(1, MmDF+42);
         var type = text.slice(MmDF+-8,MmDF-2); var text= text.slice(MmDF+42);
-        if (typet !== "DONATE") {console.log ("return")} else {
+        if (type !== "DONATE") {console.log ("return")} else {
         var data = JSON.parse(Mm1);
         var Atime = data.creationTime; var AtimeT = JSON.stringify(Atime); var annéeA= AtimeT.slice(1,5)
           var moisA= AtimeT.slice(6,8); var jourA= AtimeT.slice(9,11); var heureA= AtimeT.slice(12,14); var minuteA= AtimeT.slice(15,17)
