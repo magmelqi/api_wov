@@ -29,9 +29,9 @@ module.exports = {
               var Gemme = JSON.parse(readFileSync(`././Information/Gemme/Member-Id/${OrO}`, 'utf-8'))} catch (err) {}
       
                   try {
-              if (Or.Or > 499 && Gemme.Gemme > 0) {message.channel.send(`\`${Or.Pseudo}\` posséde: \`${Or.Or}\` <:orwov:1049617166854520892> et \`${Gemme.Gemme}\` <:diamant_wov:1049618534084395039>`);}
-              else if (Gemme.Gemme > 0) {message.channel.send(`\`${Or.Pseudo}\` posséde: \`${Gemme.Gemme}\` <:diamant_wov:1049618534084395039>`);}
-              else if (Or.Or > 499 ) {message.channel.send(`\`${Or.Pseudo}\` posséde: \`${Or.Or}\` <:orwov:1049617166854520892>`);}
+              if (Or.Or > 499 && Gemme.Gemme > 0) {message.channel.send(`\`${Or.Pseudo}\` posséde: \`${Or.Or}\` or et \`${Gemme.Gemme}\` gemme`);}
+              else if (Gemme.Gemme > 0) {message.channel.send(`\`${Or.Pseudo}\` posséde: \`${Gemme.Gemme}\` gemme`);}
+              else if (Or.Or > 499 ) {message.channel.send(`\`${Or.Pseudo}\` posséde: \`${Or.Or}\` or`);}
                   }catch (err) {}
             var Or = 0; var Gemme = 0
           }},

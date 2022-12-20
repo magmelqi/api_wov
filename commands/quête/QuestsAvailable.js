@@ -52,7 +52,7 @@ module.exports = {
 
         if (purchasableWithGems == "fals" && i == 0 &&text.promoImageUrl !== undefined) { 
         const embed1 = new MessageEmbed()
-       .setTitle(`Skin Or ${orVar}`)
+       .setTitle(`Skin or ${orVar}`)
        .setColor('#FFA500')
        .setDescription("Oui 👍🏻 Non 👎🏻")
        .setImage(text.promoImageUrl)
@@ -85,7 +85,7 @@ module.exports = {
 
         if (purchasableWithGems == "fals" && i == 1 &&text.promoImageUrl !== undefined) {
          const embed2 = new MessageEmbed()
-           .setTitle(`Skin gemme ${orVar}`)
+           .setTitle(`Skin or ${orVar}`)
            .setColor('#FFA500')
            .setDescription("Oui 👍 Non 👎")
            .setImage(text.promoImageUrl)
@@ -140,16 +140,27 @@ module.exports = {
        const poll5 = await message.channel.send({ embeds : [embed5], fetchReply: true});
         poll5.react('👍🏾');
         poll5.react('👎🏾');var orVar = orVar+1}
-    }}catch (err) {}
 
-    const embed6 = new MessageEmbed()
-          .setTitle("Avez-vous déjà payé les 500 or pour la quête ? (Si quête or)")
-          .setColor('WHITE')
-          .setDescription("Oui 👍🏿 Non 👎🏿")
-          .setTimestamp()
+        if (purchasableWithGems == "fals" && i == 5 &&text.promoImageUrl !== undefined) { 
+         const embed6 = new MessageEmbed()
+        .setTitle(`Skin or ${orVar}`)
+        .setColor('#FFA500')
+        .setDescription("Oui 👍🏿 Non 👎🏿")
+        .setImage(text.promoImageUrl)
+        .setTimestamp()
        const poll6 = await message.channel.send({ embeds : [embed6], fetchReply: true});
-        poll6.react('👍🏿');
-        poll6.react('👎🏿');
+          poll6.react('👍🏿');
+          poll6.react('👎🏿'); var orVar = orVar+1}
+       }}catch (err) {}
+
+    const embed7 = new MessageEmbed()
+        .setTitle("Avez-vous déjà payé les 500 or pour la quête ? (Si quête or)")
+        .setColor('WHITE')
+        .setDescription("Oui ✅ Non ❌")
+        .setTimestamp()
+     const poll7 = await message.channel.send({ embeds : [embed7], fetchReply: true});
+      poll7.react('✅');
+      poll7.react('❌');
 
         message.channel.send('Coucou <@&806912965496143882> voilà pour vous !') 
      
@@ -228,7 +239,7 @@ module.exports = {
 
          if (purchasableWithGems == "fals" && i == 1 &&text.promoImageUrl !== undefined) {
             const embed2 = new MessageEmbed()
-              .setTitle(`Skin gemme ${orVar}`)
+              .setTitle(`Skin or ${orVar}`)
               .setColor('#FFA500')
               .setDescription("Oui 👍 Non 👎")
               .setImage(text.promoImageUrl)
@@ -283,16 +294,27 @@ module.exports = {
         const poll5 = await interaction.channel.send({ embeds : [embed5], fetchReply: true});
          poll5.react('👍🏾');
          poll5.react('👎🏾');var orVar = orVar+1}
-     }}catch (err) {}
- 
-     const embed6 = new MessageEmbed()
-           .setTitle("Avez-vous déjà payé les 500 or pour la quête ? (Si quête or)")
-           .setColor('WHITE')
+
+         if (purchasableWithGems == "fals" && i == 5 &&text.promoImageUrl !== undefined) { 
+            const embed6 = new MessageEmbed()
+           .setTitle(`Skin or ${orVar}`)
+           .setColor('#FFA500')
            .setDescription("Oui 👍🏿 Non 👎🏿")
+           .setImage(text.promoImageUrl)
            .setTimestamp()
         const poll6 = await interaction.channel.send({ embeds : [embed6], fetchReply: true});
          poll6.react('👍🏿');
-         poll6.react('👎🏿');
+         poll6.react('👎🏿'); var orVar = orVar+1}
+     }}catch (err) {}
+ 
+     const embed7 = new MessageEmbed()
+           .setTitle("Avez-vous déjà payé les 500 or pour la quête ? (Si quête or)")
+           .setColor('WHITE')
+           .setDescription("Oui ✅ Non ❌")
+           .setTimestamp()
+        const poll7 = await interaction.channel.send({ embeds : [embed7], fetchReply: true});
+         poll7.react('✅');
+         poll7.react('❌');
 
         interaction.channel.send('Coucou <@&806912965496143882> voilà pour vous !') 
       }

@@ -34,15 +34,32 @@ module.exports = {
                 unlinkSync(`././Information/Quête/Member-Id/${ListeO}`, 'utf-8')}catch (err) {console.log(err)}
                 unlinkSync(`././Information/Quête/Member-Pseudo/${ListeOP}`, 'utf-8')}
 
+              const Mquests= await  message.channel.send({content:`Recherche des membres en cours...`})
+              const Merr = await message.channel.send({content:`- - - -`})
 
-        const Questsactive = await superagent.get(`https://api.wolvesville.com/clans/${process.env.CLAN_ID}/quests/active`)
+        var Questsactive = await superagent.get(`https://api.wolvesville.com/clans/${process.env.CLAN_ID}/quests/active`)
         .set( 'Authorization', process.env.WOV_TOKEN)
         .set('Content-Type', 'application/json')
         .set('Accept', 'application/json')
-        .catch((err) => {message.channel.send(err)}); 
-        const Clan = (Questsactive.body)
-        const Partciipants= (Clan.participants);
+        .catch((err) => {
+          if (err == "Error: Too Many Requests") {Merr.edit({content:"Erreur a la 1ère requête\n\`2ème tentatives en cours...\`"})}
+          else {return Merr.edit({content:`Erreur: ${err}`})}});
+         var objErr= JSON.stringify(Questsactive);
+         
+         if (objErr !== undefined) {var Clan = (Questsactive.body); var Partciipants= (Clan.participants);}
+         var i = 2
+         while (objErr == undefined) {await new Promise(resolve => setTimeout(resolve, 1000))
+          var Questsactive = await superagent.get(`https://api.wolvesville.com/clans/${process.env.CLAN_ID}/quests/active`)
+         .set( 'Authorization', process.env.WOV_TOKEN)
+         .set('Content-Type', 'application/json')
+         .set('Accept', 'application/json')
+         .catch((err) =>  {
+           if (err == "Error: Too Many Requests") {Merr.edit({content:`Erreur, tentatives: \`${i}\``})}
+         else {return Merr.edit({content:`Erreur: ${err}`})}});
+         var objErr= JSON.stringify(Questsactive);
+          try {var Clan = (Questsactive.body); var Partciipants= (Clan.participants);}catch(err) {}; var i = i+1} 
 
+          Merr.delete();Mquests.edit({content:`Réussie:`})
         const heure = `${dayjs().format("HH:mm")}-heure anglaise`;
         
         var text = JSON.stringify(Partciipants)
@@ -88,13 +105,27 @@ module.exports = {
     },
     async runSlash(client, interaction) { 
       interaction.reply({content: 'La liste arrive...', ephemeral: true})
-      const Questsactive = await superagent.get(`https://api.wolvesville.com/clans/${process.env.CLAN_ID}/quests/active`)
+      var Questsactive = await superagent.get(`https://api.wolvesville.com/clans/${process.env.CLAN_ID}/quests/active`)
       .set( 'Authorization', process.env.WOV_TOKEN)
       .set('Content-Type', 'application/json')
       .set('Accept', 'application/json')
-      .catch((err) => {interaction.channel.send(err)}); 
-      const Clan = (Questsactive.body)
-      const Partciipants= (Clan.participants);
+      .catch((err) => {
+        if (err == "Error: Too Many Requests") {interaction.editReply({content:"Erreur a la 1ère requête\n\`2ème tentatives en cours...\`"})}
+        else {return interaction.editReply({content:`Erreur: ${err}`})}});
+       var objErr= JSON.stringify(Questsactive);
+       
+       if (objErr !== undefined) {var Clan = (Questsactive.body); var Partciipants= (Clan.participants);}
+       var i = 2
+       while (objErr == undefined) {await new Promise(resolve => setTimeout(resolve, 1000))
+        var Questsactive = await superagent.get(`https://api.wolvesville.com/clans/${process.env.CLAN_ID}/quests/active`)
+       .set( 'Authorization', process.env.WOV_TOKEN)
+       .set('Content-Type', 'application/json')
+       .set('Accept', 'application/json')
+       .catch((err) =>  {
+         if (err == "Error: Too Many Requests") {interaction.editReply({content:`Erreur, tentatives: \`${i}\``})}
+       else {return interaction.editReply({content:`Erreur: ${err}`})}});
+       var objErr= JSON.stringify(Questsactive);
+        try {var Clan = (Questsactive.body); var Partciipants= (Clan.participants);}catch(err) {}; var i = i+1} 
 
       const heure = `${dayjs().format("HH:mm")}-heure anglaise`;
       

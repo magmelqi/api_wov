@@ -89,6 +89,21 @@ module.exports = {
         .setThumbnail(message.author.displayAvatarURL())
         .setTimestamp();
 
+        const embedP6 = new MessageEmbed()
+        .setAuthor({ name: `L'utilisateur a reéagis avec 👍🏻 !`, iconURL: member.user.displayAvatarURL()})
+        .setDescription(`${name} => quête 6`)
+        .setColor('#21ff81')
+        .setThumbnail(message.author.displayAvatarURL())
+        .setTimestamp();
+
+        const embedN6 = new MessageEmbed()
+        .setAuthor({name: `L'utilisateur a reéagis avec 👎🏻 !`, iconURL: member.user.displayAvatarURL()})
+        .setDescription(`${name} => quête 6`)
+        .setColor('#dc143c')
+        .setThumbnail(message.author.displayAvatarURL())
+        .setTimestamp();
+
+
 
         const logChannel = client.channels.cache.get('1044258472121860126');
         const regleChannel = client.channels.cache.get('817787093182054430');
@@ -98,6 +113,7 @@ module.exports = {
         const quete3Channel = client.channels.cache.get('1054398333831106591');
         const quete4Channel = client.channels.cache.get('1054398377858715699');
         const quete5Channel = client.channels.cache.get('1054399284721745950');
+        const quete6Channel = client.channels.cache.get('1054745511317483611');
 
         if (emojiName === '👍🏻' && message.channel.id == '724241714373722163') {quete1Channel.send({ embeds: [embedP1]})}
         if (emojiName === '👎🏻' && message.channel.id == '724241714373722163') {quete1Channel.send({ embeds: [embedN1]})}
@@ -114,8 +130,11 @@ module.exports = {
         if (emojiName === '👍🏾' && message.channel.id == '724241714373722163') {quete5Channel.send({ embeds: [embedP5]})}
         if (emojiName === '👎🏾' && message.channel.id == '724241714373722163') {quete5Channel.send({ embeds: [embedN5]})}
 
+        if (emojiName === '👍🏿' && message.channel.id == '724241714373722163') {quete6Channel.send({ embeds: [embedP6]})}
+        if (emojiName === '👎🏿' && message.channel.id == '724241714373722163') {quete6Channel.send({ embeds: [embedN6]})}
+
         console.log(message.channel.id)
-        if (emojiName === '✅') {
+        if (emojiName === '✅' || emojiName === '💘' || emojiName === '💗' || emojiName === '💖') {
             if (nameId == "567787590997114885" && message.channel.id == '817761804041322536' || nameId == "567787590997114885" && message.channel.id == '994618797363306496' || nameId == "567787590997114885" && message.channel.id == '1005050826777182269') {evieChannel.send(`${name} vient de claim un perso 👀`)} 
             if (message.channel.id == '724216612206542889'){regleChannel.send(`${name} a accepté les règles.`)}};
          

@@ -12,24 +12,40 @@ module.exports = {
     examples: ['donadd'],
     description: 'Actualise l\'or et les gems des membres',
        async run (client, message, args) {
-        const Messageclan = await superagent.get(`https://api.wolvesville.com/clans/${process.env.CLAN_ID}/ledger`)
+        const Mquests = await message.channel.send('Chargement des dons')
+        var Messageclan = await superagent.get(`https://api.wolvesville.com/clans/${process.env.CLAN_ID}/ledger`)
         .set( 'Authorization', process.env.WOV_TOKEN)
         .set('Content-Type', 'application/json')
         .set('Accept', 'application/json')
-        .catch((err) => {message.channel.send(`Erreur a la 1ère requête: ${err}`); console.log(err)}); 
+        .catch((err) => {
+          if (err == "Error: Too Many Requests") {Mquests.edit({content:"Erreur a la 1ère requête\n\`2ème tentatives en cours...\`"})}
+          else {return Mquests.edit({content:`Erreur: ${err}`})}});
+         var objErr= JSON.stringify(Messageclan);
+         
+         if (objErr !== undefined) {var text = Messageclan.text}
+         var i = 2
+         while (objErr == undefined) {await new Promise(resolve => setTimeout(resolve, 1000))
+           var Messageclan = await superagent.get(`https://api.wolvesville.com/clans/${process.env.CLAN_ID}/ledger`)
+         .set( 'Authorization', process.env.WOV_TOKEN)
+         .set('Content-Type', 'application/json')
+         .set('Accept', 'application/json')
+         .catch((err) =>  {
+           if (err == "Error: Too Many Requests") {Mquests.edit({content:`Erreur, tentatives: \`${i}\``})}
+         else {return Mquests.edit({content:`Erreur: ${err}`})}});
+         var objErr= JSON.stringify(Messageclan);
+          try {var text = Messageclan.text}catch(err) {}; var i = i+1} 
         console.log ('Commande banque fait'); 
     
-        var text = Messageclan.text
     
         const timestamp = `${dayjs().add(-1, 'hour').format("DD-MM-YYYY")}`; console.log(timestamp)
         const heure = `${dayjs().format("HH:mm")}-heure anglaise`;
 
         var i = 0
-      for (var type = "DONATE"; type == "DONATE";){var i =i+1;
+      for (var typet = "DONATE"; typet == "DONATE";){var i =i+1;
         var Mmf= /"creationTime":/g
         const MmDF = text.search(Mmf); var Mm1 = text.slice(1, MmDF+42);
         var type = text.slice(MmDF+-8,MmDF-2); var text= text.slice(MmDF+42);
-        if (type !== "DONATE") {console.log ("return")} else {
+        if (typet !== "DONATE") {console.log ("return")} else {
         var data = JSON.parse(Mm1);
         var Atime = data.creationTime; var AtimeT = JSON.stringify(Atime); var annéeA= AtimeT.slice(1,5)
           var moisA= AtimeT.slice(6,8); var jourA= AtimeT.slice(9,11); var heureA= AtimeT.slice(12,14); var minuteA= AtimeT.slice(15,17)
