@@ -40,7 +40,7 @@ module.exports = {
               if (data !== undefined) {
           await Mprofil.edit({content: `Recherche du Clan intitulé ${data.name} réussi\nRecherche du Chef de ${data.name}, veuillez patienter` })}
 
-          const CI1= data.leaderId; 
+          try {var CI1= data.leaderId;}catch(err) {return Mprofil.edit({content:`Aucun clan trouvé à ce nom: ${nom}`})} 
         await new Promise(resolve => setTimeout(resolve, 2000))
         var PseudoIdb = await superagent.get(`https://api.wolvesville.com/players/${CI1}`)
         .set( 'Authorization', process.env.WOV_TOKEN)
@@ -82,7 +82,7 @@ module.exports = {
   options:[
     {
         name: "clan",
-        description: "taper le clanpour voir ses informations",
+        description: "taper le clan pour voir ses informations",
         type: "STRING",
         required: true,
     }],
@@ -116,7 +116,7 @@ module.exports = {
               if (data !== undefined) {
           await interaction.editReply({content: `Recherche du Clan intitulé ${data.name} réussi\nRecherche du Chef de ${data.name}, veuillez patienter` })}
 
-          const CI1= data.leaderId; 
+          try {const CI1= data.leaderId;}catch(err) {return interaction.editReply(`Aucun clan trouvé à ce nom: ${nom}`)}
         await new Promise(resolve => setTimeout(resolve, 2000))
         var PseudoIdb = await superagent.get(`https://api.wolvesville.com/players/${CI1}`)
         .set( 'Authorization', process.env.WOV_TOKEN)

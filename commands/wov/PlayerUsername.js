@@ -38,7 +38,7 @@ module.exports = {
               try {var data = await profil.body}catch(err) {}; var i = i+1}
 
               if (data !== undefined) {
-          await Mprofil.edit({content: `Recherche du profil de ${nom} réussi\nRecherche du clan de ${nom}, veuillez patienter` })}
+          await Mprofil.edit({content: `Recherche du profil de ${nom} réussi\nRecherche du clan de ${nom}, veuillez patienter` });var data = profil.body}
 
           try {var CI1= data.clanId}catch(err) {}
         if (CI1 === undefined) {var PP = "Pas de clan"} 
@@ -52,7 +52,7 @@ module.exports = {
           else {return Mprofil.edit({content: `Erreur: ${err}`})}}); 
           var objErr= JSON.stringify(ClanIdb);
 
-          if (objErr !== undefined) {var ClanId = ClanIdb.text}
+          if (objErr !== undefined) {var Clanbody = ClanIdb.body}
           var i = 2
           while (objErr == undefined) {await new Promise(resolve => setTimeout(resolve, 1000))
             var ClanIdb = await superagent.get(`https://api.wolvesville.com/clans/${CI1}/info`)
@@ -63,26 +63,65 @@ module.exports = {
             if (err == "Error: Too Many Requests") {Mprofil.edit({content: `Erreur sur la recherche du \`clan\`, tentatives: \`${i}\``})}
             else {return Mprofil.edit({content: `Erreur: ${err}`})}}); 
             var objErr= JSON.stringify(ClanIdb);
-            try {var ClanId = await ClanIdb.text}catch(err) {}; var i = i+1} 
+            try {var Clanbody = await ClanIdb.body}catch(err) {}; var i = i+1} 
 
 
-        var CNb= /name/g
-        var CNf= /","description/g
-        const CNDB = ClanId.search(CNb); const CNDF = ClanId.search(CNf); var CN1 = ClanId.slice(CNDB+7, CNDF);
-        var CN2 = CN1.slice(0, 13);
-        if (CN2 == "Wolves Legion") {var CN1= "Wolves Legion 🐺"; var tigre = "  🐅" }}
+            if (Clanbody.name == "Wolves Legion 🐺") {var tigre = "  🐅" }}
 
-        try{
-          const embed = new MessageEmbed()
-          .setAuthor({name : `Profil WOV`})
-          .setColor(data.profileIconColor)
-          .setDescription(`${data.personalMessage ?? "Vide"}`)
-          .addFields({ name: `Pseudo`, value: `${data.username} ${tigre ?? ""}`, inline: true}, { name: 'Niveau:', value: `${data.level}`},{ name: 'Dernière connexion:', value: `${data.lastOnline.slice(0, -14)} à ${data.lastOnline.slice(11, 13)-1+2}h${data.lastOnline.slice(14,16)}`},{ name: 'Création du compte:', value: `${data.creationTime.slice(0, -14)} à ${data.creationTime.slice(11, 13)-1+2}h${data.creationTime.slice(14,16)}`},{ name: `Clan:`, value: `${CN1 ?? PP}`})
-          .setThumbnail()
-          .setImage(`${data.equippedAvatar.url}`)
-          .setTimestamp()
+          try {
+            var Created = `${data.creationTime.slice(0, -14)} à ${data.creationTime.slice(11, 13)-1+2}h${data.creationTime.slice(14,16)}`}catch(err) {}
+
+            var TotalGame = data.gameStats.totalWinCount + data.gameStats.totalLoseCount + data.gameStats.totalTieCount
+            var win = data.gameStats.totalWinCount*100 / TotalGame; var winP = JSON.stringify(win)
+            var lose = data.gameStats.totalLoseCount*100 / TotalGame; var loseP = JSON.stringify(lose)
+            var suicide = data.gameStats.exitGameBySuicideCount*100 / TotalGame; var suicideP = JSON.stringify(suicide)
+
+            var tdjH = data.gameStats.totalPlayTimeInMinutes/60 
+            var tdjHt = JSON.stringify(tdjH); 
+  
+            var ilv = 0
+            var tdjM = 61
+            while (tdjM > 60) {
+            var tdjR = tdjHt.search(`.${ilv}`); var ilv = ilv + 1
+            var tdjHC = tdjHt.slice(tdjR); var tdjM = tdjHC*60
+            }; var tdjMt = JSON.stringify(tdjM); var tdjMf = tdjMt.slice(0,2); var tdjMfPOINTS = tdjMt.slice(1,2)
+            var tdjHf = tdjHt.slice(0, tdjR); console.log(`${tdjHf}h${tdjMf}`)
+  
+            var tdjJ = tdjHf/24; var tdjJt = JSON.stringify(tdjJ) 
+            var ilv = 0
+            var tdjJh = 25
+            while (tdjJh > 24) {
+              var tdjJr = tdjJt.search(`.${ilv}`); var ilv = ilv + 1
+              var tdjJC = tdjJt.slice(tdjJr); var tdjJh= tdjJC*24; 
+            }; var tdjJtf = JSON.stringify(tdjJh); var tdjJF = tdjJtf.slice(0,2); var tdjJFPOINTS = tdjJtf.slice(1,2);
+            var tdjHeureF = tdjJt.slice(0,tdjJr);
+  
+            if (tdjJFPOINTS == ".") {var tdjJF = tdjJtf.slice(0,1)}
+            if (tdjMfPOINTS == ".") {var tdjMf = tdjMt.slice(0,1)}
+            if (tdjJh > `${tdjJF}.90`) {var tdjJF = tdjJF-1+2}
+            if (tdjM > `${tdjMf}.90`) {var tdjMf = tdjMf-1+2}
+  
+            if (Clanbody.name !== undefined) {var clanName = Clanbody.name} else {var clanName = "Pas de clan"}
+
+          try{
+            const embed = new MessageEmbed()
+              .setAuthor({name : `Profil WOV`})
+              .setColor(data.profileIconColor)
+              .setDescription(`${data.personalMessage ?? "Vide"}`)
+              .addFields(
+                { name: `Pseudo`, value: `${data.username} ${tigre ?? ""}`, inline: true}, 
+                { name: 'Niveau:', value: `${data.level}`, inline: true},
+                { name: `Clan:`, value: `${clanName}`},
+                { name: 'Dernière connexion:', value: `${data.lastOnline.slice(0, -14)} à ${data.lastOnline.slice(11, 13)-1+2}h${data.lastOnline.slice(14,16)}`,inline: true},
+                { name: 'Création du compte:', value: `${Created ?? "Pas d'info disponible"}`, inline: true},
+                { name: `Temps de jeu:`, value: `${tdjHeureF} jours ${tdjJF}h ${tdjMf}min` },
+                { name: `Victoire:`, value: `${data.gameStats.totalWinCount} - ${winP.slice(0,2)}%`, inline:true},
+                { name: `Défaite:`, value: `${data.gameStats.totalLoseCount} - ${loseP.slice(0,2)}%`, inline:true},
+                { name: `Fuite:`, value: `${data.gameStats.exitGameBySuicideCount} - ${suicideP.slice(0,4)}%`, inline:true})
+              .setImage(`${data.equippedAvatar.url}`)
+              .setTimestamp()
       
-            Mprofil.edit({ content: ' ', embeds: [embed]}),console.log(`Pseudo: ${nom} Clan: ${CN1 ?? "Pas de clan"}`), console.log ('Commande profil faite');
+            Mprofil.edit({ content: ' ', embeds: [embed]}),console.log(`Pseudo: ${nom} Clan: ${clanName}`), console.log ('Commande profil faite');
       
       } catch (err) {console.log(err)} return
         
@@ -135,7 +174,7 @@ module.exports = {
           else {return interaction.editReply({content:`Erreur ${err}`, ephemeral:true})}});
           var objErr= JSON.stringify(ClanIdb);
 
-          if (objErr !== undefined) {var ClanId = ClanIdb.text}
+          if (objErr !== undefined) { var Clanbody = ClanIdb.body}
           var i = 2
           while (objErr == undefined) {await new Promise(resolve => setTimeout(resolve, 1000))
             var ClanIdb = await superagent.get(`https://api.wolvesville.com/clans/${CI1}/info`)
@@ -146,27 +185,66 @@ module.exports = {
             if (err == "Error: Too Many Requests") {interaction.editReply({content: `Erreur sur la recherche du \`clan\`, tentatives: \`${i}\``})}
             else {return interaction.editReply({content: `Erreur: ${err}`})}});
             var objErr= JSON.stringify(ClanIdb);
-            try {var ClanId = await ClanIdb.text}catch(err) {};var i = i+1} 
+            try {var Clanbody = await ClanIdb.body}catch(err) {};var i = i+1} 
 
 
+        if (Clanbody.name == "Wolves Legion 🐺") {var tigre = "  🐅" }}
 
-        var CNb= /name/g
-        var CNf= /","description/g
-        const CNDB = ClanId.search(CNb); const CNDF = ClanId.search(CNf); var CN1 = ClanId.slice(CNDB+7, CNDF); 
-        var CN2 = CN1.slice(0, 13);
-        if (CN2 == "Wolves Legion") {var CN1= "Wolves Legion 🐺"; var tigre = "  🐅" }}
+        try {
+          var Created = `${data.creationTime.slice(0, -14)} à ${data.creationTime.slice(11, 13)-1+2}h${data.creationTime.slice(14,16)}`}catch(err) {}
+
+          var TotalGame = data.gameStats.totalWinCount + data.gameStats.totalLoseCount + data.gameStats.totalTieCount
+          var win = data.gameStats.totalWinCount*100 / TotalGame; var winP = JSON.stringify(win)
+          var lose = data.gameStats.totalLoseCount*100 / TotalGame; var loseP = JSON.stringify(lose)
+          var suicide = data.gameStats.exitGameBySuicideCount*100 / TotalGame; var suicideP = JSON.stringify(suicide)
+
+         
+          var tdjH = data.gameStats.totalPlayTimeInMinutes/60 ; console.log(tdjH)
+          var tdjHt = JSON.stringify(tdjH); 
+
+          var ilv = 0
+          var tdjM = 61
+          while (tdjM > 60) {
+          var tdjR = tdjHt.search(`.${ilv}`); var ilv = ilv + 1;
+          var tdjHC = tdjHt.slice(tdjR); var tdjM = tdjHC*60; console.log(tdjM)
+          }; var tdjMt = JSON.stringify(tdjM); var tdjMf = tdjMt.slice(0,2); var tdjMfPOINTS = tdjMt.slice(1,2)
+          var tdjHf = tdjHt.slice(0, tdjR); console.log(`${tdjHf}h${tdjMf}`)
+
+          var tdjJ = tdjHf/24; var tdjJt = JSON.stringify(tdjJ) 
+          var ilv = 0
+          var tdjJh = 25
+          while (tdjJh > 24) {
+            var tdjJr = tdjJt.search(`.${ilv}`); var ilv = ilv + 1
+            var tdjJC = tdjJt.slice(tdjJr); var tdjJh= tdjJC*24; 
+          }; var tdjJtf = JSON.stringify(tdjJh); var tdjJF = tdjJtf.slice(0,2); var tdjJFPOINTS = tdjJtf.slice(1,2);
+          var tdjHeureF = tdjJt.slice(0,tdjJr);
+
+          if (tdjJFPOINTS == ".") {var tdjJF = tdjJtf.slice(0,1)}
+          if (tdjMfPOINTS == ".") {var tdjMf = tdjMt.slice(0,1)}
+          if (tdjJh > `${tdjJF}.90`) {var tdjJF = tdjJF-1+2}
+          if (tdjM > `${tdjMf}.90`) {var tdjMf = tdjMf-1+2}
+
+          if (CI1 !== undefined) {var clanName = Clanbody.name} else {var clanName = "Pas de clan"}
 
         try{
           const embed = new MessageEmbed()
-          .setAuthor({name : `Profil WOV`})
-          .setColor(data.profileIconColor)
-          .setDescription(`${data.personalMessage ?? "Vide"}`)
-          .addFields({ name: `Pseudo`, value: `${data.username} ${tigre ?? ""}`, inline: true}, { name: 'Niveau:', value: `${data.level}`},{ name: 'Dernière connexion:', value: `${data.lastOnline.slice(0, -14)} à ${data.lastOnline.slice(11, 13)-1+2}h${data.lastOnline.slice(14,16)}`},{ name: 'Création du compte:', value: `${data.creationTime.slice(0, -14)} à ${data.creationTime.slice(11, 13)-1+2}h${data.creationTime.slice(14,16)}`},{ name: `Clan:`, value: `${CN1 ?? PP}`})
-          .setThumbnail()
-          .setImage(`${data.equippedAvatar.url}`)
-          .setTimestamp()
+            .setAuthor({name : `Profil WOV`})
+            .setColor(data.profileIconColor)
+            .setDescription(`${data.personalMessage ?? "Vide"}`)
+            .addFields(
+              { name: `Pseudo`, value: `${data.username} ${tigre ?? ""}`, inline: true}, 
+              { name: 'Niveau:', value: `${data.level}`, inline: true},
+              { name: `Clan:`, value: `${clanName}`},
+              { name: 'Dernière connexion:', value: `${data.lastOnline.slice(0, -14)} à ${data.lastOnline.slice(11, 13)-1+2}h${data.lastOnline.slice(14,16)}`,inline: true},
+              { name: 'Création du compte:', value: `${Created ?? "Pas d'info disponible"}`, inline: true},
+              { name: `Temps de jeu:`, value: `${tdjHeureF} jours ${tdjJF}h ${tdjMf}min` },
+              { name: `Victoire:`, value: `${data.gameStats.totalWinCount} - ${winP.slice(0,2)}%`, inline:true},
+              { name: `Défaite:`, value: `${data.gameStats.totalLoseCount} - ${loseP.slice(0,2)}%`, inline:true},
+              { name: `Fuite:`, value: `${data.gameStats.exitGameBySuicideCount} - ${suicideP.slice(0,4)}%`, inline:true})
+            .setImage(`${data.equippedAvatar.url}`)
+            .setTimestamp()
       
-            await interaction.channel.send({embeds: [embed] });console.log(`Pseudo: ${nom} Clan: ${CN1 ?? "Pas de clan"}`), console.log ('Commande profil faite');
+            await interaction.channel.send({embeds: [embed] });console.log(`Pseudo: ${nom} Clan: ${clanName}`), console.log ('Commande profil faite');
       
       } catch (err) {console.log(err)} return
 }}    

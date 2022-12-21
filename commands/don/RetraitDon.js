@@ -5,7 +5,7 @@ const {writeFileSync, readFileSync, readdirSync} = require ("fs");
 
 module.exports = {
     name: "retraitdon",
-    category: 'bouh',
+    category: 'don',
     permissions: ['ADMINISTRATOR'],
     ownerOnly: true,
     usage: 'retraitdon',
