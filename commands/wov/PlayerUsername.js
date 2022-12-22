@@ -76,30 +76,33 @@ module.exports = {
             var lose = data.gameStats.totalLoseCount*100 / TotalGame; var loseP = JSON.stringify(lose)
             var suicide = data.gameStats.exitGameBySuicideCount*100 / TotalGame; var suicideP = JSON.stringify(suicide)
 
-            var tdjH = data.gameStats.totalPlayTimeInMinutes/60 
+            var tdjH = data.gameStats.totalPlayTimeInMinutes/60; console.log(tdjH)
             var tdjHt = JSON.stringify(tdjH); 
   
-            var ilv = 0
-            var tdjM = 61
-            while (tdjM > 60) {
-            var tdjR = tdjHt.search(`.${ilv}`); var ilv = ilv + 1
-            var tdjHC = tdjHt.slice(tdjR); var tdjM = tdjHC*60
-            }; var tdjMt = JSON.stringify(tdjM); var tdjMf = tdjMt.slice(0,2); var tdjMfPOINTS = tdjMt.slice(1,2)
-            var tdjHf = tdjHt.slice(0, tdjR); console.log(`${tdjHf}h${tdjMf}`)
-  
-            var tdjJ = tdjHf/24; var tdjJt = JSON.stringify(tdjJ) 
-            var ilv = 0
-            var tdjJh = 25
-            while (tdjJh > 24) {
-              var tdjJr = tdjJt.search(`.${ilv}`); var ilv = ilv + 1
-              var tdjJC = tdjJt.slice(tdjJr); var tdjJh= tdjJC*24; 
-            }; var tdjJtf = JSON.stringify(tdjJh); var tdjJF = tdjJtf.slice(0,2); var tdjJFPOINTS = tdjJtf.slice(1,2);
-            var tdjHeureF = tdjJt.slice(0,tdjJr);
-  
-            if (tdjJFPOINTS == ".") {var tdjJF = tdjJtf.slice(0,1)}
-            if (tdjMfPOINTS == ".") {var tdjMf = tdjMt.slice(0,1)}
+            
+            var a = 0; var b =1
+            while (tdjHTest !== ".") {
+              var tdjHTest = tdjHt.slice(a,b); var a =a+1; var b =b+1; 
+              var tdjHeure = tdjHt.slice(a-1); var tdjM = tdjHeure*60;
+              }; 
+              var tdjMt = JSON.stringify(tdjM); var tdjMf = tdjMt.slice(0,2); 
+              var tdjHf = tdjHt.slice(0, a-1); console.log(`${tdjHf}h${tdjMf}`)
+              
+              
+
+
+              var tdjJ = tdjHf/24; var tdjJt = JSON.stringify(tdjJ)
+              var a = 0; var b =1
+              while (tdjTest !== ".") {
+                var tdjTest = tdjJt.slice(a,b); var a =a+1; var b =b+1
+                var tdjJour = tdjJt.slice(a-1); var tdjJh = tdjJour*24
+
+              }; var tdjJtf = JSON.stringify(tdjJh); var tdjJF = tdjJtf.slice(0,2); 
+              var tdjHeureF = tdjJt.slice(0, a-1);
+    
             if (tdjJh > `${tdjJF}.90`) {var tdjJF = tdjJF-1+2}
-            if (tdjM > `${tdjMf}.90`) {var tdjMf = tdjMf-1+2}
+              if (tdjM > `${tdjMf}.90`) {var tdjMf = tdjMf-1+2}
+            
   
             if (Clanbody.name !== undefined) {var clanName = Clanbody.name} else {var clanName = "Pas de clan"}
 
@@ -198,31 +201,32 @@ module.exports = {
           var lose = data.gameStats.totalLoseCount*100 / TotalGame; var loseP = JSON.stringify(lose)
           var suicide = data.gameStats.exitGameBySuicideCount*100 / TotalGame; var suicideP = JSON.stringify(suicide)
 
-         
-          var tdjH = data.gameStats.totalPlayTimeInMinutes/60 ; console.log(tdjH)
+  
+          var tdjH = data.gameStats.totalPlayTimeInMinutes/60 ; 
           var tdjHt = JSON.stringify(tdjH); 
 
-          var ilv = 0
-          var tdjM = 61
-          while (tdjM > 60) {
-          var tdjR = tdjHt.search(`.${ilv}`); var ilv = ilv + 1;
-          var tdjHC = tdjHt.slice(tdjR); var tdjM = tdjHC*60; console.log(tdjM)
-          }; var tdjMt = JSON.stringify(tdjM); var tdjMf = tdjMt.slice(0,2); var tdjMfPOINTS = tdjMt.slice(1,2)
-          var tdjHf = tdjHt.slice(0, tdjR); console.log(`${tdjHf}h${tdjMf}`)
+          var a = 0; var b =1
+          while (tdjHTest !== ".") {
+            var tdjHTest = tdjHt.slice(a,b); var a =a+1; var b =b+1; 
+            var tdjHeure = tdjHt.slice(a-1); var tdjM = tdjHeure*60;
+            }; 
+            var tdjMt = JSON.stringify(tdjM); var tdjMf = tdjMt.slice(0,2); 
+            var tdjHf = tdjHt.slice(0, a-1); console.log(`${tdjHf}h${tdjMf}`)
+            
+            
 
-          var tdjJ = tdjHf/24; var tdjJt = JSON.stringify(tdjJ) 
-          var ilv = 0
-          var tdjJh = 25
-          while (tdjJh > 24) {
-            var tdjJr = tdjJt.search(`.${ilv}`); var ilv = ilv + 1
-            var tdjJC = tdjJt.slice(tdjJr); var tdjJh= tdjJC*24; 
-          }; var tdjJtf = JSON.stringify(tdjJh); var tdjJF = tdjJtf.slice(0,2); var tdjJFPOINTS = tdjJtf.slice(1,2);
-          var tdjHeureF = tdjJt.slice(0,tdjJr);
 
-          if (tdjJFPOINTS == ".") {var tdjJF = tdjJtf.slice(0,1)}
-          if (tdjMfPOINTS == ".") {var tdjMf = tdjMt.slice(0,1)}
-          if (tdjJh > `${tdjJF}.90`) {var tdjJF = tdjJF-1+2}
-          if (tdjM > `${tdjMf}.90`) {var tdjMf = tdjMf-1+2}
+            var tdjJ = tdjHf/24; var tdjJt = JSON.stringify(tdjJ)
+            var a = 0; var b =1
+            while (tdjTest !== ".") {
+              var tdjTest = tdjJt.slice(a,b); var a =a+1; var b =b+1
+              var tdjJour = tdjJt.slice(a-1); var tdjJh = tdjJour*24
+
+            }; var tdjJtf = JSON.stringify(tdjJh); var tdjJF = tdjJtf.slice(0,2); 
+            var tdjHeureF = tdjJt.slice(0, a-1);
+    
+            if (tdjJh > `${tdjJF}.90`) {var tdjJF = tdjJF-1+2}
+              if (tdjM > `${tdjMf}.90`) {var tdjMf = tdjMf-1+2}
 
           if (CI1 !== undefined) {var clanName = Clanbody.name} else {var clanName = "Pas de clan"}
 

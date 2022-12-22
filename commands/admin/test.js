@@ -12,7 +12,7 @@ module.exports = {
     usage: 'test ',
     examples: ['test'],
     description: 'Commande test',
-     async run (client, message, args) { 
+     async run (client, message, args) { let member = message.mentions.members.first()
 
         var canvas = Canvas.createCanvas(1024, 500);
 
@@ -21,29 +21,29 @@ module.exports = {
         function getRandomInt(max) {
             return Math.floor(Math.random() * max);
           }
-        var rdm =getRandomInt(3); console.log(rdm)
+        var rdm =getRandomInt(3); console.log(rdm);
         if (rdm ==0) {var background = await Canvas.loadImage("./Information/LoupBlanc2.png");}
         if (rdm ==1) {var background = await Canvas.loadImage("./Information/LoupDuo6.png");}
-        if (rdm ==3) {var background = await Canvas.loadImage("./Information/DuoLoup2.png");}
+        if (rdm ==2) {var background = await Canvas.loadImage("./Information/DuoLoup2.png");}
         ctx.drawImage(background, 0, 0, 1024, 500);
 
         ctx.font = "42px Impact";
         if (rdm ==0) {
             ctx.fillStyle = "#FFFFFF";
             ctx.textAlign = "center";
-            ctx.fillText(message.author.tag.toUpperCase(), 512, 410);
+            ctx.fillText(member.user.tag.toUpperCase(), 512, 410);
             ctx.fillText("BIENVENUE", 512, 360);}
 
         if (rdm ==1) {
             ctx.fillStyle = "#000000";
             ctx.textAlign = "center";
-            ctx.fillText(message.author.tag.toUpperCase(), 512, 395);
+            ctx.fillText(member.user.tag.toUpperCase(), 512, 395);
             ctx.fillText("BIENVENUE", 512, 350);}
         
-        if (rdm ==0) {
+        if (rdm ==2) {
             ctx.fillStyle = "#FFFFFF";
             ctx.textAlign = "center";
-            ctx.fillText(message.author.tag.toUpperCase(), 512, 410);
+            ctx.fillText(member.user.tag.toUpperCase(), 512, 410);
             ctx.fillText("BIENVENUE", 512, 360);}
 
         //ctx.fillText(member.user.tag.toUpperCase(), 512, 410)
@@ -58,7 +58,7 @@ module.exports = {
         //    size: 1024
         //}));
 
-        var avatar = await Canvas.loadImage(message.author.displayAvatarURL({
+        var avatar = await Canvas.loadImage(member.user.displayAvatarURL({
             format: "png",
             size: 1024
         }));
