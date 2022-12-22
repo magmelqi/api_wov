@@ -12,7 +12,7 @@ module.exports = {
     examples: ['mauto'],
     description: 'Envoie les messages envoyé sur wov en temps réel(1min de décalage) (pas config l\'id channel)',
     async run (client, message, args) {const logChannel = client.channels.cache.get('1046792811065913366'); console.log('on');
-    var Merr = await message.channel.send("On");
+    var Merr = await message.channel.send("On"); 
     test54 =async() => {
 
       var Messageclan = await superagent.get(`https://api.wolvesville.com/clans/${process.env.CLAN_ID}/chat`)
@@ -37,9 +37,11 @@ module.exports = {
       
       var InfoLastest = JSON.parse(readFileSync(`././Information/Mauto/Mauto.json`, 'utf-8'))
       var AncienMessage = InfoLastest.date
-      var n = 0
-      while(Messageclan.body[n].date !== AncienMessage){ 
-        var objbody = Messageclan.body[n];var n = n+1
+        var n = 0
+        while (Messageclan.body[n].date !== AncienMessage){var n = n+1};
+        var n =n-1
+      while(n !== -1 ){ 
+        var objbody = Messageclan.body[n];var n = n-1
         try {var BOT =objbody.playerBotOwnerUsername}catch(err) {}
       var dateI = objbody.date; var dateIT = JSON.stringify(dateI)// 2022-11-20T10:51:40.988Z
         var jours = dateIT.slice(1, 11); var heure = dateIT.slice(12, 14); var minute = dateIT.slice(15, 17)
