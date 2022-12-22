@@ -87,7 +87,7 @@ module.exports = {
                 var embed= new MessageEmbed()
         .setAuthor({name: 'Chat WOV'})
         .setColor("RED")
-        .setFields({name: `Pseudo: \`${pseudobody.username}\``, value: `-Vient de \`rejoindre\` le clan`}, {name: "fais le", value: `-${jours} à ${heure}h${minute}`})
+        .setFields({name: `Pseudo: \`${pseudobody.username}\``, value: `-Vient de \`quitter\` le clan`}, {name: "fais le", value: `-${jours} à ${heure}h${minute}`})
         .setThumbnail(pseudobody.equippedAvatar.url)
         .setTimestamp()
         }
@@ -124,7 +124,7 @@ module.exports = {
   .setThumbnail(pseudobody.equippedAvatar.url)
   .setTimestamp()
          logChannel.send({ embeds: [embed]})}}
-        var AncienMessage = objbody.date
+
         const info = {
           date: Messageclan.body[0].date
         }
