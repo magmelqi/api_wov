@@ -1,7 +1,7 @@
 const superagent = require('superagent').agent();
 const { MessageEmbed } = require('discord.js');
 const dotenv = require('dotenv'); dotenv.config();
-const dayjs = require ('dayjs');
+const {writeFileSync, readFileSync} = require ("fs");
 
 module.exports = {
     name: "mauto",
@@ -10,91 +10,128 @@ module.exports = {
     ownerOnly: false,
     usage: 'mauto', 
     examples: ['mauto'],
-    description: 'Envoie les messages envoyé sur wov en temps réel (pas config l\'id channel)',
-    run (client, message, args) {const logChannel = client.channels.cache.get('1046792811065913366');message.channel.send("On");console.log('on');
+    description: 'Envoie les messages envoyé sur wov en temps réel(1min de décalage) (pas config l\'id channel)',
+    async run (client, message, args) {const logChannel = client.channels.cache.get('1046792811065913366'); console.log('on');
+    var Merr = await message.channel.send("On");
     test54 =async() => {
-    const timestamp = `${dayjs().format("YYYY-MM-DDTHH:mm:ss")}`; console.log (timestamp)
-      const Messageclan = await superagent.get(`https://api.wolvesville.com/clans/${process.env.CLAN_ID}/chat?oldest=${timestamp}`)
+
+      var Messageclan = await superagent.get(`https://api.wolvesville.com/clans/${process.env.CLAN_ID}/chat`)
       .set( 'Authorization', process.env.WOV_TOKEN)
       .set('Content-Type', 'application/json')
       .set('Accept', 'application/json')
-      .catch((err) => {message.channel.send(`Erreur a la 1ère requête: ${err} \n\`2ème tentaive en cours...\``); console.log(err)});
+      .catch((err) => { if (err == "Error: Too Many Requests") {Merr.edit({content:`Erreur, tentatives: \`${i}\``})}
+      else {return Merr.edit({content:`Erreur: ${err}`})}}); 
       var objErr= JSON.stringify(Messageclan);
 
-
-      if (objErr == undefined) {
-        const Messageclan = await superagent.get(`https://api.wolvesville.com/clans/${process.env.CLAN_ID}/chat?oldest=${timestamp}`)
+      if (objErr !== undefined) {var obj= Messageclan.text; var objbody2 = Messageclan.body}
+      var i = 2
+      while (objErr == undefined) {await new Promise(resolve => setTimeout(resolve, 1000))
+        var Messageclan = await superagent.get(`https://api.wolvesville.com/clans/${process.env.CLAN_ID}/chat`)
       .set( 'Authorization', process.env.WOV_TOKEN)
       .set('Content-Type', 'application/json')
       .set('Accept', 'application/json')
-      .catch((err) => {message.channel.send(`Erreur a la 1ère requête: ${err} \n\`3ème tentaive en cours...\` Ah bah il y en a pas flemme de mettre une 3ème requête`); console.log(err)}); 
-      var obj= Messageclan.text} else {var obj= Messageclan.text}
+      .catch((err) => { if (err == "Error: Too Many Requests") {Merr.edit({content:`Erreur, tentatives: \`${i}\``})}
+      else {return Merr.edit({content:`Erreur: ${err}`})}});
+      var objErr= JSON.stringify(Messageclan); 
+      var obj= Messageclan.text; var objbody2 = Messageclan.body} 
       
-      
-      for(let i=0; i < 10; i++ ){
-            var msgd= /","msg":"/g; var msgf= /","isSystem"/g
-      const msgd1 = obj.search(msgd); const msgf1 = obj.search(msgf); var msg = obj.slice(msgd1+9, msgf1);
-  
-      var dated= /","date":"/g; var datef= /","msg":"/g
-      const dated1 = obj.search(dated); const datef1 = obj.search(datef); var date = obj.slice(dated1+10, datef1-14); var date2 = obj.slice(datef1-13, datef1-11); var date3 = obj.slice(datef1-10, datef1-8); var date2 = date2-1+2; var date4= obj.slice(datef1-7, datef1-5);
-  
-      var PlayerIdd= /{"player/g; var PlayerIdf= /","date":"/g
-      const PlayerIdd1 = obj.search(PlayerIdd); const PlayerIdf1 = obj.search(PlayerIdf); var PlayerId = obj.slice(PlayerIdd1+13, PlayerIdf1); var obj = obj.slice(msgf1+7);console.log (`-${date} à ${date2}h${date3}:${date4}`);
-      if (dayjs().format("YYYY-MM-DD") == date){
-        if (dayjs().format("HH") == date2){
-          if (dayjs().format("mm") == date3 || dayjs().format("mm")-1+2 == date3-1+1 && dayjs().format("ss") < date4){
-            console.log (msg)
-  
-      
-      if ( PlayerId == 'nerUsername":"BOT(lusky34)') {var PlayerId= "BOT"; console.log('if')
+      var InfoLastest = JSON.parse(readFileSync(`././Information/Mauto/Mauto.json`, 'utf-8'))
+      var AncienMessage = InfoLastest.date
+      var n = 0
+      while(Messageclan.body[n].date !== AncienMessage){ 
+        var objbody = Messageclan.body[n];var n = n+1
+        try {var BOT =objbody.playerBotOwnerUsername}catch(err) {}
+      var dateI = objbody.date; var dateIT = JSON.stringify(dateI)// 2022-11-20T10:51:40.988Z
+        var jours = dateIT.slice(1, 11); var heure = dateIT.slice(12, 14); var minute = dateIT.slice(15, 17)
+
+      if ( BOT !== undefined) {var PlayerId= "BOT"; console.log('if')
       const embed= new MessageEmbed()
   .setAuthor({name: 'Chat WOV'})
   .setColor('WHITE')
-  .setFields({name: `Pseudo: \`${PlayerId}\``, value: `-${msg}`}, {name: "fais le", value: `-${date} à ${date2}h${date3}`})
-  .setThumbnail()
+  .setFields({name: `Pseudo: \`${PlayerId}\``, value: `-${objbody.msg}`}, {name: "fais le", value: `-${jours} à ${heure}h${minute}`})
+  .setThumbnail(client.user.displayAvatarURL())
   .setTimestamp();
   const logChannel = client.channels.cache.get('1044258472121860126');
     logChannel.send({ embeds: [embed]})}
-      
-     else { console.log('else'); 
-        const  usernameb  = await superagent.get(`https://api.wolvesville.com/players/${PlayerId}`)
+      else if (objbody.isSystem == true) {
+        var PlayerId = objbody.playerId
+        var  usernameb  = await superagent.get(`https://api.wolvesville.com/players/${PlayerId}`)
         .set( 'Authorization', process.env.WOV_TOKEN)
         .set('Content-Type', 'application/json')
         .set('Accept', 'application/json')
-        .catch((err) => {return message.channel.send(`Erreur a la 2ème requête: ${err}\n\`2ème tentaive en cours...\``)}); 
+        .catch((err) => { if (err == "Error: Too Many Requests") {Merr.edit({content:`Erreur, tentatives: \`${i}\``})}
+        else {return Merr.edit({content:`Erreur: ${err}`})}}); 
         var pseudoErr = JSON.stringify(usernameb);
 
-        if (pseudoErr == undefined) {
-            const  usernameb  = await superagent.get(`https://api.wolvesville.com/players/${PlayerId}`)
+        if (pseudoErr !== undefined) {var pseudo = usernameb.text; var pseudobody = usernameb.body}
+        var i = 2
+        while (pseudoErr == undefined) {
+            var  usernameb  = await superagent.get(`https://api.wolvesville.com/players/${PlayerId}`)
         .set( 'Authorization', process.env.WOV_TOKEN)
         .set('Content-Type', 'application/json')
         .set('Accept', 'application/json')
-        .catch((err) => {return message.channel.send(`Erreur a la 2ème requête: ${err}`)}); 
-        var pseudo = usernameb.text} else {var pseudo = usernameb.text}
+        .catch((err) => { if (err == "Error: Too Many Requests") {Merr.edit({content:`Erreur, tentatives: \`${i}\``})}
+        else {return Merr.edit({content:`Erreur: ${err}`})}});
+        var pseudoErr = JSON.stringify(usernameb);
+        var pseudo = usernameb.text; var pseudobody = usernameb.body} 
 
-          var usernamed= /","username":"/g; var usernamef= /","personalMessage":"/g
-      const usernamed1 = pseudo.search(usernamed); const usernamef1 = pseudo.search(usernamef); var username = pseudo.slice(usernamed1+14, usernamef1); console.log (username)
-  
+        if (objbody.msg == `join&username=${pseudobody.username}`) {
+        var embed= new MessageEmbed()
+        .setAuthor({name: 'Chat WOV'})
+        .setColor("GREEN")
+        .setFields({name: `Pseudo: \`${pseudobody.username}\``, value: `-Vient de \`rejoindre\` le clan`}, {name: "fais le", value: `-${jours} à ${heure}h${minute}`})
+        .setThumbnail(pseudobody.equippedAvatar.url)
+        .setTimestamp()
+              } 
+        else {
+                var embed= new MessageEmbed()
+        .setAuthor({name: 'Chat WOV'})
+        .setColor("RED")
+        .setFields({name: `Pseudo: \`${pseudobody.username}\``, value: `-Vient de \`rejoindre\` le clan`}, {name: "fais le", value: `-${jours} à ${heure}h${minute}`})
+        .setThumbnail(pseudobody.equippedAvatar.url)
+        .setTimestamp()
+        }
+         logChannel.send({ embeds: [embed]})
+
+      }
+
+     else { console.log('else'); var PlayerId = objbody.playerId
+        var  usernameb  = await superagent.get(`https://api.wolvesville.com/players/${PlayerId}`)
+        .set( 'Authorization', process.env.WOV_TOKEN)
+        .set('Content-Type', 'application/json')
+        .set('Accept', 'application/json')
+        .catch((err) => { if (err == "Error: Too Many Requests") {Merr.edit({content:`Erreur, tentatives: \`${i}\``})}
+        else {return Merr.edit({content:`Erreur: ${err}`})}}); 
+        var pseudoErr = JSON.stringify(usernameb);
+
+        if (pseudoErr !== undefined) {var pseudo = usernameb.text; var pseudobody = usernameb.body}
+        var i = 2
+        while (pseudoErr == undefined) {
+            var  usernameb  = await superagent.get(`https://api.wolvesville.com/players/${PlayerId}`)
+        .set( 'Authorization', process.env.WOV_TOKEN)
+        .set('Content-Type', 'application/json')
+        .set('Accept', 'application/json')
+        .catch((err) => { if (err == "Error: Too Many Requests") {Merr.edit({content:`Erreur, tentatives: \`${i}\``})}
+        else {return Merr.edit({content:`Erreur: ${err}`})}});
+        var pseudoErr = JSON.stringify(usernameb);
+        var pseudo = usernameb.text; var pseudobody = usernameb.body} 
+
+
             const embed= new MessageEmbed()
   .setAuthor({name: 'Chat WOV'})
   .setColor('#77b5fe')
-  .setFields({name: `Pseudo: \`${username}\``, value: `-${msg}`}, {name: "fais le", value: `-${date} à ${date2}h${date3}`})
-  .setThumbnail()
+  .setFields({name: `Pseudo: \`${pseudobody.username}\``, value: `-${objbody.msg}`}, {name: "fais le", value: `-${jours} à ${heure}h${minute}`})
+  .setThumbnail(pseudobody.equippedAvatar.url)
   .setTimestamp()
-        return logChannel.send({ embeds: [embed]})}
+         logChannel.send({ embeds: [embed]})}}
+        var AncienMessage = objbody.date
+        const info = {
+          date: Messageclan.body[0].date
+        }
+        const objectToJson = JSON.stringify(info)
+        writeFileSync(`././Information/Mauto/Mauto.json`, objectToJson)
+        }
         
-        
-        
-        var usernamed= /","username":"/g; var usernamef= /","personalMessage":"/g
-      const usernamed1 = pseudo.search(usernamed); const usernamef1 = pseudo.search(usernamef); var username = pseudo.slice(usernamed1+14, usernamef1); console.log (username)
-  
-            const embed= new MessageEmbed()
-  .setAuthor({name: 'Chat WOV'})
-  .setColor('#77b5fe')
-  .setFields({name: `Pseudo: \`${username}\``, value: `-${msg}`}, {name: "fais le", value: `-${date} à ${date2}h${date3}`})
-  .setThumbnail()
-  .setTimestamp()
-        logChannel.send({ embeds: [embed]})} }}}}
         test54()
         setInterval(() =>{test54()}, 60000)
       },   

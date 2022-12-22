@@ -11,7 +11,9 @@ module.exports = {
     examples: ['profil Hqrmonie'],
     description: "Voir le profil du pseudo",
       run: async(client, message, args) => {
-        var nom = message.content.substring(8).trim()
+        if (args[0] == undefined) return message.reply('merci d\'entrer un \`pseudo\` apres le nom de la commande');
+
+        var nom = args[0]
         var Mprofil= await message.channel.send(`Recherche du profil de ${nom}...`)
         var profil = await superagent.get(`https://api.wolvesville.com/players/search?username=${nom}`) 
           .set( 'Authorization', process.env.WOV_TOKEN)
@@ -81,25 +83,27 @@ module.exports = {
   
             
             var a = 0; var b =1
-            while (tdjHTest !== ".") {
+            while (tdjHTest !== "." && a !== 10) {
               var tdjHTest = tdjHt.slice(a,b); var a =a+1; var b =b+1; 
               var tdjHeure = tdjHt.slice(a-1); var tdjM = tdjHeure*60;
               }; 
-              var tdjMt = JSON.stringify(tdjM); var tdjMf = tdjMt.slice(0,2); 
+              var tdjMt = JSON.stringify(tdjM); var tdjMf = tdjMt.slice(0,2); var tdjMfPOINTS = tdjMt.slice(1,2); 
               var tdjHf = tdjHt.slice(0, a-1); console.log(`${tdjHf}h${tdjMf}`)
-              
+              if (a == 10) {var tdjMf =0; var tdjHf = tdjHt}
               
 
 
-              var tdjJ = tdjHf/24; var tdjJt = JSON.stringify(tdjJ)
+              var tdjJ = tdjHf/24; var tdjJt = JSON.stringify(tdjJ); console.log(tdjJt)
               var a = 0; var b =1
-              while (tdjTest !== ".") {
-                var tdjTest = tdjJt.slice(a,b); var a =a+1; var b =b+1
+              while (tdjTest !== "." && a !== 6) {
+                var tdjTest = tdjJt.slice(a,b); var a =a+1; var b =b+1; console.log(tdjTest, a)
                 var tdjJour = tdjJt.slice(a-1); var tdjJh = tdjJour*24
-
-              }; var tdjJtf = JSON.stringify(tdjJh); var tdjJF = tdjJtf.slice(0,2); 
+              };  var tdjJtf = JSON.stringify(tdjJh); var tdjJF = tdjJtf.slice(0,2); var tdjJFPOINTS = tdjJtf.slice(1,2)
               var tdjHeureF = tdjJt.slice(0, a-1);
-    
+             if ( a == 6) {var tdjHeureF = tdjJ; var tdjJF =0}
+
+             if (tdjJFPOINTS == ".") {var tdjJtf =tdjJtf.slice(0,1)}
+              if (tdjMfPOINTS == ".") {var tdjMf = tdjMt.slice(0,1)}
             if (tdjJh > `${tdjJF}.90`) {var tdjJF = tdjJF-1+2}
               if (tdjM > `${tdjMf}.90`) {var tdjMf = tdjMf-1+2}
             
@@ -206,27 +210,29 @@ module.exports = {
           var tdjHt = JSON.stringify(tdjH); 
 
           var a = 0; var b =1
-          while (tdjHTest !== ".") {
+          while (tdjHTest !== "." && a !== 10) {
             var tdjHTest = tdjHt.slice(a,b); var a =a+1; var b =b+1; 
             var tdjHeure = tdjHt.slice(a-1); var tdjM = tdjHeure*60;
             }; 
-            var tdjMt = JSON.stringify(tdjM); var tdjMf = tdjMt.slice(0,2); 
+            var tdjMt = JSON.stringify(tdjM); var tdjMf = tdjMt.slice(0,2); var tdjMfPOINTS = tdjMt.slice(1,2); 
             var tdjHf = tdjHt.slice(0, a-1); console.log(`${tdjHf}h${tdjMf}`)
-            
+            if (a == 10) {var tdjMf =0; var tdjHf = tdjHt}
             
 
 
-            var tdjJ = tdjHf/24; var tdjJt = JSON.stringify(tdjJ)
+            var tdjJ = tdjHf/24; var tdjJt = JSON.stringify(tdjJ); console.log(tdjJt)
             var a = 0; var b =1
-            while (tdjTest !== ".") {
-              var tdjTest = tdjJt.slice(a,b); var a =a+1; var b =b+1
+            while (tdjTest !== "." && a !== 6) {
+              var tdjTest = tdjJt.slice(a,b); var a =a+1; var b =b+1; console.log(tdjTest, a)
               var tdjJour = tdjJt.slice(a-1); var tdjJh = tdjJour*24
-
-            }; var tdjJtf = JSON.stringify(tdjJh); var tdjJF = tdjJtf.slice(0,2); 
+            };  var tdjJtf = JSON.stringify(tdjJh); var tdjJF = tdjJtf.slice(0,2); var tdjJFPOINTS = tdjJtf.slice(1,2)
             var tdjHeureF = tdjJt.slice(0, a-1);
-    
-            if (tdjJh > `${tdjJF}.90`) {var tdjJF = tdjJF-1+2}
-              if (tdjM > `${tdjMf}.90`) {var tdjMf = tdjMf-1+2}
+           if ( a == 6) {var tdjHeureF = tdjJ; var tdjJF =0}
+
+           if (tdjJFPOINTS == ".") {var tdjJtf =tdjJtf.slice(0,1)}
+            if (tdjMfPOINTS == ".") {var tdjMf = tdjMt.slice(0,1)}
+          if (tdjJh > `${tdjJF}.90`) {var tdjJF = tdjJF-1+2}
+            if (tdjM > `${tdjMf}.90`) {var tdjMf = tdjMf-1+2}
 
           if (CI1 !== undefined) {var clanName = Clanbody.name} else {var clanName = "Pas de clan"}
 
