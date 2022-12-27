@@ -10,6 +10,8 @@ module.exports = {
   examples: ['prefix ?'],
   description: "Change le prefix du bot",
     async run (client, message, args) {
+      if (args[0] == undefined) return message.reply('merci d\'entrer un \`prefix\` apres le nom de la commande');
+
       const newPrefix = args[0]
       const oldPrefix = JSON.parse(readFileSync(`././Information/prefix/prefix.json`, 'utf-8'))
       const embed = new MessageEmbed()
