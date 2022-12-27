@@ -19,19 +19,22 @@ module.exports = {
         var nom = args[n]
         console.log(nom)
           const Mname = await message.channel.send(`Lecture de l'id de ${nom}`)
-          const Merr = await message.channel.send(`- - - - - - -`)
+
           if (args[0] == "gemme" || args[0] == "Gemme") {var g = 0
         try {
-          var gemme = JSON.parse(readFileSync(`././Information/Gemme/Member-Pseudo/${nom}.json`, 'utf-8'))} catch (err) {var g = 1}}
+          var gemme = JSON.parse(readFileSync(`././Information/Gemme/Member-Pseudo/${nom}.json`, 'utf-8'))} catch (err) {var g = 2}}
 
           if (args[0] == "or" || args[0] == "Or") {var g =1
         try {
-          var or = JSON.parse(readFileSync(`././Information/Or/Member-Pseudo/${nom}.json`, 'utf-8'))} catch (err) {var g =0}}
+          var or = JSON.parse(readFileSync(`././Information/Or/Member-Pseudo/${nom}.json`, 'utf-8'))} catch (err) {var g =2}}
 
-          if (or.Or > 499 && args[0] == "or"|| args[0] == "gemme" && gemme.Gemme > 1) {
+         
 
-        if (g == 1) {var idn1 = or.PlayerId}
-        else if (g == 0) {var idn1 = gemme.PlayerId}
+        if (g == 1) {var idn1 = or.PlayerId; var ressource = or.Or}
+        else if (g == 0) {var idn1 = gemme.PlayerId; var ressource = gemme.Gemme}
+        else if (g == 2) {return Mname.edit({content:`${nom} n'a pas de don dans la base de donné (?donadd pour actualiser les dons)`})}
+
+        const Merr = await message.channel.send(`- - - - - - -`)
 
         var Quests = await superagent.put(`https://api.wolvesville.com/clans/${process.env.CLAN_ID}/members/${idn1}/participateInQuests`)
         .send({participateInQuests: true})
@@ -65,11 +68,14 @@ module.exports = {
         const embed = new MessageEmbed()
               .setAuthor({name : `Statut de participation`})
               .setColor('WHITE')
-              .addFields({ name: 'Pseudo', value: `${nom}`, inline: false}, { name: 'Participation à la quête:', value: `true`, inline: false})
+              .addFields({ name: 'Pseudo', value: `${nom}`, inline: true},
+              { name: 'Montant en banque', value: `${ressource}`, inline: true}, 
+              { name: 'Participation à la quête:', value: `true`, inline: false})
               .setTimestamp();
     
               Merr.edit({content: ' ', embeds : [embed]}); Mname.delete()
-            var n = n+1;}}
+            var n = n+1;}
+            message.channel.send(`Activation de la quête de ${n-1} joueurs`)
 
     },
     options:[

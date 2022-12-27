@@ -7,15 +7,15 @@ module.exports = {
   ownerOnly: false,
   usage: 'profile',
   examples: ['profile'],
-  description: "La commande profil(e) de ewwen",
+  description: "La commande profil(e) de ewwen/magmelqi",
     async run (client, message, args) {
-      const tryPong = await message.channel.send(`Profil(e) de ${message.author.username} en cours... un instant`);
+      const tryPong = await message.channel.send(`Profil(e) de ${message.content.substring(8).trim()} en cours... un instant`);
       await new Promise(resolve => setTimeout(resolve, 1000))
 
       const embed = new MessageEmbed()
-       .setTitle('Profile')
+       .setTitle('Profil~~e~~ ')
        .setThumbnail(client.user.displayAvatarURL())
-       .setDescription(`Non, ewwen c'est ?profil`)
+       .setDescription(`Non, ${message.author.username} c'est : \n?profil ${message.content.substring(8).trim()}`)
        .setTimestamp()
        .setAuthor({ name: `Lusky34` })
        .setFooter({ text: message.author.username, iconeURL: message.author.displayAvatarURL() })
@@ -28,13 +28,13 @@ module.exports = {
       interaction.reply({content: `Profil(e) de ${interaction.user.username} en cours... un instant`, ephemeral: true});
 
       const embed = new MessageEmbed()
-      .setTitle('Profile')
+      .setTitle('Profil~~e~~ ')
       .setThumbnail(client.user.displayAvatarURL())
-      .setDescription(`Non, ewwen c'est ?profil`)
+      .setDescription(`Non, ${interaction.user.username} c'est : \n?profil [pseudo]`)
       .setTimestamp()
       .setAuthor({ name: `Lusky34` })
       .setFooter({ text: interaction.user.username, iconeURL: interaction.user.displayAvatarURL() })
 
-    interaction.channel.send({ content: " ", embeds: [embed]});
+    interaction.editReply({ content: " ", embeds: [embed]});
   },
 };

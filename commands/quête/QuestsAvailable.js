@@ -129,6 +129,17 @@ module.exports = {
         poll4.react('👍🏽');
         poll4.react('👎🏽');var orVar = orVar+1}
 
+      if (purchasableWithGems == "true" && i == 3 &&text.promoImageUrl !== undefined) {
+        const embed4 = new MessageEmbed()
+          .setTitle(`Skin gemme ${gemmeVar}`)
+          .setColor('#FF69B4')
+          .setDescription("Oui 👍🏽 Non 👎🏽")
+          .setImage(text.promoImageUrl)
+          .setTimestamp()
+       const poll4 = await message.channel.send({ embeds : [embed4], fetchReply: true});
+        poll4.react('👍🏽');
+        poll4.react('👎🏽');var gemmeVar = gemmeVar+1}
+
 
      if (purchasableWithGems == "fals" && i == 4 &&text.promoImageUrl !== undefined) {
         const embed5 = new MessageEmbed()
@@ -141,6 +152,18 @@ module.exports = {
         poll5.react('👍🏾');
         poll5.react('👎🏾');var orVar = orVar+1}
 
+        if (purchasableWithGems == "true" && i == 4 &&text.promoImageUrl !== undefined) {
+        const embed5 = new MessageEmbed()
+          .setTitle(`Skin gemme ${gemmeVar}`)
+          .setColor('#FF69B4')
+          .setDescription("Oui 👍🏾 Non 👎🏾")
+          .setImage(text.promoImageUrl)
+          .setTimestamp()
+       const poll5 = await message.channel.send({ embeds : [embed5], fetchReply: true});
+        poll5.react('👍🏾');
+        poll5.react('👎🏾');var gemmeVar = gemmeVar+1}
+
+
         if (purchasableWithGems == "fals" && i == 5 &&text.promoImageUrl !== undefined) { 
          const embed6 = new MessageEmbed()
         .setTitle(`Skin or ${orVar}`)
@@ -151,6 +174,17 @@ module.exports = {
        const poll6 = await message.channel.send({ embeds : [embed6], fetchReply: true});
           poll6.react('👍🏿');
           poll6.react('👎🏿'); var orVar = orVar+1}
+
+         if (purchasableWithGems == "true" && i == 5 &&text.promoImageUrl !== undefined) {
+        const embed6 = new MessageEmbed()
+          .setTitle(`Skin gemme ${gemmeVar}`)
+          .setColor('#FF69B4')
+          .setDescription("Oui 👍🏿 Non 👎🏿")
+          .setImage(text.promoImageUrl)
+          .setTimestamp()
+       const poll6 = await message.channel.send({ embeds : [embed6], fetchReply: true});
+        poll6.react('👍🏿');
+        poll6.react('👎🏿');var gemmeVar = gemmeVar+1}
        }}catch (err) {}
 
     const embed7 = new MessageEmbed()
@@ -177,6 +211,7 @@ module.exports = {
          else {return interaction.editReply({content:`Erreur: ${err}`})}});
         var objErr= JSON.stringify(Questsavailable);
         
+        if (objErr !== undefined) {var Clan = Questsavailable.body; var imageB1=JSON.stringify(Clan)}
         var i = 2
         while (objErr == undefined) {await new Promise(resolve => setTimeout(resolve, 1000))
           var Questsavailable = await superagent.get(`https://api.wolvesville.com/clans/${process.env.CLAN_ID}/quests/available`)
@@ -271,8 +306,7 @@ module.exports = {
         poll3.react('👍🏼');
         poll3.react('👎🏼');var gemmeVar = gemmeVar+1}
  
- 
-      if (purchasableWithGems == "fals" && i == 3 &&text.promoImageUrl !== undefined) {
+        if (purchasableWithGems == "fals" && i == 3 &&text.promoImageUrl !== undefined) {
          const embed4 = new MessageEmbed()
            .setTitle(`Skin or ${orVar}`)
            .setColor('#FFA500')
@@ -282,6 +316,17 @@ module.exports = {
         const poll4 = await interaction.channel.send({ embeds : [embed4], fetchReply: true});
          poll4.react('👍🏽');
          poll4.react('👎🏽');var orVar = orVar+1}
+ 
+       if (purchasableWithGems == "true" && i == 3 &&text.promoImageUrl !== undefined) {
+         const embed4 = new MessageEmbed()
+           .setTitle(`Skin gemme ${gemmeVar}`)
+           .setColor('#FF69B4')
+           .setDescription("Oui 👍🏽 Non 👎🏽")
+           .setImage(text.promoImageUrl)
+           .setTimestamp()
+        const poll4 = await interaction.channel.send({ embeds : [embed4], fetchReply: true});
+         poll4.react('👍🏽');
+         poll4.react('👎🏽');var gemmeVar = gemmeVar+1}
  
  
       if (purchasableWithGems == "fals" && i == 4 &&text.promoImageUrl !== undefined) {
@@ -294,18 +339,41 @@ module.exports = {
         const poll5 = await interaction.channel.send({ embeds : [embed5], fetchReply: true});
          poll5.react('👍🏾');
          poll5.react('👎🏾');var orVar = orVar+1}
-
+ 
+         if (purchasableWithGems == "true" && i == 4 &&text.promoImageUrl !== undefined) {
+         const embed5 = new MessageEmbed()
+           .setTitle(`Skin gemme ${gemmeVar}`)
+           .setColor('#FF69B4')
+           .setDescription("Oui 👍🏾 Non 👎🏾")
+           .setImage(text.promoImageUrl)
+           .setTimestamp()
+        const poll5 = await interaction.channel.send({ embeds : [embed5], fetchReply: true});
+         poll5.react('👍🏾');
+         poll5.react('👎🏾');var gemmeVar = gemmeVar+1}
+ 
+ 
          if (purchasableWithGems == "fals" && i == 5 &&text.promoImageUrl !== undefined) { 
-            const embed6 = new MessageEmbed()
-           .setTitle(`Skin or ${orVar}`)
-           .setColor('#FFA500')
+          const embed6 = new MessageEmbed()
+         .setTitle(`Skin or ${orVar}`)
+         .setColor('#FFA500')
+         .setDescription("Oui 👍🏿 Non 👎🏿")
+         .setImage(text.promoImageUrl)
+         .setTimestamp()
+        const poll6 = await interaction.channel.send({ embeds : [embed6], fetchReply: true});
+           poll6.react('👍🏿');
+           poll6.react('👎🏿'); var orVar = orVar+1}
+ 
+          if (purchasableWithGems == "true" && i == 5 &&text.promoImageUrl !== undefined) {
+         const embed6 = new MessageEmbed()
+           .setTitle(`Skin gemme ${gemmeVar}`)
+           .setColor('#FF69B4')
            .setDescription("Oui 👍🏿 Non 👎🏿")
            .setImage(text.promoImageUrl)
            .setTimestamp()
         const poll6 = await interaction.channel.send({ embeds : [embed6], fetchReply: true});
          poll6.react('👍🏿');
-         poll6.react('👎🏿'); var orVar = orVar+1}
-     }}catch (err) {}
+         poll6.react('👎🏿');var gemmeVar = gemmeVar+1}
+        }}catch (err) {}
  
      const embed7 = new MessageEmbed()
            .setTitle("Avez-vous déjà payé les 500 or pour la quête ? (Si quête or)")

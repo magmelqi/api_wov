@@ -46,18 +46,87 @@ module.exports = {
             var InfoB = JSON.parse(readFileSync(`././Information/xp/Member-Id/${timestampH}/${xpPseudoO}.json`, 'utf-8'))} catch (err) { var InfoB = 0}
              var Xp2 = InfoB.Xp; var XpA = Xp1-Xp2;
     
-            if (XpA < 2000) { emebed.addFields({name: '- - - - - - - - - - - - - - - - - - - - - - - - - -',value:`+\`❌\` \`${InfoA.Pseudo}\` a rejoins le \`${joinTf}\`, \nxp: \`${XpA}\` sur \`2000\`xp requis`});console.log(InfoA.Pseudo, `${XpA} = ${Xp1} - ${Xp2}`)} else {console.log(InfoA.Pseudo, `${XpA} = ${Xp1} - ${Xp2}`)};
+            if (XpA < 2000) {console.log(InfoA.Pseudo, `${XpA} = ${Xp1} - ${Xp2}`)
+            var n = 0
+
+            try { var timestampL2 = `${dayjs().add(-1, 'day').add(-1, 'hour').format("DD-MM-YYYY")}`;
+            var InfoJ1s = JSON.parse(readFileSync(`././Information/xp/Member-Id/${timestampL2}/${xpPseudoO}.json`, 'utf-8'))}catch(err) {}
+
+            try { var timestampL1 = `${dayjs().add(-9, 'day').add(-1, 'hour').format("DD-MM-YYYY")}`;
+              var InfoJ1 = JSON.parse(readFileSync(`././Information/xp/Member-Id/${timestampL1}/${xpPseudoO}.json`, 'utf-8'))
+            var xpJ1 =  InfoJ1s.Xp - InfoJ1.Xp}catch(err) {}
+
+            if (xpJ1 == undefined) {}
+            else if (xpJ1 > 1999) {}
+            else if (xpJ1 < 2000) { var n = n+1
+
+              try { var timestampL2 = `${dayjs().add(-2, 'day').add(-1, 'hour').format("DD-MM-YYYY")}`;
+            var InfoJ2s = JSON.parse(readFileSync(`././Information/xp/Member-Id/${timestampL2}/${xpPseudoO}.json`, 'utf-8'))}catch(err) {}
+
+            try { var timestampL1 = `${dayjs().add(-10, 'day').add(-1, 'hour').format("DD-MM-YYYY")}`;
+              var InfoJ2 = JSON.parse(readFileSync(`././Information/xp/Member-Id/${timestampL1}/${xpPseudoO}.json`, 'utf-8'))
+            var xpJ2 =  InfoJ2s.Xp - InfoJ2.Xp}catch(err) {} 
+          }
+
+            if (xpJ2 == undefined ) {}
+            else if ( xpJ2 > 1999) {}
+            else if (xpJ2 < 2000) { var n = n+1
+
+              try { var timestampL2 = `${dayjs().add(-3, 'day').add(-1, 'hour').format("DD-MM-YYYY")}`;
+            var InfoJ3s = JSON.parse(readFileSync(`././Information/xp/Member-Id/${timestampL2}/${xpPseudoO}.json`, 'utf-8'))}catch(err) {}
+
+            try { var timestampL1 = `${dayjs().add(-11, 'day').add(-1, 'hour').format("DD-MM-YYYY")}`;
+              var InfoJ3 = JSON.parse(readFileSync(`././Information/xp/Member-Id/${timestampL1}/${xpPseudoO}.json`, 'utf-8'))
+            var xpJ3 =  InfoJ3s.Xp - InfoJ3.Xp}catch(err) {}
+          }
+
+            if (xpJ3 == undefined) {}
+            else if (xpJ3 > 1999) {}
+            else if (xpJ3 < 2000) { var n = n+1
+
+              try { var timestampL2 = `${dayjs().add(-4, 'day').add(-1, 'hour').format("DD-MM-YYYY")}`;
+            var InfoJ4s = JSON.parse(readFileSync(`././Information/xp/Member-Id/${timestampL2}/${xpPseudoO}.json`, 'utf-8'))}catch(err) {}
+
+            try { var timestampL1 = `${dayjs().add(-12, 'day').add(-1, 'hour').format("DD-MM-YYYY")}`;
+              var InfoJ4 = JSON.parse(readFileSync(`././Information/xp/Member-Id/${timestampL1}/${xpPseudoO}.json`, 'utf-8'))
+            var xpJ4 =  InfoJ4s.Xp - InfoJ4.Xp}catch(err) {}
+          }
+
+          if (xpJ4 == undefined) {}
+          else if (xpJ4 > 1999) {}
+          else if (xpJ4 < 2000) { var n = n+1 
+
+            try { var timestampL2 = `${dayjs().add(-5, 'day').add(-1, 'hour').format("DD-MM-YYYY")}`;
+            var InfoJ5s = JSON.parse(readFileSync(`././Information/xp/Member-Id/${timestampL2}/${xpPseudoO}.json`, 'utf-8'))}catch(err) {}
+
+            try { var timestampL1 = `${dayjs().add(-13, 'day').add(-1, 'hour').format("DD-MM-YYYY")}`;
+              var InfoJ5 = JSON.parse(readFileSync(`././Information/xp/Member-Id/${timestampL1}/${xpPseudoO}.json`, 'utf-8'))
+            var xpJ5 =  InfoJ5s.Xp - InfoJ5.Xp}catch(err) {}
+        }
+
+        if (xpJ5 == undefined) {}
+          else if ( xpJ5 > 1999) {}
+          else if (xpJ5 < 2000) { var n = n+1 } 
+
+          if ( n !==0) {
+            if ( n == 1) {var xpvalue = `A du être avertis hier !`}
+            else if ( n == 2) {var xpvalue = `A du être avertis avant-hier !`}
+            else if ( n == 3) {var xpvalue = `A du être avertis depuis 3 jours, son exclusion approche !`}
+            else if ( n == 4) {var xpvalue = `A du être avertis depuis 4 jours, son exclusion approche a grand pas !`}
+            else if ( n == 5) {var xpvalue = `A exclure !`}
+          emebed.addFields({name:'- - - - - - - - - - - - - - - - - - - - - - - - - -', value: `+\`❌\` \`${InfoA.Pseudo}\` a rejoins le \`${joinTf}\`, \nxp: \`${XpA}\` sur \`2000\`xp requis\nSous les 2000 xp depuis ${n} jours\n${xpvalue}` })
+        } else {emebed.addFields({name:'- - - - - - - - - - - - - - - - - - - - - - - - - -', value: `+\`❌\` \`${InfoA.Pseudo}\` a rejoins le \`${joinTf}\`, \nxp: \`${XpA}\` sur \`2000\`xp requis\nA avertir !` })}
+
+        } else {console.log(InfoA.Pseudo, `${XpA} = ${Xp1} - ${Xp2}`)};
 
 
 
           if (joinTf==timestampB ) {
 
-          try {
-          var InfoC = JSON.parse(readFileSync(`././Information/xp/Member-Id/${timestampA}/${xpPseudoO}.json`, 'utf-8'))} catch (err) {message.channel.send(`Erreur ${InfoA.Pseudo} n'a pas d'xp enregistré pour avant-hier: ${timestampA}`); var InfoC = 0}
           
-          if (Xp1 > 1000) {emebed.addFields({name: '- - - - - - - - - - - - - - - - - - - - - - - - - -',value:`+\`✅\` \`${InfoA.Pseudo}\` a rejoins le \`${joinTf}\`, \nxp: \`${Xp1}\` sur \`1000\`xp requis`});console.log(InfoC.Pseudo,  Xp1)} 
+          if (Xp1 > 1000) {emebed.addFields({name: '- - - - - - - - - - - - - - - - - - - - - - - - - -',value:`+\`✅\` \`${InfoA.Pseudo}\` a rejoins le \`${joinTf}\`, \nxp: \`${Xp1}\` sur \`1000\`xp requis`});console.log(InfoA.Pseudo,  Xp1)} 
           else {
-            emebed.addFields({name: '- - - - - - - - - - - - - - - - - - - - - - - - - -',value:`+\`❌\` \`${InfoA.Pseudo}\` a rejoins le \`${joinTf}\`, \nxp: \`${Xp1}\` sur \`1000\`xp requis`});console.log(InfoC.Pseudo,  Xp1)}
+            emebed.addFields({name: '- - - - - - - - - - - - - - - - - - - - - - - - - -',value:`+\`❌\` \`${InfoA.Pseudo}\` a rejoins le \`${joinTf}\`, \nxp: \`${Xp1}\` sur \`1000\`xp requis`});console.log(InfoA.Pseudo,  Xp1)}
         } 
       }}catch(err) {console.log(err)}
 
@@ -106,19 +175,86 @@ module.exports = {
            try {
              var InfoB = JSON.parse(readFileSync(`././Information/xp/Member-Id/${timestampH}/${xpPseudoO}.json`, 'utf-8'))} catch (err) { var InfoB = 0}
               var Xp2 = InfoB.Xp; var XpA = Xp1-Xp2;
-     
-             if (XpA < 2000) { emebed.addFields({name: '- - - - - - - - - - - - - - - - - - - - - - - - - -',value:`+\`❌\` \`${InfoA.Pseudo}\` a rejoins le \`${joinTf}\`, \nxp: \`${XpA}\` sur \`2000\`xp requis`});console.log(InfoA.Pseudo, `${XpA} = ${Xp1} - ${Xp2}`)} else {console.log(InfoA.Pseudo, `${XpA} = ${Xp1} - ${Xp2}`)};
- 
+
+             if (XpA < 2000) {console.log(InfoA.Pseudo, `${XpA} = ${Xp1} - ${Xp2}`)
+            var n = 0
+
+            try { var timestampL2 = `${dayjs().add(-1, 'day').add(-1, 'hour').format("DD-MM-YYYY")}`;
+            var InfoJ1s = JSON.parse(readFileSync(`././Information/xp/Member-Id/${timestampL2}/${xpPseudoO}.json`, 'utf-8'))}catch(err) {}
+
+            try { var timestampL1 = `${dayjs().add(-9, 'day').add(-1, 'hour').format("DD-MM-YYYY")}`;
+              var InfoJ1 = JSON.parse(readFileSync(`././Information/xp/Member-Id/${timestampL1}/${xpPseudoO}.json`, 'utf-8'))
+            var xpJ1 =  InfoJ1s.Xp - InfoJ1.Xp}catch(err) {}
+
+            if (xpJ1 == undefined) {}
+            else if (xpJ1 > 1999) {}
+            else if (xpJ1 < 2000) { var n = n+1
+
+              try { var timestampL2 = `${dayjs().add(-2, 'day').add(-1, 'hour').format("DD-MM-YYYY")}`;
+            var InfoJ2s = JSON.parse(readFileSync(`././Information/xp/Member-Id/${timestampL2}/${xpPseudoO}.json`, 'utf-8'))}catch(err) {}
+
+            try { var timestampL1 = `${dayjs().add(-10, 'day').add(-1, 'hour').format("DD-MM-YYYY")}`;
+              var InfoJ2 = JSON.parse(readFileSync(`././Information/xp/Member-Id/${timestampL1}/${xpPseudoO}.json`, 'utf-8'))
+            var xpJ2 =  InfoJ2s.Xp - InfoJ2.Xp}catch(err) {} 
+          }
+
+            if (xpJ2 == undefined ) {}
+            else if ( xpJ2 > 1999) {}
+            else if (xpJ2 < 2000) { var n = n+1
+
+              try { var timestampL2 = `${dayjs().add(-3, 'day').add(-1, 'hour').format("DD-MM-YYYY")}`;
+            var InfoJ3s = JSON.parse(readFileSync(`././Information/xp/Member-Id/${timestampL2}/${xpPseudoO}.json`, 'utf-8'))}catch(err) {}
+
+            try { var timestampL1 = `${dayjs().add(-11, 'day').add(-1, 'hour').format("DD-MM-YYYY")}`;
+              var InfoJ3 = JSON.parse(readFileSync(`././Information/xp/Member-Id/${timestampL1}/${xpPseudoO}.json`, 'utf-8'))
+            var xpJ3 =  InfoJ3s.Xp - InfoJ3.Xp}catch(err) {}
+          }
+
+            if (xpJ3 == undefined) {}
+            else if (xpJ3 > 1999) {}
+            else if (xpJ3 < 2000) { var n = n+1
+
+              try { var timestampL2 = `${dayjs().add(-4, 'day').add(-1, 'hour').format("DD-MM-YYYY")}`;
+            var InfoJ4s = JSON.parse(readFileSync(`././Information/xp/Member-Id/${timestampL2}/${xpPseudoO}.json`, 'utf-8'))}catch(err) {}
+
+            try { var timestampL1 = `${dayjs().add(-12, 'day').add(-1, 'hour').format("DD-MM-YYYY")}`;
+              var InfoJ4 = JSON.parse(readFileSync(`././Information/xp/Member-Id/${timestampL1}/${xpPseudoO}.json`, 'utf-8'))
+            var xpJ4 =  InfoJ4s.Xp - InfoJ4.Xp}catch(err) {}
+          }
+
+          if (xpJ4 == undefined) {}
+          else if (xpJ4 > 1999) {}
+          else if (xpJ4 < 2000) { var n = n+1 
+
+            try { var timestampL2 = `${dayjs().add(-5, 'day').add(-1, 'hour').format("DD-MM-YYYY")}`;
+            var InfoJ5s = JSON.parse(readFileSync(`././Information/xp/Member-Id/${timestampL2}/${xpPseudoO}.json`, 'utf-8'))}catch(err) {}
+
+            try { var timestampL1 = `${dayjs().add(-13, 'day').add(-1, 'hour').format("DD-MM-YYYY")}`;
+              var InfoJ5 = JSON.parse(readFileSync(`././Information/xp/Member-Id/${timestampL1}/${xpPseudoO}.json`, 'utf-8'))
+            var xpJ5 =  InfoJ5s.Xp - InfoJ5.Xp}catch(err) {}
+        }
+
+        if (xpJ5 == undefined) {}
+          else if ( xpJ5 > 1999) {}
+          else if (xpJ5 < 2000) { var n = n+1 } 
+
+          if ( n !==0) {
+            if ( n == 1) {var xpvalue = `A du être avertis hier !`}
+            else if ( n == 2) {var xpvalue = `A du être avertis avant-hier !`}
+            else if ( n == 3) {var xpvalue = `A du être avertis depuis 3 jours, son exclusion approche !`}
+            else if ( n == 4) {var xpvalue = `A du être avertis depuis 4 jours, son exclusion approche a grand pas !`}
+            else if ( n == 5) {var xpvalue = `A exclure !`}
+          emebed.addFields({name:'- - - - - - - - - - - - - - - - - - - - - - - - - -', value: `+\`❌\` \`${InfoA.Pseudo}\` a rejoins le \`${joinTf}\`, \nxp: \`${XpA}\` sur \`2000\`xp requis\nSous les 2000 xp depuis ${n} jours\n${xpvalue}` })
+        } else {emebed.addFields({name:'- - - - - - - - - - - - - - - - - - - - - - - - - -', value: `+\`❌\` \`${InfoA.Pseudo}\` a rejoins le \`${joinTf}\`, \nxp: \`${XpA}\` sur \`2000\`xp requis\nA avertir !` })}
+
+        } else {console.log(InfoA.Pseudo, `${XpA} = ${Xp1} - ${Xp2}`)};
  
  
            if (joinTf==timestampB ) {
- 
-           try {
-           var InfoC = JSON.parse(readFileSync(`././Information/xp/Member-Id/${timestampA}/${xpPseudoO}.json`, 'utf-8'))} catch (err) {interaction.editReply({content:`Erreur ${InfoA.Pseudo} n'a pas d'xp enregistré pour avant-hier: ${timestampA}`, ephemeral:true}); var InfoC = 0}
            
-           if (Xp1 > 1000) {emebed.addFields({name: '- - - - - - - - - - - - - - - - - - - - - - - - - -',value:`+\`✅\` \`${InfoA.Pseudo}\` a rejoins le \`${joinTf}\`, \nxp: \`${Xp1}\` sur \`1000\`xp requis`});console.log(InfoC.Pseudo,  Xp1)} 
+           if (Xp1 > 1000) {emebed.addFields({name: '- - - - - - - - - - - - - - - - - - - - - - - - - -',value:`+\`✅\` \`${InfoA.Pseudo}\` a rejoins le \`${joinTf}\`, \nxp: \`${Xp1}\` sur \`1000\`xp requis`});console.log(InfoA.Pseudo,  Xp1)} 
            else {
-             emebed.addFields({name: '- - - - - - - - - - - - - - - - - - - - - - - - - -',value:`+\`❌\` \`${InfoA.Pseudo}\` a rejoins le \`${joinTf}\`, \nxp: \`${Xp1}\` sur \`1000\`xp requis`});console.log(InfoC.Pseudo,  Xp1)}
+             emebed.addFields({name: '- - - - - - - - - - - - - - - - - - - - - - - - - -',value:`+\`❌\` \`${InfoA.Pseudo}\` a rejoins le \`${joinTf}\`, \nxp: \`${Xp1}\` sur \`1000\`xp requis`});console.log(InfoA.Pseudo,  Xp1)}
          } 
        }}catch(err) {console.log(err)}
  

@@ -13,7 +13,7 @@ module.exports = {
       run: async(client, message, args) => {
         if (args[0] == undefined) return message.reply('merci d\'entrer un \`pseudo\` apres le nom de la commande');
 
-        var nom = args[0]
+        var nom = message.content.substring(7).trim()
         var Mprofil= await message.channel.send(`Recherche du profil de ${nom}...`)
         var profil = await superagent.get(`https://api.wolvesville.com/players/search?username=${nom}`) 
           .set( 'Authorization', process.env.WOV_TOKEN)
@@ -70,10 +70,7 @@ module.exports = {
 
             if (Clanbody.name == "Wolves Legion 🐺") {var tigre = "  🐅" }}
 
-          try {
-            var Created = `${data.creationTime.slice(0, -14)} à ${data.creationTime.slice(11, 13)-1+2}h${data.creationTime.slice(14,16)}`}catch(err) {}
-
-            var TotalGame = data.gameStats.totalWinCount + data.gameStats.totalLoseCount + data.gameStats.totalTieCount
+            var TotalGame = data.gameStats.totalWinCount + data.gameStats.totalLoseCount + data.gameStats.totalTieCount+data.gameStats.exitGameBySuicideCount
             var win = data.gameStats.totalWinCount*100 / TotalGame; var winP = JSON.stringify(win)
             var lose = data.gameStats.totalLoseCount*100 / TotalGame; var loseP = JSON.stringify(lose)
             var suicide = data.gameStats.exitGameBySuicideCount*100 / TotalGame; var suicideP = JSON.stringify(suicide)
@@ -102,14 +99,42 @@ module.exports = {
               var tdjHeureF = tdjJt.slice(0, a-1);
              if ( a == 6) {var tdjHeureF = tdjJ; var tdjJF =0}
 
-             if (tdjJFPOINTS == ".") {var tdjJtf =tdjJtf.slice(0,1)}
+             if (tdjJFPOINTS == ".") {var tdjJF =tdjJtf.slice(0,1)}
               if (tdjMfPOINTS == ".") {var tdjMf = tdjMt.slice(0,1)}
             if (tdjJh > `${tdjJF}.90`) {var tdjJF = tdjJF-1+2}
               if (tdjM > `${tdjMf}.90`) {var tdjMf = tdjMf-1+2}
             
-  
-            if (Clanbody.name !== undefined) {var clanName = Clanbody.name} else {var clanName = "Pas de clan"}
 
+            if (CI1 !== undefined) {var clanName = Clanbody.name} else {var clanName = "Pas de clan"}
+
+            var  HlastOnline = data.lastOnline.slice(11, 13)-1+2
+
+            var annéeLO =  data.lastOnline.slice(0, 4); var moisLO = data.lastOnline.slice(5, 7); var jourLO= data.lastOnline.slice(8, 10);
+
+            if (HlastOnline == 24) {var HlastOnline = "00"; var jourLO = jourLO-1+2
+            if (moisLO == 1 && jourLO == 32) {moisLO = moisLO-1+2; jourLO = "01"};
+            if (moisLO == 2 && jourLO == 29) {moisLO = moisLO-1+2; jourLO = "01"};
+            if (moisLO == 3 && jourLO == 32) {moisLO = moisLO-1+2; jourLO = "01"};
+            if (moisLO == 4 && jourLO == 31) {moisLO = moisLO-1+2; jourLO = "01"};
+            if (moisLO == 5 && jourLO == 32) {moisLO = moisLO-1+2; jourLO = "01"};
+            if (moisLO == 6 && jourLO == 31) {moisLO = moisLO-1+2; jourLO = "01"};
+            if (moisLO == 7 && jourLO == 32) {moisLO = moisLO-1+2; jourLO = "01"};
+            if (moisLO == 8 && jourLO == 32) {moisLO = moisLO-1+2; jourLO = "01"};
+            if (moisLO == 9 && jourLO == 31) {moisLO = moisLO-1+2; jourLO = "01"};
+            if (moisLO == 10 && jourLO == 32) {moisLO = moisLO-1+2; jourLO = "01"};
+            if (moisLO == 11 && jourLO == 31) {moisLO = moisLO-1+2; jourLO = "01"};
+            if (moisLO == 12 && jourLO == 32) {moisLO = "01"; jourLO = "01"; var annéeLO = annéeLO-1+2};
+           };
+
+            var DlastOnline = `${jourLO}/${moisLO}/${annéeLO}`
+  
+            try {
+              var  HcreationTime = data.creationTime.slice(11, 13)-1+2
+  
+              var annéeCT =  data.creationTime.slice(0, 4); var moisCT = data.creationTime.slice(5, 7); var jourCT = data.creationTime.slice(8, 10);
+  
+              var Created = `${jourCT}/${moisCT}/${annéeCT} à ${HcreationTime}h${data.creationTime.slice(14,16)}`}catch(err) {}
+  
           try{
             const embed = new MessageEmbed()
               .setAuthor({name : `Profil WOV`})
@@ -119,7 +144,7 @@ module.exports = {
                 { name: `Pseudo`, value: `${data.username} ${tigre ?? ""}`, inline: true}, 
                 { name: 'Niveau:', value: `${data.level}`, inline: true},
                 { name: `Clan:`, value: `${clanName}`},
-                { name: 'Dernière connexion:', value: `${data.lastOnline.slice(0, -14)} à ${data.lastOnline.slice(11, 13)-1+2}h${data.lastOnline.slice(14,16)}`,inline: true},
+                { name: 'Dernière connexion:', value: `${DlastOnline} à ${HlastOnline}h${data.lastOnline.slice(14,16)}`,inline: true},
                 { name: 'Création du compte:', value: `${Created ?? "Pas d'info disponible"}`, inline: true},
                 { name: `Temps de jeu:`, value: `${tdjHeureF} jours ${tdjJF}h ${tdjMf}min` },
                 { name: `Victoire:`, value: `${data.gameStats.totalWinCount} - ${winP.slice(0,2)}%`, inline:true},
@@ -197,10 +222,7 @@ module.exports = {
 
         if (Clanbody.name == "Wolves Legion 🐺") {var tigre = "  🐅" }}
 
-        try {
-          var Created = `${data.creationTime.slice(0, -14)} à ${data.creationTime.slice(11, 13)-1+2}h${data.creationTime.slice(14,16)}`}catch(err) {}
-
-          var TotalGame = data.gameStats.totalWinCount + data.gameStats.totalLoseCount + data.gameStats.totalTieCount
+          var TotalGame = data.gameStats.totalWinCount + data.gameStats.totalLoseCount + data.gameStats.totalTieCount+data.gameStats.exitGameBySuicideCount
           var win = data.gameStats.totalWinCount*100 / TotalGame; var winP = JSON.stringify(win)
           var lose = data.gameStats.totalLoseCount*100 / TotalGame; var loseP = JSON.stringify(lose)
           var suicide = data.gameStats.exitGameBySuicideCount*100 / TotalGame; var suicideP = JSON.stringify(suicide)
@@ -229,12 +251,40 @@ module.exports = {
             var tdjHeureF = tdjJt.slice(0, a-1);
            if ( a == 6) {var tdjHeureF = tdjJ; var tdjJF =0}
 
-           if (tdjJFPOINTS == ".") {var tdjJtf =tdjJtf.slice(0,1)}
+           if (tdjJFPOINTS == ".") {var tdjJF =tdjJtf.slice(0,1)}
             if (tdjMfPOINTS == ".") {var tdjMf = tdjMt.slice(0,1)}
           if (tdjJh > `${tdjJF}.90`) {var tdjJF = tdjJF-1+2}
             if (tdjM > `${tdjMf}.90`) {var tdjMf = tdjMf-1+2}
 
           if (CI1 !== undefined) {var clanName = Clanbody.name} else {var clanName = "Pas de clan"}
+
+          var  HlastOnline = data.lastOnline.slice(11, 13)-1+2
+
+          var annéeLO =  data.lastOnline.slice(0, 4); var moisLO = data.lastOnline.slice(5, 7); var jourLO= data.lastOnline.slice(8, 10);
+
+          if (HlastOnline == 24) {var HlastOnline = "00"; var jourLO = jourLO-1+2
+            if (moisLO == 1 && jourLO == 32) {moisLO = moisLO-1+2; jourLO = "01"};
+            if (moisLO == 2 && jourLO == 29) {moisLO = moisLO-1+2; jourLO = "01"};
+            if (moisLO == 3 && jourLO == 32) {moisLO = moisLO-1+2; jourLO = "01"};
+            if (moisLO == 4 && jourLO == 31) {moisLO = moisLO-1+2; jourLO = "01"};
+            if (moisLO == 5 && jourLO == 32) {moisLO = moisLO-1+2; jourLO = "01"};
+            if (moisLO == 6 && jourLO == 31) {moisLO = moisLO-1+2; jourLO = "01"};
+            if (moisLO == 7 && jourLO == 32) {moisLO = moisLO-1+2; jourLO = "01"};
+            if (moisLO == 8 && jourLO == 32) {moisLO = moisLO-1+2; jourLO = "01"};
+            if (moisLO == 9 && jourLO == 31) {moisLO = moisLO-1+2; jourLO = "01"};
+            if (moisLO == 10 && jourLO == 32) {moisLO = moisLO-1+2; jourLO = "01"};
+            if (moisLO == 11 && jourLO == 31) {moisLO = moisLO-1+2; jourLO = "01"};
+            if (moisLO == 12 && jourLO == 32) {moisLO = "01"; jourLO = "01"; var annéeLO = annéeLO-1+2};
+           };
+           
+          var DlastOnline = `${jourLO}/${moisLO}/${annéeLO}`
+
+          try {
+            var  HcreationTime = data.creationTime.slice(11, 13)-1+2
+
+            var annéeCT =  data.creationTime.slice(0, 4); var moisCT = data.creationTime.slice(5, 7); var jourCT = data.creationTime.slice(8, 10);
+
+            var Created = `${jourCT}/${moisCT}/${annéeCT} à ${HcreationTime}h${data.creationTime.slice(14,16)}`}catch(err) {}
 
         try{
           const embed = new MessageEmbed()
@@ -245,7 +295,7 @@ module.exports = {
               { name: `Pseudo`, value: `${data.username} ${tigre ?? ""}`, inline: true}, 
               { name: 'Niveau:', value: `${data.level}`, inline: true},
               { name: `Clan:`, value: `${clanName}`},
-              { name: 'Dernière connexion:', value: `${data.lastOnline.slice(0, -14)} à ${data.lastOnline.slice(11, 13)-1+2}h${data.lastOnline.slice(14,16)}`,inline: true},
+              { name: 'Dernière connexion:', value: `${DlastOnline} à ${HlastOnline}h${data.lastOnline.slice(14,16)}`,inline: true},
               { name: 'Création du compte:', value: `${Created ?? "Pas d'info disponible"}`, inline: true},
               { name: `Temps de jeu:`, value: `${tdjHeureF} jours ${tdjJF}h ${tdjMf}min` },
               { name: `Victoire:`, value: `${data.gameStats.totalWinCount} - ${winP.slice(0,2)}%`, inline:true},
