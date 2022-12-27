@@ -14,10 +14,15 @@ module.exports = {
       const oldPrefix = JSON.parse(readFileSync(`././Information/prefix/prefix.json`, 'utf-8'))
       const embed = new MessageEmbed()
       .setTitle("Prefix")
-      .setDescription(`Le prefix \`${oldPrefix.prefix}\` à été changé en \`${newPrefix}\`\nRedémarrage du bot `)
       .setTimestamp()
-      .setThumbnail(message.author.displayAvatarURL());
+      .setThumbnail(client.user.displayAvatarURL())
+      .setFooter({ text: message.author.username, iconeURL: message.author.displayAvatarURL() });
 
+      if (newPrefix == oldPrefix.prefix) {embed.setDescription(`Le nouveau prefix est identique à l'ancien prefix, veuillez en indiquer un autre si vous voulez le changer`)
+      return message.channel.send({embeds: [embed]})
+    }
+      else {embed.setDescription(`Le prefix \`${oldPrefix.prefix}\` à été changé en \`${newPrefix}\`\nRedémarrage du bot `)}
+    
       const info = {
         prefix: newPrefix
       }
@@ -39,9 +44,14 @@ module.exports = {
       const oldPrefix = JSON.parse(readFileSync(`././Information/prefix/prefix.json`, 'utf-8'))
       const embed = new MessageEmbed()
       .setTitle("Prefix")
-      .setDescription(`Le prefix \`${oldPrefix.prefix}\` à été changé en \`${newPrefix}\`\nRedémarrage du bot `)
       .setTimestamp()
-      .setThumbnail(message.author.displayAvatarURL());
+      .setThumbnail(client.user.displayAvatarURL())
+      .setFooter({ text: message.author.username, iconeURL: message.author.displayAvatarURL() });
+
+      if (newPrefix == oldPrefix.prefix) {embed.setDescription(`Le nouveau prefix est identique à l'ancien prefix, veuillez en indiquer un autre si vous voulez le changer`)
+      return message.channel.send({embeds: [embed]})
+    }
+      else {embed.setDescription(`Le prefix \`${oldPrefix.prefix}\` à été changé en \`${newPrefix}\`\nRedémarrage du bot `)}
 
       const info = {
         prefix: newPrefix
