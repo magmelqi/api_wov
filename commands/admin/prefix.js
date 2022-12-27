@@ -7,7 +7,7 @@ module.exports = {
   permissions: ['BAN_MEMBERS'],
   ownerOnly: false,
   usage: 'prefix [chaine de caractère]',
-  examples: ['prefix ?'],
+  examples: ['prefix ? | prefix !'],
   description: "Change le prefix du bot",
     async run (client, message, args) {
       if (args[0] == undefined) return message.reply('merci d\'entrer un \`prefix\` apres le nom de la commande');
