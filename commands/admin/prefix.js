@@ -4,7 +4,7 @@ const {writeFileSync, readFileSync} = require ("fs");
 module.exports = {
   name: "prefix",
   category: 'utils',
-  permissions: ['ADMINISTRATOR'],
+  permissions: ['BAN_MEMBERS'],
   ownerOnly: false,
   usage: 'prefix [chaine de caractère]',
   examples: ['prefix ?'],
