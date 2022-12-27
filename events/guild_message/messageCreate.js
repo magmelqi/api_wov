@@ -1,4 +1,5 @@
-const prefix = '?';
+const { readFileSync } = require ("fs");
+const prefix = JSON.parse(readFileSync(`././Information/prefix/prefix.json`, 'utf-8'))
 const ownerId = '385172057433964556';
 
 module.exports = {
@@ -13,9 +14,9 @@ module.exports = {
         if (message.content.startsWith('Salut')) {message.react('👻')}
         if (message.content.startsWith('salut')) {message.react('👻')}
         if (message.content.startsWith('Salut !')) {message.channel.send('Bouh !')}
-        if (!message.content.startsWith(prefix)) return;
+        if (!message.content.startsWith(prefix.prefix)) return;
         
-        const args = message.content.slice(prefix.length).trim().split(/ +/g);
+        const args = message.content.slice(prefix.prefix.length).trim().split(/ +/g);
         const cmdName = args.shift().toLowerCase();
         if (cmdName.length == 0) return;
         

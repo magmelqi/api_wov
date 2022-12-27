@@ -1,7 +1,8 @@
 const { MessageEmbed } = require ('discord.js');
-const { readdirSync } = require ('fs');
+const { readdirSync, readFileSync } = require ('fs');
 const commandFolder = readdirSync('./commands');
-const prefix = '?';
+const Newprefix = JSON.parse(readFileSync(`././Information/prefix/prefix.json`, 'utf-8'))
+const prefix = Newprefix.prefix
 
 const contexDescription = {}
 

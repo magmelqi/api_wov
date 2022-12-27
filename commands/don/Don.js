@@ -1,6 +1,7 @@
+const { MessageEmbed } = require('discord.js');
 const dotenv = require('dotenv'); dotenv.config();
 const {readFileSync, readdirSync} = require ("fs");
-const prefix = '?';
+const prefix = JSON.parse(readFileSync(`././Information/prefix/prefix.json`, 'utf-8'))
 
 module.exports = {
     name: "don",
@@ -9,14 +10,17 @@ module.exports = {
     ownerOnly: false,
     usage: 'don', 
     examples: ['don'],
-    description: `Donne la liste des personnes ayant fait un don pour le clan (Pour uptade la liste: ${prefix}donadd)`,
+    description: `Donne la liste des personnes ayant fait un don pour le clan (Pour uptade la liste: ${prefix.prefix}donadd)`,
        async run (client, message, args) {
         try {
           var DOr = readdirSync(`././Information/Or/Member-Id`, 'utf-8')} catch (err) {return console.log(err);}
           var Ort = JSON.stringify(DOr); 
       
-      
-          for(let i=0; i < DOr.length; i++)  {
+          const embed = new MessageEmbed()
+          .setTitle(`Liste des dons présent`)
+          .setTimestamp();
+          var n = 0
+          for(let i=0; i < DOr.length; i++)  { var n = n + 1
       
             var Orf = /.json"/g; var OrS = Ort.search(Orf)
             var Ors = Ort.slice(1, OrS+6); var Ort = Ort.slice(OrS+6); 
@@ -29,12 +33,14 @@ module.exports = {
               var Gemme = JSON.parse(readFileSync(`././Information/Gemme/Member-Id/${OrO}`, 'utf-8'))} catch (err) {}
       
                   try {
-              if (Or.Or > 499 && Gemme.Gemme > 0) {message.channel.send(`\`${Or.Pseudo}\` posséde: \`${Or.Or}\` or et \`${Gemme.Gemme}\` gemme`);}
-              else if (Gemme.Gemme > 0) {message.channel.send(`\`${Or.Pseudo}\` posséde: \`${Gemme.Gemme}\` gemme`);}
-              else if (Or.Or > 499 ) {message.channel.send(`\`${Or.Pseudo}\` posséde: \`${Or.Or}\` or`);}
+              if (Or.Or > 499 && Gemme.Gemme > 0) {embed.addFields({name: '- - - - - - - - - - - - - - - - - - - - - - - - - -', value:`\`${Or.Pseudo}\` posséde: \`${Or.Or}\` or et \`${Gemme.Gemme}\` gemme`});}
+              else if (Gemme.Gemme > 0) {embed.addFields({name: '- - - - - - - - - - - - - - - - - - - - - - - - - -', value:`\`${Or.Pseudo}\` posséde: \`${Gemme.Gemme}\` gemme`});}
+              else if (Or.Or > 499 ) {embed.addFields({name: '- - - - - - - - - - - - - - - - - - - - - - - - - -', value:`\`${Or.Pseudo}\` posséde: \`${Or.Or}\` or`});}
                   }catch (err) {}
             var Or = 0; var Gemme = 0
-          }},
+          }; embed.addFields({name: '- - - - - - - - - - - - - - - - - - - - - - - - - -', value: `${n} ayant 500 or ou 1 diamant en banque`})
+          message.channel.send({embeds: [embed]})
+        },
           async runSlash(client, interaction) { 
 
             interaction.reply({content: 'Affichage des dons suffisant pour la quête', ephemeral: true})
@@ -43,7 +49,11 @@ module.exports = {
               var Ort = JSON.stringify(DOr); 
           
           
-              for(let i=0; i < DOr.length; i++)  {
+              const embed = new MessageEmbed()
+              .setTitle(`Liste des dons présent`)
+              .setTimestamp();
+              var n = 0
+              for(let i=0; i < DOr.length; i++)  { var n = n + 1
           
                 var Orf = /.json"/g; var OrS = Ort.search(Orf)
                 var Ors = Ort.slice(1, OrS+6); var Ort = Ort.slice(OrS+6); 
@@ -56,10 +66,12 @@ module.exports = {
                   var Gemme = JSON.parse(readFileSync(`././Information/Gemme/Member-Id/${OrO}`, 'utf-8'))} catch (err) {}
           
                       try {
-                  if (Or.Or > 499 && Gemme.Gemme > 0) {interaction.channel.send(`\`${Or.Pseudo}\` posséde: \`${Or.Or}\` Or et \`${Gemme.Gemme}\` gemme`);}
-                  else if (Gemme.Gemme > 0) {interaction.channel.send(`\`${Or.Pseudo}\` posséde: \`${Gemme.Gemme}\` gemme`);}
-                  else if (Or.Or > 499 ) {interaction.channel.send(`\`${Or.Pseudo}\` posséde: \`${Or.Or}\` Or`);}
+                  if (Or.Or > 499 && Gemme.Gemme > 0) {embed.addFields({name: '- - - - - - - - - - - - - - - - - - - - - - - - - -', value:`\`${Or.Pseudo}\` posséde: \`${Or.Or}\` Or et \`${Gemme.Gemme}\` gemme`});}
+                  else if (Gemme.Gemme > 0) {embed.addFields({name: '- - - - - - - - - - - - - - - - - - - - - - - - - -', value:`\`${Or.Pseudo}\` posséde: \`${Gemme.Gemme}\` gemme`});}
+                  else if (Or.Or > 499 ) {embed.addFields({name: '- - - - - - - - - - - - - - - - - - - - - - - - - -', value:`\`${Or.Pseudo}\` posséde: \`${Or.Or}\` Or`});}
                       }catch (err) {}
                 var Or = 0; var Gemme = 0 }
+                embed.addFields({name: '- - - - - - - - - - - - - - - - - - - - - - - - - -', value: `${n} ayant 500 or ou 1 diamant en banque`})
+          interaction.channel.send({embeds: [embed]})
         }
       }

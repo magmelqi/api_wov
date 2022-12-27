@@ -14,10 +14,14 @@ module.exports = {
         //devGuild.commands.set([]);
         //const devGuild2 = await client.guilds.cache.get('724207157419180062',);
         //devGuild2.commands.set([]);
-        message.channel.send("3")
-        setTimeout(() => {message.channel.send("2");}, 1000);setTimeout(() => {message.channel.send("1");}, 2000);setTimeout(() => {message.channel.send("`POUF` bot relance");}, 3000);
+        await new Promise(resolve => setTimeout(resolve, 1000))
+        message.channel.send("2")
+        await new Promise(resolve => setTimeout(resolve, 1000))
+        message.channel.send("1")
+        await new Promise(resolve => setTimeout(resolve, 1000))
+        message.channel.send("`POUF` bot relancé")
         console.log("Le bot s'est relancé.");
-        setTimeout(() => {return process.exit();}, 3000);
+        return process.exit()
       },
       async runSlash (client, interaction) {
         await interaction.reply(`Exécution en cours...`)
@@ -26,9 +30,8 @@ module.exports = {
         //devGuild.commands.set([]);
         //const devGuild2 = await client.guilds.cache.get('724207157419180062',);
         //devGuild2.commands.set([]);
-        interaction.channel.send("3")
         setTimeout(() => {interaction.channel.send("2");}, 1000);setTimeout(() => {interaction.channel.send("1");}, 2000);setTimeout(() => {interaction.channel.send("`POUF` bot relance");}, 3000);
         console.log("Le bot s'est relancé.");
-        setTimeout(() => {return process.exit();}, 3000);
+        setTimeout(() => {return process.exit();}, 3100);
       }
     }
