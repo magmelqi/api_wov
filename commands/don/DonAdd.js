@@ -144,8 +144,9 @@ module.exports = {
           console.log(Gems.Pseudo, Gems.gems); embed.addFields({name: '- - - - - - - - - - - - - - - - - - - - - - - - - -', value:`${Gems.Pseudo}: ${Gems.gems}`})}}else {embed.addFields({name: '- - - - - - - - - - - - - - - - - - - - - - - - - -', value:`Le don de gemme de \`${InfoGemme.Pseudo}\` a déjà été comptabilisé`})}}
 
      var nb = i}}
-     if (nb > 1) {embed.addFields({name: '- - - - - - - - - - - - - - - - - - - - - - - - - -', value:`Update des dons de ${nb} membres`})} else {
-     embed.addFields({name: '- - - - - - - - - - - - - - - - - - - - - - - - - -', value:`Update des dons de ${nb} membre`})}
+     if (nb > 1) {embed.addFields({name: '- - - - - - - - - - - - - - - - - - - - - - - - - -', value:`Update des dons de ${nb} membres`})}
+     else if (nb == undefined) {embed.addFields({name: '- - - - - - - - - - - - - - - - - - - - - - - - - -', value:`Aucun don n'a été fait`})} 
+     else {embed.addFields({name: '- - - - - - - - - - - - - - - - - - - - - - - - - -', value:`Update des dons de ${nb} membre`})}
      message.channel.send({embeds: [embed]})
     },
 
@@ -267,8 +268,9 @@ module.exports = {
         console.log(Gems.Pseudo, Gems.gems); embed.addFields({name: '- - - - - - - - - - - - - - - - - - - - - - - - - -', value:`${Gems.Pseudo}: ${Gems.gems}`})}}else {embed.addFields({name: '- - - - - - - - - - - - - - - - - - - - - - - - - -', value:`Le don de gemme de \`${InfoGemme.Pseudo}\` a déjà été comptabilisé`})}}
 
    var nb = i}}
-   if (nb > 1) {embed.addFields({name: '- - - - - - - - - - - - - - - - - - - - - - - - - -', value:`Update des dons de ${nb} membres`})} else {
-   embed.addFields({name: '- - - - - - - - - - - - - - - - - - - - - - - - - -', value:`Update des dons de ${nb} membre`})}
+   if (nb > 1) {embed.addFields({name: '- - - - - - - - - - - - - - - - - - - - - - - - - -', value:`Update des dons de ${nb} membres`})}
+   else if (nb == undefined) {embed.addFields({name: '- - - - - - - - - - - - - - - - - - - - - - - - - -', value:`Aucun don n'a été fait`})} 
+   else {embed.addFields({name: '- - - - - - - - - - - - - - - - - - - - - - - - - -', value:`Update des dons de ${nb} membre`})}
    interaction.channel.send({embeds: [embed]})
    }
   }
