@@ -11,7 +11,7 @@ module.exports = {
     usage: 'mauto', 
     examples: ['mauto'],
     description: 'Envoie les messages envoyé sur wov en temps réel(1min de décalage) (pas config l\'id channel)',
-    async run (client, message, args) {const logChannel = client.channels.cache.get('1046792811065913366'); console.log('on');
+    async run (client, message, args) {const logChannel = client.channels.cache.get('1057688446933680248'); console.log('on');
     var Merr = await message.channel.send("On"); 
     test54 =async() => {
 

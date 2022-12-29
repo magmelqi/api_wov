@@ -13,26 +13,36 @@ module.exports = {
   description: "Suspens",
     async run (client, message, args) { 
         var nom = message.content.substring(9).trim(); console.log(nom)
+
+        const Statut = await message.channel.send(`Tracker sur ${nom}:`)
+        const Merr = await message.channel.send(`- - - - - - -`)
+
         const Messageclan = await superagent.get(`https://api.wolvesville.com/players/search?username=${nom}`)
         .set( 'Authorization', process.env.WOV_TOKEN)
         .set('Content-Type', 'application/json')
         .set('Accept', 'application/json')
-        .catch((err) => {return message.channel.send(`Erreur a la 1ère requête: ${err}`), console.log(err)});
+        .catch((err) => {
+          if (err == "Error: Too Many Requests") {Merr.edit({content:"Erreur a la 1ère requête\n\`2ème tentatives en cours...\`"})}
+          else if (err == "Error: Not Found") {return Merr.edit({content:`Pseudo inexistant`})}
+          else {return Merr.edit({content:`Erreur: ${err}`})}});
         var objErr= JSON.stringify(Messageclan);
 
         
-          if (objErr == undefined) {await new Promise(resolve => setTimeout(resolve, 5000));console.log('yo')
-            const Messageclan = await superagent.get(`https://api.wolvesville.com/players/search?username=${nom}`)
-          .set( 'Authorization', process.env.WOV_TOKEN)
-          .set('Content-Type', 'application/json')
-          .set('Accept', 'application/json')
-          .catch((err) => {message.channel.send(`Erreur a la 2ème requêtes\n\`3ème tentaives en cours...\` Ah bah il y en a pas flemme de mettre une 3ème requêtes`);return console.log(err)});
-          var text= Messageclan.text} else {var text= Messageclan.text}
-          const Statut = await message.channel.send(`Tracker sur ${nom}: on`)
+        if (objErr !== undefined) {var body = Messageclan.body}
+        var i = 2
+        while (objErr == undefined) {await new Promise(resolve => setTimeout(resolve, 1000))
+          const Messageclan = await superagent.get(`https://api.wolvesville.com/players/search?username=${nom}`)
+        .set( 'Authorization', process.env.WOV_TOKEN)
+        .set('Content-Type', 'application/json')
+        .set('Accept', 'application/json')
+        .catch((err) => {
+          if (err == "Error: Too Many Requests") {Merr.edit({content: `Erreur sur la recherche du \`profil\`, tentatives: \`${i}\``})}
+          else if (err == "Error: Not Found") {return Merr.edit({content:`Pseudo inexistant`})}
+          else {return Merr.edit({content:`Erreur: ${err}`})}});
+          var objErr= JSON.stringify(Messageclan);
+          try {var body = await Messageclan.body}catch(err) {}; var i = i+1}
+          Merr.delete()
           
-          
-
-        const body = Messageclan.body
         var name = body.username
         var connexion = body.lastOnline
         var connexionT = JSON.stringify(connexion); var heure = connexionT.slice(12, 14); var minute = connexionT.slice(15, 17)
@@ -43,28 +53,49 @@ module.exports = {
       }
       const objectToJson = JSON.stringify(info) ;writeFileSync(`././Information/secret/secret.json`, objectToJson)
 
+      var CoA = `${heure-1+2}:${minute}`
       const embed = new MessageEmbed()
       .setTitle(`Statut de connexion`)
       .setThumbnail(body.equippedAvatar.url)
       .setColor('LIGHT_GREY')
       .setAuthor({name: nom})
       .addFields(
-       { name: 'Dernière connexion:', value: `\`\`\`${Co}\`\`\``, inline: true},
+       { name: 'Dernière connexion:', value: `\`\`\`${CoA}\`\`\``, inline: true},
        { name: "Activité", value: `\`\`\`none\`\`\``, inline: true},
       )
       .setTimestamp()
       .setFooter({text: name,iconeURL: message.author.displayAvatarURL() })
       
       Statut.edit({ content: ' ', embeds: [embed] });
-        setInterval(async()=> {
-        const Messageclan = await superagent.get(`https://api.wolvesville.com/players/search?username=${nom}`)
-        .set( 'Authorization', process.env.WOV_TOKEN)
-        .set('Content-Type', 'application/json')
-        .set('Accept', 'application/json')
-        .catch((err) => {message.channel.send(`Erreur a la requête`); console.log(err)});
-        var objErr= JSON.stringify(Messageclan); if (objErr == undefined) {var timet = 30000} else {var timet= 300000}
-      
-        const body = Messageclan.body
+      var check = 5
+        var t = "yo"
+        while(t == "yo") {
+          const Messageclan = await superagent.get(`https://api.wolvesville.com/players/search?username=${nom}`)
+          .set( 'Authorization', process.env.WOV_TOKEN)
+          .set('Content-Type', 'application/json')
+          .set('Accept', 'application/json')
+          .catch((err) => {
+            if (err == "Error: Too Many Requests") {Merr.edit({content:"Erreur a la 1ère requête\n\`2ème tentatives en cours...\`"})}
+            else if (err == "Error: Not Found") {return Merr.edit({content:`Pseudo inexistant`})}
+            else {return Merr.edit({content:`Erreur: ${err}`})}});
+          var objErr= JSON.stringify(Messageclan);
+  
+          
+          if (objErr !== undefined) {var body = Messageclan.body}
+          var i = 2
+          while (objErr == undefined) {await new Promise(resolve => setTimeout(resolve, 1000))
+            const Messageclan = await superagent.get(`https://api.wolvesville.com/players/search?username=${nom}`)
+          .set( 'Authorization', process.env.WOV_TOKEN)
+          .set('Content-Type', 'application/json')
+          .set('Accept', 'application/json')
+          .catch((err) => {
+            if (err == "Error: Too Many Requests") {Merr.edit({content: `Erreur sur la recherche du \`profil\`, tentatives: \`${i}\``})}
+            else if (err == "Error: Not Found") {return Merr.edit({content:`Pseudo inexistant`})}
+            else {return Merr.edit({content:`Erreur: ${err}`})}});
+            var objErr= JSON.stringify(Messageclan);
+            try {var body = await Messageclan.body}catch(err) {}; var i = i+1}
+            Merr.delete()
+
         var name = body.username
         var connexion = body.lastOnline
         var connexionT = JSON.stringify(connexion); var heure = connexionT.slice(12, 14); var minute = connexionT.slice(15, 17)
@@ -75,14 +106,18 @@ module.exports = {
         var heureAncienne = connexionAncienneT.slice(1, 3); var minuteAncienne = connexionAncienneT.slice(4, 6)
         console.log(heureAncienne, minuteAncienne)
 
-        if (heure !== heureAncienne || minute !== minuteAncienne) {message.author.send(`${nom} s'est connecté`)
+        if (heure !== heureAncienne || minute !== minuteAncienne) {
+          
+          if (check !== 1) {message.author.send(`${nom} s'est connecté`); var check = 1}
+
+          var CoA = `${heure-1+2}:${minute}`
           const embed = new MessageEmbed()
           .setTitle(`Statut de connexion`)
           .setThumbnail(body.equippedAvatar.url)
           .setColor('GREEN')
           .setAuthor({name: nom})
           .addFields(
-           { name: 'Dernière connexion:', value: `\`\`\`${Co}\`\`\``, inline: true},
+           { name: 'Dernière connexion:', value: `\`\`\`${CoA}\`\`\``, inline: true},
            { name: "Activité", value: `\`\`\`connecté\`\`\``, inline: true},
           )
           .setTimestamp()
@@ -95,14 +130,18 @@ module.exports = {
             lastOnline: Co
         };const objectToJson = JSON.stringify(info) ;writeFileSync(`././Information/secret/secret.json`, objectToJson)
     }
-        else if (minute == minuteAncienne && heure == heureAncienne) {message.author.send(`${nom} s'est déconnecté`)
+        else if (minute == minuteAncienne && heure == heureAncienne) {
+          
+          if (check !== 0) {message.author.send(`${nom} s'est déconnecté`); var check = 0}
+
+          var CoA = `${heure-1+2}:${minute}`
           const embed = new MessageEmbed()
           .setTitle(`Statut de connexion`)
           .setThumbnail(body.equippedAvatar.url)
           .setColor('RED')
           .setAuthor({name: nom})
           .addFields(
-           { name: 'Dernière connexion:', value: `\`\`\`${Co}\`\`\``, inline: true},
+           { name: 'Dernière connexion:', value: `\`\`\`${CoA}\`\`\``, inline: true},
            { name: "Activité", value: `\`\`\`déconnecté\`\`\``, inline: true},
           )
           .setTimestamp()
@@ -115,7 +154,7 @@ module.exports = {
           Pseudo: name,
           lastOnline: Co
       };const objectToJson = JSON.stringify(info); writeFileSync(`././Information/secret/secret.json`, objectToJson) 
-    }},300000)
+    }await new Promise(resolve => setTimeout(resolve, 600000))}
     },
     options:[
       {
