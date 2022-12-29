@@ -4,12 +4,12 @@ const dayjs = require ('dayjs');
 const { xpAdd } = require('../../models/index')
 
 module.exports = {
-    name: "xpaddM",
+    name: "xpaddm",
     category: 'xp',
     permissions: ['BAN_MEMBERS'],
     ownerOnly: true,
-    usage: 'xpaddM', 
-    examples: ['xpaddM'],
+    usage: 'xpaddm', 
+    examples: ['xpaddm'],
     description: 'Actualise les xp des membres',
        async run (client, message, args) {
          const tryRequests = await message.channel.send('Requête en cours')
