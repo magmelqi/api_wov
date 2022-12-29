@@ -1,12 +1,14 @@
 const {Client, Collection} = require('discord.js');
-const dotenv = require('dotenv');dotenv.config();const poll = require('./commands/utils/poll');
-const client = new Client({intents: 1539, partials: ['MESSAGE', 'CHANNEL', 'REACTION', 'USER', 'GUILD_MEMBER', 'GUILD_SCHEDULED_EVENT']});
+const dotenv = require('dotenv'); dotenv.config();
+const client = new Client({intents: 1539});
 const Logger = require ('./utils/Logger');
 const mongoose = require('mongoose')
 
 client.commands = new Collection ();
 
 ['EventUtil','CommandUtil'].forEach(handler => { require(`./utils/handlers/${handler}`)(client) });
+require('./utils/Function')(client);
+
 
 
 process.on ('exit', code => { Logger.client(`Le processus s'est arrèté avec le code: ${code} !`)});
@@ -22,6 +24,5 @@ mongoose.connect(process.env.DATABASE_URI, {
     family: 4 
 }).then(() => { Logger.client('Le client est connecté à la base de données !')})
 .catch(err => {Logger.error(err) });
-
 
 client.login(process.env.DISCORD_TOKEN);

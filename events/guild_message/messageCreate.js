@@ -5,7 +5,7 @@ const ownerId = '385172057433964556';
 module.exports = {
     name: "messageCreate",
     once: false,
-    execute(client, message) {
+    async execute(client, message) {
         if (message.author.bot) return;
         if (message.content.startsWith('Slt')) {message.react('👻')}
         if (message.content.startsWith('slt')) {message.react('👻')}
@@ -15,6 +15,13 @@ module.exports = {
         if (message.content.startsWith('salut')) {message.react('👻')}
         if (message.content.startsWith('Salut !')) {message.channel.send('Bouh !')}
         if (!message.content.startsWith(prefix.prefix)) return;
+
+        let guildSettings = await client.getGuild(message.guild)
+
+        if (!guildSettings) {
+            await client.createGuild(message.guild);
+            guildSettings = await client.getGuild(message.guild)
+        }
         
         const args = message.content.slice(prefix.prefix.length).trim().split(/ +/g);
         const cmdName = args.shift().toLowerCase();
