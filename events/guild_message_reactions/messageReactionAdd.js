@@ -11,7 +11,6 @@ module.exports = {
         const emojiName = messageReaction.emoji.name;
         const member = message.guild.members.cache.get(user.id)
         const name = member.displayName; const nameId = member.id; console.log(name, nameId)
-        console.log(message.channel.id)
         if(member.user.bot) return;
 
         if (messageReaction.partial) {
@@ -134,10 +133,17 @@ module.exports = {
         if (emojiName === '👍🏿' && message.channel.id == '724241714373722163') {quete6Channel.send({ embeds: [embedP6]})}
         if (emojiName === '👎🏿' && message.channel.id == '724241714373722163') {quete6Channel.send({ embeds: [embedN6]})}
 
-        console.log(message.channel.id)
+        //1054738041383694397 laîques
+        //776035119151841283 rôle
+        //724298399376998440 règle
         if (emojiName === '✅' || emojiName === '💘' || emojiName === '💗' || emojiName === '💖') {
-            if (nameId == "567787590997114885" && message.channel.id == '817761804041322536' || nameId == "567787590997114885" && message.channel.id == '994618797363306496' || nameId == "567787590997114885" && message.channel.id == '1005050826777182269') {evieChannel.send(`${name} vient de claim un perso 👀`)} 
-            if (message.channel.id == '724216612206542889'){regleChannel.send(`${name} a accepté les règles.`)}};
+            if (nameId == "567787590997114885" && message.channel.id == '817761804041322536' || nameId == "567787590997114885" && message.channel.id == '994618797363306496' || nameId == "567787590997114885" && message.channel.id == '1005050826777182269') {evieChannel.send(`${name} vient de claim un perso 👀`)}}
+
+        if (emojiName === '✅') {
+            if (message.channel.id == '724216612206542889'){
+                if (message.id == '1054738041383694397') {regleChannel.send(`${name} a accepté les règles concernant la laïcité.`)}
+                else if (message.id == '776035119151841283') {regleChannel.send(`${name} a accepté les règles des rôles.`)}
+                else if (message.id == '724298399376998440') {regleChannel.send(`${name} a accepté les règles d'usage`)}}};
          
       
          if (emojiName === '☑️' && message.channel.id == '817290280242774036') { 
