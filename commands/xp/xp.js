@@ -1,4 +1,5 @@
 const { MessageEmbed } = require('discord.js');
+const superagent = require('superagent').agent();
 const dotenv = require('dotenv'); dotenv.config();
 const {readFileSync, readdirSync} = require ("fs");
 const dayjs = require ('dayjs');
@@ -16,8 +17,31 @@ module.exports = {
        const timestampH = `${dayjs().add(-8, 'day').add(-1, 'hour').format("DD-MM-YYYY")}`; 
        const timestampA = `${dayjs().add(-3, 'day').add(-1, 'hour').format("DD-MM-YYYY")}`;
 
-        const xpPseudoTT = readdirSync(`Information/xp/Member-Id/${timestamp}`);
-        var xpPseudot = JSON.stringify(xpPseudoTT) 
+       const tryRequests = await message.channel.send('Requête en cours')
+       var Messageclan = await superagent.get(`https://api.wolvesville.com/clans/${process.env.CLAN_ID}/members`)
+       .set( 'Authorization', process.env.WOV_TOKEN)
+       .set('Content-Type', 'application/json')
+       .set('Accept', 'application/json')
+       .catch((err) => {
+         if (err == "Error: Too Many Requests") {tryRequests.edit({content:`Erreur a la 1ère requête\n\`2ème tentatives en cours...\``})} 
+         else {tryRequests.edit({content:`Erreur: ${err}`});return console.log(err)}}); 
+       console.log ('Commande xpadd faite');
+       var objErr= JSON.stringify(Messageclan);
+       if (objErr !== undefined) {tryRequests.edit({content:`Calcul en cours...`}); var body= Messageclan.body}
+
+       var i =2
+       while (objErr == undefined) {await new Promise(resolve => setTimeout(resolve, 1000))
+         var Messageclan = await superagent.get(`https://api.wolvesville.com/clans/${process.env.CLAN_ID}/members`)
+       .set( 'Authorization', process.env.WOV_TOKEN)
+       .set('Content-Type', 'application/json')
+       .set('Accept', 'application/json')
+       .catch((err) => {
+         if (err == "Error: Too Many Requests") {tryRequests.edit({content:`Erreur, tentatives: \`${i}\` `})}
+         else {tryRequests.edit({content:`Erreur: ${err}`});return console.log(err)};});
+       var objErr= JSON.stringify(Messageclan)
+       try{var body= Messageclan.body}catch(err) {};var i = i+1} 
+        tryRequests.delete()
+        
 
         const emebed = new MessageEmbed()
         .setTitle(`XP-${timestamp}`)
@@ -25,13 +49,11 @@ module.exports = {
         .setDescription(`Xp du ${timestampH} au ${timestamp} -> 2000xp\nXp du ${timestampA} au ${timestamp} -> 1000xp`)
         .setThumbnail()
         .setTimestamp()
-        try {
-          for(let i=0; i < xpPseudoTT.length; i++)  {
-            
-            var xpPseudof = /.json"/g; var xpPseudoS = xpPseudot.search(xpPseudof)
-            var xpPseudos = xpPseudot.slice(1, xpPseudoS+6); 
-            var xpPseudoO = xpPseudos.slice(1, -6); 
-            var xpPseudot = xpPseudot.slice(xpPseudoS+6)
+        try { var k = 0
+          for(let i=0; i < body.length; i++)  {
+            var objBody = Messageclan.body[k]; var k = k+1
+
+            var xpPseudoO = objBody.playerId
 
         try {
         var InfoA = JSON.parse(readFileSync(`././Information/xp/Member-Id/${timestamp}/${xpPseudoO}.json`, 'utf-8'))} catch (err) {message.channel.send(`Erreur n'a pas d'xp enregistré pour aujourd'hui: ${timestamp}`); var InfoA = 0}
@@ -146,8 +168,31 @@ module.exports = {
         const timestampH = `${dayjs().add(-8, 'day').add(-1, 'hour').format("DD-MM-YYYY")}`; 
         const timestampA = `${dayjs().add(-3, 'day').add(-1, 'hour').format("DD-MM-YYYY")}`;
  
-         const xpPseudoTT = readdirSync(`Information/xp/Member-Id/${timestamp}`);
-         var xpPseudot = JSON.stringify(xpPseudoTT) 
+        const tryRequests = await message.channel.send('Requête en cours')
+        var Messageclan = await superagent.get(`https://api.wolvesville.com/clans/${process.env.CLAN_ID}/members`)
+        .set( 'Authorization', process.env.WOV_TOKEN)
+        .set('Content-Type', 'application/json')
+        .set('Accept', 'application/json')
+        .catch((err) => {
+          if (err == "Error: Too Many Requests") {tryRequests.edit({content:`Erreur a la 1ère requête\n\`2ème tentatives en cours...\``})} 
+          else {tryRequests.edit({content:`Erreur: ${err}`});return console.log(err)}}); 
+        console.log ('Commande xpadd faite');
+        var objErr= JSON.stringify(Messageclan);
+        if (objErr !== undefined) {tryRequests.edit({content:`Calcul en cours...`}); var body= Messageclan.body}
+ 
+        var i =2
+        while (objErr == undefined) {await new Promise(resolve => setTimeout(resolve, 1000))
+          var Messageclan = await superagent.get(`https://api.wolvesville.com/clans/${process.env.CLAN_ID}/members`)
+        .set( 'Authorization', process.env.WOV_TOKEN)
+        .set('Content-Type', 'application/json')
+        .set('Accept', 'application/json')
+        .catch((err) => {
+          if (err == "Error: Too Many Requests") {tryRequests.edit({content:`Erreur, tentatives: \`${i}\` `})}
+          else {tryRequests.edit({content:`Erreur: ${err}`});return console.log(err)};});
+        var objErr= JSON.stringify(Messageclan)
+        try{var body= Messageclan.body}catch(err) {};var i = i+1} 
+         tryRequests.delete()
+         
  
          const emebed = new MessageEmbed()
          .setTitle(`XP-${timestamp}`)
@@ -155,13 +200,11 @@ module.exports = {
          .setDescription(`Xp du ${timestampH} au ${timestamp} -> 2000xp\nXp du ${timestampA} au ${timestamp} -> 1000xp`)
          .setThumbnail()
          .setTimestamp()
-         try {
-           for(let i=0; i < xpPseudoTT.length; i++)  {
-             
-             var xpPseudof = /.json"/g; var xpPseudoS = xpPseudot.search(xpPseudof)
-             var xpPseudos = xpPseudot.slice(1, xpPseudoS+6); 
-             var xpPseudoO = xpPseudos.slice(1, -6); 
-             var xpPseudot = xpPseudot.slice(xpPseudoS+6)
+         try { var k = 0
+           for(let i=0; i < body.length; i++)  {
+             var objBody = Messageclan.body[k]; var k = k+1
+ 
+             var xpPseudoO = objBody.playerId
  
          try {
          var InfoA = JSON.parse(readFileSync(`././Information/xp/Member-Id/${timestamp}/${xpPseudoO}.json`, 'utf-8'))} catch (err) {interaction.editReply({content:`Erreur n'a pas d'xp enregistré pour aujourd'hui: ${timestamp}`, ephemeral:true}); var InfoA = 0}
