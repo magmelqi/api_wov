@@ -11,7 +11,17 @@ module.exports = {
     usage: 'mauto', 
     examples: ['mauto'],
     description: 'Envoie les messages envoyé sur wov en temps réel(1min de décalage) (pas config l\'id channel)',
-    async run (client, message, args) {const logChannel = client.channels.cache.get('1057688446933680248'); console.log('on');
+    async run (client, message, args) {
+        if (!args[0] || !args[0].match(/^(Wolves|test)$/)) return message.reply('merci d\'entrer un évenement valide (`\Wolves`/`\test\``)');
+
+      if (args[0] == "Wolves") {
+      var mautoChannel = client.channels.cache.get('1057688446933680248');}
+      else if (args[0] == "test") {
+        var mautoChannel = client.channels.cache.get('1046792811065913366')
+      };  
+      
+      
+      console.log('on');
     var Merr = await message.channel.send("On"); 
     test54 =async() => {
 
@@ -37,8 +47,9 @@ module.exports = {
       
       var InfoLastest = JSON.parse(readFileSync(`././Information/Mauto/Mauto.json`, 'utf-8'))
       var AncienMessage = InfoLastest.date
-        var n = 0
-        while (Messageclan.body[n].date !== AncienMessage){var n = n+1};
+        var n = 0; 
+
+        while (Messageclan.body[n].date !== AncienMessage && n !== 29){var n = n+1;};
         var n =n-1
       while(n !== -1 ){ 
         var objbody = Messageclan.body[n];var n = n-1
@@ -53,8 +64,8 @@ module.exports = {
   .setFields({name: `Pseudo: \`${PlayerId}\``, value: `-${objbody.msg}`}, {name: "fais le", value: `-${jours} à ${heure}h${minute}`})
   .setThumbnail(client.user.displayAvatarURL())
   .setTimestamp();
-  const logChannel = client.channels.cache.get('1044258472121860126');
-    logChannel.send({ embeds: [embed]})}
+
+    mautoChannel.send({ embeds: [embed]})}
       else if (objbody.isSystem == true) {
         var PlayerId = objbody.playerId
         var  usernameb  = await superagent.get(`https://api.wolvesville.com/players/${PlayerId}`)
@@ -93,7 +104,7 @@ module.exports = {
         .setThumbnail(pseudobody.equippedAvatar.url)
         .setTimestamp()
         }
-         logChannel.send({ embeds: [embed]})
+         mautoChannel.send({ embeds: [embed]})
 
       }
 
@@ -117,15 +128,47 @@ module.exports = {
         else {return Merr.edit({content:`Erreur: ${err}`})}});
         var pseudoErr = JSON.stringify(usernameb);
         var pseudo = usernameb.text; var pseudobody = usernameb.body} 
+        const embed= new MessageEmbed()
+        if (objbody.msg != undefined) {var msg = `-${objbody.msg}`
+        embed.addFields({name: `Pseudo: \`${pseudobody.username}\``, value: msg})} 
+        else {
 
+          const Minfo = await message.channel.send(`Requête en cours`)
+          const Merr = await message.channel.send(`- - - - -`)
+          const  emojis  = await superagent.get(`https://api.wolvesville.com/items/emojis`)
+          .set( 'Authorization', process.env.WOV_TOKEN)
+          .set('Content-Type', 'application/json')
+          .set('Accept', 'application/json')
+          .catch((err) => { if (err == "Error: Too Many Requests") {Merr.edit({content:`Erreur, tentatives: \`${i}\``})}
+          else {return Merr.edit({content:`Erreur: ${err}`})}}); 
+          var emojisErr = JSON.stringify(emojis);
+  
+          if (emojisErr !== undefined) {var emojist = emojis.text; var emojisbody = emojis.body}
+          var i = 2
+          while (emojisErr == undefined) {
+              const  emojis  = await superagent.get(`https://api.wolvesville.com/items/emojis`)
+          .set( 'Authorization', process.env.WOV_TOKEN)
+          .set('Content-Type', 'application/json')
+          .set('Accept', 'application/json')
+          .catch((err) => { if (err == "Error: Too Many Requests") {Merr.edit({content:`Erreur, tentatives: \`${i}\``})}
+          else {return Merr.edit({content:`Erreur: ${err}`})}});
+          var emojisErr = JSON.stringify(emojis);
+          var emojist = emojis.text; var emojisbody = emojis.body} 
+            Merr.delete(); Minfo.delete()
 
-            const embed= new MessageEmbed()
-  .setAuthor({name: 'Chat WOV'})
-  .setColor('#77b5fe')
-  .setFields({name: `Pseudo: \`${pseudobody.username}\``, value: `-${objbody.msg}`}, {name: "fais le", value: `-${jours} à ${heure}h${minute}`})
-  .setThumbnail(pseudobody.equippedAvatar.url)
-  .setTimestamp()
-         logChannel.send({ embeds: [embed]})}}
+            var emojisC = 0;
+            while (emojis.body[emojisC].id !== objbody.emojiId) {var emojisC = emojisC +1}
+            var msg = emojis.body[emojisC].urlPreview
+            embed.addFields({name: `Pseudo: \`${pseudobody.username}\``, value: emojis.body[emojisC].name})
+            embed.setImage(msg)
+        }
+
+            embed.setAuthor({name: 'Chat WOV'})
+            embed.setColor('#77b5fe')
+            embed.addFields({name: "fais le", value: `-${jours} à ${heure}h${minute}`})
+            embed.setThumbnail(pseudobody.equippedAvatar.url)
+            embed.setTimestamp()
+         mautoChannel.send({ embeds: [embed]})}}
 
         const info = {
           date: Messageclan.body[0].date

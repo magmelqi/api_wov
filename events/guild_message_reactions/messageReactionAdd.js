@@ -11,6 +11,7 @@ module.exports = {
         const emojiName = messageReaction.emoji.name;
         const member = message.guild.members.cache.get(user.id)
         const name = member.displayName; const nameId = member.id; console.log(name, nameId)
+        console.log(message.channel.id)
         if(member.user.bot) return;
 
         if (messageReaction.partial) {
@@ -139,10 +140,11 @@ module.exports = {
             if (message.channel.id == '724216612206542889'){regleChannel.send(`${name} a accepté les règles.`)}};
          
       
-         if (emojiName === '☑️' && message.channel.id == '817290280242774036') {
-            member.send(`Recherche d'un profil au nom de "${name}":`)
+         if (emojiName === '☑️' && message.channel.id == '817290280242774036') { 
+            const voteLogChannel = client.channels.cache.get('1058381353336438865');
+           const Mdebut = await voteLogChannel.send(`Recherche d'un profil au nom de "${name}":`)
             await new Promise(resolve => setTimeout(resolve, 1000))
-         console.log(name); const Mname = await member.send(`- - - - - -`)
+         console.log(name); const Mname = await voteLogChannel.send(`- - - - - -`)
                                    
          var Username = await superagent.get(`https://api.wolvesville.com/players/search?username=${name}`)
          .set( 'Authorization', process.env.WOV_TOKEN)
@@ -168,9 +170,9 @@ module.exports = {
         var objErr= JSON.stringify(Username);
          try {var User = await Username.body; var UserId=JSON.stringify(User);;}catch(err) {}; var i = i+1} 
          Mname.edit({content:`Profil de ${name} trouvé avec succés`})
-         member.send(`Activation de votre partipation:`)
+         Mdebut.edit(`Activation de votre partipation:`)
          await new Promise(resolve => setTimeout(resolve, 1000))
-         const Mactive = await member.send(`- - - - - -`)
+         Mname.edit(`- - - - - -`)
     
          var idn = UserId.slice(7, 43); var idn1 = idn.trim(); console.log(idn)
          
@@ -181,9 +183,9 @@ module.exports = {
          .set('Content-Type', 'application/json')
          .set('Accept', 'application/json')
          .catch((err) => {
-           if (err == "Error: Too Many Requests") {Mactive.edit({content:"Erreur a la 2ème requêtes\n\`2ème tentatives en cours...\`"})}
-           else if (err == "Error: Not Found") {return Mactive.edit({content:`Pseudo: ${name} n'est pas présent dans le clan.`})}
-           else {return Mactive.edit({content:`${err}, \nveuillez avertir: <@385172057433964556>`})}});
+           if (err == "Error: Too Many Requests") {Mname.edit({content:"Erreur a la 2ème requêtes\n\`2ème tentatives en cours...\`"})}
+           else if (err == "Error: Not Found") {return Mname.edit({content:`Pseudo: ${name} n'est pas présent dans le clan.`})}
+           else {return Mname.edit({content:`${err}, \nveuillez avertir: <@385172057433964556>`})}});
            var objErr= JSON.stringify(Quests);
      
            if (objErr !== undefined) {var Clan =  Quests.body; var obj=JSON.stringify(Clan);}
@@ -195,13 +197,13 @@ module.exports = {
            .set('Content-Type', 'application/json')
            .set('Accept', 'application/json')
            .catch((err) => {
-               if (err == "Error: Too Many Requests") {Mactive.edit({content:`Erreur, tentatives: \`${i}\``})}
-               else if (err == "Error: Not Found") {return Mactive.edit({content:`Pseudo: ${name} n'est pas présent dans le clan.`})}
-               else {return Mactive.edit({content:`${err}, \nveuillez avertir: <@385172057433964556>`})}});
+               if (err == "Error: Too Many Requests") {Mname.edit({content:`Erreur, tentatives: \`${i}\``})}
+               else if (err == "Error: Not Found") {return Mname.edit({content:`Pseudo: ${name} n'est pas présent dans le clan.`})}
+               else {return Mname.edit({content:`${err}, \nveuillez avertir: <@385172057433964556>`})}});
           var objErr= JSON.stringify(Quests);
            try {var Clan =  Quests.body; var obj=JSON.stringify(Clan);}catch(err) {}; var i = i+1}
    
-        
+            Mdebut.delete()
          var CNb= /name/g
          var CNf= /","level"/g;
  
@@ -220,7 +222,7 @@ module.exports = {
                .setThumbnail(User.equippedAvatar.url)
                .setTimestamp()
                .setFooter({text: 'Quête'});
-               Mactive.edit({content: ' ', embeds : [embed]});logChannel.send({ embeds: [embed]})
+               Mname.edit({content: ' ', embeds : [embed]});member.send({ embeds: [embed]})
 
      }
  

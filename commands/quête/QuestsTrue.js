@@ -15,10 +15,10 @@ module.exports = {
         if (!args[0] || !args[0].match(/^(or|Or|gemme|Gemme)$/)) return message.reply('merci d\'entrer au 1er argument du type de quête qu\'il s\'agit (`\or`/`\gemme\`)');
 
         var n =1
+        var msg = null
         while (args[n] !== undefined) {
         var nom = args[n]
         console.log(nom)
-          const Mname = await message.channel.send(`Lecture de l'id de ${nom}`)
 
           if (args[0] == "gemme" || args[0] == "Gemme") {var g = 0
         try {
@@ -34,17 +34,15 @@ module.exports = {
         else if (g == 0) {var idn1 = gemme.PlayerId; var ressource = gemme.Gemme}
         else if (g == 2) {return Mname.edit({content:`${nom} n'a pas de don dans la base de donné (?donadd pour actualiser les dons)`})}
 
-        const Merr = await message.channel.send(`- - - - - - -`)
-
         var Quests = await superagent.put(`https://api.wolvesville.com/clans/${process.env.CLAN_ID}/members/${idn1}/participateInQuests`)
         .send({participateInQuests: true})
         .set( 'Authorization', process.env.WOV_TOKEN)
         .set('Content-Type', 'application/json')
         .set('Accept', 'application/json')
-        .catch((err) => {
+        .catch(async(err) => {var Merr = await message.channel.send(`- - - - - - -`)
           if (err == "Error: Too Many Requests") {Merr.edit({content:"Erreur a la 2ème requêtes\n\`2ème tentatives en cours...\`"})}
           else if (err == "Error: Not Found") {return Merr.edit({content:`Pseudo: ${nom} n'est pas présent dans le clan.`})}
-          else {return Merr.edit({content:`Erreur: ${err}`})}});
+          else {return Merr.edit({content:`Erreur: ${err}`})};Merr.delete()});
           var objErr= JSON.stringify(Quests);
     
           if (objErr !== undefined) {var Clan =  Quests.body;}
@@ -55,26 +53,21 @@ module.exports = {
           .set( 'Authorization', process.env.WOV_TOKEN)
           .set('Content-Type', 'application/json')
           .set('Accept', 'application/json')
-          .catch((err) => {
-              if (err == "Error: Too Many Requests") {Merr.edit({content:`Erreur, tentatives: \`${i}\``})}
+          .catch(async(err) => { const Merr = await message.channel.send(`- - - - - - -`)
+              if (err == "Error: Too Many Requests") {Merr.edit({content:`Erreur, tentatives: \`${i}\` pour ${nom}`})}
               else if (err == "Error: Not Found") {return Merr.edit({content:`Pseudo: ${nom} n'est pas présent dans le clan.`})}
-              else {return Merr.edit({content:`Erreur: ${err}`})}});
+              else {return Merr.edit({content:`Erreur: ${err}`})};Merr.delete()});
          var objErr= JSON.stringify(Quests);
           try {var Clan =  Quests.body;}catch(err) {}; var i = i+1}
        
-        console.log (`Pseudo: ${nom}`);
-        console.log (`Participation à la quête: true`);
+        console.log (`Pseudo: ${nom} Participation à la quête: true`);
 
-        const embed = new MessageEmbed()
-              .setAuthor({name : `Statut de participation`})
-              .setColor('WHITE')
-              .addFields({ name: 'Pseudo', value: `${nom}`, inline: true},
-              { name: 'Montant en banque', value: `${ressource}`, inline: true}, 
-              { name: 'Participation à la quête:', value: `true`, inline: false})
-              .setTimestamp();
-    
-              Merr.edit({content: ' ', embeds : [embed]}); Mname.delete()
+        var msgi = `Pseudo: ${nom}, banque: ${ressource}, activation réussie`
+        var msg = `${msg + msgi}\n- - - - - -\n`
+
             var n = n+1;}
+            if (msg.slice(0,4) == "null") {var msgf = msg.slice(4)} else {var msgf = msg}
+            message.channel.send(msgf)
             message.channel.send(`Activation de la quête de ${n-1} joueurs`)
 
     },

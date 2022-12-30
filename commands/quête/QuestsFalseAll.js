@@ -39,12 +39,11 @@ module.exports = {
             
         Merr.delete(); Minfo.delete()
         var k =0
+        var msg = null
         while(Username.body[k] !== undefined) {
         var User = await Username.body[k]; var nom = User.username;console.log(User.participateInClanQuests)
 
         if (User.participateInClanQuests == true) {
-            var Merr = await message.channel.send({content:`Profil de ${nom} trouvé avec succés.\nDéactivation de la quête pour ${nom}:`})
-            const Minfo = await message.channel.send({content:`- - - - -`})
         var idn1 = User.playerId;
 
         var Quests = await superagent.put(`https://api.wolvesville.com/clans/${process.env.CLAN_ID}/members/${idn1}/participateInQuests`)
@@ -52,10 +51,11 @@ module.exports = {
         .set( 'Authorization', process.env.WOV_TOKEN)
         .set('Content-Type', 'application/json')
         .set('Accept', 'application/json')
-        .catch((err) => {
+        .catch(async(err) => {
+          const Minfo = await message.channel.send({content:`- - - - -`})
           if (err == "Error: Too Many Requests") {Minfo.edit({content:"Erreur a la 2ème requêtes\n\`2ème tentatives en cours...\`"})}
           else if (err == "Error: Not Found") {return Minfo.edit({content:`Pseudo: ${nom} n'est pas présent dans le clan.`})}
-          else {return Minfo.edit({content:`Erreur: ${err}`})}});
+          else {return Minfo.edit({content:`Erreur: ${err}`})};Minfo.delete()});
           var objErr= JSON.stringify(Quests);
 
          var i = 2
@@ -65,21 +65,19 @@ module.exports = {
           .set( 'Authorization', process.env.WOV_TOKEN)
           .set('Content-Type', 'application/json')
           .set('Accept', 'application/json')
-          .catch((err) => {
-              if (err == "Error: Too Many Requests") {Minfo.edit({content:`Erreur, tentatives: \`${i}\``})}
+          .catch(async(err) => {
+            const Minfo = await message.channel.send({content:`- - - - -`})
+              if (err == "Error: Too Many Requests") {Minfo.edit({content:`Erreur, tentatives: \`${i}\` pour ${nom}`})}
               else if (err == "Error: Not Found") {return Minfo.edit({content:`Pseudo: ${nom} n'est pas présent dans le clan.`})}
-              else {return Minfo.edit({content:`Erreur: ${err}`})}});
+              else {return Minfo.edit({content:`Erreur: ${err}`})};Minfo.delete()});
          var objErr= JSON.stringify(Quests); var i = i+1}
         console.log (`Pseudo: ${User.username}`);
-
-        const embed = new MessageEmbed()
-              .setAuthor({name : `Statut de participation`})
-              .setColor(User.profileIconColor)
-              .addFields({ name: 'Pseudo', value: `${User.username}`, inline: false}, { name: 'Participation à la quête:', value: `false`, inline: false})
-              .setTimestamp();
+            var msgi = `Pseudo: ${User.username}, désactivation réussie`
+        var msg = `${msg + msgi}\n- - - - - -\n`
     
-              message.channel.send({embeds : [embed]}); Minfo.delete(); Merr.delete()
             var n = n+1;}var k = k+1}
+            if (msg.slice(0,4) == "null") {var msgf = msg.slice(4)} else {var msgf = msg}
+            message.channel.send(msgf)
             message.channel.send("Tout les membres ont leur participation désactivitée")
     },
     options:[
