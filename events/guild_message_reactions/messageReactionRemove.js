@@ -10,7 +10,8 @@ module.exports = {
         const message = messageReaction.message;
         const emojiName = messageReaction.emoji.name;
         const member = message.guild.members.cache.get(user.id)
-        const name = member.displayName; const nameId = member.id; console.log(name, nameId)
+        if (member !== undefined) {var name = member.displayName; const nameId = member.id; console.log(name, nameId)}
+        else if (member == undefined) {var name = user.id}
         console.log(message.id)
         if(member.user.bot) return;
 

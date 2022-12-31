@@ -7,8 +7,6 @@ module.exports = {
     once: false,
     async execute(client, message) {
         if (message.author.bot) return;
-        if (message.content.startsWith('Slt')) {message.react('👻')}
-        if (message.content.startsWith('slt')) {message.react('👻')}
         if (message.content.startsWith('Bouh')) {message.react('👻')}
         if (message.content.startsWith('bouh')) {message.react('👻')}
         if (message.content.startsWith('Salut')) {message.react('👻')}

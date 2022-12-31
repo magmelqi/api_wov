@@ -1,7 +1,8 @@
 const superagent = require('superagent').agent();
 const dotenv = require('dotenv'); dotenv.config();
 const {writeFileSync, readFileSync, readdirSync} = require ("fs");
-const { MessageEmbed } = require('discord.js')
+const { MessageEmbed } = require('discord.js');
+const dayjs = require ('dayjs');
 
 module.exports = {
   name: "tracker",
@@ -53,6 +54,7 @@ module.exports = {
       }
       const objectToJson = JSON.stringify(info) ;writeFileSync(`././Information/secret/secret.json`, objectToJson)
 
+      var MEM = `${dayjs().add(+10, 'minute').add(+1, 'hour').format("HH:mm")}`;
       var CoA = `${heure-1+2}:${minute}`
       const embed = new MessageEmbed()
       .setTitle(`Statut de connexion`)
@@ -61,7 +63,7 @@ module.exports = {
       .setAuthor({name: nom})
       .addFields(
        { name: 'Dernière connexion:', value: `\`\`\`${CoA}\`\`\``, inline: true},
-       { name: "Activité", value: `\`\`\`none\`\`\``, inline: true},
+       { name: "Mise en marche:", value: `\`\`\`A ${MEM}\`\`\``, inlie: true },
       )
       .setTimestamp()
       .setFooter({text: name,iconeURL: message.author.displayAvatarURL() })
@@ -69,7 +71,8 @@ module.exports = {
       Statut.edit({ content: ' ', embeds: [embed] });
       var check = 5
         var t = "yo"
-        while(t == "yo") {
+        var temps = 600000
+        while(t == "yo") {await new Promise(resolve => setTimeout(resolve, temps))
           const Messageclan = await superagent.get(`https://api.wolvesville.com/players/search?username=${nom}`)
           .set( 'Authorization', process.env.WOV_TOKEN)
           .set('Content-Type', 'application/json')
@@ -109,7 +112,7 @@ module.exports = {
         if (heure !== heureAncienne || minute !== minuteAncienne) {
           
           if (check !== 1) {message.author.send(`${nom} s'est connecté`); var check = 1}
-
+          var temps = 600000
           var CoA = `${heure-1+2}:${minute}`
           const embed = new MessageEmbed()
           .setTitle(`Statut de connexion`)
@@ -133,7 +136,7 @@ module.exports = {
         else if (minute == minuteAncienne && heure == heureAncienne) {
           
           if (check !== 0) {message.author.send(`${nom} s'est déconnecté`); var check = 0}
-
+          var temps = 60000
           var CoA = `${heure-1+2}:${minute}`
           const embed = new MessageEmbed()
           .setTitle(`Statut de connexion`)
@@ -154,7 +157,7 @@ module.exports = {
           Pseudo: name,
           lastOnline: Co
       };const objectToJson = JSON.stringify(info); writeFileSync(`././Information/secret/secret.json`, objectToJson) 
-    }await new Promise(resolve => setTimeout(resolve, 600000))}
+    }}
     },
     options:[
       {

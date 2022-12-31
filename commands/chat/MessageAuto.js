@@ -55,13 +55,39 @@ module.exports = {
         var objbody = Messageclan.body[n];var n = n-1
         try {var BOT =objbody.playerBotOwnerUsername}catch(err) {}
       var dateI = objbody.date; var dateIT = JSON.stringify(dateI)// 2022-11-20T10:51:40.988Z
+
+
         var jours = dateIT.slice(1, 11); var heure = dateIT.slice(12, 14); var minute = dateIT.slice(15, 17)
+
+        var  HlastOnline = objbody.date.slice(11, 13)-1+2
+
+            var annéeLO =  objbody.date.slice(0, 4); var moisLO = objbody.date.slice(5, 7); var jourLO= objbody.date.slice(8, 10);
+
+            if (HlastOnline == 24) {var HlastOnline = "00"; var jourLO = jourLO-1+2
+            if (moisLO == 1 && jourLO == 32) {moisLO = moisLO-1+2; jourLO = "01"};
+            if (moisLO == 2 && jourLO == 29) {moisLO = moisLO-1+2; jourLO = "01"};
+            if (moisLO == 3 && jourLO == 32) {moisLO = moisLO-1+2; jourLO = "01"};
+            if (moisLO == 4 && jourLO == 31) {moisLO = moisLO-1+2; jourLO = "01"};
+            if (moisLO == 5 && jourLO == 32) {moisLO = moisLO-1+2; jourLO = "01"};
+            if (moisLO == 6 && jourLO == 31) {moisLO = moisLO-1+2; jourLO = "01"};
+            if (moisLO == 7 && jourLO == 32) {moisLO = moisLO-1+2; jourLO = "01"};
+            if (moisLO == 8 && jourLO == 32) {moisLO = moisLO-1+2; jourLO = "01"};
+            if (moisLO == 9 && jourLO == 31) {moisLO = moisLO-1+2; jourLO = "01"};
+            if (moisLO == 10 && jourLO == 32) {moisLO = moisLO-1+2; jourLO = "01"};
+            if (moisLO == 11 && jourLO == 31) {moisLO = moisLO-1+2; jourLO = "01"};
+            if (moisLO == 12 && jourLO == 32) {moisLO = "01"; jourLO = "01"; var annéeLO = annéeLO-1+2};
+           };
+
+            var DlastOnline = `${jourLO}/${moisLO}/${annéeLO}`
+
+
+
 
       if ( BOT !== undefined) {var PlayerId= "BOT"; console.log('if')
       const embed= new MessageEmbed()
   .setAuthor({name: 'Chat WOV'})
   .setColor('WHITE')
-  .setFields({name: `Pseudo: \`${PlayerId}\``, value: `-${objbody.msg}`}, {name: "fais le", value: `-${jours} à ${heure}h${minute}`})
+  .setFields({name: `Pseudo: \`${PlayerId}\``, value: `-${objbody.msg}`}, {name: "fais le", value: `${DlastOnline} à ${HlastOnline}h${objbody.date.slice(14,16)}`})
   .setThumbnail(client.user.displayAvatarURL())
   .setTimestamp();
 
@@ -92,7 +118,7 @@ module.exports = {
         var embed= new MessageEmbed()
         .setAuthor({name: 'Chat WOV'})
         .setColor("GREEN")
-        .setFields({name: `Pseudo: \`${pseudobody.username}\``, value: `-Vient de \`rejoindre\` le clan`}, {name: "fais le", value: `-${jours} à ${heure}h${minute}`})
+        .setFields({name: `Pseudo: \`${pseudobody.username}\``, value: `-Vient de \`rejoindre\` le clan`}, {name: "fais le", value: `${DlastOnline} à ${HlastOnline}h${objbody.date.slice(14,16)}`})
         .setThumbnail(pseudobody.equippedAvatar.url)
         .setTimestamp()
               } 
@@ -100,7 +126,7 @@ module.exports = {
                 var embed= new MessageEmbed()
         .setAuthor({name: 'Chat WOV'})
         .setColor("RED")
-        .setFields({name: `Pseudo: \`${pseudobody.username}\``, value: `-Vient de \`quitter\` le clan`}, {name: "fais le", value: `-${jours} à ${heure}h${minute}`})
+        .setFields({name: `Pseudo: \`${pseudobody.username}\``, value: `-Vient de \`quitter\` le clan`}, {name: "fais le", value: `${DlastOnline} à ${HlastOnline}h${objbody.date.slice(14,16)}`})
         .setThumbnail(pseudobody.equippedAvatar.url)
         .setTimestamp()
         }
@@ -165,7 +191,7 @@ module.exports = {
 
             embed.setAuthor({name: 'Chat WOV'})
             embed.setColor('#77b5fe')
-            embed.addFields({name: "fais le", value: `-${jours} à ${heure}h${minute}`})
+            embed.addFields({name: "fais le", value: `${DlastOnline} à ${HlastOnline}h${objbody.date.slice(14,16)}`})
             embed.setThumbnail(pseudobody.equippedAvatar.url)
             embed.setTimestamp()
          mautoChannel.send({ embeds: [embed]})}}
