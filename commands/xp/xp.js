@@ -71,10 +71,10 @@ module.exports = {
             if (XpA < 2000) {console.log(InfoA.Pseudo, `${XpA} = ${Xp1} - ${Xp2}`)
             var n = 0
 
-            try { var timestampL2 = `${dayjs().add(-1, 'day').add(-1, 'hour').format("DD-MM-YYYY")}`;
+            try { var timestampL2 = `${dayjs().add(-1, 'day').add(-1, 'hour').format("DD-MM-YYYY")}`; var InfoJ1s = 0
             var InfoJ1s = JSON.parse(readFileSync(`././Information/xp/Member-Id/${timestampL2}/${xpPseudoO}.json`, 'utf-8'))}catch(err) {}
 
-            try { var timestampL1 = `${dayjs().add(-9, 'day').add(-1, 'hour').format("DD-MM-YYYY")}`;
+            try { var timestampL1 = `${dayjs().add(-9, 'day').add(-1, 'hour').format("DD-MM-YYYY")}`;var InfoJ1 = 0
               var InfoJ1 = JSON.parse(readFileSync(`././Information/xp/Member-Id/${timestampL1}/${xpPseudoO}.json`, 'utf-8'))
             var xpJ1 =  InfoJ1s.Xp - InfoJ1.Xp}catch(err) {}
 
@@ -222,10 +222,10 @@ module.exports = {
               if (XpA < 2000) {console.log(InfoA.Pseudo, `${XpA} = ${Xp1} - ${Xp2}`)
               var n = 0
   
-              try { var timestampL2 = `${dayjs().add(-1, 'day').add(-1, 'hour').format("DD-MM-YYYY")}`;
+              try { var timestampL2 = `${dayjs().add(-1, 'day').add(-1, 'hour').format("DD-MM-YYYY")}`;var InfoJ1s = 0
               var InfoJ1s = JSON.parse(readFileSync(`././Information/xp/Member-Id/${timestampL2}/${xpPseudoO}.json`, 'utf-8'))}catch(err) {}
   
-              try { var timestampL1 = `${dayjs().add(-9, 'day').add(-1, 'hour').format("DD-MM-YYYY")}`;
+              try { var timestampL1 = `${dayjs().add(-9, 'day').add(-1, 'hour').format("DD-MM-YYYY")}`;var InfoJ1 = 0
                 var InfoJ1 = JSON.parse(readFileSync(`././Information/xp/Member-Id/${timestampL1}/${xpPseudoO}.json`, 'utf-8'))
               var xpJ1 =  InfoJ1s.Xp - InfoJ1.Xp}catch(err) {}
   

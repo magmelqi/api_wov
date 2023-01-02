@@ -11,9 +11,12 @@ module.exports = {
     examples: ['profil Hqrmonie'],
     description: "Voir le profil du pseudo",
       run: async(client, message, args) => {
-        if (args[0] == undefined) return message.reply('merci d\'entrer un \`pseudo\` apres le nom de la commande');
+        let member = message.mentions.members.first();
+        if (args[0] == undefined && member == undefined) return message.reply('merci d\'entrer un \`pseudo\` apres le nom de la commande');
 
-        var nom = message.content.substring(7).trim()
+        if (member == undefined) {var nom = message.content.substring(7).trim()
+        } else {var nom = member.displayName}
+
         var Mprofil= await message.channel.send(`Recherche du profil de ${nom}...`)
         var profil = await superagent.get(`https://api.wolvesville.com/players/search?username=${nom}`) 
           .set( 'Authorization', process.env.WOV_TOKEN)

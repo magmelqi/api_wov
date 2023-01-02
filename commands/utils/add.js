@@ -9,21 +9,22 @@ module.exports = {
       run: (client, message, args) =>  {
           let role = message.guild.roles.cache.find(r => r.id === '806912965496143882'); //🐅Membre de la WL🐅
           let role2 = message.guild.roles.cache.find(r => r.name === 'Louveteau'); //Louveteau
-          let member = message.mentions.members.first();
+          
+          let member = message.mentions.members.first(); console.log(member)
   
-          if (member.roles.cache.has(role.id) && member.roles.cache.has(role2.id)) { return message.channel.send(`${member} posséde déjà le role ${role.name} et le role ${role2.name}.`)}
+          if (member.roles.cache.has(role.id) && member.roles.cache.has(role2.id)) { return message.channel.send(`${member.displayName} posséde déjà le role ${role.name} et le role ${role2.name}.`)}
 
-          if (!member.roles.cache.has(role.id) && !member.roles.cache.has(role2.id)) {member.roles.add(role); member.roles.add(role2); return message.channel.send(`${member} posséde maintement le role ${role.name} et le role ${role2.name}.`)}
+          if (!member.roles.cache.has(role.id) && !member.roles.cache.has(role2.id)) {member.roles.add(role); member.roles.add(role2); return message.channel.send(`${member.displayName} posséde maintement le role ${role.name} et le role ${role2.name}.`)}
    
-              if (member.roles.cache.has(role.id)) {message.channel.send(`${member} posséde déjà le role ${role.name}.`)}
+              if (member.roles.cache.has(role.id)) {message.channel.send(`${member.displayName} posséde déjà le role ${role.name}.`)}
               else {member.roles.add(role)
-                  .then (m => message.channel.send(`${member} posséde maintement le role ${role.name}.`))
+                  .then (m => message.channel.send(`${member.displayName} posséde maintement le role ${role.name}.`))
                   .catch((err) => {return message.channel.send(`Erreur: ${err}`)});}
               
   
-              if (member.roles.cache.has(role2.id)) {message.channel.send(`${member} posséde déjà le role ${role2.name}.`)}
+              if (member.roles.cache.has(role2.id)) {message.channel.send(`${member.displayName} posséde déjà le role ${role2.name}.`)}
               else {member.roles.add(role2)
-                  .then (m => message.channel.send(`${member} posséde maintement le role ${role2.name}.`))
+                  .then (m => message.channel.send(`${member.displayName} posséde maintement le role ${role2.name}.`))
                   .catch((err) => {return message.channel.send(`Erreur: ${err}`)}); }
   
       },
@@ -36,23 +37,25 @@ module.exports = {
         }
     ],
       async runSlash(client, interaction) {
-        const member = interaction.options.getUser('mention'); console.log(member);
-        let role = client.guilds.cache.find(r => r.name === 'WOV'); //🐅Membre de la WL🐅
-        let role2 = client.guilds.cache.find(r => r.name === 'Events'); //Louveteau
-        
-        if (member.roles.has(role.id) && member.roles.has(role2.id)) { return interaction.reply(`${member} posséde déjà le role ${role.name} et le role ${role2.name}.`)}
+        const membert = interaction.options.getUser('mention');
+        const member = interaction.guild.members.cache.get(membert.id)
 
-        if (!member.roles.has(role.id) && !member.roles.has(role2.id)) {member.roles.add(role); member.roles.add(role2); return interaction.reply(`${member} posséde maintement le role ${role.name} et le role ${role2.name}.`)}
+        let role = await interaction.guild.roles.cache.find(r => r.id === '806912965496143882'); //🐅Membre de la WL🐅
+        let role2 = await interaction.guild.roles.cache.find(r => r.name === 'Louveteau'); //Louveteau
+        
+        if (member.roles.cache.has(role.id) && member.roles.cache.has(role2.id)) { return interaction.reply({content:`${member.displayName} posséde déjà le role ${role.name} et le role ${role2.name}.`, ephemeral:true})}
+
+        if (!member.roles.cache.has(role.id) && !member.roles.cache.has(role2.id)) {member.roles.add(role); member.roles.add(role2); return interaction.reply(`${member.displayName} posséde maintement le role ${role.name} et le role ${role2.name}.`)}
  
-            if (member.roles.has(role.id)) {interaction.reply(`${member} posséde déjà le role ${role.name}.`)}
-            else {member.roles.add(role)
-                .then (m => interaction.reply(`${member} posséde maintement le role ${role.name}.`))
+            if (member.roles.cache.has(role.id)) {interaction.reply(`${member.displayName} posséde déjà le role ${role.name}.`)}
+            else {member.roles.add(role.id)
+                .then (m => interaction.followUp(`${member.displayName} posséde maintement le role ${role.name}.`))
                 .catch((err) => {return interaction.reply(`Erreur: ${err}`)});}
             
 
-            if (member.roles.has(role2.id)) {interaction.reply(`${member} posséde déjà le role ${role2.name}.`)}
-            else {member.roles.add(role2)
-                .then (m => interaction.reply(`${member} posséde maintement le role ${role2.name}.`))
+            if (member.roles.cache.has(role2.id)) {interaction.reply(`${member.displayName} posséde déjà le role ${role2.name}.`)}
+            else {member.roles.add(role2.id)
+                .then (m => interaction.followUp(`${member.displayName} posséde maintement le role ${role2.name}.`))
                 .catch((err) => {return interaction.reply(`Erreur: ${err}`)}); }
       }
     }

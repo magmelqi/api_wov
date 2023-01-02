@@ -73,9 +73,10 @@ module.exports = {
          var objErr= JSON.stringify(Quests); var i = i+1}
         console.log (`Pseudo: ${User.username}`);
             var msgi = `Pseudo: ${User.username}, désactivation réussie`
-        var msg = `${msg + msgi}\n- - - - - -\n`
+        var msg = `\n${msg + msgi}\n- - - - - -`
     
             var n = n+1;}var k = k+1}
+            if (msg.slice(-11) == "- - - - - -") {var msg = msg.slice(0, -12)} 
             if (msg.slice(0,4) == "null") {var msgf = msg.slice(4)} else {var msgf = msg}
             message.channel.send(msgf)
             message.channel.send("Tout les membres ont leur participation désactivitée")

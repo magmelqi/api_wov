@@ -63,9 +63,10 @@ module.exports = {
         console.log (`Pseudo: ${nom} Participation à la quête: true`);
 
         var msgi = `Pseudo: ${nom}, banque: ${ressource}, activation réussie`
-        var msg = `${msg + msgi}\n- - - - - -\n`
+        var msg = `\n${msg + msgi}\n- - - - - -`
 
             var n = n+1;}
+            if (msg.slice(-11) == "- - - - - -") {var msg = msg.slice(0, -12)} 
             if (msg.slice(0,4) == "null") {var msgf = msg.slice(4)} else {var msgf = msg}
             message.channel.send(msgf)
             message.channel.send(`Activation de la quête de ${n-1} joueurs`)

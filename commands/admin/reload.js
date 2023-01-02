@@ -21,6 +21,7 @@ module.exports = {
         await new Promise(resolve => setTimeout(resolve, 1000))
         message.channel.send("`POUF` bot relancé")
         console.log("Le bot s'est relancé.");
+        await new Promise(resolve => setTimeout(resolve, 100))
         return process.exit()
       },
       async runSlash (client, interaction) {

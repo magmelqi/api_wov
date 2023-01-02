@@ -12,14 +12,16 @@ module.exports = {
     examples: ['messagesend', 'messagesend BOUH'],
     description: 'Envoie un message dans le chat du clan',
       run: async(client, message, args) => {
+        var nom = message.member.displayName;
+
         const Messageclan = await superagent.post(`https://api.wolvesville.com/clans/${process.env.CLAN_ID}/chat`)
-        .send({message: `${message.author.username} :${message.content.substring(6)}`})
+        .send({message: `${nom} :${message.content.substring(6)}`})
         .set( 'Authorization', process.env.WOV_TOKEN)
         .set('Content-Type', 'application/json')
         .set('Accept', 'application/json')
         .catch((err) => {return message.channel.send(err)}); 
         console.log ('Commande MessageSend fait');
-        console.log(`${message.author.username} :${message.content.substring(6)}`)
+        console.log(`${nom} :${message.content.substring(6)}`)
         message.channel.send(`'${message.content.substring(6)} ' a bien été envoyé.`)
         
   },
@@ -33,15 +35,17 @@ module.exports = {
 ],
 
   runSlash: async(client, interaction) => {
+    const nom = interaction.member.displayName
     const MessageContent = interaction.options.getString('message');
+    
     const Messagesend = await superagent.post(`https://api.wolvesville.com/clans/${process.env.CLAN_ID}/chat`)
-  .send({message: `${interaction.user.username} :${MessageContent}`})
+  .send({message: `${nom} :${MessageContent}`})
   .set( 'Authorization', process.env.WOV_TOKEN)
   .set('Content-Type', 'application/json')
   .set('Accept', 'application/json')
   .catch((err) => {return interaction.reply(err)}); 
   console.log ('Commande MessageSend fait');
-  console.log(`${interaction.user.username} :${MessageContent}`)
+  console.log(`${nom} :${MessageContent}`)
   message.channel.send(`'${MessageContent} ' a bien été envoyé.`)
 }
 }

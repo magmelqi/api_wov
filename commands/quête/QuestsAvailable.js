@@ -196,7 +196,7 @@ module.exports = {
       poll7.react('✅');
       poll7.react('❌');
 
-        message.channel.send('Coucou <@&806912965496143882> voilà pour vous !') 
+        message.channel.send('Coucou <@&806912965496143882> voilà pour vous !\n\`\`Fin des votes a 14h.\`\`') 
      
        },
 
@@ -384,6 +384,6 @@ module.exports = {
          poll7.react('✅');
          poll7.react('❌');
 
-        interaction.channel.send('Coucou <@&806912965496143882> voilà pour vous !') 
+        interaction.channel.send('Coucou <@&806912965496143882> voilà pour vous !\n\`\`Fin des votes a 14h.\`\`') 
       }
       }
