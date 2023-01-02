@@ -56,6 +56,7 @@ module.exports = {
             var msgi = `\`\`${exPseudo}\`\` a changé son pseudo en \`\`${newPseudo}\`\``
             var msg = `${msg + msgi}\n- - - - - -\n`}
         }}
+        if (msg == null) {return message.channel.send("Personne n'a changé de pseudo depuis hier")}
         if (msg.slice(0,4) == "null") {var msgf = msg.slice(4)} else {var msgf = msg}
         message.channel.send(msgf)
   
@@ -111,6 +112,7 @@ module.exports = {
         var msgi = `\`\`${exPseudo}\`\` a changé son pseudo en \`\`${newPseudo}\`\``
         var msg = `${msg + msgi}\n- - - - - -\n`}
         }}
+        if (msg == null) {return message.channel.send("Personne n'a changé de pseudo depuis hier")}
         if (msg.slice(0,4) == "null") {var msgf = msg.slice(4)} else {var msgf = msg}
         interaction.channel.send(msgf)
        }
