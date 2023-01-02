@@ -45,16 +45,17 @@ module.exports = {
         var msg = null
         while ( k < body.length) { var k = k+1
             var objBody = Messageclan.body[n]; var n =n +1
-        try {
+        try {var exPseudoD = 0
             var exPseudoD = JSON.parse(readFileSync(`././Information/xp/Member-Id/${timestamp}/${objBody.playerId}.json`, 'utf-8'))} catch (err) {}
             
         var newPseudo = objBody.username
         var exPseudo = exPseudoD.Pseudo
         
+        if (exPseudoD !== 0) {
         if ( exPseudo != newPseudo) {
             var msgi = `\`\`${exPseudo}\`\` a changé son pseudo en \`\`${newPseudo}\`\``
             var msg = `${msg + msgi}\n- - - - - -\n`}
-        }
+        }}
         if (msg.slice(0,4) == "null") {var msgf = msg.slice(4)} else {var msgf = msg}
         message.channel.send(msgf)
   
@@ -100,16 +101,16 @@ module.exports = {
         var msg = null
         while ( k < body.length) { var k = k+1
             var objBody = Messageclan.body[n]; var n =n +1
-        try {
+        try {var exPseudoD = 0
             var exPseudoD = JSON.parse(readFileSync(`././Information/xp/Member-Id/${timestamp}/${objBody.playerId}.json`, 'utf-8'))} catch (err) {}
 
         var newPseudo = objBody.username
         var exPseudo = exPseudoD.Pseudo
-        
+        if (exPseudoD !== 0) {
         if ( exPseudo != newPseudo) {
         var msgi = `\`\`${exPseudo}\`\` a changé son pseudo en \`\`${newPseudo}\`\``
         var msg = `${msg + msgi}\n- - - - - -\n`}
-        }
+        }}
         if (msg.slice(0,4) == "null") {var msgf = msg.slice(4)} else {var msgf = msg}
         interaction.channel.send(msgf)
        }
