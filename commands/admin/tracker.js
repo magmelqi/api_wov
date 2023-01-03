@@ -42,7 +42,7 @@ module.exports = {
           else {return Merr.edit({content:`Erreur: ${err}`})}});
           var objErr= JSON.stringify(Messageclan);
           try {var body = await Messageclan.body}catch(err) {}; var i = i+1}
-          Merr.delete()
+          Statut.delete()
           
         var name = body.username
         var connexion = body.lastOnline
@@ -68,7 +68,7 @@ module.exports = {
       .setTimestamp()
       .setFooter({text: name,iconeURL: message.author.displayAvatarURL() })
       
-      Statut.edit({ content: ' ', embeds: [embed] });
+      Merr.edit({ content: ' ', embeds: [embed] });
       var check = 5
         var t = "yo"
         var temps = 600000
@@ -126,7 +126,7 @@ module.exports = {
           .setTimestamp()
           .setFooter({text: name,iconeURL: message.author.displayAvatarURL() })
           
-          Statut.edit({ content: ' ', embeds: [embed] });
+          Merr.edit({ content: ' ', embeds: [embed] });
 
         const info = {
             Pseudo: name,
@@ -150,7 +150,7 @@ module.exports = {
           .setTimestamp()
           .setFooter({text: name,iconeURL: message.author.displayAvatarURL() })
           
-          Statut.edit({ content: ' ', embeds: [embed] });
+          Merr.edit({ content: ' ', embeds: [embed] });
 
 
         const info = {
