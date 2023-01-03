@@ -64,7 +64,7 @@ module.exports = {
           var secondeOr= timeT.slice(18,20); console.log(`Donnée-or: Année: ${annéeOr}, mois: ${moisOr}, jour: ${jourOr}, heure: ${heureOr}, minute: ${minuteOr}, seconde: ${secondeOr}`)
 
           if (annéeA > annéeOr || moisA > moisOr || moisA == moisOr && jourA > jourOr || moisA == moisOr && jourA == jourOr && heureA > heureOr || moisA == moisOr && jourA == jourOr && heureA == heureOr && minuteA > minuteOr || moisA == moisOr && jourA == jourOr && heureA == heureOr && minuteA == minuteOr && secondeA > secondeOr ) {
-          if (InfoOr.Création == data.creationTime) {embed.addFields({name: '- - - - - - - - - - - - - - - - - - - - - - - - - -', value:`Le don d'or de ${InfoOr.Pseudo} a déjà été comptabilisé`})}
+          if (InfoOr.Création > data.creationTime) {embed.addFields({name: '- - - - - - - - - - - - - - - - - - - - - - - - - -', value:`Le don d'or de ${InfoOr.Pseudo} a déjà été comptabilisé`})}
           else if (InfoOr.Or > 0) {
             const info = {
               Pseudo: data.playerUsername,

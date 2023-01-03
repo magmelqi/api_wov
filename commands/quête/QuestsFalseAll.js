@@ -72,7 +72,7 @@ module.exports = {
               else {return Minfo.edit({content:`Erreur: ${err}`})};Minfo.delete()});
          var objErr= JSON.stringify(Quests); var i = i+1}
         console.log (`Pseudo: ${User.username}`);
-            var msgi = `Pseudo: ${User.username}, désactivation réussie`
+            var msgi = `\nPseudo: ${User.username}, désactivation réussie`
         var msg = `\n${msg + msgi}\n- - - - - -`
     
             var n = n+1;}var k = k+1}

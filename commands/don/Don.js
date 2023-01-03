@@ -20,7 +20,7 @@ module.exports = {
           .setTitle(`Liste des dons présent`)
           .setTimestamp();
           var n = 0
-          for(let i=0; i < DOr.length; i++)  { var n = n + 1
+          for(let i=0; i < DOr.length; i++)  {
       
             var Orf = /.json"/g; var OrS = Ort.search(Orf)
             var Ors = Ort.slice(1, OrS+6); var Ort = Ort.slice(OrS+6); 
@@ -33,9 +33,9 @@ module.exports = {
               var Gemme = JSON.parse(readFileSync(`././Information/Gemme/Member-Id/${OrO}`, 'utf-8'))} catch (err) {}
       
                   try {
-              if (Or.Or > 499 && Gemme.Gemme > 0) {embed.addFields({name: '- - - - - - - - - - - - - - - - - - - - - - - - - -', value:`\`${Or.Pseudo}\` posséde: \`${Or.Or}\` or et \`${Gemme.Gemme}\` gemme`});}
-              else if (Gemme.Gemme > 0) {embed.addFields({name: '- - - - - - - - - - - - - - - - - - - - - - - - - -', value:`\`${Or.Pseudo}\` posséde: \`${Gemme.Gemme}\` gemme`});}
-              else if (Or.Or > 499 ) {embed.addFields({name: '- - - - - - - - - - - - - - - - - - - - - - - - - -', value:`\`${Or.Pseudo}\` posséde: \`${Or.Or}\` or`});}
+              if (Or.Or > 499 && Gemme.Gemme > 0) {embed.addFields({name: '- - - - - - - - - - - - - - - - - - - - - - - - - -', value:`\`${Or.Pseudo}\` posséde: \`${Or.Or}\` or et \`${Gemme.Gemme}\` gemme`});var n = n + 1}
+              else if (Gemme.Gemme > 0) {embed.addFields({name: '- - - - - - - - - - - - - - - - - - - - - - - - - -', value:`\`${Or.Pseudo}\` posséde: \`${Gemme.Gemme}\` gemme`});var n = n + 1}
+              else if (Or.Or > 499 ) {embed.addFields({name: '- - - - - - - - - - - - - - - - - - - - - - - - - -', value:`\`${Or.Pseudo}\` posséde: \`${Or.Or}\` or`});var n = n + 1}
                   }catch (err) {}
             var Or = 0; var Gemme = 0
           }; embed.addFields({name: '- - - - - - - - - - - - - - - - - - - - - - - - - -', value: `${n} ayant 500 or ou 1 diamant en banque`})
@@ -53,7 +53,7 @@ module.exports = {
               .setTitle(`Liste des dons présent`)
               .setTimestamp();
               var n = 0
-              for(let i=0; i < DOr.length; i++)  { var n = n + 1
+              for(let i=0; i < DOr.length; i++)  {
           
                 var Orf = /.json"/g; var OrS = Ort.search(Orf)
                 var Ors = Ort.slice(1, OrS+6); var Ort = Ort.slice(OrS+6); 
@@ -66,9 +66,9 @@ module.exports = {
                   var Gemme = JSON.parse(readFileSync(`././Information/Gemme/Member-Id/${OrO}`, 'utf-8'))} catch (err) {}
           
                       try {
-                  if (Or.Or > 499 && Gemme.Gemme > 0) {embed.addFields({name: '- - - - - - - - - - - - - - - - - - - - - - - - - -', value:`\`${Or.Pseudo}\` posséde: \`${Or.Or}\` Or et \`${Gemme.Gemme}\` gemme`});}
-                  else if (Gemme.Gemme > 0) {embed.addFields({name: '- - - - - - - - - - - - - - - - - - - - - - - - - -', value:`\`${Or.Pseudo}\` posséde: \`${Gemme.Gemme}\` gemme`});}
-                  else if (Or.Or > 499 ) {embed.addFields({name: '- - - - - - - - - - - - - - - - - - - - - - - - - -', value:`\`${Or.Pseudo}\` posséde: \`${Or.Or}\` Or`});}
+                  if (Or.Or > 499 && Gemme.Gemme > 0) {embed.addFields({name: '- - - - - - - - - - - - - - - - - - - - - - - - - -', value:`\`${Or.Pseudo}\` posséde: \`${Or.Or}\` Or et \`${Gemme.Gemme}\` gemme`});var n = n + 1}
+                  else if (Gemme.Gemme > 0) {embed.addFields({name: '- - - - - - - - - - - - - - - - - - - - - - - - - -', value:`\`${Or.Pseudo}\` posséde: \`${Gemme.Gemme}\` gemme`});var n = n + 1}
+                  else if (Or.Or > 499 ) {embed.addFields({name: '- - - - - - - - - - - - - - - - - - - - - - - - - -', value:`\`${Or.Pseudo}\` posséde: \`${Or.Or}\` Or`});var n = n + 1}
                       }catch (err) {}
                 var Or = 0; var Gemme = 0 }
                 embed.addFields({name: '- - - - - - - - - - - - - - - - - - - - - - - - - -', value: `${n} ayant 500 or ou 1 diamant en banque`})

@@ -32,8 +32,8 @@ module.exports = {
 
         if (g == 1) {var idn1 = or.PlayerId; var ressource = or.Or}
         else if (g == 0) {var idn1 = gemme.PlayerId; var ressource = gemme.Gemme}
-        else if (g == 2) {return Mname.edit({content:`${nom} n'a pas de don dans la base de donné (?donadd pour actualiser les dons)`})}
-
+        else if (g == 2) {var msgi =`\n${nom} n'a pas de don dans la base de donné`}
+          if (g != 2 ) {
         var Quests = await superagent.put(`https://api.wolvesville.com/clans/${process.env.CLAN_ID}/members/${idn1}/participateInQuests`)
         .send({participateInQuests: true})
         .set( 'Authorization', process.env.WOV_TOKEN)
@@ -62,8 +62,8 @@ module.exports = {
        
         console.log (`Pseudo: ${nom} Participation à la quête: true`);
 
-        var msgi = `Pseudo: ${nom}, banque: ${ressource}, activation réussie`
-        var msg = `\n${msg + msgi}\n- - - - - -`
+        var msgi = `\nPseudo: ${nom}, banque: ${ressource}, activation réussie`}
+        var msg = `${msg + msgi}\n- - - - - -`
 
             var n = n+1;}
             if (msg.slice(-11) == "- - - - - -") {var msg = msg.slice(0, -12)} 

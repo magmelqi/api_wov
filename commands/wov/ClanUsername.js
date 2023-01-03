@@ -11,7 +11,7 @@ module.exports = {
     examples: ['clan Wolves Legion 🐺'],
     description: "Voir les détailles du clan",
       run: async(client, message, args) => {
-        var nom = message.content.substring(5).trim(); 
+        var nom = message.content.substring(5).trim(); console.log(nom)
         var Mprofil= await message.channel.send(`Recherche du Clan intitulé: ${nom}...`)
         var profil = await superagent.get(`https://api.wolvesville.com/clans/search?name=${nom}`) 
           .set( 'Authorization', process.env.WOV_TOKEN)

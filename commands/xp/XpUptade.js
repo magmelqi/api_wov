@@ -39,7 +39,8 @@ module.exports = {
     
         const timestamp = `${dayjs().add(-1, 'hour').format("DD-MM-YYYY")}`; 
         const heure = `${dayjs().add(-1, 'hour').format("HH:mm")}-heure anglaise`;
-    
+        var Mln = null; var Mlc = null; var MlS = null; var Mml = null; var MLS = null
+
        try {
       for (var i = 0; i < 50;i++){ 
         var Mmf= /"participateInClanQuests":/g
@@ -69,7 +70,38 @@ module.exports = {
         writeFileSync(`././Information/xp/Member-Id/${timestamp}/${data.playerId}.json`, objectToJson)
         writeFileSync(`././Information/xp/Member-Pseudo/${timestamp}/${data.username}.json`, objectToJson)
         const Xp = JSON.parse(readFileSync(`././Information/xp/Member-Id/${timestamp}/${data.playerId}.json`, 'utf-8')); console.log(Xp.Pseudo, Xp.Xp)
-     i= i}} catch (err) {}message.channel.send({content:`Update des xp de \`${i}\` membres`})
+
+        const vérificationH = `${dayjs().add(-1, 'day').add(-1, 'hour').format("DD-MM-YYYY")}`;
+        const vérification = `${dayjs().add(-1, 'hour').format("DD-MM-YYYY")}`; 
+
+        try {
+            var LoupB = JSON.parse(readFileSync(`././Information/xp/Member-Id/${vérificationH}/${data.playerId}.json`, 'utf-8'))} catch (err) { var LoupB = 0}
+        try {
+            var LoupA = JSON.parse(readFileSync(`././Information/xp/Member-Id/${vérification}/${data.playerId}.json`, 'utf-8'))} catch (err) { var LoupA = 0}
+
+        if (LoupB.Xp < 20000 && LoupA.Xp >= 20000) { console.log('ln')
+          var Mln = `\n${data.username} vient de dépasser les \`\`20 000xp\`\`, obtient donc le rôle de \`\`Loup Novice\`\``}
+
+        if (LoupB.Xp < 50000 && LoupA.Xp >= 50000) { console.log('lc')
+          var Mlc = `\n${data.username} vient de dépasser les \`\`50 000xp\`\`, obtient donc le rôle de \`\`Loup Confirmé\`\``}
+
+        if (LoupB.Xp < 100000 && LoupA.Xp >= 100000) { console.log('ls')
+          var Mls = `\n${data.username} vient de dépasser les \`\`100 000xp\`\`, obtient donc le rôle de \`\`Loup Sage\`\``}
+
+        if (LoupB.Xp < 250000 && LoupA.Xp >= 250000) { console.log('lS')
+          var MlS = `\n${data.username} vient de dépasser les \`\`250 000xp\`\`, obtient donc le rôle de \`\`Loup Supérieur\`\``}
+
+        if (LoupB.Xp < 500000 && LoupA.Xp >= 500000) { console.log('ml')
+          var Mml = `\n${data.username} vient de dépasser les \`\`500 000xp\`\`, obtient donc le rôle de \`\`Maître Loup\`\``}
+
+        if (LoupB.Xp < 1000000 && LoupA.Xp >= 1000000) { console.log('LS')
+          var MLS = `\n${data.username} vient de dépasser les \`\`1 000 000xp\`\`, obtient donc le rôle de \`\`Loup Seigneur\`\``}
+
+
+     i= i}} catch (err) {}
+     if (Mln = "null") {var Mln =' '}; if (Mlc = "null") {var Mlc =' '}; if (Mls = "null") {var Mls =' '}; if (MlS = "null") {var MlS =' '}; 
+     if (Mml = "null") {var Mml =' '}; if (MLS = "null") {var MLS =' '}
+     message.channel.send({content:`Update des xp de \`${i}\` membres ${Mln, Mlc, Mls, MlS, Mml, MLS}`})
     },
 
     async runSlash(client, interaction) { 
@@ -100,6 +132,8 @@ module.exports = {
   
       const timestamp = `${dayjs().add(-1, 'hour').format("DD-MM-YYYY")}`; 
       const heure = `${dayjs().add(-1, 'hour').format("HH:mm")}-heure anglaise`;
+      var Mln = null; var Mlc = null; var MlS = null; var Mml = null; var MLS = null
+      
      try {
     for (var i = 0; i < 50;i++){ 
       var Mmf= /"participateInClanQuests":/g
@@ -129,6 +163,34 @@ module.exports = {
       writeFileSync(`././Information/xp/Member-Id/${timestamp}/${data.playerId}.json`, objectToJson)
       writeFileSync(`././Information/xp/Member-Pseudo/${timestamp}/${data.username}.json`, objectToJson)
       const Xp = JSON.parse(readFileSync(`././Information/xp/Member-Id/${timestamp}/${data.playerId}.json`, 'utf-8')); console.log(Xp.Pseudo, Xp.Xp)
-    var i = i}}catch(err){}interaction.channel.send(`Update des xp de \`${i}\` membres`)
+
+
+      try {
+        var LoupB = JSON.parse(readFileSync(`././Information/xp/Member-Id/${vérificationH}/${data.playerId}.json`, 'utf-8'))} catch (err) { var LoupB = 0}
+    try {
+        var LoupA = JSON.parse(readFileSync(`././Information/xp/Member-Id/${vérification}/${data.playerId}.json`, 'utf-8'))} catch (err) { var LoupA = 0}
+
+    if (LoupB.Xp < 20000 && LoupA.Xp >= 20000) { console.log('ln')
+      var Mln = `\n${data.username} vient de dépasser les \`\`20 000xp\`\`, obtient donc le rôle de \`\`Loup Novice\`\``}
+
+    if (LoupB.Xp < 50000 && LoupA.Xp >= 50000) { console.log('lc')
+      var Mlc = `\n${data.username} vient de dépasser les \`\`50 000xp\`\`, obtient donc le rôle de \`\`Loup Confirmé\`\``}
+
+    if (LoupB.Xp < 100000 && LoupA.Xp >= 100000) { console.log('ls')
+      var Mls = `\n${data.username} vient de dépasser les \`\`100 000xp\`\`, obtient donc le rôle de \`\`Loup Sage\`\``}
+
+    if (LoupB.Xp < 250000 && LoupA.Xp >= 250000) { console.log('lS')
+      var MlS = `\n${data.username} vient de dépasser les \`\`250 000xp\`\`, obtient donc le rôle de \`\`Loup Supérieur\`\``}
+
+    if (LoupB.Xp < 500000 && LoupA.Xp >= 500000) { console.log('ml')
+      var Mml = `\n${data.username} vient de dépasser les \`\`500 000xp\`\`, obtient donc le rôle de \`\`Maître Loup\`\``}
+
+    if (LoupB.Xp < 1000000 && LoupA.Xp >= 1000000) { console.log('LS')
+      var MLS = `\n${data.username} vient de dépasser les \`\`1 000 000xp\`\`, obtient donc le rôle de \`\`Loup Seigneur\`\``}
+
+    var i = i}}catch(err){}
+    if (Mln = "null") {var Mln =' '}; if (Mlc = "null") {var Mlc =' '}; if (Mls = "null") {var Mls =' '}; if (MlS = "null") {var MlS =' '}; 
+    if (Mml = "null") {var Mml =' '}; if (MLS = "null") {var MLS =' '}
+    interaction.channel.send({content:`Update des xp de \`${i}\` membres ${Mln, Mlc, Mls, MlS, Mml, MLS}`})
   }
   }

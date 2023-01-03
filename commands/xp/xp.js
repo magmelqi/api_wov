@@ -62,6 +62,7 @@ module.exports = {
 
           var join = InfoA.Création; var joinT= JSON.stringify(join); var joinTf= joinT.slice(1,11);
           const timestampB= dayjs().add(-3, 'day').add(-1, 'hour').format("YYYY-MM-DD")
+          var derCo = objBody.lastOnline; var derCoT= JSON.stringify(derCo); var derCoTf = derCoT.slice(1,11)
 
           
           try {
@@ -136,8 +137,8 @@ module.exports = {
             else if ( n == 3) {var xpvalue = `A du être avertis, son exclusion approche !`}
             else if ( n == 4) {var xpvalue = `A du être avertis, son exclusion approche a grand pas !`}
             else if ( n == 5) {var xpvalue = `A exclure !`}
-          emebed.addFields({name:'- - - - - - - - - - - - - - - - - - - - - - - - - -', value: `+\`❌\` \`${InfoA.Pseudo}\` a rejoins le \`${joinTf}\`, \nxp: \`${XpA}\` sur \`2000\`xp requis\nSous les 2000 xp depuis ${n} jours\n${xpvalue}` })
-        } else {emebed.addFields({name:'- - - - - - - - - - - - - - - - - - - - - - - - - -', value: `+\`❌\` \`${InfoA.Pseudo}\` a rejoins le \`${joinTf}\`, \nxp: \`${XpA}\` sur \`2000\`xp requis\nA avertir !` })}
+          emebed.addFields({name:'- - - - - - - - - - - - - - - - - - - - - - - - - -', value: `+\`❌\` \`${InfoA.Pseudo}\` a rejoins le \`${joinTf}\`,\n+Dernière connexion: \`${derCoTf}\`,\nxp: \`${XpA}\` sur \`2000\`xp requis\nSous les 2000 xp depuis ${n} jours\n${xpvalue}` })
+        } else {emebed.addFields({name:'- - - - - - - - - - - - - - - - - - - - - - - - - -', value: `+\`❌\` \`${InfoA.Pseudo}\` a rejoins le \`${joinTf}\`,\n+Dernière connexion: \`${derCoTf}\`,\nxp: \`${XpA}\` sur \`2000\`xp requis\nA avertir !` })}
 
         } else {console.log(InfoA.Pseudo, `${XpA} = ${Xp1} - ${Xp2}`)};
 
@@ -146,9 +147,9 @@ module.exports = {
           if (joinTf==timestampB ) {
 
           
-          if (Xp1 > 1000) {emebed.addFields({name: '- - - - - - - - - - - - - - - - - - - - - - - - - -',value:`+\`✅\` \`${InfoA.Pseudo}\` a rejoins le \`${joinTf}\`, \nxp: \`${Xp1}\` sur \`1000\`xp requis`});console.log(InfoA.Pseudo,  Xp1)} 
+          if (Xp1 > 1000) {emebed.addFields({name: '- - - - - - - - - - - - - - - - - - - - - - - - - -',value:`+\`✅\` \`${InfoA.Pseudo}\` a rejoins le \`${joinTf}\`,\n+Dernière connexion: \`${derCoTf}\`,\nxp: \`${Xp1}\` sur \`1000\`xp requis`});console.log(InfoA.Pseudo,  Xp1)} 
           else {
-            emebed.addFields({name: '- - - - - - - - - - - - - - - - - - - - - - - - - -',value:`+\`❌\` \`${InfoA.Pseudo}\` a rejoins le \`${joinTf}\`, \nxp: \`${Xp1}\` sur \`1000\`xp requis`});console.log(InfoA.Pseudo,  Xp1)}
+            emebed.addFields({name: '- - - - - - - - - - - - - - - - - - - - - - - - - -',value:`+\`❌\` \`${InfoA.Pseudo}\` a rejoins le \`${joinTf}\`,\n+Dernière connexion: \`${derCoTf}\`,\nxp: \`${Xp1}\` sur \`1000\`xp requis`});console.log(InfoA.Pseudo,  Xp1)}
         } 
       }}catch(err) {console.log(err)}
 
@@ -168,17 +169,16 @@ module.exports = {
         const timestampH = `${dayjs().add(-8, 'day').add(-1, 'hour').format("DD-MM-YYYY")}`; 
         const timestampA = `${dayjs().add(-3, 'day').add(-1, 'hour').format("DD-MM-YYYY")}`;
  
-        const tryRequests = await message.channel.send('Requête en cours')
         var Messageclan = await superagent.get(`https://api.wolvesville.com/clans/${process.env.CLAN_ID}/members`)
         .set( 'Authorization', process.env.WOV_TOKEN)
         .set('Content-Type', 'application/json')
         .set('Accept', 'application/json')
         .catch((err) => {
-          if (err == "Error: Too Many Requests") {tryRequests.edit({content:`Erreur a la 1ère requête\n\`2ème tentatives en cours...\``})} 
-          else {tryRequests.edit({content:`Erreur: ${err}`});return console.log(err)}}); 
+          if (err == "Error: Too Many Requests") {interaction.editReply({content:`Erreur a la 1ère requête\n\`2ème tentatives en cours...\``})} 
+          else {interaction.editReply({content:`Erreur: ${err}`});return console.log(err)}}); 
         console.log ('Commande xpadd faite');
         var objErr= JSON.stringify(Messageclan);
-        if (objErr !== undefined) {tryRequests.edit({content:`Calcul en cours...`}); var body= Messageclan.body}
+        if (objErr !== undefined) {interaction.editReply({content:`Calcul en cours...`}); var body= Messageclan.body}
  
         var i =2
         while (objErr == undefined) {await new Promise(resolve => setTimeout(resolve, 1000))
@@ -187,12 +187,10 @@ module.exports = {
         .set('Content-Type', 'application/json')
         .set('Accept', 'application/json')
         .catch((err) => {
-          if (err == "Error: Too Many Requests") {tryRequests.edit({content:`Erreur, tentatives: \`${i}\` `})}
-          else {tryRequests.edit({content:`Erreur: ${err}`});return console.log(err)};});
+          if (err == "Error: Too Many Requests") {interaction.editReply({content:`Erreur, tentatives: \`${i}\` `})}
+          else {interaction.editReply({content:`Erreur: ${err}`});return console.log(err)};});
         var objErr= JSON.stringify(Messageclan)
         try{var body= Messageclan.body}catch(err) {};var i = i+1} 
-         tryRequests.delete()
-         
  
          const emebed = new MessageEmbed()
          .setTitle(`XP-${timestamp}`)
@@ -213,6 +211,7 @@ module.exports = {
  
            var join = InfoA.Création; var joinT= JSON.stringify(join); var joinTf= joinT.slice(1,11);
            const timestampB= dayjs().add(-3, 'day').add(-1, 'hour').format("YYYY-MM-DD")
+           var derCo = objBody.lastOnline; var derCoT= JSON.stringify(derCo); var derCoTf = derCoT.slice(1,11)
  
            
            try {
@@ -287,17 +286,17 @@ module.exports = {
               else if ( n == 3) {var xpvalue = `A du être avertis, son exclusion approche !`}
               else if ( n == 4) {var xpvalue = `A du être avertis, son exclusion approche a grand pas !`}
               else if ( n == 5) {var xpvalue = `A exclure !`}
-            emebed.addFields({name:'- - - - - - - - - - - - - - - - - - - - - - - - - -', value: `+\`❌\` \`${InfoA.Pseudo}\` a rejoins le \`${joinTf}\`, \nxp: \`${XpA}\` sur \`2000\`xp requis\nSous les 2000 xp depuis ${n} jours\n${xpvalue}` })
-          } else {emebed.addFields({name:'- - - - - - - - - - - - - - - - - - - - - - - - - -', value: `+\`❌\` \`${InfoA.Pseudo}\` a rejoins le \`${joinTf}\`, \nxp: \`${XpA}\` sur \`2000\`xp requis\nA avertir !` })}
+            emebed.addFields({name:'- - - - - - - - - - - - - - - - - - - - - - - - - -', value: `+\`❌\` \`${InfoA.Pseudo}\` a rejoins le \`${joinTf}\`,\n+Dernière connexion: \`${derCoTf}\`,\nxp: \`${XpA}\` sur \`2000\`xp requis\nSous les 2000 xp depuis ${n} jours\n${xpvalue}` })
+          } else {emebed.addFields({name:'- - - - - - - - - - - - - - - - - - - - - - - - - -', value: `+\`❌\` \`${InfoA.Pseudo}\` a rejoins le \`${joinTf}\`,\n+Dernière connexion: \`${derCoTf}\`,\nxp: \`${XpA}\` sur \`2000\`xp requis\nA avertir !` })}
   
           } else {console.log(InfoA.Pseudo, `${XpA} = ${Xp1} - ${Xp2}`)};
  
  
            if (joinTf==timestampB ) {
            
-           if (Xp1 > 1000) {emebed.addFields({name: '- - - - - - - - - - - - - - - - - - - - - - - - - -',value:`+\`✅\` \`${InfoA.Pseudo}\` a rejoins le \`${joinTf}\`, \nxp: \`${Xp1}\` sur \`1000\`xp requis`});console.log(InfoA.Pseudo,  Xp1)} 
+           if (Xp1 > 1000) {emebed.addFields({name: '- - - - - - - - - - - - - - - - - - - - - - - - - -',value:`+\`✅\` \`${InfoA.Pseudo}\` a rejoins le \`${joinTf}\`,\n+Dernière connexion: \`${derCoTf}\`,\nxp: \`${Xp1}\` sur \`1000\`xp requis`});console.log(InfoA.Pseudo,  Xp1)} 
            else {
-             emebed.addFields({name: '- - - - - - - - - - - - - - - - - - - - - - - - - -',value:`+\`❌\` \`${InfoA.Pseudo}\` a rejoins le \`${joinTf}\`, \nxp: \`${Xp1}\` sur \`1000\`xp requis`});console.log(InfoA.Pseudo,  Xp1)}
+             emebed.addFields({name: '- - - - - - - - - - - - - - - - - - - - - - - - - -',value:`+\`❌\` \`${InfoA.Pseudo}\` a rejoins le \`${joinTf}\`,\n+Dernière connexion: \`${derCoTf}\`,\nxp: \`${Xp1}\` sur \`1000\`xp requis`});console.log(InfoA.Pseudo,  Xp1)}
          } 
        }}catch(err) {console.log(err)}
  
