@@ -1,6 +1,7 @@
 const superagent = require('superagent').agent();
-const { MessageEmbed } = require('discord.js');
+const { MessageEmbed, Formatters } = require('discord.js');
 const dotenv = require('dotenv'); dotenv.config();
+const dayjs = require ('dayjs');
 
 module.exports = {
     name: "quests",
@@ -196,7 +197,15 @@ module.exports = {
       poll7.react('✅');
       poll7.react('❌');
 
-        message.channel.send('Coucou <@&806912965496143882> voilà pour vous !\n\`\`Fin des votes a 14h.\`\`') 
+      var jour = `${dayjs().format("ddd")}`; var j = 0
+      while (jour != "Tue") { var j = j +1
+             var jour = `${dayjs().add(+j, 'day').format("ddd")}`;
+      };
+      var date = `${dayjs().add(+j, 'day').format("YYYY-MM-DD")}`
+      console.log(date)
+      const TempsF = Formatters.time(dayjs(`${date}T14:00`).unix(), Formatters.TimestampStyles.RelativeTime)
+
+        message.channel.send(`Coucou <@&806912965496143882> voilà pour vous !\nFin des votes ${TempsF}`) 
      
        },
 
@@ -384,6 +393,14 @@ module.exports = {
          poll7.react('✅');
          poll7.react('❌');
 
-        interaction.channel.send('Coucou <@&806912965496143882> voilà pour vous !\n\`\`Fin des votes a 14h.\`\`') 
+         var jour = `${dayjs().format("ddd")}`; var j = 0
+         while (jour != "Tue") { var j = j +1
+                var jour = `${dayjs().add(+j, 'day').format("ddd")}`;
+         };
+         var date = `${dayjs().add(+j, 'day').format("YYYY-MM-DD")}`
+         console.log(date)
+         const TempsF = Formatters.time(dayjs(`${date}T14:00`).unix(), Formatters.TimestampStyles.RelativeTime)
+
+        interaction.channel.send(`Coucou <@&806912965496143882> voilà pour vous !\nFin des votes: ${TempsF}`) 
       }
       }
