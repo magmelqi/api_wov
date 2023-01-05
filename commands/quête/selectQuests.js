@@ -12,7 +12,7 @@ const buttons2 = new MessageActionRow()
 
   new MessageButton()
   .setCustomId('confirm-button')
-  .setLabel('✅')
+  .setLabel('✔️')
   .setStyle('SUCCESS'),
 
   new MessageButton()
