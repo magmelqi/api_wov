@@ -25,5 +25,10 @@ module.exports = {
 
         cmd.runSlash(client, interaction, guildSettings);
       }
+      else if (interaction.isButton()) {
+        const btn = client.buttons.get(interaction.customId);
+        if (!btn) return interaction.reply('ce button n\'existe pas ! ou elle n\'est pas chargée.');
+        btn.runInteraction(client, interaction);
+      }
     },
   };

@@ -202,10 +202,10 @@ module.exports = {
              var jour = `${dayjs().add(+j, 'day').format("ddd")}`;
       };
       var date = `${dayjs().add(+j, 'day').format("YYYY-MM-DD")}`
-      console.log(date)
-      const TempsF = Formatters.time(dayjs(`${date}T14:00`).unix(), Formatters.TimestampStyles.RelativeTime)
-
-        message.channel.send(`Coucou <@&806912965496143882> voilà pour vous !\nFin des votes ${TempsF}`) 
+      
+         const realativeTempsF = Formatters.time(dayjs(`${date}T13:00`).unix(), Formatters.TimestampStyles.RelativeTime)
+         const TempsF = Formatters.time(dayjs(`${date}T13:00`).unix(), Formatters.TimestampStyles.ShortDateTime);
+        message.channel.send(`Coucou <@&806912965496143882> voilà pour vous !\nFin des votes le ${TempsF} (${realativeTempsF})`)  
      
        },
 
@@ -398,9 +398,9 @@ module.exports = {
                 var jour = `${dayjs().add(+j, 'day').format("ddd")}`;
          };
          var date = `${dayjs().add(+j, 'day').format("YYYY-MM-DD")}`
-         console.log(date)
-         const TempsF = Formatters.time(dayjs(`${date}T14:00`).unix(), Formatters.TimestampStyles.RelativeTime)
 
-        interaction.channel.send(`Coucou <@&806912965496143882> voilà pour vous !\nFin des votes: ${TempsF}`) 
+         const realativeTempsF = Formatters.time(dayjs(`${date}T13:00`).unix(), Formatters.TimestampStyles.RelativeTime)
+         const TempsF = Formatters.time(dayjs(`${date}T13:00`).unix(), Formatters.TimestampStyles.ShortDateTime);
+        interaction.channel.send(`Coucou <@&806912965496143882> voilà pour vous !\nFin des votes le ${TempsF} (${realativeTempsF})`) 
       }
       }
