@@ -16,6 +16,11 @@ const buttons2 = new MessageActionRow()
   .setStyle('SUCCESS'),
 
   new MessageButton()
+  .setCustomId('annul-button')
+  .setLabel('✖️')
+  .setStyle('DANGER'),
+
+  new MessageButton()
   .setCustomId('suivant-button')
   .setLabel('⏩')
   .setStyle('PRIMARY'),
