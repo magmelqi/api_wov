@@ -9,7 +9,7 @@ module.exports = {
         var nom = `Choix-${nomF}`;
         
         try {
-            var InfoA = JSON.parse(readFileSync(`././Quête-info/${nom}.json`, 'utf-8'))} catch (err) {interaction.reply({content:`Il n'y a pas plus bas que le choix ${nomF+1}.`, ephemeral:true})}
+            var InfoA = JSON.parse(readFileSync(`././Information/Quête-info/${nom}.json`, 'utf-8'))} catch (err) {interaction.reply({content:`Il n'y a pas plus bas que le choix ${nomF+1}.`, ephemeral:true})}
 
             if (InfoA.Type == false) {var couleur = 'ff8000'} else {var couleur = 'FFC0CB'}
 

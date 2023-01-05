@@ -32,7 +32,7 @@ module.exports = {
      async run (client, message, args) {
 
       try {
-        var Lister = readdirSync(`././Quête-info`, 'utf-8')} catch (err) {return console.log(err);}
+        var Lister = readdirSync(`././Information/Quête-info`, 'utf-8')} catch (err) {return console.log(err);}
         var Lisetet = JSON.stringify(Lister);
 
         for(let i=0; i < Lister.length; i++)  {
@@ -42,7 +42,7 @@ module.exports = {
             try {var ListeO = JSON.parse(Listes);}catch(err) {console.log(err)}
 
           try {
-              unlinkSync(`././Quête-info/${ListeO}`, 'utf-8')}catch (err) {console.log(err)}}
+              unlinkSync(`././Information/Quête-info/${ListeO}`, 'utf-8')}catch (err) {console.log(err)}}
 
 
       const tryRequests = await message.channel.send('Requête en cours')
@@ -80,7 +80,7 @@ module.exports = {
             Id: id
           }; const objectToJson = JSON.stringify(info)
 
-          writeFileSync(`././Quête-info/Choix-${n}.json`, objectToJson)
+          writeFileSync(`././Information/Quête-info/Choix-${n}.json`, objectToJson)
         }
 
 
