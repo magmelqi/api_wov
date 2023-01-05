@@ -1,5 +1,5 @@
 const {readFileSync, readdirSync, unlinkSync} = require ("fs");
-const { MessageEmbed } = require ('discord.js')
+const { MessageEmbed, MessageAttachment } = require ('discord.js')
 
 module.exports = {
     name: "annul-button",
@@ -26,13 +26,13 @@ module.exports = {
               unlinkSync(`././Information/Quête-info/${ListeO}`, 'utf-8')}catch (err) {console.log(err)}}
 
               const embed = new MessageEmbed()
-              .setTitle('Blocage actif')
-              .setImage(InfoA.Image)
               .setColor('RED')
               .setFooter({text: "Blocage terminé"})
               .setTimestamp();
 
-            await interaction.message.edit({content:' ', embeds: [embed]})
+              var attachement = new MessageAttachment("./Information/Erreur.png")
+
+            await interaction.message.edit({content:'Blocage actif', embeds: [embed], files: [attachement]})
 
         interaction.reply({content:`Blocage des boutons.`})
 
