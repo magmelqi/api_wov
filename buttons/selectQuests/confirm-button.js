@@ -19,16 +19,16 @@ module.exports = {
             .setFooter({text: "Sélection terminé"})
             .setTimestamp();
             await interaction.message.edit({content:`${nom}`,embeds: [embed]})
-        const filter = msg =>  msg.author.id === interaction.user.id && msg.content.includes("O") || msg.content.includes("N");
+        const filter = msg =>  msg.author.id === interaction.user.id && msg.content.includes("O") || msg.content.includes("N") || msg.content.includes("o") || msg.content.includes("n");
 
         var A = false
         await interaction.reply({content:`${interaction.user.username}, souhaitez-vous réellement lancer la quête pour le skin du choix numéro ${nomF}? (o/n)`})
         .then(async() => {
            await interaction.channel.awaitMessages({ filter, max: 1, time: 5000, errors: ['time'] })
                 .then(collected => {
-                    if (collected.first().content == "O"){
+                    if (collected.first().content == "O" || collected.first().content == "o"){
                     interaction.followUp(`${collected.first().author.username} vient de confirmer le lancement de la quête à 21h00`); return A = true}
-                    if (collected.first().content == "N"){
+                    if (collected.first().content == "N" || collected.first().content == "n"){
                         interaction.followUp(`${collected.first().author.username} - Annulation de la quête ${nomF}...`); return A = false}
                     
                 })
