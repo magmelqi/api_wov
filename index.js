@@ -4,7 +4,9 @@ const client = new Client({intents: 1539, partials: ['MESSAGE', 'CHANNEL', 'USER
 const Logger = require ('./utils/Logger');
 const mongoose = require('mongoose')
 
-['commands','buttons'].forEach(x => client[x] = new Collection());
+client.commands = new Collection ();
+client.buttons = new Collection ();
+//['commands', 'buttons'].forEach(x => client[x] = new Collection());
 
 ['EventUtil','CommandUtil', 'ButtonUtil'].forEach(handler => { require(`./utils/handlers/${handler}`)(client) });
 require('./utils/Function')(client);
