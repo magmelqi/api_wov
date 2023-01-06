@@ -25,16 +25,9 @@ module.exports = {
           try {
               unlinkSync(`././Information/Quête-info/${ListeO}`, 'utf-8')}catch (err) {console.log(err)}}
 
-              const embed = new MessageEmbed()
-              .setColor('RED')
-              .setFooter({text: "Blocage terminé"})
-              .setTimestamp();
+            await interaction.message.delete()
 
-              var attachement = new MessageAttachment("./Information/Erreur.png")
-
-            await interaction.message.edit({content:'Blocage actif', embeds: [embed], files: [attachement]})
-
-        interaction.reply({content:`Blocage des boutons.`})
+        try {interaction.reply({content:"  "})}catch(err) {}
 
        }
   }

@@ -19,7 +19,7 @@ module.exports = {
         .setColor(couleur)
         .setFooter({text: "Sélection en cours"})
         .setTimestamp();
-           interaction.reply({content:`Visualisation du choix ${nomF}`, ephemeral:true})
+          try{ interaction.reply({content:"  ", ephemeral:true})}catch(err) {}
         await interaction.message.edit({content:`${nom}`,embeds: [embed]})
        }
   }

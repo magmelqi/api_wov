@@ -27,7 +27,7 @@ const buttons2 = new MessageActionRow()
 )
      
 module.exports = {
-  name: "selectq",
+  name: "selectqu",
   category: 'admin',
   permissions: ['BAN_MEMBERS'],
   ownerOnly: false,
