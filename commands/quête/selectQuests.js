@@ -7,7 +7,7 @@ const buttons2 = new MessageActionRow()
 .addComponents(
   new MessageButton()
   .setCustomId('return-button')
-  .setLabel('⏪')
+  .setLabel('👈🏼')
   .setStyle('PRIMARY'),
 
   new MessageButton()
@@ -22,7 +22,7 @@ const buttons2 = new MessageActionRow()
 
   new MessageButton()
   .setCustomId('suivant-button')
-  .setLabel('⏩')
+  .setLabel('👉🏼')
   .setStyle('PRIMARY'),
 )
      
