@@ -1,10 +1,49 @@
 const {readFileSync, readdirSync, unlinkSync} = require ("fs");
 const { MessageEmbed, Formatters, MessageAttachment } = require ('discord.js');
 const dayjs = require("dayjs");
+const superagent = require('superagent').agent();
+const dotenv = require('dotenv'); dotenv.config();
 
 module.exports = {
     name: "confirm-button",
        async runInteraction (client , interaction) {
+
+        var a = 1
+        var questsActive = await superagent.get(`https://api.wolvesville.com/clans/${process.env.CLAN_ID}/quests/active`)
+        .set( 'Authorization', process.env.WOV_TOKEN)
+        .set('Content-Type', 'application/json')
+        .set('Accept', 'application/json')
+        .catch((err) => {
+          if (err == "Error: Too Many Requests") {interaction.channel.reply({content:`Erreur, 2ème tentatives`}); return a = 0} 
+          else {interaction.channel.reply({content:`Erreur: ${err}`, ephemeral:true}); console.log(err); return a = 2}});
+        var objErr= JSON.stringify(questsActive);
+        if (objErr != undefined) {var body = questsActive.body}
+  
+        var i =2
+        while (objErr == undefined && a == 0) {await new Promise(resolve => setTimeout(resolve, 1000))
+          var questsActive = await superagent.get(`https://api.wolvesville.com/clans/${process.env.CLAN_ID}/quests/active`)
+        .set( 'Authorization', process.env.WOV_TOKEN)
+        .set('Content-Type', 'application/json')
+        .set('Accept', 'application/json')
+        .catch((err) => {
+          if (err == "Error: Too Many Requests") {interaction.channel.editReply({content:`Erreur, tentatives: \`${i}\` `})}
+          else {interaction.channel.editReply({content:`Erreur: ${err}`}); console.log(err); return a = 2};});
+        var objErr= JSON.stringify(questsActive)
+        try{var text= questsActive.text}catch(err) {};var i = i+1}
+
+            if (a==2) return
+
+            if (objErr != undefined) {
+                const embed = new MessageEmbed()
+                .setTitle('**__Quête déjâ en cours__**')
+                .setImage(body.quest.promoImageUrl)
+                .setColor('BLUE')
+                .setFooter({text: "Quête actif"})
+                .setTimestamp();
+                await interaction.message.edit({embeds: [embed]})
+                interaction.reply({content:' '})
+            }else {
+        
 
         var nom = interaction.message.content
         var nomT = JSON.stringify(nom); var nomTF = nomT.slice(7, -1); var nomF = nomTF -1 +1;
@@ -95,9 +134,9 @@ module.exports = {
                     if (Mili < 540000) {return interaction.channel.send('Erreur: veuillez lancer la commande avant 20h50')}
                     else {var image = new MessageAttachment(InfoA.Image)
               await new Promise(resolve => setTimeout(resolve, Mili))
-            interaction.channel.send({content:"Lancement de la quête dans `\`\`10 min\`\`\nPour l'annuler faite la commande reload", files:[image]})
+            interaction.channel.send({content:"Lancement de la quête dans `\`\`10 min\`\`\nPour l'annuler faite la commande reload ou cliquez sur la croix rouge", files:[image]})
             await new Promise(resolve => setTimeout(resolve, 540000))
-            interaction.channel.send("Lancement de la quête dans `\`\`1 min\`\`\nPour l'annuler faite la commande reload")
+            interaction.channel.send("Lancement de la quête dans `\`\`1 min\`\`\nPour l'annuler faite la commande reload ou cliquez sur la croix rouge")
             await new Promise(resolve => setTimeout(resolve, 60000))
             var  QuestsClaim = await superagent.post(`https://api.wolvesville.com/clans/${process.env.CLAN_ID}/quests/claim`)
             .send({questId: InfoA.Id})
@@ -113,6 +152,6 @@ module.exports = {
         } else {interaction.channel.send(`Annulation du lancement de la quête réussie`)}
 
 
-       }
+       }}
   }
   
