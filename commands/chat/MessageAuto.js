@@ -10,7 +10,7 @@ module.exports = {
     ownerOnly: false,
     usage: 'mauto', 
     examples: ['mauto'],
-    description: 'Envoie les messages envoyé sur wov en temps réel(1min de décalage) (pas config l\'id channel)',
+    description: 'Envoie les messages envoyé sur wov en temps réel(1min de décalage)',
     async run (client, message, args) {
         if (!args[0] || !args[0].match(/^(Wolves|test)$/)) return message.reply('merci d\'entrer un évenement valide (`\Wolves`/`\test\``)');
 
@@ -45,7 +45,7 @@ module.exports = {
       var objErr= JSON.stringify(Messageclan); 
       var obj= Messageclan.text; var objbody2 = Messageclan.body} 
       
-      var InfoLastest = JSON.parse(readFileSync(`././Information/Mauto/Mauto.json`, 'utf-8'))
+      var InfoLastest = JSON.parse(readFileSync(`././Information/Date/Mauto.json`, 'utf-8'))
       var AncienMessage = InfoLastest.date
         var n = 0; 
 
@@ -54,10 +54,6 @@ module.exports = {
       while(n !== -1 ){ 
         var objbody = Messageclan.body[n];var n = n-1
         try {var BOT =objbody.playerBotOwnerUsername}catch(err) {}
-      var dateI = objbody.date; var dateIT = JSON.stringify(dateI)// 2022-11-20T10:51:40.988Z
-
-
-        var jours = dateIT.slice(1, 11); var heure = dateIT.slice(12, 14); var minute = dateIT.slice(15, 17)
 
         var  HlastOnline = objbody.date.slice(11, 13)-1+2
 
@@ -200,7 +196,7 @@ module.exports = {
           date: Messageclan.body[0].date
         }
         const objectToJson = JSON.stringify(info)
-        writeFileSync(`././Information/Mauto/Mauto.json`, objectToJson)
+        writeFileSync(`././Information/Date/Mauto.json`, objectToJson)
         }
         
         test54()
