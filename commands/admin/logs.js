@@ -12,7 +12,7 @@ module.exports = {
     examples: ['log'],
     description: 'Envoie les logs du clan',
     async run (client, message, args) {
-        if (!args[0] || !args[0].match(/^(Wolves|test)$/)) return message.reply('merci d\'entrer un évenement valide (`\Wolves`/`\test\``)');
+        if (!args[0] || !args[0].match(/^(Wolves|test)$/)) return message.reply('merci d\'entrer un évenement valide (`\Wolves`/`test\``)');
 
       if (args[0] == "Wolves") {
       var logChannel = client.channels.cache.get('');}
