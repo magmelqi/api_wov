@@ -97,7 +97,7 @@ module.exports = {
             else {return Merr.edit({content:`Erreur: ${err}`})}});
             var objErr= JSON.stringify(Messageclan);
             try {var body = await Messageclan.body}catch(err) {}; var i = i+1}
-            Merr.delete()
+           
 
         var name = body.username
         var connexion = body.lastOnline

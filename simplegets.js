@@ -1,18 +1,8 @@
 
 
+API = async() => { var a = 1
+if (a=1) {console.log(a)} else {var b = 5}
+console.log(b)
+}
 
-fetch('https://api.wolvesville.com/items/avatarItems/', {
-    method: 'GET',
-    headers: {
-        'Authorization': 'Bot <api key>',
-        'Content-Type': 'application/json',
-        'Accept': 'application/json'
-    }
-})
-    .then(response => response.json())
-    .then(data => {
-        console.log(data);
-    })
-    .catch(error => {
-        console.log(error);
-    });
+API()
