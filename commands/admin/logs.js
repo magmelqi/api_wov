@@ -15,7 +15,7 @@ module.exports = {
         if (!args[0] || !args[0].match(/^(Wolves|test)$/)) return message.reply('merci d\'entrer un évenement valide (`\Wolves`/`test\`)');
 
       if (args[0] == "Wolves") {
-      var logChannel = client.channels.cache.get(''); var mautoChannel = client.channels.cache.get('1057688446933680248');}
+      var logChannel = client.channels.cache.get('1061297491712163920'); var mautoChannel = client.channels.cache.get('1057688446933680248');}
       else if (args[0] == "test") {
         var logChannel = client.channels.cache.get('1061297491712163920'); var mautoChannel = client.channels.cache.get('1046792811065913366')
       };  
@@ -241,7 +241,7 @@ module.exports = {
             else if (objbodyM.msg != undefined) {
               embed.setAuthor({name: 'Chat WOV'})
               embed.setColor('#77b5fe')
-              embed.addFields({name: `Pseudo: \`${pseudobody.username}\``, value: msg}, {name: "fais le", value: `${DlastOnline} à ${HlastOnline}h${objbodyM.date.slice(14,16)}`})
+              embed.addFields({name: `Pseudo: \`${pseudobody.username}\``, value: objbodyM.msg}, {name: "fais le", value: `${DlastOnline} à ${HlastOnline}h${objbodyM.date.slice(14,16)}`})
               embed.setThumbnail(pseudobody.equippedAvatar.url)
               embed.setTimestamp();
             }
@@ -267,15 +267,15 @@ module.exports = {
               else {return Merr.edit({content:`Erreur: ${err}`})}});
               var emojisErr = JSON.stringify(emojis);
               var emojist = emojis.text; var emojisbody = emojis.body} 
-                Merr.delete(); Minfo.delete()
+                Merr.delete(); Minfo.delete();
     
                 var emojisC = 0;
-                while (emojis.body[emojisC].id !== objbody.emojiId) {var emojisC = emojisC +1}
+                while (emojis.body[emojisC].id !== objbodyM.emojiId) {var emojisC = emojisC +1}
                 var msg = emojis.body[emojisC].urlPreview
 
                 embed.setAuthor({name: 'Chat WOV'})
                 embed.setColor('#77b5fe')
-                embed.addFields({name: `Pseudo: \`${pseudobody.username}\``, value: emojis.body[emojisC].name}, {name: "fais le", value: `${DlastOnline} à ${HlastOnline}h${objbody.date.slice(14,16)}`})
+                embed.addFields({name: `Pseudo: \`${pseudobody.username}\``, value: emojis.body[emojisC].name}, {name: "fais le", value: `${DlastOnline} à ${HlastOnline}h${objbodyM.date.slice(14,16)}`})
                 embed.setImage(msg)
                 embed.setThumbnail(pseudobody.equippedAvatar.url)
                 embed.setTimestamp();
