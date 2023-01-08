@@ -15,12 +15,13 @@ module.exports = {
         if (!args[0] || !args[0].match(/^(Wolves|test)$/)) return message.reply('merci d\'entrer un évenement valide (`\Wolves`/`test\`)');
 
       if (args[0] == "Wolves") {
-      var logChannel = client.channels.cache.get('1061297491712163920'); var mautoChannel = client.channels.cache.get('1057688446933680248');}
+      var logChannel = client.channels.cache.get('1061783809152012408'); var mautoChannel = client.channels.cache.get('1057688446933680248'); var queteLogChannel = client.channels.cache.get('1061784076798922792');
+    }
       else if (args[0] == "test") {
-        var logChannel = client.channels.cache.get('1061297491712163920'); var mautoChannel = client.channels.cache.get('1046792811065913366')
+        var logChannel = client.channels.cache.get('1061297491712163920'); var mautoChannel = client.channels.cache.get('1046792811065913366'); var queteLogChannel = client.channels.cache.get('1058381353336438865');
       };  
 
-        var queteLogChannel = client.channels.cache.get('1058381353336438865')
+        
 
       console.log('on');
     var Merr = await message.channel.send("On"); 
@@ -109,10 +110,10 @@ module.exports = {
            else if (objbody.action == "PLAYER_QUEST_PARTICIPATION_ENABLED") {
             try {var BOT = objbody.playerBotOwnerUsername}catch(err) {}
             if (BOT == undefined) {var Player = objbody.playerUsername}
-            if (objbody.targetPlayerUsername != undefined) {var targetP = objbody.targetPlayerUsername} else {var targetP = objbody.playerUsername; var Player = "AUTO"}
+            if (objbody.targetPlayerUsername != undefined) {var targetP = objbody.targetPlayerUsername; var couleur = 'GREEN'} else {var targetP = objbody.playerUsername; var Player = "AUTO"; var couleur = 'ORANGE'}
             
             embed.setTitle(`Participation activée: ${Player ?? ""}`)
-            embed.setColor('GREEN')
+            embed.setColor(couleur)
             embed.addFields({name:"Pseudo", value: `-${targetP}`},
             {name:"Fais le",value:`-${DlastOnline} à ${HlastOnline}h${objbody.creationTime.slice(14,16)}`})
             embed.setTimestamp();
