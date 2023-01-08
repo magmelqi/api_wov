@@ -4,7 +4,7 @@ module.exports = {
     name: "reload",
     category: 'admin',
     permissions: ['ADMINISTRATOR'],
-    ownerOnly: true,
+    ownerOnly: false,
     usage: 'reload',
     examples: ['reload'],
     description: 'Relancer le bot',

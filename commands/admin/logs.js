@@ -79,7 +79,7 @@ module.exports = {
            const embed = new MessageEmbed();
 
            if (objbody.action == "PLAYER_JOINED") {
-            embed.setTitle('Un nouveau membre à rejoins le clan')
+            embed.setTitle('Un membre à rejoins le clan')
             embed.setColor('GREEN')
             embed.addFields({name:"Pseudo", value: `-${objbody.playerUsername}`},
             {name:"Rejoins le",value:`-${DlastOnline} à ${HlastOnline}h${objbody.creationTime.slice(14,16)}`})
@@ -88,7 +88,7 @@ module.exports = {
             logChannel.send({embeds: [embed]})
            }
            else if (objbody.action == "PLAYER_LEFT") {
-            embed.setTitle('Un ancien membre à quitté le clan')
+            embed.setTitle('Un membre à quitté le clan')
             embed.setColor('RED')
             embed.addFields({name:"Pseudo", value: `-${objbody.playerUsername}`},
             {name:"Quitté le",value:`${DlastOnline} à ${HlastOnline}h${objbody.creationTime.slice(14,16)}`})
@@ -109,10 +109,11 @@ module.exports = {
            else if (objbody.action == "PLAYER_QUEST_PARTICIPATION_ENABLED") {
             try {var BOT = objbody.playerBotOwnerUsername}catch(err) {}
             if (BOT == undefined) {var Player = objbody.playerUsername}
+            if (objbody.targetPlayerUsername != undefined) {var targetP = objbody.targetPlayerUsername} else {var targetP = objbody.playerUsername; var Player = "AUTO"}
             
             embed.setTitle(`Participation activée: ${Player ?? ""}`)
             embed.setColor('GREEN')
-            embed.addFields({name:"Pseudo", value: `-${objbody.targetPlayerUsername}`},
+            embed.addFields({name:"Pseudo", value: `-${targetP}`},
             {name:"Fais le",value:`-${DlastOnline} à ${HlastOnline}h${objbody.creationTime.slice(14,16)}`})
             embed.setTimestamp();
 
@@ -121,18 +122,28 @@ module.exports = {
            else if (objbody.action == "PLAYER_QUEST_PARTICIPATION_DISABLED") {
             try {var BOT = objbody.playerBotOwnerUsername}catch(err) {}
             if (BOT == undefined) {var Player = objbody.playerUsername}
+            if (objbody.targetPlayerUsername != undefined) {var targetP = objbody.targetPlayerUsername} else {var targetP = objbody.playerUsername; var Player = "AUTO"}
 
             embed.setTitle(`Participation désactivée: ${Player ?? ""}`)
             embed.setColor('RED')
-            embed.addFields({name:"Pseudo", value: `-${objbody.targetPlayerUsername}`},
+            embed.addFields({name:"Pseudo", value: `-${targetP}`},
             {name:"Fais le",value:`-${DlastOnline} à ${HlastOnline}h${objbody.creationTime.slice(14,16)}`})
             embed.setTimestamp();
 
             queteLogChannel.send({embeds: [embed]})
            }
            else if (objbody.action == "BLACKLIST_ADDED") {
-            embed.setTitle(`Un membre à été ajouté sur la liste noir par ${objbody.playerUsername}`)
+            embed.setTitle(`Un membre à été ajouté sur la liste noir par ${objbody.playerUsername} ⚫`)
             embed.setColor('DARK_RED')
+            embed.addFields({name:"Pseudo", value: `-${objbody.targetPlayerUsername}`},
+            {name:"Fais le",value:`${DlastOnline} à ${HlastOnline}h${objbody.creationTime.slice(14,16)}`})
+            embed.setTimestamp();
+
+            logChannel.send({embeds: [embed]})
+           }
+           else if (objbody.action == "BLACKLIST_REMOVED") {
+            embed.setTitle(`Un membre à été retiré de la liste noir par ${objbody.playerUsername} ⚫`)
+            embed.setColor('DARK_GREEN')
             embed.addFields({name:"Pseudo", value: `-${objbody.targetPlayerUsername}`},
             {name:"Fais le",value:`${DlastOnline} à ${HlastOnline}h${objbody.creationTime.slice(14,16)}`})
             embed.setTimestamp();
@@ -227,7 +238,7 @@ module.exports = {
 
             const embed = new MessageEmbed();
           
-            if (objbodyM.isSystem == "true") {
+            if (objbodyM.isSystem == true) {
               if (objbodyM.msg == `join&username=${pseudobody.username}`) {console.log(`${pseudobody.username} vient de rejoindre le clan`)
               }else { console.log(`${pseudobody.username} vient de quitter le clan`)}
             }
