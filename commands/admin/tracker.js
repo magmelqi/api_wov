@@ -7,8 +7,8 @@ const dayjs = require ('dayjs');
 module.exports = {
   name: "tracker",
   category: 'secret',
-  permissions: ['SEND_MESSAGES'],
-  ownerOnly: true,
+  permissions: ['BAN_MEMBERS'],
+  ownerOnly: false,
   usage: 'tracker',
   examples: ['tracker'],
   description: "Suspens",
