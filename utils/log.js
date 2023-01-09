@@ -104,7 +104,7 @@ const {writeFileSync, readFileSync} = require ("fs");
             try {var BOT = objbody.playerBotOwnerUsername}catch(err) {}
             if (BOT != undefined) {var send = 0} else {var send = 1}
             if (BOT == undefined) {var Player = objbody.playerUsername}
-            if (objbody.targetPlayerUsername != undefined) {var targetP = objbody.targetPlayerUsername; var couleur = 'GREEN'} else {var targetP = objbody.playerUsername; var Player = "AUTO"; var couleur = 'ORANGE'}
+            if (objbody.targetPlayerUsername != undefined) {var targetP = objbody.targetPlayerUsername; var couleur = 'GREEN'} else {var targetP = objbody.playerUsername; var couleur = 'ORANGE'}
             
             embed.setTitle(`Participation activée: ${Player ?? ""}`)
             embed.setColor(couleur)
@@ -118,7 +118,7 @@ const {writeFileSync, readFileSync} = require ("fs");
             try {var BOT = objbody.playerBotOwnerUsername}catch(err) {}
             if (send ==1) {queteLogChannel.send({embeds: [embed]})}
             if (BOT == undefined) {var Player = objbody.playerUsername}
-            if (objbody.targetPlayerUsername != undefined) {var targetP = objbody.targetPlayerUsername} else {var targetP = objbody.playerUsername; var Player = "AUTO"}
+            if (objbody.targetPlayerUsername != undefined) {var targetP = objbody.targetPlayerUsername} else {var targetP = objbody.playerUsername;}
 
             embed.setTitle(`Participation désactivée: ${Player ?? ""}`)
             embed.setColor('RED')
@@ -234,8 +234,8 @@ const {writeFileSync, readFileSync} = require ("fs");
             const embed = new MessageEmbed();
           
             if (objbodyM.isSystem == true) {
-              if (objbodyM.msg == `join&username=${pseudobody.username}`) {console.log(`${pseudobody.username} vient de rejoindre le clan`)
-              }else { console.log(`${pseudobody.username} vient de quitter le clan`)}
+              if (objbodyM.msg == `join&username=${pseudobody.username}`) {mautoChannel.send(`${pseudobody.username} vient de rejoindre le clan`)
+              }else { mautoChannel.send(`${pseudobody.username} vient de quitter le clan`)}
             }
             else if (BOT != undefined) {
               embed.setAuthor({name: 'Chat WOV'})
