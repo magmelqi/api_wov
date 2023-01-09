@@ -1,4 +1,5 @@
 const Logger = require ('../../utils/Logger')
+const logClan = require ('../../utils/log')
 
 module.exports = {
     name: "ready",
@@ -16,5 +17,6 @@ module.exports = {
         const devGuild2 = await client.guilds.cache.get('724207157419180062',);
         devGuild2.commands.set(client.commands.map(cmd => cmd));
         
+        logClan.log(client)
     },
   };

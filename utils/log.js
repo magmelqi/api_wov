@@ -3,30 +3,23 @@ const { MessageEmbed } = require('discord.js');
 const dotenv = require('dotenv'); dotenv.config();
 const {writeFileSync, readFileSync} = require ("fs");
 
-module.exports = {
-    name: "log",
-    category: 'admin',
-    permissions: ['ADMINISTRATOR'],
-    ownerOnly: false,
-    usage: 'log', 
-    examples: ['log'],
-    description: 'Envoie les logs du clan',
-    async run (client, message, args) {
-        if (!args[0] || !args[0].match(/^(Wolves|test)$/)) return message.reply('merci d\'entrer un évenement valide (`\Wolves`/`test\`)');
 
-      if (args[0] == "Wolves") {
-      var logChannel = client.channels.cache.get('1061783809152012408'); var mautoChannel = client.channels.cache.get('1057688446933680248'); var queteLogChannel = client.channels.cache.get('1061784076798922792');
-    }
-      else if (args[0] == "test") {
-        var logChannel = client.channels.cache.get('1061297491712163920'); var mautoChannel = client.channels.cache.get('1046792811065913366'); var queteLogChannel = client.channels.cache.get('1058381353336438865');
-      };  
-
+    async function log (client) {
+        
+      
+      //const logChannel = client.channels.cache.get('1061783809152012408'); const mautoChannel = client.channels.cache.get('1057688446933680248'); const //queteLogChannel = client.channels.cache.get('1061784076798922792');
+    
+      
+        const logChannel = client.channels.cache.get('1061297491712163920'); const mautoChannel = client.channels.cache.get('1046792811065913366'); const queteLogChannel = client.channels.cache.get('1058381353336438865');
+        
+      const errChannel = client.channels.cache.get('1044258472121860126');
         
 
-      console.log('on');
-    var Merr = await message.channel.send("On"); 
-    test54 =async() => {
-
+      console.log('Log on');
+    var Merr = await errChannel.send("Log On");
+    var noStop = 5
+    while (noStop == 5) {
+      //LOGS - - - - - - - - - - - - - - - - - - - - - - -
       var logs = await superagent.get(`https://api.wolvesville.com/clans/${process.env.CLAN_ID}/logs`)
       .set( 'Authorization', process.env.WOV_TOKEN)
       .set('Content-Type', 'application/json')
@@ -48,13 +41,13 @@ module.exports = {
       var obj= logs.text; var objbody2 = logs.body} 
       
       var InfoLastest = JSON.parse(readFileSync(`././Information/Date/Log.json`, 'utf-8'))
-      var AncienMessage = InfoLastest.date
+      var AncienMessage = InfoLastest.date;
         var n = 0; 
 
         while (logs.body[n].creationTime !== AncienMessage && n !== 199){var n = n+1;};
         var n =n-1
 
-      while( n !== -1 ){ 
+      while( n !== -1 ){
         var objbody = logs.body[n];var n = n-1
 
         var  HlastOnline = objbody.creationTime.slice(11, 13)-1+2
@@ -75,11 +68,11 @@ module.exports = {
             if (moisLO == 11 && jourLO == 31) {moisLO = moisLO-1+2; jourLO = "01"};
             if (moisLO == 12 && jourLO == 32) {moisLO = "01"; jourLO = "01"; var annéeLO = annéeLO-1+2};
            };
-
+          
             var DlastOnline = `${jourLO}/${moisLO}/${annéeLO}`
            const embed = new MessageEmbed();
 
-           if (objbody.action == "PLAYER_JOINED") {
+           if (objbody.action == "PLAYER_JOINED") { 
             embed.setTitle('Un membre à rejoins le clan')
             embed.setColor('GREEN')
             embed.addFields({name:"Pseudo", value: `-${objbody.playerUsername}`},
@@ -109,6 +102,7 @@ module.exports = {
            }
            else if (objbody.action == "PLAYER_QUEST_PARTICIPATION_ENABLED") {
             try {var BOT = objbody.playerBotOwnerUsername}catch(err) {}
+            if (BOT != undefined) {var send = 0} else {var send = 1}
             if (BOT == undefined) {var Player = objbody.playerUsername}
             if (objbody.targetPlayerUsername != undefined) {var targetP = objbody.targetPlayerUsername; var couleur = 'GREEN'} else {var targetP = objbody.playerUsername; var Player = "AUTO"; var couleur = 'ORANGE'}
             
@@ -118,10 +112,11 @@ module.exports = {
             {name:"Fais le",value:`-${DlastOnline} à ${HlastOnline}h${objbody.creationTime.slice(14,16)}`})
             embed.setTimestamp();
 
-            queteLogChannel.send({embeds: [embed]})
+            if (send ==1) {queteLogChannel.send({embeds: [embed]})}
            }
            else if (objbody.action == "PLAYER_QUEST_PARTICIPATION_DISABLED") {
             try {var BOT = objbody.playerBotOwnerUsername}catch(err) {}
+            if (send ==1) {queteLogChannel.send({embeds: [embed]})}
             if (BOT == undefined) {var Player = objbody.playerUsername}
             if (objbody.targetPlayerUsername != undefined) {var targetP = objbody.targetPlayerUsername} else {var targetP = objbody.playerUsername; var Player = "AUTO"}
 
@@ -131,7 +126,7 @@ module.exports = {
             {name:"Fais le",value:`-${DlastOnline} à ${HlastOnline}h${objbody.creationTime.slice(14,16)}`})
             embed.setTimestamp();
 
-            queteLogChannel.send({embeds: [embed]})
+            if (send ==1) {queteLogChannel.send({embeds: [embed]})}
            }
            else if (objbody.action == "BLACKLIST_ADDED") {
             embed.setTitle(`Un membre à été ajouté sur la liste noir par ${objbody.playerUsername} ⚫`)
@@ -159,8 +154,7 @@ module.exports = {
         }
         const objectToJsonL = JSON.stringify(infoL)
         writeFileSync(`././Information/Date/Log.json`, objectToJsonL)
-
-
+        //MAUTO   - - - - - - - - - - - - - - - - - - - - - - -
         await new Promise(resolve => setTimeout(resolve, 5000))
 
         
@@ -235,7 +229,7 @@ module.exports = {
             else {return Merr.edit({content:`Erreur: ${err}`})}});
             var pseudoErr = JSON.stringify(usernameb);
             var pseudo = usernameb.text; var pseudobody = usernameb.body}
-          } else {var BOT = objbodyM.playerBotOwnerUsername}
+          } try {var BOT = objbodyM.playerBotOwnerUsername}catch(err) {}
 
             const embed = new MessageEmbed();
           
@@ -246,7 +240,7 @@ module.exports = {
             else if (BOT != undefined) {
               embed.setAuthor({name: 'Chat WOV'})
               embed.setColor('WHITE')
-              embed.setFields({name: `Pseudo: \`BOT\``, value: `-${objbodyM.msg}`}, {name: "fais le", value: `${DlastOnline} à ${HlastOnline}h${objbodyM.date.slice(14,16)}`})
+              embed.setFields({name: `\`BOT\``, value: `-${objbodyM.msg}`}, {name: "fais le", value: `${DlastOnline} à ${HlastOnline}h${objbodyM.date.slice(14,16)}`})
               embed.setThumbnail(client.user.displayAvatarURL())
               embed.setTimestamp();
             }
@@ -258,8 +252,8 @@ module.exports = {
               embed.setTimestamp();
             }
             else if (objbodyM.emojiId != undefined) {
-              const Minfo = await message.channel.send(`Requête en cours`)
-              const Merr = await message.channel.send(`- - - - -`)
+              const Minfo = await errChannel.send(`Requête en cours`)
+              const Merr = await errChannel.send(`- - - - -`)
               const  emojis  = await superagent.get(`https://api.wolvesville.com/items/emojis`)
               .set( 'Authorization', process.env.WOV_TOKEN)
               .set('Content-Type', 'application/json')
@@ -301,9 +295,7 @@ module.exports = {
           }
           const objectToJsonM = JSON.stringify(infoM)
           writeFileSync(`././Information/Date/Mauto.json`, objectToJsonM)
-        }
+        await new Promise(resolve => setTimeout(resolve, 60000))}}
         
-        test54()
-        setInterval(() =>{test54()}, 60000)
-      },   
-}
+        module.exports= { log }
+      
