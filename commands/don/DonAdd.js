@@ -127,10 +127,31 @@ module.exports = {
 
      const infoD = {date: Dons.body[0].creationTime}; const objectToJsonD = JSON.stringify(infoD)
     writeFileSync(`././Information/Date/Don.json`, objectToJsonD)
+     
+    var  HlastOnline = Dons.body[0].creationTime.slice(11, 13)-1+2
 
-     if (nb > 1) {embed.addFields({name: '- - - - - - - - - - - - - - - - - - - - - - - - - -', value:`Update des dons de ${nb} membres`})}
-     else if (nb == undefined) {embed.addFields({name: '- - - - - - - - - - - - - - - - - - - - - - - - - -', value:`Aucun don n'a été fait`})} 
-     else {embed.addFields({name: '- - - - - - - - - - - - - - - - - - - - - - - - - -', value:`Update des dons de ${nb} membre`})}
+            var annéeLO =  Dons.body[0].creationTime.slice(0, 4); var moisLO = Dons.body[0].creationTime.slice(5, 7); var jourLO= Dons.body[0].creationTime.slice(8, 10);
+
+            if (HlastOnline == 24) {var HlastOnline = "00"; var jourLO = jourLO-1+2
+            if (moisLO == 1 && jourLO == 32) {moisLO = moisLO-1+2; jourLO = "01"};
+            if (moisLO == 2 && jourLO == 29) {moisLO = moisLO-1+2; jourLO = "01"};
+            if (moisLO == 3 && jourLO == 32) {moisLO = moisLO-1+2; jourLO = "01"};
+            if (moisLO == 4 && jourLO == 31) {moisLO = moisLO-1+2; jourLO = "01"};
+            if (moisLO == 5 && jourLO == 32) {moisLO = moisLO-1+2; jourLO = "01"};
+            if (moisLO == 6 && jourLO == 31) {moisLO = moisLO-1+2; jourLO = "01"};
+            if (moisLO == 7 && jourLO == 32) {moisLO = moisLO-1+2; jourLO = "01"};
+            if (moisLO == 8 && jourLO == 32) {moisLO = moisLO-1+2; jourLO = "01"};
+            if (moisLO == 9 && jourLO == 31) {moisLO = moisLO-1+2; jourLO = "01"};
+            if (moisLO == 10 && jourLO == 32) {moisLO = moisLO-1+2; jourLO = "01"};
+            if (moisLO == 11 && jourLO == 31) {moisLO = moisLO-1+2; jourLO = "01"};
+            if (moisLO == 12 && jourLO == 32) {moisLO = "01"; jourLO = "01"; var annéeLO = annéeLO-1+2};
+           };
+          
+            var DlastOnline = `${jourLO}/${moisLO}/${annéeLO}`
+
+   if (nb > 1) {embed.addFields({name: '- - - - - - - - - - - - - - - - - - - - - - - - - -', value:`Update des dons de ${nb} membres`})}
+   else if (nb == undefined) {embed.addFields({name: '- - - - - - - - - - - - - - - - - - - - - - - - - -', value:`Aucun nouveau don n'a été fait depuis: ${DlastOnline} à ${HlastOnline}h${Dons.body[0].creationTime.slice(14,16)}`})} 
+   else {embed.addFields({name: '- - - - - - - - - - - - - - - - - - - - - - - - - -', value:`Update des dons de ${nb} membre`})}
      message.channel.send({embeds: [embed]})
     },
 
@@ -250,9 +271,30 @@ module.exports = {
 
    const infoD = {date: Dons.body[0].creationTime}; const objectToJsonD = JSON.stringify(infoD)
     writeFileSync(`././Information/Date/Don.json`, objectToJsonD)
-    
+      
+    var  HlastOnline = Dons.body[0].creationTime.slice(11, 13)-1+2
+
+            var annéeLO =  Dons.body[0].creationTime.slice(0, 4); var moisLO = Dons.body[0].creationTime.slice(5, 7); var jourLO= Dons.body[0].creationTime.slice(8, 10);
+
+            if (HlastOnline == 24) {var HlastOnline = "00"; var jourLO = jourLO-1+2
+            if (moisLO == 1 && jourLO == 32) {moisLO = moisLO-1+2; jourLO = "01"};
+            if (moisLO == 2 && jourLO == 29) {moisLO = moisLO-1+2; jourLO = "01"};
+            if (moisLO == 3 && jourLO == 32) {moisLO = moisLO-1+2; jourLO = "01"};
+            if (moisLO == 4 && jourLO == 31) {moisLO = moisLO-1+2; jourLO = "01"};
+            if (moisLO == 5 && jourLO == 32) {moisLO = moisLO-1+2; jourLO = "01"};
+            if (moisLO == 6 && jourLO == 31) {moisLO = moisLO-1+2; jourLO = "01"};
+            if (moisLO == 7 && jourLO == 32) {moisLO = moisLO-1+2; jourLO = "01"};
+            if (moisLO == 8 && jourLO == 32) {moisLO = moisLO-1+2; jourLO = "01"};
+            if (moisLO == 9 && jourLO == 31) {moisLO = moisLO-1+2; jourLO = "01"};
+            if (moisLO == 10 && jourLO == 32) {moisLO = moisLO-1+2; jourLO = "01"};
+            if (moisLO == 11 && jourLO == 31) {moisLO = moisLO-1+2; jourLO = "01"};
+            if (moisLO == 12 && jourLO == 32) {moisLO = "01"; jourLO = "01"; var annéeLO = annéeLO-1+2};
+           };
+          
+            var DlastOnline = `${jourLO}/${moisLO}/${annéeLO}`
+
    if (nb > 1) {embed.addFields({name: '- - - - - - - - - - - - - - - - - - - - - - - - - -', value:`Update des dons de ${nb} membres`})}
-   else if (nb == undefined) {embed.addFields({name: '- - - - - - - - - - - - - - - - - - - - - - - - - -', value:`Aucun don n'a été fait`})} 
+   else if (nb == undefined) {embed.addFields({name: '- - - - - - - - - - - - - - - - - - - - - - - - - -', value:`Aucun nouveau don n'a été fait depuis: ${DlastOnline} à ${HlastOnline}h${Dons.body[0].creationTime.slice(14,16)}`})} 
    else {embed.addFields({name: '- - - - - - - - - - - - - - - - - - - - - - - - - -', value:`Update des dons de ${nb} membre`})}
    interaction.channel.send({embeds: [embed]})
    }
