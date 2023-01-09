@@ -35,7 +35,7 @@ module.exports = {
          else {return Mquests.edit({content:`Erreur: ${err}`})}});
          var objErr= JSON.stringify(Dons);
           try {var text = Dons.text}catch(err) {}; var i = i+1} 
-        console.log ('Commande banque fait'); 
+        console.log ('Commande banque fait'); Mquests.delete()
 
           const heure = dayjs().format("HH:mm")
 
