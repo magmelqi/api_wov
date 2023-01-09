@@ -7,7 +7,7 @@ const {writeFileSync, readFileSync} = require ("fs");
     async function log (client) {
         
       return
-      //const logChannel = client.channels.cache.get('1061783809152012408'); const mautoChannel = client.channels.cache.get('1057688446933680248'); const //queteLogChannel = client.channels.cache.get('1061784076798922792');
+      //const logChannel = client.channels.cache.get('1061783809152012408'); const mautoChannel = client.channels.cache.get('1057688446933680248'); const queteLogChannel = client.channels.cache.get('1061784076798922792');
     
       
         const logChannel = client.channels.cache.get('1061297491712163920'); const mautoChannel = client.channels.cache.get('1046792811065913366'); const queteLogChannel = client.channels.cache.get('1058381353336438865');

@@ -164,7 +164,7 @@ module.exports = {
   options:[
     {
         name: "pseudo",
-        description: "taper le pseudo pour voir son profil wov",
+        description: "tapez le pseudo pour voir son profil wov",
         type: "STRING",
         required: true,
     }],
