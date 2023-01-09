@@ -35,7 +35,7 @@ module.exports = {
          else {return Mquests.edit({content:`Erreur: ${err}`})}});
          var objErr= JSON.stringify(Dons);
           try {var text = Dons.text}catch(err) {}; var i = i+1} 
-        console.log ('Commande banque fait'); Mquests.delete()
+        console.log ('Commande banque fait');
 
           const heure = dayjs().format("HH:mm")
 
@@ -152,7 +152,7 @@ module.exports = {
    if (nb > 1) {embed.addFields({name: '- - - - - - - - - - - - - - - - - - - - - - - - - -', value:`Update des dons de ${nb} membres`})}
    else if (nb == undefined) {embed.addFields({name: '- - - - - - - - - - - - - - - - - - - - - - - - - -', value:`Aucun nouveau don n'a été fait depuis: ${DlastOnline} à ${HlastOnline}h${Dons.body[0].creationTime.slice(14,16)}`})} 
    else {embed.addFields({name: '- - - - - - - - - - - - - - - - - - - - - - - - - -', value:`Update des dons de ${nb} membre`})}
-     message.channel.send({embeds: [embed]})
+   Mquests.delete(); message.channel.send({embeds: [embed]})
     },
 
     async runSlash(client, interaction) { 
