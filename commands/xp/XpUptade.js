@@ -1,6 +1,6 @@
 const superagent = require('superagent').agent();
 const dotenv = require('dotenv'); dotenv.config();
-const {writeFileSync, readFileSync, mkdirSync, existsSync} = require ("fs");
+const {writeFileSync, readFileSync, mkdirSync, existsSync, rmdirSync} = require ("fs");
 const dayjs = require ('dayjs');
 const { MessageEmbed } = require('discord.js');
 
@@ -13,6 +13,14 @@ module.exports = {
     examples: ['xpadd'],
     description: 'Actualise les xp des membres',
        async run (client, message, args) {
+        const ancienTime = `${dayjs().add(-1, 'hour').add(-14, 'day').format("DD-MM-YYYY")}`;
+        if (existsSync(`././Information/xp/Member-Id/${ancienTime}`)){
+            rmdirSync(`././Information/xp/Member-Id/${ancienTime}`, { recursive: true, force: true })
+      }
+      if (existsSync(`././Information/xp/Member-Pseudo/${ancienTime}`)){
+        rmdirSync(`././Information/xp/Member-Pseudo/${ancienTime}`, { recursive: true, force: true })
+      }
+
          const tryRequests = await message.channel.send('Requête en cours')
         var Messageclan = await superagent.get(`https://api.wolvesville.com/clans/${process.env.CLAN_ID}/members`)
         .set( 'Authorization', process.env.WOV_TOKEN)
@@ -106,7 +114,13 @@ module.exports = {
     },
 
     async runSlash(client, interaction) { 
-      
+      const ancienTime = `${dayjs().add(-1, 'hour').add(-14, 'day').format("DD-MM-YYYY")}`;
+        if (existsSync(`././Information/xp/Member-Id/${ancienTime}`)){
+            rmdirSync(`././Information/xp/Member-Id/${ancienTime}`, { recursive: true, force: true })
+      }
+      if (existsSync(`././Information/xp/Member-Pseudo/${ancienTime}`)){
+        unlinkSync(`././Information/xp/Member-Pseudo/${ancienTime}`, { recursive: true, force: true })
+      }
       var Messageclan = await superagent.get(`https://api.wolvesville.com/clans/${process.env.CLAN_ID}/members`)
       .set( 'Authorization', process.env.WOV_TOKEN)
       .set('Content-Type', 'application/json')
