@@ -48,13 +48,22 @@ module.exports = {
         .setColor('WHITE')
         .setDescription(`Xp du ${timestampH} au ${timestamp} -> 2000xp\nXp du ${timestampA} au ${timestamp} -> 1000xp`)
         .setThumbnail()
-        .setTimestamp()
+        .setTimestamp();
+
+        var Absence = readdirSync(`././Information/xp/absence`, 'utf-8')
+
         try { var k = 0
-          for(let i=0; i < body.length; i++)  {
+          for(let i=0; i < body.length; i++)  {var confirmAbsence = false
             var objBody = Messageclan.body[k]; var k = k+1
 
             var xpPseudoO = objBody.playerId
-
+            var abs = 0
+            while(abs < Absence.length && !confirmAbsence) {
+                var absFile = JSON.parse(readFileSync(`././Information/xp/absence/${Absence[abs]}`, 'utf-8')); 
+                   if (absFile.PlayerId == xpPseudoO) {confirmAbsence = true}
+                   var abs = abs +1;
+            };
+            
         try {
         var InfoA = JSON.parse(readFileSync(`././Information/xp/Member-Id/${timestamp}/${xpPseudoO}.json`, 'utf-8'))} catch (err) {message.channel.send(`Erreur n'a pas d'xp enregistré pour aujourd'hui: ${timestamp}`); var InfoA = 0}
          var Xp1 = InfoA.Xp
@@ -70,6 +79,8 @@ module.exports = {
              var Xp2 = InfoB.Xp; var XpA = Xp1-Xp2;
     
             if (XpA < 2000) {console.log(InfoA.Pseudo, `${XpA} = ${Xp1} - ${Xp2}`)
+            if (confirmAbsence) { emebed.addFields({name:'- - - - - - - - - - - - - - - - - - - - - - - - - -', value: `+\`☑️\` \`${objBody.username}\` a rejoins le \`${joinTf}\`,\n+Absence signalée jusqu'au \`\`${absFile.dateLimite}\`\`\nRaison: ${absFile.raison}` })}
+            else {
             var n = 0
 
             try { var timestampL2 = `${dayjs().add(-1, 'day').add(-1, 'hour').format("DD-MM-YYYY")}`; var InfoJ1s = 0
@@ -138,9 +149,9 @@ module.exports = {
             else if ( n == 4) {var xpvalue = `A du être avertis, son exclusion approche a grand pas !`}
             else if ( n == 5) {var xpvalue = `A exclure !`}
           emebed.addFields({name:'- - - - - - - - - - - - - - - - - - - - - - - - - -', value: `+\`❌\` \`${InfoA.Pseudo}\` a rejoins le \`${joinTf}\`,\n+Dernière connexion: \`${derCoTf}\`,\nxp: \`${XpA}\` sur \`2000\`xp requis\nSous les 2000 xp depuis ${n} jours\n${xpvalue}` })
-        } else {emebed.addFields({name:'- - - - - - - - - - - - - - - - - - - - - - - - - -', value: `+\`❌\` \`${InfoA.Pseudo}\` a rejoins le \`${joinTf}\`,\n+Dernière connexion: \`${derCoTf}\`,\nxp: \`${XpA}\` sur \`2000\`xp requis\nA avertir !` })}
+        } else {emebed.addFields({name:'- - - - - - - - - - - - - - - - - - - - - - - - - -', value: `+\`⚠️\` \`${InfoA.Pseudo}\` a rejoins le \`${joinTf}\`,\n+Dernière connexion: \`${derCoTf}\`,\nxp: \`${XpA}\` sur \`2000\`xp requis\nA avertir !` })}
 
-        } else {console.log(InfoA.Pseudo, `${XpA} = ${Xp1} - ${Xp2}`)};
+        }} else {console.log(InfoA.Pseudo, `${XpA} = ${Xp1} - ${Xp2}`)};
 
 
 
@@ -197,12 +208,21 @@ module.exports = {
          .setColor('WHITE')
          .setDescription(`Xp du ${timestampH} au ${timestamp} -> 2000xp\nXp du ${timestampA} au ${timestamp} -> 1000xp`)
          .setThumbnail()
-         .setTimestamp()
+         .setTimestamp();
+
+         var Absence = readdirSync(`././Information/xp/absence`, 'utf-8')
+         
          try { var k = 0
-           for(let i=0; i < body.length; i++)  {
-             var objBody = Messageclan.body[k]; var k = k+1
- 
-             var xpPseudoO = objBody.playerId
+           for(let i=0; i < body.length; i++)  {var confirmAbsence = false
+            var objBody = Messageclan.body[k]; var k = k+1
+
+            var xpPseudoO = objBody.playerId
+            var abs = 0
+            while(abs < Absence.length && !confirmAbsence) {
+                var absFile = JSON.parse(readFileSync(`././Information/xp/absence/${Absence[abs]}`, 'utf-8')); 
+                   if (absFile.PlayerId == xpPseudoO) {confirmAbsence = true}
+                   var abs = abs +1;
+            };
  
          try {
          var InfoA = JSON.parse(readFileSync(`././Information/xp/Member-Id/${timestamp}/${xpPseudoO}.json`, 'utf-8'))} catch (err) {interaction.editReply({content:`Erreur n'a pas d'xp enregistré pour aujourd'hui: ${timestamp}`, ephemeral:true}); var InfoA = 0}
@@ -219,9 +239,11 @@ module.exports = {
               var Xp2 = InfoB.Xp; var XpA = Xp1-Xp2;
 
               if (XpA < 2000) {console.log(InfoA.Pseudo, `${XpA} = ${Xp1} - ${Xp2}`)
+              if (confirmAbsence) { emebed.addFields({name:'- - - - - - - - - - - - - - - - - - - - - - - - - -', value: `+\`☑️\` \`${objBody.username}\` a rejoins le \`${joinTf}\`,\n+Absence signalée jusqu'au \`\`${absFile.dateLimite}\`\`\nRaison: ${absFile.raison}` })}
+              else {
               var n = 0
   
-              try { var timestampL2 = `${dayjs().add(-1, 'day').add(-1, 'hour').format("DD-MM-YYYY")}`;var InfoJ1s = 0
+              try { var timestampL2 = `${dayjs().add(-1, 'day').add(-1, 'hour').format("DD-MM-YYYY")}`; var InfoJ1s = 0
               var InfoJ1s = JSON.parse(readFileSync(`././Information/xp/Member-Id/${timestampL2}/${xpPseudoO}.json`, 'utf-8'))}catch(err) {}
   
               try { var timestampL1 = `${dayjs().add(-9, 'day').add(-1, 'hour').format("DD-MM-YYYY")}`;var InfoJ1 = 0
@@ -287,9 +309,9 @@ module.exports = {
               else if ( n == 4) {var xpvalue = `A du être avertis, son exclusion approche a grand pas !`}
               else if ( n == 5) {var xpvalue = `A exclure !`}
             emebed.addFields({name:'- - - - - - - - - - - - - - - - - - - - - - - - - -', value: `+\`❌\` \`${InfoA.Pseudo}\` a rejoins le \`${joinTf}\`,\n+Dernière connexion: \`${derCoTf}\`,\nxp: \`${XpA}\` sur \`2000\`xp requis\nSous les 2000 xp depuis ${n} jours\n${xpvalue}` })
-          } else {emebed.addFields({name:'- - - - - - - - - - - - - - - - - - - - - - - - - -', value: `+\`❌\` \`${InfoA.Pseudo}\` a rejoins le \`${joinTf}\`,\n+Dernière connexion: \`${derCoTf}\`,\nxp: \`${XpA}\` sur \`2000\`xp requis\nA avertir !` })}
+          } else {emebed.addFields({name:'- - - - - - - - - - - - - - - - - - - - - - - - - -', value: `+\`⚠️\` \`${InfoA.Pseudo}\` a rejoins le \`${joinTf}\`,\n+Dernière connexion: \`${derCoTf}\`,\nxp: \`${XpA}\` sur \`2000\`xp requis\nA avertir !` })}
   
-          } else {console.log(InfoA.Pseudo, `${XpA} = ${Xp1} - ${Xp2}`)};
+          }} else {console.log(InfoA.Pseudo, `${XpA} = ${Xp1} - ${Xp2}`)};
  
  
            if (joinTf==timestampB ) {
