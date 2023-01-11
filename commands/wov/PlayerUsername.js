@@ -14,7 +14,7 @@ module.exports = {
         let member = message.mentions.members.first();
         if (args[0] == undefined && member == undefined) return message.reply('merci d\'entrer un \`pseudo\` apres le nom de la commande');
 
-        if (member == undefined) {var nom = message.content.substring(7).trim()
+        if (member == undefined) {var nom = args[0]
         } else {var nom = member.displayName}
 
         var Mprofil= await message.channel.send(`Recherche du profil de ${nom}...`)

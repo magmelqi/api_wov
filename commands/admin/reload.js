@@ -3,7 +3,7 @@
 module.exports = {
     name: "reload",
     category: 'admin',
-    permissions: ['ADMINISTRATOR'],
+    permissions: ['BAN_MEMBERS'],
     ownerOnly: false,
     usage: 'reload',
     examples: ['reload'],

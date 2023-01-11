@@ -14,35 +14,35 @@ module.exports = {
         .set('Content-Type', 'application/json')
         .set('Accept', 'application/json')
         .catch((err) => {
-          if (err == "Error: Too Many Requests") {interaction.channel.reply({content:`Erreur, 2ème tentatives`}); return a = 0} 
-          else {interaction.channel.reply({content:`Erreur: ${err}`, ephemeral:true}); console.log(err); return a = 2}});
+          if (err == "Error: Too Many Requests") {interaction.channel.reply({content:`Erreur, 2ème tentatives`}); return a = 1}
+          if (err == "Error: Not Found") {return a = 2} 
+          else {interaction.channel.reply({content:`Erreur: ${err}`, ephemeral:true}); console.log(err); return a = 3}});
         var objErr= JSON.stringify(questsActive);
         if (objErr != undefined) {var body = questsActive.body}
   
         var i =2
-        while (objErr == undefined && a == 0) {await new Promise(resolve => setTimeout(resolve, 1000))
+        while (objErr == undefined && a == 1) {await new Promise(resolve => setTimeout(resolve, 1000))
           var questsActive = await superagent.get(`https://api.wolvesville.com/clans/${process.env.CLAN_ID}/quests/active`)
         .set( 'Authorization', process.env.WOV_TOKEN)
         .set('Content-Type', 'application/json')
         .set('Accept', 'application/json')
         .catch((err) => {
           if (err == "Error: Too Many Requests") {interaction.channel.editReply({content:`Erreur, tentatives: \`${i}\` `})}
-          else {interaction.channel.editReply({content:`Erreur: ${err}`}); console.log(err); return a = 2};});
+          if (err == "Error: Not Found") {return a = 2}
+          else {interaction.channel.editReply({content:`Erreur: ${err}`}); console.log(err); return a = 3};});
         var objErr= JSON.stringify(questsActive)
         try{var text= questsActive.text}catch(err) {};var i = i+1}
 
-            if (a==2) return
-
-            if (objErr != undefined) {
+            if ( a == 1) {
                 const embed = new MessageEmbed()
-                .setTitle('**__Quête déjâ en cours__**')
+                .setTitle('**__Quête déjà en cours__**')
                 .setImage(body.quest.promoImageUrl)
                 .setColor('BLUE')
                 .setFooter({text: "Quête actif"})
                 .setTimestamp();
                 await interaction.message.edit({embeds: [embed]})
                 interaction.reply({content:' '})
-            }else {
+            }else if (a == 2){
         
 
         var nom = interaction.message.content
@@ -103,7 +103,7 @@ module.exports = {
 
          var heure = `${dayjs().format("HH")}`;
               var h = 0
-              while (heure != 21) { var h = h +1
+              while (heure != 20) { var h = h +1
                      var heure = heure -1 +2
                      if ( heure == 24) {var heure = 0}
               };var h = h-1
@@ -130,13 +130,13 @@ module.exports = {
                     
               interaction.channel.send(`Lancement de la quête ${nomF}...\n${TempsF} (${realativeTempsF})`); console.log(InfoA.Id)
                     console.log(Mili)
-                    var  Mili = Mili - 600000
                     if (Mili < 540000) {return interaction.channel.send('Erreur: veuillez lancer la commande avant 20h50')}
                     else {var image = new MessageAttachment(InfoA.Image)
+                      var  Mili = Mili - 600000
               await new Promise(resolve => setTimeout(resolve, Mili))
-            interaction.channel.send({content:"Lancement de la quête dans `\`\`10 min\`\`\nPour l'annuler faite la commande reload ou cliquez sur la croix rouge", files:[image]})
+            interaction.channel.send({content:"Lancement de la quête dans `\`\`10 min\`\`\nPour l'annuler faite la commande reload (?reload)", files:[image]})
             await new Promise(resolve => setTimeout(resolve, 540000))
-            interaction.channel.send("Lancement de la quête dans `\`\`1 min\`\`\nPour l'annuler faite la commande reload ou cliquez sur la croix rouge")
+            interaction.channel.send("Lancement de la quête dans `\`\`1 min\`\`\nPour l'annuler faite la commande reload (?reload)")
             await new Promise(resolve => setTimeout(resolve, 60000))
             var  QuestsClaim = await superagent.post(`https://api.wolvesville.com/clans/${process.env.CLAN_ID}/quests/claim`)
             .send({questId: InfoA.Id})
@@ -146,7 +146,7 @@ module.exports = {
             .catch((err) => { if (err == "Error: Too Many Requests") {interaction.channel.send({content:`Erreur, veuillez reconfirmer la quête`})}
             else {return interaction.channel.send({content:`Erreur: ${err}`})}}); 
         interaction.channel.send(`La quête a été lancé !`)
-        const QuêteChannel =  client.channels.cache.get('1044258472121860126')//817290280242774036
+        const QuêteChannel =  client.channels.cache.get('817290280242774036')//817290280242774036
         QuêteChannel.send(`Quête lancée ! <:panda_youpi:724242729046900756>`)}
         interaction.message.delete()
         } else {interaction.channel.send(`Annulation du lancement de la quête réussie`)}
