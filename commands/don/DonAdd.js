@@ -56,8 +56,9 @@ module.exports = {
           if (objbody.type == "DONATE") {
           if (objbody.gold > 0) {
             embed.addFields({name:'- - - - - - - - - - - - - - - - - - - - - - - - - -', value:`Don de ${objbody.playerUsername} de ${objbody.gold} or.`})
+            var orErg = 0
            try{ var orErg = JSON.parse(readFileSync(`././Information/Or/Member-Id/${objbody.playerId}.json`, 'utf-8'))}catch(err) {}
-           if (orErg != undefined) { var or =orErg.Or -1 +1; var gold = objbody.gold -1 +1
+           if (orErg != 0) { var or =orErg.Or -1 +1; var gold = objbody.gold -1 +1
             const info = {
               Pseudo: objbody.playerUsername,
               PlayerId: objbody.playerId,
@@ -73,7 +74,7 @@ module.exports = {
             };
             writeFileSync(`././Information/Or/Member-Pseudo/${objbody.playerUsername}.json`, objectToJson)
            } 
-           else if (orErg == undefined) {
+           else if (orErg == 0) {
             const info = {
               Pseudo: objbody.playerUsername,
               PlayerId: objbody.playerId,
@@ -89,8 +90,9 @@ module.exports = {
           }
           else if (objbody.gems > 0) {
             embed.addFields({name:'- - - - - - - - - - - - - - - - - - - - - - - - - -', value:`Don de ${objbody.playerUsername} de ${objbody.gems} gemmes.`})
+            var gemmeErg = 0
             try{ var gemmeErg = JSON.parse(readFileSync(`././Information/Gemme/Member-Id/${objbody.playerId}.json`, 'utf-8'))}catch(err) {}
-           if (gemmeErg != undefined) { var gemme =gemmeErg.Gemme -1 +1; var gems = objbody.gems -1 +1
+           if (gemmeErg != 0) { var gemme =gemmeErg.Gemme -1 +1; var gems = objbody.gems -1 +1
             const info = {
               Pseudo: objbody.playerUsername,
               PlayerId: objbody.playerId,
@@ -106,7 +108,7 @@ module.exports = {
             };
             writeFileSync(`././Information/Gemme/Member-Pseudo/${objbody.playerUsername}.json`, objectToJson)
            } 
-           else if (gemmeErg == undefined) {
+           else if (gemmeErg == 0) {
             const info = {
               Pseudo: objbody.playerUsername,
               PlayerId: objbody.playerId,

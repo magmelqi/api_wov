@@ -1,8 +1,8 @@
 const superagent = require('superagent').agent();
 const { MessageEmbed } = require('discord.js');
 const dotenv = require('dotenv'); dotenv.config();
-const {writeFileSync, readFileSync} = require ("fs");
-
+const {writeFileSync, readFileSync, unlinkSync} = require ("fs");
+const dayjs = require ('dayjs');
 
     async function log (client) {
     
@@ -116,7 +116,7 @@ const {writeFileSync, readFileSync} = require ("fs");
            }
            else if (objbody.action == "PLAYER_QUEST_PARTICIPATION_DISABLED") {
             try {var BOT = objbody.playerBotOwnerUsername}catch(err) {}
-            if (send ==1) {queteLogChannel.send({embeds: [embed]})}
+            if (BOT != undefined) {var send = 0} else {var send = 1}
             if (BOT == undefined) {var Player = objbody.playerUsername}
             if (objbody.targetPlayerUsername != undefined) {var targetP = objbody.targetPlayerUsername} else {var targetP = objbody.playerUsername;}
 
@@ -319,7 +319,6 @@ const {writeFileSync, readFileSync} = require ("fs");
            else {return Merr.edit({content:`Erreur: ${err}`})}});
            var objErr= JSON.stringify(Dons);
             try {var text = Dons.text}catch(err) {}; var i = i+1} 
-          console.log ('Commande banque fait');
   
             const heure = dayjs().format("HH:mm")
   
@@ -329,19 +328,20 @@ const {writeFileSync, readFileSync} = require ("fs");
   
           var InfoLastest = JSON.parse(readFileSync(`././Information/Date/Don.json`, 'utf-8'))
           var AncienMessage = InfoLastest.date;
-            var n = 0; 
+            var n = 0; var nb = 0
     
             while (Dons.body[n].creationTime !== AncienMessage && n !== 99){var n = n+1;};
             var n =n-1
-    
-          while( n !== -1 ){
+            var i = 0
+          while( n !== -1 ){var i = i +1
             var objbody = Dons.body[n];var n = n-1
   
             if (objbody.type == "DONATE") {
             if (objbody.gold > 0) {
               embed.addFields({name:'- - - - - - - - - - - - - - - - - - - - - - - - - -', value:`Don de ${objbody.playerUsername} de ${objbody.gold} or.`})
+              var orErg = 0
              try{ var orErg = JSON.parse(readFileSync(`././Information/Or/Member-Id/${objbody.playerId}.json`, 'utf-8'))}catch(err) {}
-             if (orErg != undefined) { var or =orErg.Or -1 +1; var gold = objbody.gold -1 +1
+             if (orErg != 0) { var or =orErg.Or -1 +1; var gold = objbody.gold -1 +1
               const info = {
                 Pseudo: objbody.playerUsername,
                 PlayerId: objbody.playerId,
@@ -357,7 +357,7 @@ const {writeFileSync, readFileSync} = require ("fs");
               };
               writeFileSync(`././Information/Or/Member-Pseudo/${objbody.playerUsername}.json`, objectToJson)
              } 
-             else if (orErg == undefined) {
+             else if (orErg == 0) {
               const info = {
                 Pseudo: objbody.playerUsername,
                 PlayerId: objbody.playerId,
@@ -373,8 +373,9 @@ const {writeFileSync, readFileSync} = require ("fs");
             }
             else if (objbody.gems > 0) {
               embed.addFields({name:'- - - - - - - - - - - - - - - - - - - - - - - - - -', value:`Don de ${objbody.playerUsername} de ${objbody.gems} gemmes.`})
+              var gemmeErg = 0
               try{ var gemmeErg = JSON.parse(readFileSync(`././Information/Gemme/Member-Id/${objbody.playerId}.json`, 'utf-8'))}catch(err) {}
-             if (gemmeErg != undefined) { var gemme =gemmeErg.Gemme -1 +1; var gems = objbody.gems -1 +1
+             if (gemmeErg != 0) { var gemme =gemmeErg.Gemme -1 +1; var gems = objbody.gems -1 +1
               const info = {
                 Pseudo: objbody.playerUsername,
                 PlayerId: objbody.playerId,
@@ -390,7 +391,7 @@ const {writeFileSync, readFileSync} = require ("fs");
               };
               writeFileSync(`././Information/Gemme/Member-Pseudo/${objbody.playerUsername}.json`, objectToJson)
              } 
-             else if (gemmeErg == undefined) {
+             else if (gemmeErg == 0) {
               const info = {
                 Pseudo: objbody.playerUsername,
                 PlayerId: objbody.playerId,
@@ -404,11 +405,11 @@ const {writeFileSync, readFileSync} = require ("fs");
               writeFileSync(`././Information/Gemme/Member-Pseudo/${objbody.playerUsername}.json`, objectToJson)
              }
             }
-            else {embed.addFields({name:'- - - - - - - - - - - - - - - - - - - - - - - - - -', value:`Erreur, type de don de contenant aucun don pour: ${playerUsername}`})}
+            else {embed.addFields({name:'- - - - - - - - - - - - - - - - - - - - - - - - - -', value:`Erreur, type de don de contenant aucun don pour: ${objbody.playerUsername}`})}
   
           
        var nb = i+1}}
-  if (nb != undefined) {
+  if (nb != 0) { var nb = nb -2 +1
        const infoD = {date: Dons.body[0].creationTime}; const objectToJsonD = JSON.stringify(infoD)
       writeFileSync(`././Information/Date/Don.json`, objectToJsonD)
        
@@ -435,7 +436,7 @@ const {writeFileSync, readFileSync} = require ("fs");
   
      if (nb > 1) {embed.addFields({name: '- - - - - - - - - - - - - - - - - - - - - - - - - -', value:`Update des dons de ${nb} membres`})}
      else {embed.addFields({name: '- - - - - - - - - - - - - - - - - - - - - - - - - -', value:`Update des dons de ${nb} membre`})}
-     donLogChannel.send({embeds: [embed]})}
+     donLogChannel.send({embeds: [embed]})}; 
 
 
 
