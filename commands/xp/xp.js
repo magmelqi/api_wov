@@ -51,16 +51,18 @@ module.exports = {
         .setTimestamp();
 
         var Absence = readdirSync(`././Information/xp/absence`, 'utf-8')
+        var supAbsence = `${dayjs().add(-1, 'hour').add(-1, 'day').format("DD/MM/YYYY")}`;
 
         try { var k = 0
-          for(let i=0; i < body.length; i++)  {var confirmAbsence = false
+          for(let i=0; i < body.length; i++)  {var confirmAbsence = false; var endAbsence = false
             var objBody = Messageclan.body[k]; var k = k+1
 
             var xpPseudoO = objBody.playerId
             var abs = 0
-            while(abs < Absence.length && !confirmAbsence) {
-                var absFile = JSON.parse(readFileSync(`././Information/xp/absence/${Absence[abs]}`, 'utf-8')); 
-                   if (absFile.PlayerId == xpPseudoO) {confirmAbsence = true}
+            while(abs < Absence.length && !confirmAbsence && !endAbsence) {
+                var absFile = JSON.parse(readFileSync(`././Information/xp/absence/${Absence[abs]}`, 'utf-8'));
+                   if (absFile.PlayerId == xpPseudoO && absFile.dateLimite == supAbsence) {endAbsence = true}
+                   else if (absFile.PlayerId == xpPseudoO) {confirmAbsence = true}
                    var abs = abs +1;
             };
             
@@ -80,6 +82,7 @@ module.exports = {
     
             if (XpA < 2000) {console.log(InfoA.Pseudo, `${XpA} = ${Xp1} - ${Xp2}`)
             if (confirmAbsence) { emebed.addFields({name:'- - - - - - - - - - - - - - - - - - - - - - - - - -', value: `+\`☑️\` \`${objBody.username}\` a rejoins le \`${joinTf}\`,\n+Absence signalée jusqu'au \`\`${absFile.dateLimite}\`\`\nRaison: ${absFile.raison}` })}
+            else if (endAbsence) { emebed.addFields({name:'- - - - - - - - - - - - - - - - - - - - - - - - - -', value: `+\`⭕\` \`${objBody.username}\` a rejoins le \`${joinTf}\`,\n+Fin de l'absence signalée jusqu'au \`\`${absFile.dateLimite}\`\`\nxp: \`${XpA}\` sur \`2000\`xp requis` })}
             else {
             var n = 0
 

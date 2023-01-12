@@ -17,7 +17,10 @@ module.exports = {
         if (args[0] == undefined && member == undefined) return message.reply('merci d\'entrer un \`pseudo\` après le nom de la commande');
         if (args[1] == undefined) {return message.reply("merci de rentrer la date du dernier jour d'absence après le pseudo.")}
         if (args[2] == undefined) {return message.reply("merci de rentrer la raison de l'absence après la date.")}
-        if (args[3] != undefined) {var raisonT = `${args[2]} ${args[3]}`} else {var raisonT = args[2]}
+
+        var raisonT = args[2]
+        var n = 3
+        while (args[n] != undefined) {var raisonT = `${raisonT} ${args[n]}`; var n = n +1} 
 
         if (member == undefined) {var nom = args[0]
         } else {var nom = member.displayName}
