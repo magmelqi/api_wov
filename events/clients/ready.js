@@ -1,10 +1,9 @@
 const Logger = require ('../../utils/Logger')
-const logClan = require ('../../utils/log')
 
 module.exports = {
     name: "ready",
     once: true,
-    async execute(client) {const logChannel = client.channels.cache.get('1044258472121860126');
+    async execute(client) {
         let guildsCount = await client.guilds.fetch();
         let usersCount = client.guilds.cache.reduce((a, g) => a + g.memberCount, 0);
 
@@ -16,7 +15,6 @@ module.exports = {
         devGuild.commands.set(client.commands.map(cmd => cmd));
         const devGuild2 = await client.guilds.cache.get('724207157419180062',);
         devGuild2.commands.set(client.commands.map(cmd => cmd));
-        
-        logClan.log(client)
+    
     },
   };
