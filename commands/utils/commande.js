@@ -9,7 +9,7 @@ module.exports = {
   examples: ['message'],
   description: "La commande message envoie un message sur wolvesville l'API",
     async run (client, message, args) {
-      const tryPong = await message.channel.send("message envoyé");
+      const tryPong = await message.channel.send("message");
 
       const embed = new MessageEmbed()
        .setTitle('message')
