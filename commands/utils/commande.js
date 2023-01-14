@@ -1,0 +1,45 @@
+const { MessageEmbed } = require('discord.js')
+
+module.exports = {
+  name: "message",
+  category: 'utils',
+  permissions: ['SEND_MESSAGES'],
+  ownerOnly: false,
+  usage: 'message',
+  examples: ['message'],
+  description: "La commande message envoie un message sur wolvesville l'API",
+    async run (client, message, args) {
+      const tryPong = await message.channel.send("message envoyé");
+
+      const embed = new MessageEmbed()
+       .setTitle('message')
+       .setThumbnail(client.user.displayAvatarURL())
+       .addFields(
+        { name: 'Latence API', value: `\`\`\`${client.ws.ping}ms\`\`\``, inline: true},
+        { name: "Latence BOT", value: `\`\`\`${tryPong.createdTimestamp - message.createdTimestamp}ms\`\`\``, inline: true},
+        { name: 'Uptime', value: `<t:${parseInt(client.readyTimestamp / 1000)}:R>`, inline: true},
+       )
+       .setTimestamp()
+       .setAuthor({name: `magmelqi`})
+       .setFooter({ text: message.author.username, iconeURL: message.author.displayAvatarURL() })
+       
+
+
+    tryPong.edit({ content: ' ', embeds: [embed] }); 
+    },
+    async runSlash (client, interaction) {
+      const tryPong = await interaction.reply({content: "message envoyé", fetchReply: true});
+
+    const embed = new MessageEmbed()
+      .setTitle("message")
+      .setThumbnail(client.user.displayAvatarURL())
+      .addFields(
+        { name: "Latence API", value: `\`\`\`${client.ws.ping}ms\`\`\``, inline: true},
+        { name: "Latence BOT", value: `\`\`\`${tryPong.createdTimestamp - interaction.createdTimestamp}ms\`\`\``, inline: true,}
+      )
+      .setTimestamp()
+      .setFooter({text: interaction.user.username, iconURL: interaction.user.displayAvatarURL()});
+
+    interaction.editReply({ content: " ", embeds: [embed] });
+  },
+};
