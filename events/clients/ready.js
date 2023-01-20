@@ -11,7 +11,7 @@ module.exports = {
 
         client.user.setPresence({ activities: [{ name: 'les bêtises de magmelqi', type: 'WATCHING'}], status: 'online'}) //dnd, invisible, online, idle
     // WATCHING PLAYING
-        const devGuild = await client.guilds.cache.get('1063506732086743061'); console.log(devGuild)
+        const devGuild = await client.guilds.cache.get('1063506732086743061')
         devGuild.commands.set(client.commands.map(cmd => cmd));
       
     
